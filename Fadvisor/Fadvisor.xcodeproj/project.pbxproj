@@ -109,8 +109,6 @@
 		C1591ABA2AFE32D500351431 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1591AB92AFE32D500351431 /* MainTabBarController.m */; };
 		C1591AC02AFE372100351431 /* TabNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1591ABF2AFE372100351431 /* TabNavigationController.m */; };
 		C1591AC72AFE3FB000351431 /* TabHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1591AC52AFE3FB000351431 /* TabHomeViewController.m */; };
-		C1591AC92AFE3FE000351431 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1591AC82AFE3FE000351431 /* Localizable.strings */; };
-		C1591ACB2AFE3FEC00351431 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1591ACA2AFE3FEC00351431 /* InfoPlist.strings */; };
 		C1591ACF2AFE419300351431 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1591ACE2AFE419300351431 /* BaseViewController.m */; };
 		C1591ADB2AFE422E00351431 /* NavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C1591AD32AFE422D00351431 /* NavigationBar.m */; };
 		C1591ADC2AFE422E00351431 /* AutoRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = C1591AD72AFE422D00351431 /* AutoRefreshFooter.m */; };
@@ -129,6 +127,11 @@
 		C1591B5A2AFF1DC000351431 /* LocalDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C1591B532AFF1DC000351431 /* LocalDataStorage.m */; };
 		C1591B5B2AFF1DC000351431 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C1591B562AFF1DC000351431 /* Utils.m */; };
 		C1591B5C2AFF1DC000351431 /* KeyChainHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C1591B592AFF1DC000351431 /* KeyChainHelper.m */; };
+		C1591B652AFFC41500351431 /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C1591B602AFFC41400351431 /* RequestManager.m */; };
+		C1591B662AFFC41500351431 /* BaseResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C1591B622AFFC41400351431 /* BaseResponse.m */; };
+		C1591B672AFFC41500351431 /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C1591B632AFFC41400351431 /* BaseRequest.m */; };
+		C1591B6B2AFFCF6800351431 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1591B682AFFCF6700351431 /* Localizable.strings */; };
+		C1591B752AFFCFCC00351431 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1591B722AFFCFCC00351431 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -365,8 +368,6 @@
 		C1591ABF2AFE372100351431 /* TabNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabNavigationController.m; sourceTree = "<group>"; };
 		C1591AC52AFE3FB000351431 /* TabHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabHomeViewController.m; sourceTree = "<group>"; };
 		C1591AC62AFE3FB000351431 /* TabHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabHomeViewController.h; sourceTree = "<group>"; };
-		C1591AC82AFE3FE000351431 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		C1591ACA2AFE3FEC00351431 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		C1591ACD2AFE419300351431 /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		C1591ACE2AFE419300351431 /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		C1591AD32AFE422D00351431 /* NavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBar.m; sourceTree = "<group>"; };
@@ -405,6 +406,16 @@
 		C1591B562AFF1DC000351431 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		C1591B582AFF1DC000351431 /* KeyChainHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChainHelper.h; sourceTree = "<group>"; };
 		C1591B592AFF1DC000351431 /* KeyChainHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChainHelper.m; sourceTree = "<group>"; };
+		C1591B5F2AFFC41400351431 /* BaseResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseResponse.h; sourceTree = "<group>"; };
+		C1591B602AFFC41400351431 /* RequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestManager.m; sourceTree = "<group>"; };
+		C1591B612AFFC41400351431 /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
+		C1591B622AFFC41400351431 /* BaseResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseResponse.m; sourceTree = "<group>"; };
+		C1591B632AFFC41400351431 /* BaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
+		C1591B642AFFC41500351431 /* RequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestManager.h; sourceTree = "<group>"; };
+		C1591B692AFFCF6700351431 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "../../../../fadvisor-ios-2021/Fadvisor/Fadvisor/Support Files/en.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C1591B6A2AFFCF6700351431 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "../../../../fadvisor-ios-2021/Fadvisor/Fadvisor/Support Files/zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C1591B732AFFCFCC00351431 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "../../../../fadvisor-ios-2021/Fadvisor/Fadvisor/Support Files/en.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		C1591B742AFFCFCC00351431 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "../../../../fadvisor-ios-2021/Fadvisor/Fadvisor/Support Files/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C8126B4E9064B917D59445AB /* Pods-FadvisorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FadvisorTests.debug.xcconfig"; path = "Target Support Files/Pods-FadvisorTests/Pods-FadvisorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E169AA165A089CABEB289175 /* Pods-FadvisorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FadvisorTests.release.xcconfig"; path = "Target Support Files/Pods-FadvisorTests/Pods-FadvisorTests.release.xcconfig"; sourceTree = "<group>"; };
 		E4CF22C0F536A158DB5DBDBF /* Pods_FadvisorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FadvisorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -479,9 +490,8 @@
 				C159191A2AFDC43E00351431 /* AppDelegate.m */,
 				C1591A752AFE15F100351431 /* Assets.xcassets */,
 				C159192A2AFDC43F00351431 /* Info.plist */,
-				C1591ACC2AFE413000351431 /* Utils */,
-				C1591AB42AFE316F00351431 /* MainTabBar */,
 				C1591A8D2AFE2E9700351431 /* Base */,
+				C1591AB42AFE316F00351431 /* MainTabBar */,
 				C1591A982AFE2EBD00351431 /* Modules */,
 				C159196B2AFDCEEF00351431 /* Helpers */,
 				C15919502AFDCE4900351431 /* Categories */,
@@ -542,6 +552,7 @@
 		C159196B2AFDCEEF00351431 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C1591B5E2AFFC40500351431 /* Network */,
 				C1591A992AFE2EBD00351431 /* NotificationView */,
 				C1591A9C2AFE2EBD00351431 /* EasyBlankPageView */,
 				C1591A9F2AFE2EBD00351431 /* SkeletonPageView */,
@@ -821,8 +832,8 @@
 			isa = PBXGroup;
 			children = (
 				C1591B472AFE826200351431 /* resource.bundle */,
-				C1591ACA2AFE3FEC00351431 /* InfoPlist.strings */,
-				C1591AC82AFE3FE000351431 /* Localizable.strings */,
+				C1591B722AFFCFCC00351431 /* InfoPlist.strings */,
+				C1591B682AFFCF6700351431 /* Localizable.strings */,
 				C159192B2AFDC43F00351431 /* main.m */,
 				C1591A732AFDD59F00351431 /* LaunchScreen.storyboard */,
 				C1591A722AFDD0E200351431 /* Macro.h */,
@@ -887,6 +898,7 @@
 		C1591AB42AFE316F00351431 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
+				C1591ACC2AFE413000351431 /* Utils */,
 				C1591AC12AFE3F0600351431 /* TabHome */,
 				C1591AFA2AFE781F00351431 /* TabAccount */,
 				C1591AF72AFE781F00351431 /* TabColumn */,
@@ -1060,6 +1072,19 @@
 			path = KeyChain;
 			sourceTree = "<group>";
 		};
+		C1591B5E2AFFC40500351431 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C1591B612AFFC41400351431 /* BaseRequest.h */,
+				C1591B632AFFC41400351431 /* BaseRequest.m */,
+				C1591B5F2AFFC41400351431 /* BaseResponse.h */,
+				C1591B622AFFC41400351431 /* BaseResponse.m */,
+				C1591B642AFFC41500351431 /* RequestManager.h */,
+				C1591B602AFFC41400351431 /* RequestManager.m */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		D715D3D78CDFC8BFEAAECDAB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1163,6 +1188,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = C159190D2AFDC43E00351431;
 			productRefGroup = C15919172AFDC43E00351431 /* Products */;
@@ -1181,10 +1207,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1591B6B2AFFCF6800351431 /* Localizable.strings in Resources */,
 				C1591A742AFDD59F00351431 /* LaunchScreen.storyboard in Resources */,
-				C1591ACB2AFE3FEC00351431 /* InfoPlist.strings in Resources */,
-				C1591AC92AFE3FE000351431 /* Localizable.strings in Resources */,
 				C1591A762AFE15F100351431 /* Assets.xcassets in Resources */,
+				C1591B752AFFCFCC00351431 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1347,6 +1373,7 @@
 				C159196A2AFDCE5600351431 /* NSBundle+Additions.m in Sources */,
 				C1591A452AFDCF0400351431 /* UIBezierPath+YYAdd.m in Sources */,
 				C1591A502AFDCF0400351431 /* UIControl+YYAdd.m in Sources */,
+				C1591B652AFFC41500351431 /* RequestManager.m in Sources */,
 				C15919632AFDCE4900351431 /* UIView+GestureCallback.m in Sources */,
 				C1591A362AFDCF0400351431 /* YYTextLine.m in Sources */,
 				C1591A1E2AFDCF0400351431 /* YYCache.m in Sources */,
@@ -1418,8 +1445,10 @@
 				C1591A5A2AFDCF0400351431 /* NSObject+YYAddForARC.m in Sources */,
 				C1591A592AFDCF0400351431 /* NSTimer+YYAdd.m in Sources */,
 				C1591A2C2AFDCF0400351431 /* YYAnimatedImageView.m in Sources */,
+				C1591B672AFFC41500351431 /* BaseRequest.m in Sources */,
 				C1591AFE2AFE781F00351431 /* TabColumnViewController.m in Sources */,
 				C1591A262AFDCF0400351431 /* YYFrameImage.m in Sources */,
+				C1591B662AFFC41500351431 /* BaseResponse.m in Sources */,
 				C15919612AFDCE4900351431 /* UIButton+ViolenceBtn.m in Sources */,
 				C1591A1D2AFDCF0400351431 /* YYDiskCache.m in Sources */,
 				C1591A522AFDCF0400351431 /* NSArray+YYAdd.m in Sources */,
@@ -1458,6 +1487,27 @@
 			targetProxy = C159193C2AFDC43F00351431 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C1591B682AFFCF6700351431 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C1591B692AFFCF6700351431 /* en */,
+				C1591B6A2AFFCF6700351431 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		C1591B722AFFCFCC00351431 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C1591B732AFFCFCC00351431 /* en */,
+				C1591B742AFFCFCC00351431 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C15919432AFDC43F00351431 /* Debug */ = {

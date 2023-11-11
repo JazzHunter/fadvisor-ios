@@ -48,6 +48,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor backgroundColor];
     [self addChildViewControllers];
     self.currentIndex = 0;
     [self addLottieImage:self.currentIndex];

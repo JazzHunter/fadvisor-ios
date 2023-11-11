@@ -8,8 +8,9 @@
 #ifndef Macro_h
 #define Macro_h
 
-#define kStatusBarHeight                  [UIApplication sharedApplication].statusBarFrame.size.height
-#define kDefaultNavBarHeight              ([UIApplication sharedApplication].statusBarFrame.size.height + 44.0)
+#define kStatusBarHeight                  [UIApplication sharedApplication].windows.firstObject.windowScene.statusBarManager.statusBarFrame.size.height
+
+#define kDefaultNavBarHeight              ([UIApplication sharedApplication].windows.firstObject.windowScene.statusBarManager.statusBarFrame.size.height + 44.0)
 
 #define kBottomBarHeight                  49
 #define kAPPDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
