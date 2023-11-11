@@ -1,0 +1,107 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '13.0'
+
+use_frameworks!
+
+# ignore all warnings from all pods
+inhibit_all_warnings!
+
+#配置workspace路径
+workspace 'Fadvisor.xcworkspace'
+
+# 公有
+def base_ui_pods
+  # 排版
+  pod 'MyLayout'
+  # 蒙版
+  pod 'MBProgressHUD'
+  # 友盟 - 推送、统计、分享模块
+#  pod 'UMCommon' # 由原来的UMCCommon变为UMCommon
+#  pod 'UMDevice' # 必须集成
+#  pod 'UMAPM' # 实现APM相关功能，如稳定性分析等
+#  pod 'UMPush'# 原为'UMCPush'
+#  pod 'UMCSecurityPlugins'
+#  pod 'UMCCommonLog'
+#  pod 'UMShare/Social/WeChat'# 集成微信(完整版14.4M)
+#  pod 'UMShare/Social/ReducedQQ' # 集成QQ/QZone/TIM(精简版0.5M)
+#  pod 'UMShare/Social/ReducedSina' # 集成新浪微博(精简版1M)
+#  pod 'UMShare/Social/Email' # 集成邮件
+#  pod 'UMShare/Social/SMS' # 集成短信
+  
+  # 骨架屏
+  pod 'TABAnimated'
+  
+  # 下拉刷新
+  pod 'MJRefresh'
+end
+
+# 网络
+def network_pods
+  # 网络请求
+  pod 'AFNetworking', '3.2.1'
+  
+end
+
+# 工具类
+def utils_pods
+  # 唯一设备标识
+  pod 'FCUUID'
+  
+end
+
+# 基础
+def base_pods
+  # 日志
+  pod 'CocoaLumberjack'
+  
+end
+
+################# 主工程
+target 'Fadvisor' do
+  base_pods
+  base_ui_pods
+  network_pods
+  utils_pods
+  
+  # DoraemonKit
+#  pod 'DoraemonKit/Core'
+#  pod 'DoraemonKit/WithGPS'
+#  pod 'DoraemonKit/WithLoad'
+  
+  # 将字典(NSDictionary)和数组(NSArray)打印的Log显示为Json格式,可以解决Xcode打印字典和数组时中文显示乱码问题
+  pod 'PrintBeautifulLog'
+  
+  # 全局滑动
+  pod 'FDFullscreenPopGesture'
+  
+  # 动画
+  pod 'lottie-ios', '2.5.3'
+  
+  # 横向的列表切换
+  pod 'JXCategoryView'
+  
+  # Page页切换
+  pod 'JXPagingView/Pager'
+  
+  # 警告框
+  pod 'LEEAlert'
+  
+
+  target 'FadvisorTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'FadvisorUITests' do
+    # Pods for testing
+  end
+
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+        end
+    end
+end

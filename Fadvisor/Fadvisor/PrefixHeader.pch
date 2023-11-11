@@ -1,0 +1,23 @@
+//
+//  PrefixHeader.pch
+//  Fadvisor
+//
+//  Created by 韩建伟 on 2023/11/10.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+#import "Macro.h"
+#import "Constants.h"
+#import "CacheKey.h"
+#import "YYKit.h"
+
+#import "Categories.h"
+#import "XYColorOC.h"
+
+
+#endif /* PrefixHeader_pch */
