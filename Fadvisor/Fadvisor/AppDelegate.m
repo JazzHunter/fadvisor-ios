@@ -15,17 +15,14 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 ////    [self clearLaunchScreenCache];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     MainTabBarController *tabBarController = [[MainTabBarController alloc] init];
-    
+
     [self.window setRootViewController:tabBarController];
     [self.window makeKeyAndVisible];
 
-
-    
     return YES;
 }
 

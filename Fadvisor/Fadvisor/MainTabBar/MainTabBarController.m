@@ -77,7 +77,6 @@
     }
 }
 
-
 - (void)addLottieImageInMainThread:(NSInteger)index {
     LOTAnimationView *lottieView = [LOTAnimationView animationNamed:self.lottieAnimationJsonFileArr[index] inBundle:[NSBundle bundleWithPath:[[[NSBundle resourceBundle] resourcePath] stringByAppendingPathComponent:@"TabBarLottieFiles"]]];
     CGFloat singleW = [UIScreen mainScreen].bounds.size.width / tabBarItemsCount;
@@ -89,7 +88,6 @@
     self.lottieView = lottieView;
     [self.tabBar addSubview:lottieView];
 }
-
 
 - (void)playLottieAnimation {
     self.lottieView.animationProgress = 0;
@@ -103,11 +101,9 @@
     [self.lottieView play];
 }
 
-
 - (UINavigationController *)currentNavigationController {
     return self.selectedViewController;
 }
-
 
 #pragma mark - UITabBarControllerDelegate
 
@@ -133,4 +129,5 @@
     }
     return _lottieAnimationJsonFileArr;
 }
+
 @end

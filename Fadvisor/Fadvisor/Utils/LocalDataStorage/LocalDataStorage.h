@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface LocalDataStorage : NSObject
 
 + (id)cacheForKey:(NSString *)key;

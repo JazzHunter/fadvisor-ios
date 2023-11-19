@@ -27,7 +27,7 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
     self = [super init];
     if (self) {
         //TabBar的配置
-        self.tabBarItem.title = NSLocalizedString(@"TabHomeName", nil);;
+        self.tabBarItem.title = NSLocalizedString(@"TabHomeName", nil);
         self.tabBarItem.image = [[UIImage imageNamed:@"tab_home_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         self.tabBarItem.selectedImage = [[UIImage alloc] init];
         [self.navigationController setNavigationBarHidden:YES animated:NO];
@@ -37,7 +37,7 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSArray <NSString *> *titles = @[@"推荐", @"专题", @"栏目",@"团队"];
+    NSArray <NSString *> *titles = @[@"推荐", @"专题", @"栏目", @"团队"];
     _categoryView = [[JXCategoryTitleView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, pinSectionHeaderHeight)];
     self.categoryView.titles = titles;
     self.categoryView.backgroundColor = [UIColor backgroundColor];
@@ -50,20 +50,20 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
     self.categoryView.titleLabelZoomScale = 1.05;
     self.categoryView.averageCellSpacingEnabled = NO;
     self.categoryView.titleLabelAnchorPointStyle = JXCategoryTitleLabelAnchorPointStyleBottom;
-    
+
     JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
     lineView.indicatorColor = [UIColor mainColor];
     lineView.lineStyle = JXCategoryIndicatorLineStyle_Lengthen;
     self.categoryView.indicators = @[lineView];
-    
+
     self.pagerView = [[JXPagerListRefreshView alloc] initWithDelegate:self];
     self.pagerView.mainTableView.gestureDelegate = self;
     self.pagerView.pinSectionHeaderVerticalOffset = kStatusBarHeight;   //悬浮位置
-    
+
     [self.view addSubview:self.pagerView];
-    
+
     self.categoryView.listContainer = (id<JXCategoryViewListContainer>)self.pagerView.listContainerView;
-    
+
     //导航栏隐藏的情况，处理扣边返回，下面的代码要加上
     [self.pagerView.listContainerView.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
     [self.pagerView.mainTableView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
@@ -77,7 +77,7 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
 
 #pragma mark - Header View
 
-- (UIView *)headerView{
+- (UIView *)headerView {
     if (!_headerView) {
         _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kDefaultNavBarHeight)];
         _headerView.backgroundColor = [UIColor backgroundColor];
@@ -86,12 +86,12 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
         _headerViewLayout.gravity = MyGravity_Vert_Center;
         _headerViewLayout.padding = UIEdgeInsetsMake(kStatusBarHeight, 10, 0, 10);
         [_headerView addSubview:_headerViewLayout];
-        
+
         UIImageView *appIconIV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"app_icon_thumb"]];
-        appIconIV.frame = CGRectMake(0,0,40,40);
+        appIconIV.frame = CGRectMake(0, 0, 40, 40);
         [_headerViewLayout addSubview:appIconIV];
         [appIconIV setCornerRadius:6];
-        
+
         MyLinearLayout *searchBarView = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Horz];
         searchBarView.myHeight = 36.f;
         searchBarView.weight = 1;
@@ -105,10 +105,10 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
         searchBarView.highlightedOpacity = 0.2;
         [searchBarView setTarget:self action:@selector(searchBarDidClick:)];
         [_headerViewLayout addSubview:searchBarView];
-        
+
         UIImageView *searchIC = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_search"]];
         [searchBarView addSubview:searchIC];
-        
+
         UILabel *placeholderLabel = [UILabel new];
         placeholderLabel.text = @"请输入文章、作者、专题或者栏目";
         placeholderLabel.font = [UIFont systemFontOfSize:ItemIntroductionFontSize];
@@ -119,6 +119,7 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
     }
     return _headerView;
 }
+
 - (void)searchBarDidClick:(UIView *)sender {
     //    GeneralSearchViewController *searchVC = [[GeneralSearchViewController alloc] init];
     //    [UIView transitionWithView:self.navigationController.view duration:0.3f options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
@@ -179,11 +180,10 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
     //        default:
     //            break;
     //    }
-    
+
     TabHomeRcmdViewController *vc = [[TabHomeRcmdViewController alloc] init];
     return vc;
 }
-
 
 #pragma mark - BaseViewControllerDatasource
 - (BOOL)baseViewControllerIsNeedNavBar:(BaseViewController *)baseViewController {
@@ -193,7 +193,6 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
 #pragma mark - JXCategoryViewDelegate
 
 - (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
-    
 }
 
 #pragma mark - JXPagerMainTableViewGestureDelegate
@@ -208,8 +207,8 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
 
 - (void)mainTableViewDidScroll:(UIScrollView *)scrollView {
     CGFloat thresholdDistance = 44.f;
-    CGFloat percent = scrollView.contentOffset.y/thresholdDistance;
-    self.headerViewLayout.alpha = 1- MAX(0, MIN(1, percent));
+    CGFloat percent = scrollView.contentOffset.y / thresholdDistance;
+    self.headerViewLayout.alpha = 1 - MAX(0, MIN(1, percent));
 }
 
 @end

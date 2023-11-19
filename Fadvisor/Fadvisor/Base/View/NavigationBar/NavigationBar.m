@@ -8,9 +8,9 @@
 
 #import "NavigationBar.h"
 
-#define kLeftRightViewHorzPadding        8.0
-#define kLeftRightViewStandardSize      44.0
-@interface NavigationBar()
+#define kLeftRightViewHorzPadding  8.0
+#define kLeftRightViewStandardSize 44.0
+@interface NavigationBar ()
 
 @end
 
@@ -87,18 +87,18 @@
 }
 
 - (void)setTitle:(NSAttributedString *)title {
-   UILabel *navTitleLabel = [UILabel new];
-   navTitleLabel.numberOfLines = 0;//可能出现多行的标题
-   [navTitleLabel setAttributedText:title];
-   navTitleLabel.textAlignment = NSTextAlignmentCenter;
-   navTitleLabel.userInteractionEnabled = YES;
-   navTitleLabel.lineBreakMode = NSLineBreakByClipping;
-   [navTitleLabel sizeToFit];
-   self.titleView = navTitleLabel;
+    UILabel *navTitleLabel = [UILabel new];
+    navTitleLabel.numberOfLines = 0;//可能出现多行的标题
+    [navTitleLabel setAttributedText:title];
+    navTitleLabel.textAlignment = NSTextAlignmentCenter;
+    navTitleLabel.userInteractionEnabled = YES;
+    navTitleLabel.lineBreakMode = NSLineBreakByClipping;
+    [navTitleLabel sizeToFit];
+    self.titleView = navTitleLabel;
 }
 
-- (void)setTitleText: (NSString *)titleText {
-    NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:16 weight:UIFontWeightMedium], NSForegroundColorAttributeName:[UIColor titleTextColor]};
+- (void)setTitleText:(NSString *)titleText {
+    NSDictionary *attributes = @{ NSFontAttributeName: [UIFont systemFontOfSize:16 weight:UIFontWeightMedium], NSForegroundColorAttributeName: [UIColor titleTextColor] };
     NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:titleText attributes:attributes];
     [self setTitle:text];
 }
@@ -124,18 +124,18 @@
         self.rootLayout.bottomBorderline = bld;
     }
     /** 导航条的左边的 view */
-   /** 导航条左边的按钮 */
+    /** 导航条左边的按钮 */
     if ([self.dataSource respondsToSelector:@selector(navigationBarHideLeftView:)] && [self.dataSource navigationBarHideLeftView:self]) {
         _leftView = [UIView new];
     } else if ([self.dataSource respondsToSelector:@selector(navigationBarLeftView:)]) {
-       _leftView = [self.dataSource navigationBarLeftView:self];
+        _leftView = [self.dataSource navigationBarLeftView:self];
     } else if ([self.dataSource respondsToSelector:@selector(navigationBarLeftButtonImage:navigationBar:)]) {
-       UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kLeftRightViewStandardSize, kLeftRightViewStandardSize)];
-       UIImage *image = [self.dataSource navigationBarLeftButtonImage:btn navigationBar:self];
-       if (image) {
-           [btn setImage:image forState:UIControlStateNormal];
-       }
-       _leftView = btn;
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kLeftRightViewStandardSize, kLeftRightViewStandardSize)];
+        UIImage *image = [self.dataSource navigationBarLeftButtonImage:btn navigationBar:self];
+        if (image) {
+            [btn setImage:image forState:UIControlStateNormal];
+        }
+        _leftView = btn;
     } else {
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kLeftRightViewStandardSize, kLeftRightViewStandardSize)];
         [btn setImage:[UIImage imageNamed:@"navgationbar_back_pre"] forState:UIControlStateHighlighted];
@@ -149,7 +149,7 @@
     _leftView.leftPos.equalTo(@kLeftRightViewHorzPadding);
     _leftView.centerYPos.equalTo(@0);
     [self.rootLayout addSubview:_leftView];
-    
+
     /** 导航条右边的 view */
     /** 导航条右边的按钮 */
     if ([self.dataSource respondsToSelector:@selector(navigationBarHideRightView:)] && [self.dataSource navigationBarHideRightView:self]) {
@@ -173,7 +173,7 @@
     _rightView.rightPos.equalTo(@kLeftRightViewHorzPadding);
     _rightView.centerYPos.equalTo(@0);
     [self.rootLayout addSubview:_rightView];
-    
+
     /** 导航条中间的 View */
     if ([self.dataSource respondsToSelector:@selector(navigationBarTitleView:)]) {
         _titleView = [self.dataSource navigationBarTitleView:self];
@@ -191,7 +191,7 @@
         [navTitleLabel sizeToFit];
         self.titleView = navTitleLabel;//这里是因为需要设置左右边距
     } else {
-        MyBaseLayout * titleView = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Horz];
+        MyBaseLayout *titleView = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Horz];
         titleView.gravity = MyGravity_Center;
         titleView.mySize = CGSizeMake(kScreenWidth - 2 * (2 * kLeftRightViewHorzPadding + kLeftRightViewStandardSize), MyLayoutSize.wrap);
         titleView.subviewHSpace = 12;
@@ -199,7 +199,7 @@
         _titleView.centerXPos.equalTo(@0);
         _titleView.centerYPos.equalTo(@0);
     }
-    
+
     __block BOOL isHaveTapGes = NO;
     [self.titleView.gestureRecognizers enumerateObjectsUsingBlock:^(__kindof UIGestureRecognizer *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
         if ([obj isKindOfClass:[UITapGestureRecognizer class]]) {
@@ -207,12 +207,12 @@
             *stop = YES;
         }
     }];
-    
+
     if (!isHaveTapGes) {
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(titleClick:)];
         [_titleView addGestureRecognizer:tap];
     }
-    
+
     [self.rootLayout addSubview:_titleView];
 }
 

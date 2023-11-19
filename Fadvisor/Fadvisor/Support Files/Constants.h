@@ -17,7 +17,7 @@
 #define APPID                             @"1271998307"
 
 #define DefaultContactEmail               @"kc@cn.pwc.com"
-#define BaseURL                           @"http://a3d2146881.zicp.vip/"
+#define BaseURL                           @"http://127.0.0.1:9999/"
 
 // 友盟
 #define ThirdSDKUMConfigInstanceAppKey    @"5ea912a0167eddb71800005a"
@@ -32,42 +32,5 @@
 
 #define DEFAULT_PAGE_NO                   1
 #define DEFAULT_PAGE_SIZE                 20
-
-/**
- 需要加载的数据类型
- */
-typedef enum : NSUInteger {
-    ModuleTypeAll = 1,
-    ModuleTypeWeb = 2,
-    ModuleTypeItem = 3,
-    ModuleTypeAuthor = 4,
-    ModuleTypeArticle = 11,
-    ModuleTypePublication = 12,
-    ModuleTypeVideo = 13,
-    ModuleTypeTopic = 14,
-    ModuleTypeColumn = 15,
-    ModuleTypeContact = 16,
-    ModuleTypeTeam = 17,
-    ModuleTypeAudio = 31,
-    ModuleTypeImage = 32
-} ModuleType;
-
-typedef enum : NSUInteger {
-    PageLoadStateNotInited = 1, //初次进入，尚未初始化
-    PageLoadStateInited4LoadMore = 2, //初始化成功，后续是获取更多
-    PageLoadStateInited4Refresh = 3,  //初始化成功，后续是重新刷新数据
-    PageLoadStateInitedError = 9
-} PageLoadState;
-
-typedef NS_ENUM (NSInteger, ItemTableViewCellShowType) {
-    /** 未知模式*/
-    ItemTableViewCellShowTypeUnknown          = 0,
-    /** 正常模式*/
-    ItemTableViewCellShowTypeNormal           = 1,
-    /** 作者关注状态 */
-    ItemTableViewCellShowTypeAuthorSubscribed = 2,
-    /** 专题关注状态  */
-    ItemTableViewCellShowTypeTopicSubscribed  = 3
-};
 
 #endif

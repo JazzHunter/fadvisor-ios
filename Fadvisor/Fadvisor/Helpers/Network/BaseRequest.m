@@ -11,25 +11,24 @@
 
 @implementation BaseRequest
 
-- (void)POST:(NSString *)URLString parameters:(id)parameters completion:(void(^)(BaseResponse *response))completion {
-    __weak typeof(self) weakSelf;
+- (void)POST:(NSString *)URLString parameters:(id)parameters completion:(void (^)(BaseResponse *response))completion {
+    Weak(self);
     [[RequestManager sharedManager] POST:URLString parameters:parameters completion:^(BaseResponse *response) {
-        if (!weakSelf) {
-            return ;
+        if (!weakself) {
+            return;
         }
         !completion ? : completion(response);
     }];
 }
 
-- (void)GET:(NSString *)URLString parameters:(id)parameters completion:(void(^)(BaseResponse *response))completion {
-    __weak typeof(self) weakSelf;
+- (void)GET:(NSString *)URLString parameters:(id)parameters completion:(void (^)(BaseResponse *response))completion {
+    Weak(self);
     [[RequestManager sharedManager] GET:URLString parameters:parameters completion:^(BaseResponse *response) {
-        if (!weakSelf) {
-            return ;
+        if (!weakself) {
+            return;
         }
-        !completion ?: completion(response);
+        !completion ? : completion(response);
     }];
 }
-
 
 @end

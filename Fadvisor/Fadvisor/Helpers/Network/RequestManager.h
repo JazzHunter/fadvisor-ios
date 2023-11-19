@@ -13,11 +13,11 @@ typedef NSString DataName;
 
 typedef enum : NSInteger {
     // 自定义错误码
-    RequestManagerStatusCodeOK = 1000,
-//    RequestManagerUserInfoExpired = 123123;
+    RequestManagerStatusCodeOK = 0,
+    RequestManagerStatusCodeFail = 1,
 } RequestManagerStatusCode;
 
-typedef BaseResponse *(^ResponseFormat)(BaseResponse *response);
+typedef BaseResponse * (^ResponseFormat)(BaseResponse *response);
 
 @interface RequestManager : AFHTTPSessionManager
 
@@ -38,6 +38,6 @@ typedef BaseResponse *(^ResponseFormat)(BaseResponse *response);
    data 数据对应的二进制数据
    LMJDataName data对应的参数
  */
-- (void)upload:(NSString *)urlString parameters:(id)parameters formDataBlock:(NSDictionary<NSData *, DataName *> *(^)(id<AFMultipartFormData> formData, NSMutableDictionary<NSData *, DataName *> *needFillDataDict))formDataBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(BaseResponse *response))completion;
+- (void)upload:(NSString *)urlString parameters:(id)parameters formDataBlock:(NSDictionary<NSData *, DataName *> * (^)(id<AFMultipartFormData> formData, NSMutableDictionary<NSData *, DataName *> *needFillDataDict))formDataBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(BaseResponse *response))completion;
 
 @end

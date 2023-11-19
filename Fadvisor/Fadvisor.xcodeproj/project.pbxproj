@@ -132,6 +132,11 @@
 		C1591B672AFFC41500351431 /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C1591B632AFFC41400351431 /* BaseRequest.m */; };
 		C1591B6B2AFFCF6800351431 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1591B682AFFCF6700351431 /* Localizable.strings */; };
 		C1591B752AFFCFCC00351431 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1591B722AFFCFCC00351431 /* InfoPlist.strings */; };
+		C1591B782B05FCAE00351431 /* RcmdItemsServcie.m in Sources */ = {isa = PBXBuildFile; fileRef = C1591B772B05FCAE00351431 /* RcmdItemsServcie.m */; };
+		C1B0CEE82B0771CD00A1173E /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B0CEE72B0771CD00A1173E /* Item.m */; };
+		C1B0CEEC2B08A09B00A1173E /* Author.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B0CEEB2B08A09B00A1173E /* Author.m */; };
+		C1B0CEEF2B08DE0100A1173E /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B0CEEE2B08DE0100A1173E /* Tag.m */; };
+		C1B0CEF32B090A6600A1173E /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B0CEF22B090A6600A1173E /* UserManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -416,6 +421,18 @@
 		C1591B6A2AFFCF6700351431 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "../../../../fadvisor-ios-2021/Fadvisor/Fadvisor/Support Files/zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C1591B732AFFCFCC00351431 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "../../../../fadvisor-ios-2021/Fadvisor/Fadvisor/Support Files/en.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C1591B742AFFCFCC00351431 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "../../../../fadvisor-ios-2021/Fadvisor/Fadvisor/Support Files/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		C1591B762B05FCAE00351431 /* RcmdItemsServcie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RcmdItemsServcie.h; sourceTree = "<group>"; };
+		C1591B772B05FCAE00351431 /* RcmdItemsServcie.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RcmdItemsServcie.m; sourceTree = "<group>"; };
+		C1B0CEE62B0771CD00A1173E /* Item.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		C1B0CEE72B0771CD00A1173E /* Item.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		C1B0CEE92B088A7800A1173E /* ContentEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentEnum.h; sourceTree = "<group>"; };
+		C1B0CEEA2B08A09B00A1173E /* Author.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Author.h; sourceTree = "<group>"; };
+		C1B0CEEB2B08A09B00A1173E /* Author.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Author.m; sourceTree = "<group>"; };
+		C1B0CEED2B08DE0100A1173E /* Tag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
+		C1B0CEEE2B08DE0100A1173E /* Tag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
+		C1B0CEF12B090A6600A1173E /* UserManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
+		C1B0CEF22B090A6600A1173E /* UserManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
+		C1B0CEF52B09AF2F00A1173E /* BaseEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseEnum.h; sourceTree = "<group>"; };
 		C8126B4E9064B917D59445AB /* Pods-FadvisorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FadvisorTests.debug.xcconfig"; path = "Target Support Files/Pods-FadvisorTests/Pods-FadvisorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E169AA165A089CABEB289175 /* Pods-FadvisorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FadvisorTests.release.xcconfig"; path = "Target Support Files/Pods-FadvisorTests/Pods-FadvisorTests.release.xcconfig"; sourceTree = "<group>"; };
 		E4CF22C0F536A158DB5DBDBF /* Pods_FadvisorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FadvisorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -491,6 +508,7 @@
 				C1591A752AFE15F100351431 /* Assets.xcassets */,
 				C159192A2AFDC43F00351431 /* Info.plist */,
 				C1591A8D2AFE2E9700351431 /* Base */,
+				C1591ACC2AFE413000351431 /* Utils */,
 				C1591AB42AFE316F00351431 /* MainTabBar */,
 				C1591A982AFE2EBD00351431 /* Modules */,
 				C159196B2AFDCEEF00351431 /* Helpers */,
@@ -839,6 +857,7 @@
 				C1591A722AFDD0E200351431 /* Macro.h */,
 				C1591A712AFDCFAC00351431 /* CacheKey.h */,
 				C1591A702AFDCFAC00351431 /* Constants.h */,
+				C1B0CEF52B09AF2F00A1173E /* BaseEnum.h */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -855,6 +874,8 @@
 		C1591A982AFE2EBD00351431 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				C1B0CEE52B07551900A1173E /* Content */,
+				C1591B792B05FCC300351431 /* Services */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -898,7 +919,6 @@
 		C1591AB42AFE316F00351431 /* MainTabBar */ = {
 			isa = PBXGroup;
 			children = (
-				C1591ACC2AFE413000351431 /* Utils */,
 				C1591AC12AFE3F0600351431 /* TabHome */,
 				C1591AFA2AFE781F00351431 /* TabAccount */,
 				C1591AF72AFE781F00351431 /* TabColumn */,
@@ -924,6 +944,7 @@
 		C1591ACC2AFE413000351431 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C1B0CEF02B090A5000A1173E /* UserInfo */,
 				C1591B572AFF1DC000351431 /* KeyChain */,
 				C1591B512AFF1DC000351431 /* LocalDataStorage */,
 				C1591B542AFF1DC000351431 /* Utils */,
@@ -1083,6 +1104,46 @@
 				C1591B602AFFC41400351431 /* RequestManager.m */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		C1591B792B05FCC300351431 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C1591B762B05FCAE00351431 /* RcmdItemsServcie.h */,
+				C1591B772B05FCAE00351431 /* RcmdItemsServcie.m */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C1B0CEE52B07551900A1173E /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				C1B0CEF42B09AD3C00A1173E /* Models */,
+				C1B0CEE92B088A7800A1173E /* ContentEnum.h */,
+			);
+			path = Content;
+			sourceTree = "<group>";
+		};
+		C1B0CEF02B090A5000A1173E /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				C1B0CEF12B090A6600A1173E /* UserManager.h */,
+				C1B0CEF22B090A6600A1173E /* UserManager.m */,
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		C1B0CEF42B09AD3C00A1173E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C1B0CEE62B0771CD00A1173E /* Item.h */,
+				C1B0CEE72B0771CD00A1173E /* Item.m */,
+				C1B0CEEA2B08A09B00A1173E /* Author.h */,
+				C1B0CEEB2B08A09B00A1173E /* Author.m */,
+				C1B0CEED2B08DE0100A1173E /* Tag.h */,
+				C1B0CEEE2B08DE0100A1173E /* Tag.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		D715D3D78CDFC8BFEAAECDAB /* Pods */ = {
@@ -1338,6 +1399,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1B0CEE82B0771CD00A1173E /* Item.m in Sources */,
 				C15919672AFDCE4900351431 /* UIButton+Additions.m in Sources */,
 				C1591A4F2AFDCF0400351431 /* UIImage+YYAdd.m in Sources */,
 				C1591A602AFDCF0400351431 /* YYCGUtilities.m in Sources */,
@@ -1360,6 +1422,8 @@
 				C1591B5B2AFF1DC000351431 /* Utils.m in Sources */,
 				C1591A562AFDCF0400351431 /* NSData+YYAdd.m in Sources */,
 				C1591A4C2AFDCF0400351431 /* UIView+YYAdd.m in Sources */,
+				C1591B782B05FCAE00351431 /* RcmdItemsServcie.m in Sources */,
+				C1B0CEEF2B08DE0100A1173E /* Tag.m in Sources */,
 				C1591A5F2AFDCF0400351431 /* NSObject+YYAddForKVO.m in Sources */,
 				C1591A6B2AFDCF0400351431 /* YYTimer.m in Sources */,
 				C1591A412AFDCF0400351431 /* YYTextAttribute.m in Sources */,
@@ -1400,6 +1464,7 @@
 				C1591B4F2AFF0BBF00351431 /* ItemFloatCoverSkeletonTableViewCell.m in Sources */,
 				C1591A1F2AFDCF0400351431 /* YYKVStorage.m in Sources */,
 				C1591A332AFDCF0400351431 /* YYTextEffectWindow.m in Sources */,
+				C1B0CEEC2B08A09B00A1173E /* Author.m in Sources */,
 				C1591A4E2AFDCF0400351431 /* UIGestureRecognizer+YYAdd.m in Sources */,
 				C1591A3D2AFDCF0400351431 /* NSParagraphStyle+YYText.m in Sources */,
 				C1591ADC2AFE422E00351431 /* AutoRefreshFooter.m in Sources */,
@@ -1416,6 +1481,7 @@
 				C1591A2E2AFDCF0400351431 /* NSObject+YYModel.m in Sources */,
 				C1591A542AFDCF0400351431 /* NSBundle+YYAdd.m in Sources */,
 				C1591A422AFDCF0400351431 /* YYTextArchiver.m in Sources */,
+				C1B0CEF32B090A6600A1173E /* UserManager.m in Sources */,
 				C1591A4D2AFDCF0400351431 /* UIBarButtonItem+YYAdd.m in Sources */,
 				C1591A6A2AFDCF0400351431 /* YYFileHash.m in Sources */,
 				C1591A3B2AFDCF0400351431 /* YYTextRunDelegate.m in Sources */,
@@ -1536,7 +1602,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1597,7 +1663,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

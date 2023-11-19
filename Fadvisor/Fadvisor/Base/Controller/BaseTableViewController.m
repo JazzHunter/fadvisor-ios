@@ -37,20 +37,20 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+
     // 适配 ios 11
     self.tableView.estimatedRowHeight = 80;
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.backgroundColor = [UIColor clearColor];
-    
+
     //配置骨架屏
     self.tableView.tabAnimated = [TABTableAnimated animatedWithCellClass:[ItemFloatCoverSkeletonTableViewCell class] cellHeight:160];
     self.tableView.tabAnimated.showTableHeaderView = YES;
     self.tableView.tabAnimated.superAnimationType = TABViewSuperAnimationTypeShimmer;
     self.tableView.tabAnimated.canLoadAgain = YES;
-    self.tableView.tabAnimated.adjustBlock = ^(TABComponentManager * _Nonnull manager) {
+    self.tableView.tabAnimated.adjustBlock = ^(TABComponentManager *_Nonnull manager) {
         manager.animation(1).dropStayTime(0.6).height(13);
         manager.animation(3).height(16);
         manager.animation(4).height(14);
@@ -69,7 +69,7 @@
 }
 
 - (UITableView *)tableView {
-    if(_tableView == nil) {
+    if (_tableView == nil) {
         UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:self.tableViewStyle];
         [self.view addSubview:tableView];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

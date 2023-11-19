@@ -22,15 +22,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)formatFloat:(double)f;
 
-+ (void)dispatchAsyncBlock:(void(^)(void))block;
++ (void)dispatchAsyncBlock:(void (^)(void))block;
 
 + (NSString *)shortedNumberPrice:(double)number;
 
 //主线程 执行
-+ (void)dispatchMainQueueBlock:(void(^)(void))block;
++ (void)dispatchMainQueueBlock:(void (^)(void))block;
 
 //延时执行
-+ (void)dispatchQueueDelayTime:(float)delayTime block:(void(^)(void))block;
++ (void)dispatchQueueDelayTime:(float)delayTime block:(void (^)(void))block;
 
 + (NSString *)shortedNumberDesc:(long)number;
 
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)formatNumberDecimalValue:(double)value;
 
-+ (NSString *)isNullToString:(id)string ;
++ (NSString *)isNullToString:(id)string;
 
 + (NSDictionary *)convertToDictionary:(NSString *)jsonStr;
 

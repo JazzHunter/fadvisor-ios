@@ -7,17 +7,17 @@
 
 #import "KeyChainHelper.h"
 
-#define TOKEN_KEY            [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"] stringByAppendingString:@".token"]
+#define TOKEN_KEY [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"] stringByAppendingString:@".token"]
 
 @implementation KeyChainHelper
 
 + (NSMutableDictionary *)getKeychainQuery:(NSString *)service {
     return [NSMutableDictionary dictionaryWithObjectsAndKeys:
-    (__bridge_transfer id)kSecClassGenericPassword,(__bridge_transfer id)kSecClass,
-    service, (__bridge_transfer id)kSecAttrService,
-        service, (__bridge_transfer id)kSecAttrAccount,
-        (__bridge_transfer id)kSecAttrAccessibleAfterFirstUnlock,(__bridge_transfer id)kSecAttrAccessible,
-        nil];
+            (__bridge_transfer id)kSecClassGenericPassword, (__bridge_transfer id)kSecClass,
+            service, (__bridge_transfer id)kSecAttrService,
+            service, (__bridge_transfer id)kSecAttrAccount,
+            (__bridge_transfer id)kSecAttrAccessibleAfterFirstUnlock, (__bridge_transfer id)kSecAttrAccessible,
+            nil];
 }
 
 + (void)save:(NSString *)service data:(id)data {
@@ -70,4 +70,5 @@
 + (void)deleteToken {
     [self delete:TOKEN_KEY];
 }
+
 @end

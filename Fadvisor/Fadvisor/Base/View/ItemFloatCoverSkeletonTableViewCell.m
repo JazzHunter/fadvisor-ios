@@ -9,19 +9,18 @@
 #define CellHeight           320
 #define CoverImgWidth        105    //封面图片的宽度
 #define CoverImgHeight       85     //封面图片的高度
-#define ContactCoverImgWidth     28     //作者头像大小
+#define ContactCoverImgWidth 28         //作者头像大小
 
 #import "ItemFloatCoverSkeletonTableViewCell.h"
 #import <MyLayout/MyLayout.h>
 
-@interface ItemFloatCoverSkeletonTableViewCell()
+@interface ItemFloatCoverSkeletonTableViewCell ()
 
-@property(nonatomic, strong, readonly) MyBaseLayout *rootLayout;
+@property (nonatomic, strong, readonly) MyBaseLayout *rootLayout;
 
 @end
 
 @implementation ItemFloatCoverSkeletonTableViewCell
-
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -32,18 +31,16 @@
 }
 
 - (CGSize)systemLayoutSizeFittingSize:(CGSize)targetSize withHorizontalFittingPriority:(UILayoutPriority)horizontalFittingPriority verticalFittingPriority:(UILayoutPriority)verticalFittingPriority {
-        
     return [self.rootLayout sizeThatFits:CGSizeMake(targetSize.width - self.safeAreaInsets.left - self.safeAreaInsets.right, targetSize.height)];
 }
 
-
 - (void)createUI {
     _rootLayout = [MyFloatLayout floatLayoutWithOrientation:MyOrientation_Vert];
-    _rootLayout.frame = CGRectMake(0,0,kScreenWidth, 160);
+    _rootLayout.frame = CGRectMake(0, 0, kScreenWidth, 160);
     _rootLayout.cacheEstimatedRect = YES; //这个属性只局限于在UITableViewCell中使用，用来优化tableviewcell的高度自适应的性能，其他地方请不要使用！！！
     _rootLayout.padding = UIEdgeInsetsMake(ItemMarginVertical, ItemMarginHorizon, ItemMarginVertical, ItemMarginHorizon);
     [self.contentView addSubview:_rootLayout];
-    
+
     MyLinearLayout *topLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Horz];
     topLayout.weight = 1;
     topLayout.gravity = MyGravity_Vert_Center | MyGravity_Horz_Between;
@@ -51,11 +48,11 @@
     topLayout.myHorzMargin = 0;
     topLayout.myBottom = 6;
     [_rootLayout addSubview:topLayout];
-    
+
     //作者头像
     UIImageView *contactAvatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ContactCoverImgWidth, ContactCoverImgWidth)];
     [contactAvatarImageView setCornerRadius:ContactCoverImgWidth / 2];
-    
+
     [topLayout addSubview:contactAvatarImageView];
 
     //栏目标签
@@ -65,15 +62,15 @@
     channelLabel.myRight = 0;
     [channelLabel sizeToFit];
     [topLayout addSubview:channelLabel];
-    
-    UIImageView *coverImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,CoverImgWidth, CoverImgHeight)];
+
+    UIImageView *coverImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CoverImgWidth, CoverImgHeight)];
     coverImageView.myLeft = 12;
     coverImageView.reverseFloat = YES;
     [coverImageView setCornerRadius:6];
     [_rootLayout addSubview:coverImageView];
 
     UILabel *titleLabel = [[UILabel alloc]init];
-    titleLabel.font = [UIFont systemFontOfSize: ItemTitleFontSize];
+    titleLabel.font = [UIFont systemFontOfSize:ItemTitleFontSize];
     titleLabel.myHeight = MyLayoutSize.wrap;
     titleLabel.weight = 1;
     titleLabel.numberOfLines = 2;
@@ -82,7 +79,7 @@
     [_rootLayout addSubview:titleLabel];
 
     UILabel *introdcutionLabel = [[UILabel alloc]init];
-    introdcutionLabel.font = [UIFont systemFontOfSize: ItemTitleFontSize];
+    introdcutionLabel.font = [UIFont systemFontOfSize:ItemTitleFontSize];
     introdcutionLabel.myHeight = MyLayoutSize.wrap;
     introdcutionLabel.weight = 1;
     introdcutionLabel.numberOfLines = 1;
@@ -90,9 +87,9 @@
     introdcutionLabel.text = @"普华永道中国內地、香港地區、澳门地區及台湾地區成员机构根据各地适用的法律协作运营。整体而言，员工总数超过20,000人，其中包括超过720名合伙人。";
     [introdcutionLabel sizeToFit];
     [_rootLayout addSubview:introdcutionLabel];
-    
+
     UILabel *metaLabel = [[UILabel alloc]init];
-    metaLabel.font = [UIFont systemFontOfSize: ItemMetaFontSize];
+    metaLabel.font = [UIFont systemFontOfSize:ItemMetaFontSize];
     metaLabel.myHeight = MyLayoutSize.wrap;
     metaLabel.weight = 1;
     metaLabel.numberOfLines = 1;
@@ -100,13 +97,12 @@
     metaLabel.text = @"普华永道中国內地、香港地區、澳门地區及台湾地區成员机构根据各地适用的法律协作运营。整体而言，员工总数超过20,000人，其中包括超过720名合伙人。";
     [metaLabel sizeToFit];
     [_rootLayout addSubview:metaLabel];
-    
+
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 8)];
     lineView.clearFloat = YES;
     lineView.myTop = 12;
     lineView.myLeft = -ItemMarginHorizon;
     [_rootLayout addSubview:lineView];
-    
 }
 
 @end

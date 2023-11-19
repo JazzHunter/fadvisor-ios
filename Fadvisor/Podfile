@@ -40,6 +40,12 @@ def network_pods
   # 网络请求
   pod 'AFNetworking', '3.2.1'
   
+  # 网络监控
+  pod 'Reachability'
+
+  #字典转模型
+  pod 'MJExtension'
+  
 end
 
 # 工具类

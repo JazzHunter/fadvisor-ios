@@ -11,13 +11,12 @@
 #import "YYDiskCache.h"
 
 //YYCache
-#define LocalStorageDataCahceKey        @"CacheData"
+#define LocalStorageDataCahceKey @"CacheData"
 //是否是空对象
 #define IsEmpty(_object) (_object == nil \
                           || [_object isKindOfClass:[NSNull class]] \
                           || ([_object respondsToSelector:@selector(length)] && [(NSData *)_object length] == 0) \
                           || ([_object respondsToSelector:@selector(count)] && [(NSArray *)_object count] == 0))
-
 
 @implementation LocalDataStorage
 

@@ -25,9 +25,11 @@ PODS:
   - LEEAlert (1.6.6)
   - lottie-ios (2.5.3)
   - MBProgressHUD (1.2.0)
+  - MJExtension (3.4.1)
   - MJRefresh (3.7.6)
   - MyLayout (1.9.10)
   - PrintBeautifulLog (1.2.0)
+  - Reachability (3.2)
   - TABAnimated (2.6.4)
   - UICKeyChainStore (2.1.2)
 
@@ -41,9 +43,11 @@ DEPENDENCIES:
   - LEEAlert
   - lottie-ios (= 2.5.3)
   - MBProgressHUD
+  - MJExtension
   - MJRefresh
   - MyLayout
   - PrintBeautifulLog
+  - Reachability
   - TABAnimated
 
 SPEC REPOS:
@@ -57,9 +61,11 @@ SPEC REPOS:
     - LEEAlert
     - lottie-ios
     - MBProgressHUD
+    - MJExtension
     - MJRefresh
     - MyLayout
     - PrintBeautifulLog
+    - Reachability
     - TABAnimated
     - UICKeyChainStore
 
@@ -73,12 +79,14 @@ SPEC CHECKSUMS:
   LEEAlert: 7c2ea10bcd6be93d6d102abe947a9ff9708c4b60
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   MJRefresh: 2fe7fb43a5167ceda20bb7e63f130c04fd1814a5
   MyLayout: 39ee012bd780936c973bdc5d8ce0f84e3de489d7
   PrintBeautifulLog: 81bcb5db0e90d2834f7641433f41e314f33c42ed
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   TABAnimated: 44589b94525ba535c411816f333caa4d4fc9a399
   UICKeyChainStore: 85db518bb1d294366d15ec9b92a416c4e670518f
 
-PODFILE CHECKSUM: 29d5e5d126fdf98657874e52b4502f119d61d764
+PODFILE CHECKSUM: fee235ec14d5a92d1538b07046d48a73c515e821
 
 COCOAPODS: 1.11.3

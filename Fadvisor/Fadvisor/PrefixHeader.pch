@@ -19,5 +19,6 @@
 #import "Categories.h"
 #import "XYColorOC.h"
 
+#import <MJExtension.h>
 
 #endif /* PrefixHeader_pch */

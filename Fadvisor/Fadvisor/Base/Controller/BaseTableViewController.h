@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BaseTableViewController : BaseViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) UITableView *tableView;
+
 // tableview的样式, 默认plain
 - (instancetype)initWithStyle:(UITableViewStyle)style;
 

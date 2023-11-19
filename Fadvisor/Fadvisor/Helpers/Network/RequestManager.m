@@ -11,24 +11,23 @@
 #import "LocalDataStorage.h"
 #import "KeyCHainHelper.h"
 
-#define BASE_URL                            @"http://112.126.102.153/"    // 平台Key
-#define ClientIdKey                         @"Client_Id"                  // 平台Key
-#define ClientIdValue                       @"ios"                        // 平台Value
-#define AppVersionKey                       @"App_Version"                // 版本Key
+#define ClientIdKey   @"Client_Id"                                        // 平台Key
+#define ClientIdValue @"ios"                                              // 平台Value
+#define AppVersionKey @"App_Version"                                      // 版本Key
 
 @implementation RequestManager
 
-// post
+// Post
 - (void)POST:(NSString *)urlString parameters:(id)parameters completion:(void (^)(BaseResponse *))completion {
     [self request:@"POST" URL:urlString parameters:parameters completion:completion];
 }
 
-//get
+//Get
 - (void)GET:(NSString *)urlString parameters:(id)parameters completion:(void (^)(BaseResponse *))completion {
     [self request:@"GET" URL:urlString parameters:parameters completion:completion];
 }
 
-#pragma mark - post & get
+#pragma mark - Post & Get
 - (void)request:(NSString *)method URL:(NSString *)urlString parameters:(id)parameters completion:(void (^)(BaseResponse *response))completion {
     if (self.isLocal) {
         [self requestLocal:urlString completion:completion];
@@ -74,7 +73,11 @@ static NSString *jsonFileDirectory = @"LocalJsons";
 - (void)wrapperTask:(NSURLSessionDataTask *)task responseObject:(id)responseObject error:(NSError *)error completion:(void (^)(BaseResponse *response))completion {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         BaseResponse *response = [self convertTask:task responseObject:responseObject error:error];
+
+    #if DEBUG
         [self LogResponse:task.currentRequest.URL.absoluteString response:response];
+    #endif
+
         dispatch_async(dispatch_get_main_queue(), ^{
             !completion ? : completion(response);
         });
@@ -108,7 +111,7 @@ static NSString *jsonFileDirectory = @"LocalJsons";
 
 #pragma mark - 打印返回日志
 - (void)LogResponse:(NSString *)urlString response:(BaseResponse *)response {
-    NSLog(@"\n[%@]---%@\n", urlString, response);
+    NSLog(@"[%@]---%@\n", urlString, response);
 }
 
 #pragma mark - 上传文件
@@ -117,7 +120,7 @@ static NSString *jsonFileDirectory = @"LocalJsons";
 //  fileName 图片对应名字,一般服务不会使用,因为服务端会直接根据你上传的图片随机产生一个唯一的图片名字
 //  mimeType 资源类型
 //  不确定参数类型 可以这个 octet-stream 类型, 二进制流
-- (void)upload:(NSString *)urlString parameters:(id)parameters formDataBlock:(NSDictionary<NSData *, DataName *> *(^)(id<AFMultipartFormData> formData, NSMutableDictionary<NSData *, DataName *> *needFillDataDict))formDataBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(BaseResponse *response))completion {
+- (void)upload:(NSString *)urlString parameters:(id)parameters formDataBlock:(NSDictionary<NSData *, DataName *> * (^)(id<AFMultipartFormData> formData, NSMutableDictionary<NSData *, DataName *> *needFillDataDict))formDataBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(BaseResponse *response))completion {
     static NSString *mineType = @"application/octet-stream";
 
     [self POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
@@ -147,14 +150,15 @@ static NSString *jsonFileDirectory = @"LocalJsons";
     [acceptableContentTypes addObjectsFromArray:@[@"application/json", @"text/json", @"text/javascript", @"text/html", @"text/plain", @"application/xml", @"text/xml", @"*/*", @"application/x-plist"]];
     self.responseSerializer.acceptableContentTypes = [acceptableContentTypes copy];
     [self.requestSerializer setValue:ClientIdValue forHTTPHeaderField:ClientIdKey];
-    
+
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     [self.requestSerializer setValue:[infoDictionary objectForKey:@"CFBundleShortVersionString"] forHTTPHeaderField:AppVersionKey];
-    
+
     [self.requestSerializer setValue:[KeyChainHelper getToken] forHTTPHeaderField:@"Authorization"];
 
     //记录网络状态
     [self.reachabilityManager startMonitoring];
+
     //自定义处理数据
     self.responseFormat = ^BaseResponse *(BaseResponse *response) {
         return response;
@@ -177,17 +181,17 @@ static NSString *jsonFileDirectory = @"LocalJsons";
         AFJSONResponseSerializer *JSONserializer = (AFJSONResponseSerializer *)responseSerializer;
         JSONserializer.removesKeysWithNullValues = YES;
         /*
-         NSJSONReadingMutableContainers = 转换出来的对象是可变数组或者可变字典
-         NSJSONReadingMutableLeaves = 转换呼出来的OC对象中的字符串是可变的\注意：iOS7之后无效 bug
-         NSJSONReadingAllowFragments = 如果服务器返回的JSON数据，不是标准的JSON，那么就必须使用这个值，否则无法解析
-         */
+        NSJSONReadingMutableContainers = 转换出来的对象是可变数组或者可变字典
+        NSJSONReadingMutableLeaves = 转换呼出来的OC对象中的字符串是可变的\注意：iOS7之后无效 bug
+        NSJSONReadingAllowFragments = 如果服务器返回的JSON数据，不是标准的JSON，那么就必须使用这个值，否则无法解析
+     */
         JSONserializer.readingOptions = NSJSONReadingMutableContainers;
     }
 }
 
 #pragma mark - 单例和设置
 + (instancetype)manager {
-    RequestManager *manager = [[[self class] alloc] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
+    RequestManager *manager = [[[self class] alloc] initWithBaseURL:[NSURL URLWithString:BaseURL]];
     [manager configSettings];
     return manager;
 }

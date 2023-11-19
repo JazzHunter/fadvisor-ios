@@ -20,7 +20,7 @@
     self.view.backgroundColor = [UIColor backgroundColorGray];
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        if (@available(iOS 11.0, *)){
+        if (@available(iOS 11.0, *)) {
             [[UIScrollView appearanceWhenContainedInInstancesOfClasses:@[[BaseViewController class]]] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
         }
     });
@@ -41,7 +41,7 @@
 #pragma mark - Life Cycle
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-     // 配置友盟统计
+    // 配置友盟统计
 //    [UMengHelper beginLogPageViewName:self.title ? self.title: NSStringFromClass([self class])];
 }
 
@@ -63,7 +63,6 @@
 }
 
 - (void)dealloc {
-
 }
 
 #pragma mark - DataSource
@@ -91,5 +90,6 @@
     //重新加载view
     [self viewDidLoad];
 }
+
 #endif
 @end

@@ -56,7 +56,7 @@
 @property (strong, nonatomic) NSAttributedString *title;
 @property (strong, nonatomic) id<NavigationBarDataSource> dataSource;
 @property (strong, nonatomic) id<NavigationBarDelegate> delegate;
-- (void)setTitleText: (NSString *)titleText;
+- (void)setTitleText:(NSString *)titleText;
 /** 根视图 */
 @property (strong, nonatomic) MyBaseLayout *rootLayout;
 

@@ -16,7 +16,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationBar.hidden = YES;
-    
+
     // 不让自控制器控制系统导航条
     self.fd_viewControllerBasedNavigationBarAppearanceEnabled = NO;
 }
