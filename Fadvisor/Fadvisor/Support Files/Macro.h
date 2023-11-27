@@ -8,9 +8,33 @@
 #ifndef Macro_h
 #define Macro_h
 
-#define kStatusBarHeight                  [UIApplication sharedApplication].windows.firstObject.windowScene.statusBarManager.statusBarFrame.size.height
+//#define kStatusBarHeight                  [UIApplication sharedApplication].windows.firstObject.windowScene.statusBarManager.statusBarFrame.size.height
 
-#define kDefaultNavBarHeight              ([UIApplication sharedApplication].windows.firstObject.windowScene.statusBarManager.statusBarFrame.size.height + 44.0)
+// 状态栏高度
+#define kStatusBarHeight \
+({\
+    CGFloat height = 0.0;\
+    if (@available(iOS 11.0, *)) {\
+        UIEdgeInsets insets = [UIApplication sharedApplication].delegate.window.safeAreaInsets;\
+        height = insets.top;\
+    } else {\
+        height = 20.0;\
+    }\
+    height;\
+})
+
+
+#define kDefaultNavBarHeight              \
+({\
+    CGFloat height = 44.0;\
+    if (@available(iOS 11.0, *)) {\
+        UIEdgeInsets insets = [UIApplication sharedApplication].delegate.window.safeAreaInsets;\
+        height = insets.top  + 44.0;\
+    } else {\
+        height = 20.0 + 44.0;\
+    }\
+    height;\
+})
 
 #define kBottomBarHeight                  49
 #define kAPPDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])

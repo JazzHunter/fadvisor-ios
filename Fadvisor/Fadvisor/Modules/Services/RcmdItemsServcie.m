@@ -12,7 +12,6 @@
 
 @property (nonatomic, copy) NSString *sortValue1;
 @property (nonatomic, copy) NSString *sortValue2;
-@property (nonatomic, assign) BOOL noMore;
 
 @property (nonatomic, strong) NSDictionary *latestParams;
 
@@ -20,17 +19,18 @@
 
 @implementation RcmdItemsServcie
 
-- (void)getHomeRcmdItems:(BOOL)isMore completion:(void (^)(NSError *error, BOOL isHaveNextPage))completion {
+- (void)getHomeRcmdItems:(BOOL)isFromBottom completion:(void (^)(NSError *error, BOOL isHaveNewData))completion {
+    if (self.noMore) {
+        return;
+    }
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"sortValue1"] = self.sortValue1 ? @"" : self.sortValue1;
     params[@"sortValue2"] = self.sortValue1 ? @"" : self.sortValue1;
 
     self.latestParams = params;
-    // 加载热评贴的确认参数
-    if (isMore) {
-        params[@"sortValue1"] = self.sortValue1 ? @"" : self.sortValue1;
-        params[@"sortValue2"] = self.sortValue1 ? @"" : self.sortValue1;
-    }
+    
+    params[@"sortValue1"] = self.sortValue1 ? @"" : self.sortValue1;
+    params[@"sortValue2"] = self.sortValue2 ? @"" : self.sortValue2;
 
     NSString *homeRcmdAPI =  [NSString stringWithFormat:@"/knwlsrch/item%@/home",   [UserManager sharedManager].isLogin ? @"" : @"/anonymous" ];
 
@@ -43,19 +43,52 @@
         // 数据是空的时候不是字典了
         if (![response.responseObject isKindOfClass:[NSDictionary class]]) {
             response.error = [NSError errorWithDomain:NSGlobalDomain code:-1 userInfo:nil];
-            completion(response.error, YES);
+            completion(response.error, NO);
             return;
         }
 
         if (!response.responseObject || response.error) {
-            completion(response.error, YES);
+            completion(response.error, NO);
             return;
         }
 
-        [self.rcmdItems addObjectsFromArray:[Item mj_objectArrayWithKeyValuesArray:response.responseObject[@"records"]]];
+        NSMutableArray<ItemModel *> *records = [ItemModel mj_objectArrayWithKeyValuesArray:response.responseObject[@"records"]];
+        NSUInteger total = [[NSString stringWithFormat:@"%@", response.responseObject[@"total"]] intValue];
+        if (records.count == 0 || total == records.count) {
+            self.noMore = YES;
+        }
 
-        completion(nil, true);
+        // 读取更多是插入到最后，否则是插入到最前面
+        if (isFromBottom) {
+            [self.rcmdItems addObjectsFromArray:records];
+        } else {
+            NSRange range = NSMakeRange(0, records.count);
+            NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:range];
+            [self.rcmdItems insertObjects:records atIndexes:set];
+        }
+
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        formatter.maximumFractionDigits = 8;
+        self.sortValue1 = [formatter stringFromNumber:response.responseObject[@"sortValues"][0]];
+        self.sortValue2 = response.responseObject[@"sortValues"][1];
+
+        completion(nil, records.count > 0);
     }];
+}
+
+- (NSMutableArray<ItemModel *> *)rcmdItems {
+    if (_rcmdItems == nil) {
+        _rcmdItems = [NSMutableArray array];
+    }
+    return _rcmdItems;
+}
+
+- (void)reset {
+    _rcmdItems = [NSMutableArray array];
+    _noMore = NO;
+    _total = 0;
+    self.sortValue1 = @"";
+    self.sortValue2 = @"";
 }
 
 @end

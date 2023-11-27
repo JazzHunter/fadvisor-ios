@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Author : NSObject
+@interface AuthorModel : NSObject
 
 /** id */
 @property (nonatomic, copy) NSString *itemId;

@@ -5,9 +5,9 @@
 //  Created by 韩建伟 on 2023/11/17.
 //
 
-#import "Item.h"
+#import "ItemModel.h"
 
-@implementation Item
+@implementation ItemModel
 
 /**
  *  数组中需要转换的模型类
@@ -16,11 +16,11 @@
  */
 + (NSDictionary *)mj_objectClassInArray {
     return @{
-        @"items": [Item class],
-        @"authors": [Author  class],
-        @"followedAuthorList": [Author  class],
-        @"subscribedCollList": [Item  class],
-        @"subscribedTagList": [Tag  class],
+        @"items": [ItemModel class],
+        @"authors": [AuthorModel class],
+        @"followedAuthorList": [AuthorModel class],
+        @"subscribedCollList": [ItemModel class],
+        @"subscribedTagList": [TagModel class],
     };
 }
 

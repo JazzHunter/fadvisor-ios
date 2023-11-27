@@ -9,9 +9,9 @@
 #import "NotificationView.h"
 #import <MyLayout/MyLayout.h>
 
-#define MarginVertical  10
-#define MarginHorizon   18
-#define MessageTextSize 15
+#define MarginVertical      10
+#define MarginHorizon       18
+#define MessageTextSize     15
 
 #pragma mark - NotificationView
 @interface NotificationView ()<CAAnimationDelegate>
@@ -51,7 +51,7 @@
         [rootLayout addSubview:messageLabel];
         [rootLayout setNeedsLayout];
         [rootLayout layoutIfNeeded];
-        rootLayout.layer.cornerRadius = rootLayout.height / 2;
+        rootLayout.layer.cornerRadius = rootLayout.height /2;
         switch (type) {
             case NotificationInfo:
                 rootLayout.backgroundColor = [UIColor colorFromHexString:@"8799a3"];
@@ -186,7 +186,7 @@
 
         //位移开始动画
         CABasicAnimation *posStartAnim = [CABasicAnimation animationWithKeyPath:@"position"];
-        posStartAnim.fromValue = [NSValue valueWithCGPoint:CGPointMake(kScreenWidth / 2, -kDefaultNavBarHeight / 2)];
+        posStartAnim.fromValue = [NSValue valueWithCGPoint:CGPointMake(kScreenWidth / 2, -kDefaultNavBarHeight/2)];
         posStartAnim.byValue = [NSValue valueWithCGPoint:CGPointMake(0, kDefaultNavBarHeight)];
         posStartAnim.removedOnCompletion = NO;
         posStartAnim.fillMode = kCAFillModeForwards;
@@ -195,7 +195,7 @@
 
         //位移结束动画
         CABasicAnimation *posEndAnim = [CABasicAnimation animationWithKeyPath:@"position"];
-        posEndAnim.fromValue = [NSValue valueWithCGPoint:CGPointMake(kScreenWidth / 2, kDefaultNavBarHeight / 2)];
+        posEndAnim.fromValue = [NSValue valueWithCGPoint:CGPointMake(kScreenWidth / 2, kDefaultNavBarHeight/2)];
         posEndAnim.byValue = [NSValue valueWithCGPoint:CGPointMake(0, -kDefaultNavBarHeight)];
         posEndAnim.removedOnCompletion = NO;
         posEndAnim.beginTime = 3.5;

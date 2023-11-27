@@ -17,13 +17,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //背景色
-    self.view.backgroundColor = [UIColor backgroundColorGray];
+//    self.view.backgroundColor = [UIColor backgroundColorGray];
+    self.view.backgroundColor = [UIColor greenColor];
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         if (@available(iOS 11.0, *)) {
             [[UIScrollView appearanceWhenContainedInInstancesOfClasses:@[[BaseViewController class]]] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
         }
     });
+
 }
 
 - (void)setNavigationBarTitle:(NSString *)navigationBarTitle {
@@ -37,6 +39,8 @@
     [super viewDidLayoutSubviews];
     [self.view bringSubviewToFront:self.navigationBar];
 }
+
+
 
 #pragma mark - Life Cycle
 - (void)viewWillAppear:(BOOL)animated {
@@ -60,9 +64,6 @@
         self.title = title.copy;
     }
     return self;
-}
-
-- (void)dealloc {
 }
 
 #pragma mark - DataSource
@@ -92,4 +93,15 @@
 }
 
 #endif
+
+//#pragma mark - 屏幕旋转
+//- (void)viewWillTransitionToSize:(CGSize)size
+//       withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+//    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+//    [coordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+//        UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+//        // 处理屏幕旋转后的操作
+//    }];
+//}
+
 @end

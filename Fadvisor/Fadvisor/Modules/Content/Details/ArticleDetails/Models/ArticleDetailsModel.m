@@ -1,13 +1,13 @@
 //
-//  Author.m
+//  ArticleDetailsModel.m
 //  Fadvisor
 //
-//  Created by 韩建伟 on 2023/11/18.
+//  Created by 韩建伟 on 2023/11/24.
 //
 
-#import "Author.h"
+#import "ArticleDetailsModel.h"
 
-@implementation Author
+@implementation ArticleDetailsModel
 
 /**
  *  将属性名换为其他key去字典中取值
@@ -16,8 +16,9 @@
  */
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{
-        @"authorId" : @"id",
+        @"itemId": @"id",
     };
 }
+
 
 @end

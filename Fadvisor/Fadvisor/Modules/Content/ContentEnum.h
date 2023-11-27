@@ -33,4 +33,38 @@ typedef enum : NSUInteger {
     ItemTypeFavorites = 66,
 } ItemType;
 
+/**
+ 返回的 ResultMode类型
+ */
+typedef enum : NSInteger {
+    ResultModeNotAuthorized = -1,
+    ResultModeNotFound = -2,
+    ResultModeWaiting = -3,
+    ResultModeHalt = -4,
+    ResultModeNormal = 1,
+    ResultModePreview = 2
+} ResultModeEnum;
+
+/**
+ 获取方式
+ */
+typedef enum : NSInteger {
+    AcquisitionActionLoginRequired = -1,
+    AcquisitionActionInternalResource = -2,
+    AcquisitionActionRestrictResource = -3,
+    AcquisitionActionCodeRequired = -4,
+    AcquisitionActionPayRequired = -5,
+    AcquisitionActionCollRequired = -6,
+    AcquisitionActionNone = -9,
+    AcquisitionActionFree = 1,
+    AcquisitionActionLimitedFree = 2,
+    AcquisitionActionPay = 3,
+    AcquisitionActionCode = 4,
+    AcquisitionActionGift = 5,
+    AcquisitionActionColl = 6,
+    AcquisitionActionTrial = 7,
+    AcquisitionActionUserGroup = 8,
+    AcquisitionActionSys = 9
+} AcquisitionAction;
+
 #endif /* ContentConstants_h */

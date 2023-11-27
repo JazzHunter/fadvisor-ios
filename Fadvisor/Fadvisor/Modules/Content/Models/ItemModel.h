@@ -6,12 +6,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Author.h"
-#import "Tag.h"
+#import "AuthorModel.h"
+#import "TagModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Item : NSObject
+@interface ItemModel : NSObject
 
 /** id */
 @property (nonatomic, copy) NSString *itemId;
@@ -68,10 +68,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *contentText;
 
 /** 作者列表 */
-@property (nonatomic, strong) NSMutableArray<Author *> *authors;
+@property (nonatomic, strong) NSMutableArray<AuthorModel *> *authors;
 
 /** 主要容器 */
-@property (nonatomic, strong) Item *primaryColl;
+@property (nonatomic, strong) ItemModel *primaryColl;
 
 /** 发布模式 */
 @property (nonatomic, assign) NSString *pubMode;
@@ -101,19 +101,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) NSUInteger itemCount;
 
 /** 子项 */
-@property (nonatomic, strong) NSMutableArray<Item *> *items;
+@property (nonatomic, strong) NSMutableArray<ItemModel *> *items;
 
 /** 该Item所属的关注的作者列表 */
-@property (nonatomic, strong) NSMutableArray<Author *> *followedAuthorList;
+@property (nonatomic, strong) NSMutableArray<AuthorModel *> *followedAuthorList;
 
 /** 该Item所属的订阅的合集的列表 */
-@property (nonatomic, strong) NSMutableArray<Item *> *subscribedCollList;
+@property (nonatomic, strong) NSMutableArray<ItemModel *> *subscribedCollList;
 
 /**该Item所属的订阅的Tag的列表 */
-@property (nonatomic, strong) NSMutableArray<Tag *> *subscribedTagList;
+@property (nonatomic, strong) NSMutableArray<TagModel *> *subscribedTagList;
 
 // 文件部分
-/** 大小*/
+/** 文件大小*/
 @property (assign, nonatomic) NSInteger size;
 
 /** 页数*/

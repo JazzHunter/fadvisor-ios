@@ -64,7 +64,6 @@
     TabNavigationController *four = [[TabNavigationController alloc] initWithRootViewController:[[TabDiscoveryViewController alloc] init]];
     TabNavigationController *five = [[TabNavigationController alloc] initWithRootViewController:[[TabAccountViewController alloc] init]];
     self.viewControllers = @[one, two, four, five];
-//    self.viewControllers = @[two, four, five];
 }
 
 - (void)addLottieImage:(NSInteger)index {

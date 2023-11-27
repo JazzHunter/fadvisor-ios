@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Tag : NSObject
+@interface TagModel : NSObject
 
 /** id */
 @property (nonatomic, copy) NSString *tagId;
@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) NSTimeInterval actionTime;
 
 /**子标签数组*/
-@property (nonatomic, strong) NSMutableArray<Tag *> *children;
+@property (nonatomic, strong) NSMutableArray<TagModel *> *children;
 
 @end
 

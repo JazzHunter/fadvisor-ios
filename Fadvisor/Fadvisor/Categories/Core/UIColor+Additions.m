@@ -107,15 +107,16 @@
 
 + (UIColor *)titleTextColor {
     return [UIColor getColorWithLightColor:[UIColor colorFromHexString:@"333333"]
-                                 darkColor:[UIColor colorFromHexString:@"c8c8c8"]];
+                                 darkColor:[UIColor colorFromHexString:@"cccccc"]];
 }
 
 + (UIColor *)descriptionTextColor {
-    return [UIColor colorFromHexString:@"999999"];
+    return [UIColor colorFromHexString:@"8590a6"];
 }
 
 + (UIColor *)metaTextColor {
-    return [UIColor colorFromHexString:@"969696"];
+    return [UIColor getColorWithLightColor:[UIColor colorFromHexString:@"999999"]
+                                 darkColor:[UIColor colorFromHexString:@"a8a8a8"]];
 }
 
 + (UIColor *)contentTextColor {
@@ -124,7 +125,7 @@
 }
 
 + (UIColor *)borderColor {
-    return [UIColor getColorWithLightColor:[UIColor colorFromHexString:@"DCDCDC"]
+    return [UIColor getColorWithLightColor:[UIColor colorFromHexString:@"EBEEF5"]
                                  darkColor:[UIColor colorFromHexString:@"2F2F2F"]];
 }
 
