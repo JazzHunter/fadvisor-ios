@@ -187,7 +187,7 @@ static void *BlankPageViewKey = &BlankPageViewKey;
 //        [UIView animateWithDuration:0.3 animations:^{
 //            self.blankPageView.alpha = 0;
 //        } completion:^(BOOL finished) {
-        [self.blankPageView removeFromSuperview];
+            [self.blankPageView removeFromSuperview];
 //        }];
     }
 }

@@ -8,6 +8,7 @@
 #import "ArticleDetailsViewController.h"
 #import "ItemDetailsService.h"
 #import "ContentEnum.h"
+#import "EasyBlankPageView.h"
 
 @interface ArticleDetailsViewController ()
 
@@ -20,16 +21,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
-    [self configNavigationBar];
-    
+
+    [self initNavigationBar];
     [self getData];
-    
-    
 }
 
-- (void) configNavigationBar {
-    
+- (void)initNavigationBar {
     self.navigationBar.delegate = self;
     self.navigationBar.dataSource = self;
     [self.navigationBar setTitleText:@"读取中"];
@@ -40,6 +37,10 @@
     [self.itemDetailsService getDetails:ItemTypeArticle itemId:self.articleId completion:^(NSError *error, NSDictionary *detailsDic) {
         [weakself.navigationBar setTitleText:weakself.itemDetailsService.result.info.title];
         weakself.detailsModel = [ArticleDetailsModel mj_objectWithKeyValues:detailsDic];
+
+        [weakself.tableView showBlankPage:EasyBlankPageViewTypeNetworkError reloadButtonBlock:^(id sender) {
+            
+        }];
     }];
 }
 
