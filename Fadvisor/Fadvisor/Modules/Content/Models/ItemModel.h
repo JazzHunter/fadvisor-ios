@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) NSUInteger itemType;
 
 /** 发布时间 */
-@property (assign, nonatomic) NSTimeInterval putTime;
+@property (assign, nonatomic) NSTimeInterval pubTime;
 
 /** 动作时间 */
 @property (assign, nonatomic) NSTimeInterval actionTime;

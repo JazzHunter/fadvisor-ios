@@ -8,14 +8,12 @@
 
 #ifndef CacheKey_h
 #define CacheKey_h
-#define DownloadImageViaWWAN            @"DownloadImageViaWWAN"
-#define DownloadAVViaWWAN               @"DownloadAVViaWWAN"
-#define NightTheme                      @"NightTheme"
-#define FontSizeIndex                   @"FontSizeIndex"
+
+#define ContentZoom                   @"ContentZoom"
 
 //Events
-#define GlobalFontSizeChanged           @"GlobalFontSizeChanged"
-#define GlobalLoginSuccess              @"GlobalLoginSuccess"
-#define GlobalLogoutSuccess             @"GlobalLogoutSuccess"
+#define GlobalContentZoomLevelChanged @"GlobalContentZoomLevelChanged"
+#define GlobalLoginSuccess            @"GlobalLoginSuccess"
+#define GlobalLogoutSuccess           @"GlobalLogoutSuccess"
 
 #endif /* CacheKey_h */

@@ -17,8 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //背景色
-//    self.view.backgroundColor = [UIColor backgroundColorGray];
-    self.view.backgroundColor = [UIColor greenColor];
+    self.view.backgroundColor = [UIColor backgroundColorGray];
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         if (@available(iOS 11.0, *)) {

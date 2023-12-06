@@ -5,16 +5,16 @@
 //  Created by 韩建伟 on 2023/11/24.
 //
 
-#import "BaseTableViewController.h"
+#import "BaseScrollViewController.h"
 #import "ItemModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ArticleDetailsViewController : BaseTableViewController<NavigationBarDataSource, NavigationBarDelegate>
+@interface ArticleDetailsViewController : BaseScrollViewController<NavigationBarDataSource, NavigationBarDelegate>
 
-@property (nonatomic, copy) NSString *articleId;
+- (instancetype)initWithItem:(ItemModel *)model;
 
-@property (nonatomic, strong) ItemModel *item;
+- (instancetype)initWithId:(NSString *)articleId;
 
 @end
 

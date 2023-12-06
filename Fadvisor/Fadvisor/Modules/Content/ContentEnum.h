@@ -43,7 +43,7 @@ typedef enum : NSInteger {
     ResultModeHalt = -4,
     ResultModeNormal = 1,
     ResultModePreview = 2
-} ResultModeEnum;
+} ResultMode;
 
 /**
  获取方式

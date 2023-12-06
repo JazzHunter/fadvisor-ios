@@ -19,7 +19,7 @@
 
 @implementation RcmdItemsServcie
 
-- (void)getHomeRcmdItems:(BOOL)isFromBottom completion:(void (^)(NSError *error, BOOL isHaveNewData))completion {
+- (void)getHomeRcmdItems:(BOOL)isFromBottom completion:(void (^)(NSString *errorMsg, BOOL isHaveNewData))completion {
     if (self.noMore) {
         return;
     }
@@ -41,19 +41,17 @@
         }
 
         // 数据是空的时候不是字典了
-        if (![response.responseObject isKindOfClass:[NSDictionary class]]) {
-            response.error = [NSError errorWithDomain:NSGlobalDomain code:-1 userInfo:nil];
-            completion(response.error, NO);
+        if (![response.responseObject isKindOfClass:[NSDictionary class]] || !response.responseObject || response.error) {
+            completion(response.errorMsg, NO);
             return;
         }
 
-        if (!response.responseObject || response.error) {
-            completion(response.error, NO);
-            return;
-        }
 
         NSMutableArray<ItemModel *> *records = [ItemModel mj_objectArrayWithKeyValuesArray:response.responseObject[@"records"]];
         NSUInteger total = [[NSString stringWithFormat:@"%@", response.responseObject[@"total"]] intValue];
+        
+        self.total = total;
+        
         if (records.count == 0 || total == records.count) {
             self.noMore = YES;
         }

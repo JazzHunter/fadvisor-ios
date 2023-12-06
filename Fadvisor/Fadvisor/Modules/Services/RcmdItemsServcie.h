@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) NSUInteger total;
 
 /** 获取推荐内容 */
-- (void)getHomeRcmdItems:(BOOL)isFromBottom completion:(void (^)(NSError *error, BOOL isHaveNewData))completion;
+- (void)getHomeRcmdItems:(BOOL)isFromBottom completion:(void (^)(NSString *errorMsg, BOOL isHaveNewData))completion;
 
 /** 重置 */
 - (void)reset;

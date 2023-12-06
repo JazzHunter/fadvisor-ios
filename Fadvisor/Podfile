@@ -92,7 +92,11 @@ target 'Fadvisor' do
   # 警告框
   pod 'LEEAlert'
   
+  # GK 图片浏览器
+#  pod 'GKPhotoBrowser'
+  pod 'GKPhotoBrowser/YY'
 
+  
   target 'FadvisorTests' do
     inherit! :search_paths
     # Pods for testing

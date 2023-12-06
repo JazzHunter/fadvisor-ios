@@ -18,7 +18,6 @@
 		C12B09A12B1389B500108664 /* ItemDetailsService.m in Sources */ = {isa = PBXBuildFile; fileRef = C12B09A02B1389B500108664 /* ItemDetailsService.m */; };
 		C12B09A52B138EA600108664 /* BaseItemDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C12B09A42B138EA600108664 /* BaseItemDetailsModel.m */; };
 		C12B09A82B13973600108664 /* MediaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C12B09A72B13973600108664 /* MediaModel.m */; };
-		C12B09AB2B14E8FF00108664 /* EasyBlankPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C12B09AA2B14E8FF00108664 /* EasyBlankPageView.m */; };
 		C148E3CA2B0EFC7A00DAA612 /* ItemFloatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C148E3C92B0EFC7A00DAA612 /* ItemFloatTableViewCell.m */; };
 		C159191B2AFDC43E00351431 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C159191A2AFDC43E00351431 /* AppDelegate.m */; };
 		C159192C2AFDC43F00351431 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C159192B2AFDC43F00351431 /* main.m */; };
@@ -148,6 +147,12 @@
 		C1B0CEEC2B08A09B00A1173E /* AuthorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B0CEEB2B08A09B00A1173E /* AuthorModel.m */; };
 		C1B0CEEF2B08DE0100A1173E /* TagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B0CEEE2B08DE0100A1173E /* TagModel.m */; };
 		C1B0CEF32B090A6600A1173E /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B0CEF22B090A6600A1173E /* UserManager.m */; };
+		C1BA9C742B1B315700D82BC1 /* ArticleDetailsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BA9C732B1B315700D82BC1 /* ArticleDetailsHeaderView.m */; };
+		C1BA9C772B1B489200D82BC1 /* BaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BA9C762B1B489200D82BC1 /* BaseCollectionViewController.m */; };
+		C1BA9C7B2B1B48A100D82BC1 /* VerticalFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BA9C792B1B48A100D82BC1 /* VerticalFlowLayout.m */; };
+		C1BA9C7E2B1B8EEC00D82BC1 /* RichTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BA9C7D2B1B8EEC00D82BC1 /* RichTextView.m */; };
+		C1CEB7C32B1E1C2900AA8490 /* BaseScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7C22B1E1C2900AA8490 /* BaseScrollViewController.m */; };
+		C1FB990A2B1839D3002DA461 /* ContentExcepitonView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,8 +192,6 @@
 		C12B09A42B138EA600108664 /* BaseItemDetailsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseItemDetailsModel.m; sourceTree = "<group>"; };
 		C12B09A62B13973600108664 /* MediaModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MediaModel.h; sourceTree = "<group>"; };
 		C12B09A72B13973600108664 /* MediaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaModel.m; sourceTree = "<group>"; };
-		C12B09A92B14E8FF00108664 /* EasyBlankPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyBlankPageView.h; sourceTree = "<group>"; };
-		C12B09AA2B14E8FF00108664 /* EasyBlankPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyBlankPageView.m; sourceTree = "<group>"; };
 		C148E3C82B0EFC7A00DAA612 /* ItemFloatTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemFloatTableViewCell.h; sourceTree = "<group>"; };
 		C148E3C92B0EFC7A00DAA612 /* ItemFloatTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemFloatTableViewCell.m; sourceTree = "<group>"; };
 		C15919162AFDC43E00351431 /* Fadvisor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fadvisor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -460,6 +463,18 @@
 		C1B0CEF12B090A6600A1173E /* UserManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserManager.h; sourceTree = "<group>"; };
 		C1B0CEF22B090A6600A1173E /* UserManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserManager.m; sourceTree = "<group>"; };
 		C1B0CEF52B09AF2F00A1173E /* BaseEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseEnum.h; sourceTree = "<group>"; };
+		C1BA9C722B1B315700D82BC1 /* ArticleDetailsHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArticleDetailsHeaderView.h; sourceTree = "<group>"; };
+		C1BA9C732B1B315700D82BC1 /* ArticleDetailsHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArticleDetailsHeaderView.m; sourceTree = "<group>"; };
+		C1BA9C752B1B489200D82BC1 /* BaseCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCollectionViewController.h; sourceTree = "<group>"; };
+		C1BA9C762B1B489200D82BC1 /* BaseCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCollectionViewController.m; sourceTree = "<group>"; };
+		C1BA9C792B1B48A100D82BC1 /* VerticalFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerticalFlowLayout.m; sourceTree = "<group>"; };
+		C1BA9C7A2B1B48A100D82BC1 /* VerticalFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerticalFlowLayout.h; sourceTree = "<group>"; };
+		C1BA9C7C2B1B8EEC00D82BC1 /* RichTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RichTextView.h; sourceTree = "<group>"; };
+		C1BA9C7D2B1B8EEC00D82BC1 /* RichTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RichTextView.m; sourceTree = "<group>"; };
+		C1CEB7C12B1E1C2900AA8490 /* BaseScrollViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseScrollViewController.h; sourceTree = "<group>"; };
+		C1CEB7C22B1E1C2900AA8490 /* BaseScrollViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseScrollViewController.m; sourceTree = "<group>"; };
+		C1FB99082B1839D3002DA461 /* ContentExcepitonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentExcepitonView.h; sourceTree = "<group>"; };
+		C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentExcepitonView.m; sourceTree = "<group>"; };
 		C8126B4E9064B917D59445AB /* Pods-FadvisorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FadvisorTests.debug.xcconfig"; path = "Target Support Files/Pods-FadvisorTests/Pods-FadvisorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E169AA165A089CABEB289175 /* Pods-FadvisorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FadvisorTests.release.xcconfig"; path = "Target Support Files/Pods-FadvisorTests/Pods-FadvisorTests.release.xcconfig"; sourceTree = "<group>"; };
 		E4CF22C0F536A158DB5DBDBF /* Pods_FadvisorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FadvisorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -518,17 +533,10 @@
 				C12B09A22B138CAD00108664 /* Models */,
 				C12B09912B107C7400108664 /* ArticleDetailsViewController.h */,
 				C12B09922B107C7400108664 /* ArticleDetailsViewController.m */,
+				C1BA9C722B1B315700D82BC1 /* ArticleDetailsHeaderView.h */,
+				C1BA9C732B1B315700D82BC1 /* ArticleDetailsHeaderView.m */,
 			);
 			path = ArticleDetails;
-			sourceTree = "<group>";
-		};
-		C12B09952B10851300108664 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				C12B09962B10853100108664 /* WebContentFileManager.h */,
-				C12B09972B10853100108664 /* WebContentFileManager.m */,
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		C12B09A22B138CAD00108664 /* Models */ = {
@@ -635,7 +643,6 @@
 			children = (
 				C1591B5E2AFFC40500351431 /* Network */,
 				C1591A992AFE2EBD00351431 /* NotificationView */,
-				C1591A9C2AFE2EBD00351431 /* EasyBlankPageView */,
 				C1591A9F2AFE2EBD00351431 /* SkeletonPageView */,
 				C1591AA22AFE2EBD00351431 /* FTPopOverMenu */,
 			);
@@ -952,15 +959,6 @@
 			path = NotificationView;
 			sourceTree = "<group>";
 		};
-		C1591A9C2AFE2EBD00351431 /* EasyBlankPageView */ = {
-			isa = PBXGroup;
-			children = (
-				C12B09A92B14E8FF00108664 /* EasyBlankPageView.h */,
-				C12B09AA2B14E8FF00108664 /* EasyBlankPageView.m */,
-			);
-			path = EasyBlankPageView;
-			sourceTree = "<group>";
-		};
 		C1591A9F2AFE2EBD00351431 /* SkeletonPageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1024,6 +1022,11 @@
 				C1591ACE2AFE419300351431 /* BaseViewController.m */,
 				C1591B492AFF0B3100351431 /* BaseTableViewController.h */,
 				C1591B4A2AFF0B3100351431 /* BaseTableViewController.m */,
+				C1BA9C752B1B489200D82BC1 /* BaseCollectionViewController.h */,
+				C1BA9C762B1B489200D82BC1 /* BaseCollectionViewController.m */,
+				C1BA9C782B1B48A100D82BC1 /* CollectionViewLayout */,
+				C1CEB7C12B1E1C2900AA8490 /* BaseScrollViewController.h */,
+				C1CEB7C22B1E1C2900AA8490 /* BaseScrollViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1192,9 +1195,8 @@
 		C1B0CEE52B07551900A1173E /* Content */ = {
 			isa = PBXGroup;
 			children = (
-				C12B09952B10851300108664 /* Utils */,
+				C1BA9C7F2B1CBFCB00D82BC1 /* BaseUI */,
 				C12B098F2B0F964400108664 /* Details */,
-				C1ABA4722B0C5D9200CA6E7B /* ListViewCell */,
 				C1B0CEF42B09AD3C00A1173E /* Models */,
 				C1B0CEE92B088A7800A1173E /* ContentEnum.h */,
 			);
@@ -1227,6 +1229,37 @@
 				C12B09A72B13973600108664 /* MediaModel.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C1BA9C782B1B48A100D82BC1 /* CollectionViewLayout */ = {
+			isa = PBXGroup;
+			children = (
+				C1BA9C792B1B48A100D82BC1 /* VerticalFlowLayout.m */,
+				C1BA9C7A2B1B48A100D82BC1 /* VerticalFlowLayout.h */,
+			);
+			path = CollectionViewLayout;
+			sourceTree = "<group>";
+		};
+		C1BA9C7F2B1CBFCB00D82BC1 /* BaseUI */ = {
+			isa = PBXGroup;
+			children = (
+				C1FB99082B1839D3002DA461 /* ContentExcepitonView.h */,
+				C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */,
+				C1BA9C802B1CC01400D82BC1 /* RichTextView */,
+				C1ABA4722B0C5D9200CA6E7B /* ListViewCell */,
+			);
+			path = BaseUI;
+			sourceTree = "<group>";
+		};
+		C1BA9C802B1CC01400D82BC1 /* RichTextView */ = {
+			isa = PBXGroup;
+			children = (
+				C1BA9C7C2B1B8EEC00D82BC1 /* RichTextView.h */,
+				C1BA9C7D2B1B8EEC00D82BC1 /* RichTextView.m */,
+				C12B09962B10853100108664 /* WebContentFileManager.h */,
+				C12B09972B10853100108664 /* WebContentFileManager.m */,
+			);
+			path = RichTextView;
 			sourceTree = "<group>";
 		};
 		D715D3D78CDFC8BFEAAECDAB /* Pods */ = {
@@ -1521,7 +1554,10 @@
 				C1591A342AFDCF0400351431 /* YYTextInput.m in Sources */,
 				C159196A2AFDCE5600351431 /* NSBundle+Additions.m in Sources */,
 				C1591A452AFDCF0400351431 /* UIBezierPath+YYAdd.m in Sources */,
+				C1CEB7C32B1E1C2900AA8490 /* BaseScrollViewController.m in Sources */,
 				C1591A502AFDCF0400351431 /* UIControl+YYAdd.m in Sources */,
+				C1BA9C7B2B1B48A100D82BC1 /* VerticalFlowLayout.m in Sources */,
+				C1BA9C742B1B315700D82BC1 /* ArticleDetailsHeaderView.m in Sources */,
 				C1591B652AFFC41500351431 /* RequestManager.m in Sources */,
 				C15919632AFDCE4900351431 /* UIView+GestureCallback.m in Sources */,
 				C1591A362AFDCF0400351431 /* YYTextLine.m in Sources */,
@@ -1561,6 +1597,7 @@
 				C1591AFD2AFE781F00351431 /* TabDiscoveryViewController.m in Sources */,
 				C1591A282AFDCF0400351431 /* UIButton+YYWebImage.m in Sources */,
 				C1591A222AFDCF0400351431 /* YYWebImageManager.m in Sources */,
+				C1BA9C772B1B489200D82BC1 /* BaseCollectionViewController.m in Sources */,
 				C1591A492AFDCF0400351431 /* UITableView+YYAdd.m in Sources */,
 				C1591A4B2AFDCF0400351431 /* UIScreen+YYAdd.m in Sources */,
 				C1591A5D2AFDCF0400351431 /* NSNotificationCenter+YYAdd.m in Sources */,
@@ -1583,7 +1620,6 @@
 				C1591A3A2AFDCF0400351431 /* YYLabel.m in Sources */,
 				C1591A402AFDCF0400351431 /* UIPasteboard+YYText.m in Sources */,
 				C1591A552AFDCF0400351431 /* NSObject+YYAdd.m in Sources */,
-				C12B09AB2B14E8FF00108664 /* EasyBlankPageView.m in Sources */,
 				C1591AED2AFE771100351431 /* CALayer+XYColorOC.m in Sources */,
 				C1591A672AFDCF0400351431 /* YYDispatchQueuePool.m in Sources */,
 				C1591ACF2AFE419300351431 /* BaseViewController.m in Sources */,
@@ -1594,6 +1630,8 @@
 				C1591A302AFDCF0400351431 /* YYTextView.m in Sources */,
 				C1591A442AFDCF0400351431 /* UITextField+YYAdd.m in Sources */,
 				C1591A6C2AFDCF0400351431 /* YYThreadSafeArray.m in Sources */,
+				C1BA9C7E2B1B8EEC00D82BC1 /* RichTextView.m in Sources */,
+				C1FB990A2B1839D3002DA461 /* ContentExcepitonView.m in Sources */,
 				C1591A322AFDCF0400351431 /* YYTextContainerView.m in Sources */,
 				C148E3CA2B0EFC7A00DAA612 /* ItemFloatTableViewCell.m in Sources */,
 				C1591A472AFDCF0400351431 /* UIDevice+YYAdd.m in Sources */,
@@ -1797,7 +1835,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_TEAM = J4UMM6RGDR;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Fadvisor/PrefixHeader.pch";
@@ -1812,7 +1850,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pwccn.klcore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1830,7 +1868,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 30;
 				DEVELOPMENT_TEAM = 6HJDCQJ6WD;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Fadvisor/PrefixHeader.pch";
@@ -1845,7 +1883,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pwccn.klcore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

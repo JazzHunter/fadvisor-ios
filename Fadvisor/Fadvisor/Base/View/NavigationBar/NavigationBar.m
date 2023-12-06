@@ -33,8 +33,6 @@
         //启用设备旋转
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
-        
-        NSLog(@"当前的 statusBarheight: %f", kStatusBarHeight);
     }
     return self;
 }
@@ -45,19 +43,16 @@
     // 处理屏幕旋转后的操作
     switch (orientation) {
         case UIDeviceOrientationPortrait:
-            NSLog(@"旋转垂直的 statusBarheight: %f", kStatusBarHeight);
             self.frame = CGRectMake(0, 0, kScreenWidth, kDefaultNavBarHeight);
             self.bgView.frame = self.frame;
             self.rootLayout.paddingTop = kStatusBarHeight;
         break;
         case UIDeviceOrientationLandscapeLeft:
-            NSLog(@"向左 statusBarheight: %f", kStatusBarHeight);
             self.frame = CGRectMake(0, 0, kScreenHeight, 44.0);
             self.bgView.frame = self.frame;
             self.rootLayout.paddingTop = 0;
         break;
         case UIDeviceOrientationLandscapeRight:
-            NSLog(@"向右 statusBarheight: %f", kStatusBarHeight);
             self.frame = CGRectMake(0, 0, kScreenHeight, 44.0);
             self.bgView.frame = self.frame;
             self.rootLayout.paddingTop = 0;

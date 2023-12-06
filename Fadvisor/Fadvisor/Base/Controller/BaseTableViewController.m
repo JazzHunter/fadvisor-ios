@@ -10,7 +10,9 @@
 #import "ItemFloatCoverSkeletonTableViewCell.h"
 
 @interface BaseTableViewController ()
+
 @property (nonatomic, assign) UITableViewStyle tableViewStyle;
+
 @end
 
 @implementation BaseTableViewController

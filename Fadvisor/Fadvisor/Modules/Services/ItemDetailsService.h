@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) ItemDetailsResultModel *result;
 
 /**获取相关 Details 信息 */
-- (void)getDetails:(NSUInteger)itemType itemId:(NSString *)itemId completion:(void (^)(NSError *error, NSDictionary *detailsDic))completion;
+- (void)getDetails:(NSUInteger)itemType itemId:(NSString *)itemId completion:(void (^)(NSString *errorMsg, NSDictionary *detailsDic))completion;
 
 @end
 

@@ -75,9 +75,8 @@ static NSString *jsonFileDirectory = @"LocalJsons";
         BaseResponse *response = [self convertTask:task responseObject:responseObject error:error];
 
     #if DEBUG
-        [self LogResponse:task.currentRequest.URL.absoluteString response:response];
+//        [self LogResponse:task.currentRequest.URL.absoluteString response:response];
     #endif
-
         dispatch_async(dispatch_get_main_queue(), ^{
             !completion ? : completion(response);
         });
@@ -87,9 +86,10 @@ static NSString *jsonFileDirectory = @"LocalJsons";
 #pragma mark - 包装返回的数据
 - (BaseResponse *)convertTask:(NSURLSessionDataTask *)task responseObject:(id)responseObject error:(NSError *)error {
     BaseResponse *response = [BaseResponse new];
+    
+    // ⚠️ 这里看一下，errorMsg 应该更好
     if (error) {
         response.error = error;
-        response.errorMsg = @"网络似乎不太理想……";
         return response;
     }
     response.statusCode = [responseObject[@"code"] integerValue];
@@ -98,6 +98,7 @@ static NSString *jsonFileDirectory = @"LocalJsons";
             response.responseObject = responseObject[@"data"];
             break;
         default:
+            response.error = [NSError errorWithDomain:NSCocoaErrorDomain code:-1 userInfo:nil];
             response.errorMsg = responseObject[@"message"];
             break;
     }

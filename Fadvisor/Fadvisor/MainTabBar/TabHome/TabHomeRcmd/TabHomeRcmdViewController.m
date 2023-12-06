@@ -12,12 +12,15 @@
 #import "NotificationView.h"
 #import "ItemFloatTableViewCell.h"
 #import "ArticleDetailsViewController.h"
+#import "ContentExcepitonView.h"
 
 @interface TabHomeRcmdViewController ()
 
 @property (nonatomic, copy) void (^ scrollCallback)(UIScrollView *scrollView);
 
 @property (nonatomic, strong) RcmdItemsServcie *rcmdItemsService;
+
+@property (nonatomic, assign) BOOL inited;
 
 @end
 
@@ -27,10 +30,18 @@
     [super viewDidLoad];
 
     [self.tableView registerClass:[ItemFloatTableViewCell class] forCellReuseIdentifier:NSStringFromClass([ItemFloatTableViewCell class])];
+    
+    // init data
+    self.inited = NO;
+    
 
     //添加 Header & Footer
     Weak(self);
     self.tableView.mj_header = [RefreshHeader headerWithRefreshingBlock:^{
+        if (self.tableView.mj_footer.hidden == YES) {
+            self.tableView.mj_footer.hidden = NO;
+        }
+        
         if (self.rcmdItemsService.noMore) {
             [weakself.tableView.mj_header endRefreshing];
             [NotificationView showNotificaiton:@"没有新数据了" type:NotificationInfo];
@@ -39,21 +50,40 @@
         if ([weakself.tableView.mj_footer isRefreshing]) {
             [weakself.tableView.mj_header endRefreshing];
         }
-        [self.rcmdItemsService getHomeRcmdItems:NO completion:^(NSError *error, BOOL isHaveNewData) {
+        [self.rcmdItemsService getHomeRcmdItems:NO completion:^(NSString *errorMsg, BOOL isHaveNewData) {
             // 结束刷新状态
             ![weakself.tableView.mj_header isRefreshing] ? : [weakself.tableView.mj_header endRefreshing];
             ![weakself.tableView.mj_footer isRefreshing] ? : [weakself.tableView.mj_footer endRefreshing];
-
-            if (error) {
-                [NotificationView showNotificaiton:error.localizedDescription type:NotificationDanger];
+            
+            // 错误处理
+            if (errorMsg) {
+                if (weakself.inited) {
+                    [NotificationView showNotificaiton:errorMsg type:NotificationDanger];
+                } else {
+                    weakself.tableView.mj_footer.hidden = YES;
+                    [weakself.tableView showNetworkError:errorMsg reloadButtonBlock:^(id sender) {
+                        [weakself.tableView.mj_header beginRefreshing];
+                    }];
+                }
                 return;
             }
-
+            
+            if (!weakself.inited) {
+                weakself.inited = YES;
+            } else {
+                [NotificationView showNotificaiton:isHaveNewData ? @"已为您加载了新数据" : @"没有新数据了"];
+            }
+            
+            if (weakself.rcmdItemsService.total == 0) {
+                [weakself.tableView showEmptyList];
+                return;
+            }
+ 
             if (isHaveNewData) {
                 [weakself.tableView reloadData];
             }
-            [NotificationView showNotificaiton:isHaveNewData ? @"已为您加载了新数据" : @"没有新数据了"];
-            [weakself.tableView.mj_footer setState:self.rcmdItemsService.noMore ? MJRefreshStateNoMoreData : MJRefreshStateIdle];
+            
+            [weakself.tableView.mj_footer setState:weakself.rcmdItemsService.noMore ? MJRefreshStateNoMoreData : MJRefreshStateIdle];
         }];
     }];
     self.tableView.mj_footer = [AutoRefreshFooter footerWithRefreshingBlock:^{
@@ -68,19 +98,21 @@
             [weakself.tableView.mj_footer endRefreshing];
             return;
         }
-        [self.rcmdItemsService getHomeRcmdItems:YES completion:^(NSError *error, BOOL isHaveNewData) {
+        [self.rcmdItemsService getHomeRcmdItems:YES completion:^(NSString *errorMsg, BOOL isHaveNewData) {
             // 结束刷新状态
             ![weakself.tableView.mj_header isRefreshing] ? : [weakself.tableView.mj_header endRefreshing];
             ![weakself.tableView.mj_footer isRefreshing] ? : [weakself.tableView.mj_footer endRefreshing];
 
-            if (error) {
-                [NotificationView showNotificaiton:error.localizedDescription type:NotificationDanger];
+            if (errorMsg) {
+                [NotificationView showNotificaiton:errorMsg type:NotificationDanger];
+                [weakself.tableView.mj_footer setState:MJRefreshStateIdle];
                 return;
             }
+            
             if (isHaveNewData) {
                 [weakself.tableView reloadData];
             }
-            [weakself.tableView.mj_footer setState:self.rcmdItemsService.noMore ? MJRefreshStateNoMoreData : MJRefreshStateIdle];
+            [weakself.tableView.mj_footer setState:weakself.rcmdItemsService.noMore ? MJRefreshStateNoMoreData : MJRefreshStateIdle];
         }];
     }];
     [self.tableView.mj_header beginRefreshing];
@@ -90,9 +122,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    ArticleDetailsViewController *vc = [[ArticleDetailsViewController alloc] init];
-    ItemModel *model = self.rcmdItemsService.rcmdItems[indexPath.row];
-    vc.articleId = model.itemId;
+    ArticleDetailsViewController *vc = [[ArticleDetailsViewController alloc] initWithItem:self.rcmdItemsService.rcmdItems[indexPath.row]];
 
     vc.hidesBottomBarWhenPushed = YES;
 
