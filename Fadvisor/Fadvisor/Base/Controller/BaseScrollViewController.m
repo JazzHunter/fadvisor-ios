@@ -9,12 +9,9 @@
 
 @interface BaseScrollViewController ()
 
-
-
 @end
 
 @implementation BaseScrollViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupBaseScrollViewUI];
@@ -26,8 +23,6 @@
         contentInset.top += kDefaultNavBarHeight;
         self.scrollView.contentInset = contentInset;
     }
-    [self.scrollView setSafeBottomInset];
-
     self.scrollView.backgroundColor = [UIColor clearColor];
 
     
@@ -35,7 +30,6 @@
     contentLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0); //设置布局内的子视图离自己的边距.
     contentLayout.myHorzMargin = 0;                          //同时指定左右边距为0表示宽度和父视图一样宽
     contentLayout.heightSize.lBound(_scrollView.heightSize, 0, 1); //高度虽然是自适应的。但是最小的高度不能低于父视图的高度.
-//    contentLayout.myHeight = MyLayoutSize.wrap;
     [_scrollView addSubview:contentLayout];
     self.contentLayout = contentLayout;
 }

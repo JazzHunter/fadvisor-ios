@@ -5,11 +5,11 @@
 //  Created by 韩建伟 on 2021/3/20.
 //
 
-#import "BaseViewController.h"
+#import "BaseScrollViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TabAccountViewController : BaseViewController
+@interface TabAccountViewController : BaseScrollViewController<NavigationBarDataSource, NavigationBarDelegate>
 
 @end
 

@@ -36,6 +36,42 @@ PODS:
   - Reachability (3.2)
   - TABAnimated (2.6.4)
   - UICKeyChainStore (2.1.2)
+  - UMAPM (1.8.5)
+  - UMCCommonLog (2.0.2)
+  - UMCommon (7.4.3):
+    - UMDevice
+  - UMDevice (3.3.0)
+  - UMPush (4.0.4):
+    - UMCommon
+  - UMShare/Core (6.10.9):
+    - UMCommon
+  - UMShare/Social/Email (6.10.9):
+    - UMCommon
+    - UMShare/Core
+  - UMShare/Social/QQ (6.10.9):
+    - UMCommon
+    - UMShare/Core
+    - UMShare/Social/ReducedQQ
+  - UMShare/Social/ReducedQQ (6.10.9):
+    - UMCommon
+    - UMShare/Core
+  - UMShare/Social/ReducedSina (6.10.9):
+    - UMCommon
+    - UMShare/Core
+  - UMShare/Social/ReducedWeChat (6.10.9):
+    - UMCommon
+    - UMShare/Core
+  - UMShare/Social/Sina (6.10.9):
+    - UMCommon
+    - UMShare/Core
+    - UMShare/Social/ReducedSina
+  - UMShare/Social/SMS (6.10.9):
+    - UMCommon
+    - UMShare/Core
+  - UMShare/Social/WeChat (6.10.9):
+    - UMCommon
+    - UMShare/Core
+    - UMShare/Social/ReducedWeChat
   - YYCache (1.0.4)
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
@@ -61,6 +97,16 @@ DEPENDENCIES:
   - PrintBeautifulLog
   - Reachability
   - TABAnimated
+  - UMAPM
+  - UMCCommonLog
+  - UMCommon
+  - UMDevice
+  - UMPush
+  - UMShare/Social/Email
+  - UMShare/Social/QQ
+  - UMShare/Social/Sina
+  - UMShare/Social/SMS
+  - UMShare/Social/WeChat
 
 SPEC REPOS:
   trunk:
@@ -81,6 +127,12 @@ SPEC REPOS:
     - Reachability
     - TABAnimated
     - UICKeyChainStore
+    - UMAPM
+    - UMCCommonLog
+    - UMCommon
+    - UMDevice
+    - UMPush
+    - UMShare
     - YYCache
     - YYImage
     - YYWebImage
@@ -103,10 +155,16 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   TABAnimated: 44589b94525ba535c411816f333caa4d4fc9a399
   UICKeyChainStore: 85db518bb1d294366d15ec9b92a416c4e670518f
+  UMAPM: dc2b417de76136e7fe7fc82c1706f8cd08281b26
+  UMCCommonLog: bea707e50c85cef4b0eb47cc5c7226bb843245ca
+  UMCommon: 8fc989e90fc40a8b100bef3ffe21f7a59fe439ea
+  UMDevice: f67106f8f1a8bc465ba20d376d896e178be66ba7
+  UMPush: 1496cebc2f50a1ff9ef74b69bf868c6c3960c97f
+  UMShare: 199fc08bdc742d9eaed454e8f6e7e422959ea68b
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 046f7c6037fbf488233b7dc8fdb2a2060d52da74
+PODFILE CHECKSUM: f34e13c6378481e0b9121376379a5e6d42185b6b
 
 COCOAPODS: 1.11.3

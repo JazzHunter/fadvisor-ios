@@ -15,18 +15,19 @@ def base_ui_pods
   pod 'MyLayout'
   # 蒙版
   pod 'MBProgressHUD'
+  
   # 友盟 - 推送、统计、分享模块
-#  pod 'UMCommon' # 由原来的UMCCommon变为UMCommon
-#  pod 'UMDevice' # 必须集成
-#  pod 'UMAPM' # 实现APM相关功能，如稳定性分析等
-#  pod 'UMPush'# 原为'UMCPush'
-#  pod 'UMCSecurityPlugins'
-#  pod 'UMCCommonLog'
-#  pod 'UMShare/Social/WeChat'# 集成微信(完整版14.4M)
-#  pod 'UMShare/Social/ReducedQQ' # 集成QQ/QZone/TIM(精简版0.5M)
-#  pod 'UMShare/Social/ReducedSina' # 集成新浪微博(精简版1M)
-#  pod 'UMShare/Social/Email' # 集成邮件
-#  pod 'UMShare/Social/SMS' # 集成短信
+  pod 'UMCommon'    # 必须集成
+  pod 'UMDevice'    # 必须集成
+  pod 'UMCCommonLog'  # 可选，日志插件
+  pod 'UMAPM'   # 必选，APM组件，原错误分析升级为独立产品U-APM
+  pod 'UMPush'  # 必选，推送组件，由原来的UMCPush变为UMPush
+  #  分享SDK 在线依赖其它平台仅支持手动集成[友盟+官网-开发者中心-sdk下载页-sdk下载]
+  pod 'UMShare/Social/WeChat'
+  pod 'UMShare/Social/Sina'
+  pod 'UMShare/Social/QQ'
+  pod 'UMShare/Social/Email' # 集成邮件
+  pod 'UMShare/Social/SMS' # 集成短信
   
   # 骨架屏
   pod 'TABAnimated'
@@ -95,6 +96,9 @@ target 'Fadvisor' do
   # GK 图片浏览器
 #  pod 'GKPhotoBrowser'
   pod 'GKPhotoBrowser/YY'
+  
+  # 阿里播放器
+#  pod 'AliPlayerPartSDK_iOS'
 
   
   target 'FadvisorTests' do

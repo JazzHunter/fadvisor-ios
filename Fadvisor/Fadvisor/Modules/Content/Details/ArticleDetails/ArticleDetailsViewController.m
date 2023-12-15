@@ -10,6 +10,8 @@
 #import "ContentEnum.h"
 #import "ContentExcepitonView.h"
 #import "RichTextView.h"
+#import "SharePanel.h"
+#import "SkeletonPageView.h"
 
 @interface ArticleDetailsViewController ()<UIScrollViewDelegate>
 
@@ -21,6 +23,9 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *pubTimeLabel;
 @property (nonatomic, strong) RichTextView *richTextView;
+
+@property (nonatomic, strong) SharePanel *sharePanel;
+@property (nonatomic, strong) MyLinearLayout *shareBtn;
 
 @end
 
@@ -48,11 +53,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self getData];
+    [self.scrollView setSafeBottomInset];
     
     [self initNavigationBar];
-    
     [self initUI];
+    [self getData];
 }
 
 - (void)initNavigationBar {
@@ -62,8 +67,10 @@
 }
 
 - (void)getData {
+    [self.view showSkeletonPage:SkeletonPageViewTypeContentDetail isNavbarPadding:YES];
     Weak(self);
     [self.itemDetailsService getDetails:ItemTypeArticle itemId:self.articleId completion:^(NSString *errorMsg, NSDictionary *detailsDic) {
+        [self.view hideSkeletonPage];
         weakself.detailsModel = [ArticleDetailsModel mj_objectWithKeyValues:detailsDic];
         
         weakself.info = weakself.itemDetailsService.result.info;
@@ -96,11 +103,22 @@
     
     [self.contentLayout addSubview:self.titleLabel];
     [self.contentLayout addSubview:test];
-    [self.contentLayout addSubview:self.richTextView];
+//    [self.contentLayout addSubview:self.richTextView];
     
     UILabel *pubTimeLabel = [[UILabel alloc] init];
     self.pubTimeLabel = pubTimeLabel;
     [self.contentLayout addSubview:self.pubTimeLabel];
+    
+    MyLinearLayout *shareBtn = [[MyLinearLayout alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
+    [shareBtn setHighlightedOpacity:0.5];
+    [shareBtn setBackgroundImage:[UIImage imageNamed:@"ic_share"]];
+    [shareBtn setTarget:self action:@selector(handleSharePanelOpen:)];
+    self.shareBtn = shareBtn;
+    [self.contentLayout addSubview:self.shareBtn];
+}
+
+-(void)handleSharePanelOpen:(MyBaseLayout*)sender{
+    [self.sharePanel showPanelWithItem:self.info];
 }
 
 #pragma mark - BaseViewControllerDatasource
@@ -137,6 +155,13 @@
         _titleLabel = [[UILabel alloc] init];
     }
     return _titleLabel;
+}
+
+- (SharePanel *)sharePanel {
+    if (_sharePanel == nil) {
+        _sharePanel = [[SharePanel alloc] initWithFrame:CGRectMake(0, 0, 120, 240)];
+    }
+    return _sharePanel;
 }
 
 @end

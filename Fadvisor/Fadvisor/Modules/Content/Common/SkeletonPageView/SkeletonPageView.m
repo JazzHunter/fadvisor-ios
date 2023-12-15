@@ -36,11 +36,11 @@
             [self createNormalSkeletonUI];
             break;
         };
-        case SkeletonPageViewTypeTab: {
+        case SkeletonPageViewTypeCell: {
             [self createNormalSkeletonUI];
             break;
         };
-        case SkeletonPageViewTypeArticlDetail: {
+        case SkeletonPageViewTypeContentDetail: {
             [self createNormalSkeletonUI];
             break;
         };

@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 typedef enum : NSUInteger {
-    SkeletonPageViewTypeTab,
+    SkeletonPageViewTypeCell,
     SkeletonPageViewTypeNormal,
-    SkeletonPageViewTypeArticlDetail,
+    SkeletonPageViewTypeContentDetail,
 } SkeletonPageViewType;
 
 @interface SkeletonPageView : UIView

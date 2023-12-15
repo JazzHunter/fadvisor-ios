@@ -23,7 +23,6 @@
 /** 当前View 的 Offset，会参与计算图片的回归位置 */
 @property (nonatomic, assign) CGFloat offsetY;
 
-
 @end
 
 static NSString *const ScriptName_clickImage = @"clickImage";
@@ -70,12 +69,10 @@ static NSString *const ScriptName_loadGifImage = @"loadGifImage";
                            <meta name = \"viewport\" content=\"width = device-width, initial-scale = 1, user-scalable=no\"/>\
                            <title></title>\
                            <link href=\"./static/css/WebContentStyle.css\" rel=\"stylesheet\" type=\"text/css\"/>\
-                           <script src=\"./static/js/jquery.min.js\"></script>\
                            </head>\
                            <body style=\"zoom:%@;\">\
                            <div class=\"content\">%@</div>\
                            </body>\
-                           <script src=\"./static/js/WebContentHandle.js\"></script>\
                            </html>", @"night-theme", contentZoom, contentHTMLString];
 
         NSString *htmlPath = [[WebContentFileManager getCachePath] stringByAppendingPathComponent:@"newsContent.html"];
@@ -85,10 +82,6 @@ static NSString *const ScriptName_loadGifImage = @"loadGifImage";
         dispatch_async(dispatch_get_main_queue(), ^{
             if (!error) [strongSelf loadRequest:[NSURLRequest requestWithURL:htmlUrl]];
         });
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.jianshu.com/p/7baaff716f6f"]];
-//            [super loadRequest:request];
-//        });
     });
 }
 
@@ -220,8 +213,15 @@ static NSString *const ScriptName_loadGifImage = @"loadGifImage";
 #pragma mark - 更新高度
 
 - (void)updateHeight {
+    // 获取内容高度
+    NSString *getContentHeightJS = @"\
+    function getBodyHeight() {\
+    return document.getElementsByTagName('body')[0].offsetHeight;\
+    }";
+    [self evaluateJavaScript:getContentHeightJS completionHandler:nil];
+    
     Weak(self);
-    [self evaluateJavaScript:@"getContentHeight();" completionHandler:^(id _Nullable response, NSError *_Nullable error) {
+    [self evaluateJavaScript:@"getBodyHeight();" completionHandler:^(id _Nullable response, NSError *_Nullable error) {
         if (!error) {
             CGFloat height = [response floatValue];
             !weakself.loadedFinishBlock ? : weakself.loadedFinishBlock(height);

@@ -38,24 +38,40 @@
     /** 设置默认状态 */
     NSMutableDictionary *norDict = @{}.mutableCopy;
     norDict[NSForegroundColorAttributeName] = [UIColor systemGrayColor];
+    norDict[NSFontAttributeName] = [UIFont systemFontOfSize:10.0f];
     [tabBarItem setTitleTextAttributes:norDict forState:UIControlStateNormal];
 
     /** 设置选中状态 */
     NSMutableDictionary *selDict = @{}.mutableCopy;
     selDict[NSForegroundColorAttributeName] = [UIColor mainColor];
+    selDict[NSFontAttributeName] = [UIFont systemFontOfSize:14.0f];
     [tabBarItem setTitleTextAttributes:selDict forState:UIControlStateSelected];
+
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor backgroundColor];
     [self addChildViewControllers];
     self.currentIndex = 0;
     [self addLottieImage:self.currentIndex];
     [self playLottieAnimation];
     self.delegate = self;
+    
     //解决iOS13选中字体变蓝色的情况
     self.tabBar.tintColor = [UIColor mainColor];
+    // 改变 tabbar 背景色。https://www.jianshu.com/p/28916945a4ec
+    if(@available(iOS 15.0, *)) {
+        UITabBarAppearance *apperarance = [[UITabBarAppearance alloc] init];
+        [apperarance setBackgroundColor:[UIColor backgroundColor]];
+        [apperarance setBackgroundEffect:nil];
+        self.tabBar.standardAppearance = apperarance;
+        self.tabBar.scrollEdgeAppearance = apperarance;
+    } else {
+        self.tabBar.translucent =  NO;
+        self.tabBar.backgroundColor = [UIColor backgroundColor];
+    }
+    
+
 }
 
 - (void)addChildViewControllers {

@@ -20,7 +20,7 @@ typedef enum : NSInteger {
 
 @interface ContentExcepitonView : UIView
 
-- (void)config:(ContentExcepitonType)contentExcepitonType tips:(NSString *)tips reloadButtonBlock:(void (^)(UIButton *sender))block;
+- (void)config:(ContentExcepitonType)contentExcepitonType tips:(nullable NSString *)tips reloadButtonBlock:(void (^)(UIButton *sender))block;
 - (void)config:(ResultMode)resultMode acquisitionAction:(AcquisitionAction)acquisitionAction model:(ItemModel *)model reloadButtonBlock:(void (^)(UIButton *sender))block;
 
 @end

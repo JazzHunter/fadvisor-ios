@@ -142,6 +142,7 @@
 		C1591B6B2AFFCF6800351431 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1591B682AFFCF6700351431 /* Localizable.strings */; };
 		C1591B752AFFCFCC00351431 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1591B722AFFCFCC00351431 /* InfoPlist.strings */; };
 		C1591B782B05FCAE00351431 /* RcmdItemsServcie.m in Sources */ = {isa = PBXBuildFile; fileRef = C1591B772B05FCAE00351431 /* RcmdItemsServcie.m */; };
+		C193BFB42B2B4207003D3644 /* UMengHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C193BFB32B2B4207003D3644 /* UMengHelper.m */; };
 		C1ABA46F2B0C572E00CA6E7B /* NotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1ABA46E2B0C572D00CA6E7B /* NotificationView.m */; };
 		C1B0CEE82B0771CD00A1173E /* ItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B0CEE72B0771CD00A1173E /* ItemModel.m */; };
 		C1B0CEEC2B08A09B00A1173E /* AuthorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1B0CEEB2B08A09B00A1173E /* AuthorModel.m */; };
@@ -152,6 +153,11 @@
 		C1BA9C7B2B1B48A100D82BC1 /* VerticalFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BA9C792B1B48A100D82BC1 /* VerticalFlowLayout.m */; };
 		C1BA9C7E2B1B8EEC00D82BC1 /* RichTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BA9C7D2B1B8EEC00D82BC1 /* RichTextView.m */; };
 		C1CEB7C32B1E1C2900AA8490 /* BaseScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7C22B1E1C2900AA8490 /* BaseScrollViewController.m */; };
+		C1CEB7CB2B20B1D400AA8490 /* LEECoolButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7CA2B20B1D400AA8490 /* LEECoolButton.m */; };
+		C1CEB7DB2B22B77400AA8490 /* SharePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7DA2B22B77400AA8490 /* SharePanel.m */; };
+		C1CEB7DF2B23757C00AA8490 /* SkeletonPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7DD2B23757C00AA8490 /* SkeletonPageView.m */; };
+		C1CEB7E12B245E5700AA8490 /* AliVideoCert.crt in Resources */ = {isa = PBXBuildFile; fileRef = C1CEB7E02B245E5700AA8490 /* AliVideoCert.crt */; };
+		C1CEB7E52B24629400AA8490 /* VideoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7E42B24629400AA8490 /* VideoDetailsViewController.m */; };
 		C1FB990A2B1839D3002DA461 /* ContentExcepitonView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */; };
 /* End PBXBuildFile section */
 
@@ -391,8 +397,6 @@
 		C1591A722AFDD0E200351431 /* Macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
 		C1591A732AFDD59F00351431 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C1591A752AFE15F100351431 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../fadvisor-ios-2021/Fadvisor/Fadvisor/Assets.xcassets"; sourceTree = "<group>"; };
-		C1591AA02AFE2EBD00351431 /* SkeletonPageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SkeletonPageView.m; sourceTree = "<group>"; };
-		C1591AA12AFE2EBD00351431 /* SkeletonPageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkeletonPageView.h; sourceTree = "<group>"; };
 		C1591AA32AFE2EBD00351431 /* FTPopOverMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTPopOverMenu.h; sourceTree = "<group>"; };
 		C1591AA42AFE2EBD00351431 /* FTPopOverMenu.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTPopOverMenu.m; sourceTree = "<group>"; };
 		C1591AB82AFE32D500351431 /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -451,6 +455,8 @@
 		C1591B742AFFCFCC00351431 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "../../../../fadvisor-ios-2021/Fadvisor/Fadvisor/Support Files/zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C1591B762B05FCAE00351431 /* RcmdItemsServcie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RcmdItemsServcie.h; sourceTree = "<group>"; };
 		C1591B772B05FCAE00351431 /* RcmdItemsServcie.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RcmdItemsServcie.m; sourceTree = "<group>"; };
+		C193BFB22B2B4207003D3644 /* UMengHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMengHelper.h; sourceTree = "<group>"; };
+		C193BFB32B2B4207003D3644 /* UMengHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMengHelper.m; sourceTree = "<group>"; };
 		C1ABA46D2B0C572D00CA6E7B /* NotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationView.h; sourceTree = "<group>"; };
 		C1ABA46E2B0C572D00CA6E7B /* NotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationView.m; sourceTree = "<group>"; };
 		C1B0CEE62B0771CD00A1173E /* ItemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemModel.h; sourceTree = "<group>"; };
@@ -473,6 +479,15 @@
 		C1BA9C7D2B1B8EEC00D82BC1 /* RichTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RichTextView.m; sourceTree = "<group>"; };
 		C1CEB7C12B1E1C2900AA8490 /* BaseScrollViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseScrollViewController.h; sourceTree = "<group>"; };
 		C1CEB7C22B1E1C2900AA8490 /* BaseScrollViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseScrollViewController.m; sourceTree = "<group>"; };
+		C1CEB7C92B20B1D400AA8490 /* LEECoolButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LEECoolButton.h; sourceTree = "<group>"; };
+		C1CEB7CA2B20B1D400AA8490 /* LEECoolButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LEECoolButton.m; sourceTree = "<group>"; };
+		C1CEB7D92B22B77400AA8490 /* SharePanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharePanel.h; sourceTree = "<group>"; };
+		C1CEB7DA2B22B77400AA8490 /* SharePanel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharePanel.m; sourceTree = "<group>"; };
+		C1CEB7DD2B23757C00AA8490 /* SkeletonPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkeletonPageView.m; sourceTree = "<group>"; };
+		C1CEB7DE2B23757C00AA8490 /* SkeletonPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkeletonPageView.h; sourceTree = "<group>"; };
+		C1CEB7E02B245E5700AA8490 /* AliVideoCert.crt */ = {isa = PBXFileReference; lastKnownFileType = text; path = AliVideoCert.crt; sourceTree = "<group>"; };
+		C1CEB7E32B24629400AA8490 /* VideoDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoDetailsViewController.h; sourceTree = "<group>"; };
+		C1CEB7E42B24629400AA8490 /* VideoDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoDetailsViewController.m; sourceTree = "<group>"; };
 		C1FB99082B1839D3002DA461 /* ContentExcepitonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentExcepitonView.h; sourceTree = "<group>"; };
 		C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentExcepitonView.m; sourceTree = "<group>"; };
 		C8126B4E9064B917D59445AB /* Pods-FadvisorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FadvisorTests.debug.xcconfig"; path = "Target Support Files/Pods-FadvisorTests/Pods-FadvisorTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -522,6 +537,7 @@
 		C12B098F2B0F964400108664 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				C1CEB7E22B24625C00AA8490 /* VideoDetails */,
 				C12B09902B0F964D00108664 /* ArticleDetails */,
 			);
 			path = Details;
@@ -530,22 +546,14 @@
 		C12B09902B0F964D00108664 /* ArticleDetails */ = {
 			isa = PBXGroup;
 			children = (
-				C12B09A22B138CAD00108664 /* Models */,
+				C12B09992B10E96F00108664 /* ArticleDetailsModel.h */,
+				C12B099A2B10E96F00108664 /* ArticleDetailsModel.m */,
 				C12B09912B107C7400108664 /* ArticleDetailsViewController.h */,
 				C12B09922B107C7400108664 /* ArticleDetailsViewController.m */,
 				C1BA9C722B1B315700D82BC1 /* ArticleDetailsHeaderView.h */,
 				C1BA9C732B1B315700D82BC1 /* ArticleDetailsHeaderView.m */,
 			);
 			path = ArticleDetails;
-			sourceTree = "<group>";
-		};
-		C12B09A22B138CAD00108664 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				C12B09992B10E96F00108664 /* ArticleDetailsModel.h */,
-				C12B099A2B10E96F00108664 /* ArticleDetailsModel.m */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		C159190D2AFDC43E00351431 = {
@@ -641,9 +649,9 @@
 		C159196B2AFDCEEF00351431 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C193BFB12B2B4207003D3644 /* UMengHelper */,
 				C1591B5E2AFFC40500351431 /* Network */,
 				C1591A992AFE2EBD00351431 /* NotificationView */,
-				C1591A9F2AFE2EBD00351431 /* SkeletonPageView */,
 				C1591AA22AFE2EBD00351431 /* FTPopOverMenu */,
 			);
 			path = Helpers;
@@ -919,6 +927,7 @@
 		C1591A6F2AFDCF9700351431 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				C1CEB7E02B245E5700AA8490 /* AliVideoCert.crt */,
 				C1591B472AFE826200351431 /* resource.bundle */,
 				C1591B722AFFCFCC00351431 /* InfoPlist.strings */,
 				C1591B682AFFCF6700351431 /* Localizable.strings */,
@@ -962,8 +971,8 @@
 		C1591A9F2AFE2EBD00351431 /* SkeletonPageView */ = {
 			isa = PBXGroup;
 			children = (
-				C1591AA02AFE2EBD00351431 /* SkeletonPageView.m */,
-				C1591AA12AFE2EBD00351431 /* SkeletonPageView.h */,
+				C1CEB7DE2B23757C00AA8490 /* SkeletonPageView.h */,
+				C1CEB7DD2B23757C00AA8490 /* SkeletonPageView.m */,
 			);
 			path = SkeletonPageView;
 			sourceTree = "<group>";
@@ -1126,8 +1135,8 @@
 		C1591AFA2AFE781F00351431 /* TabAccount */ = {
 			isa = PBXGroup;
 			children = (
-				C1591AFB2AFE781F00351431 /* TabAccountViewController.m */,
 				C1591AFC2AFE781F00351431 /* TabAccountViewController.h */,
+				C1591AFB2AFE781F00351431 /* TabAccountViewController.m */,
 			);
 			path = TabAccount;
 			sourceTree = "<group>";
@@ -1183,6 +1192,15 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		C193BFB12B2B4207003D3644 /* UMengHelper */ = {
+			isa = PBXGroup;
+			children = (
+				C193BFB22B2B4207003D3644 /* UMengHelper.h */,
+				C193BFB32B2B4207003D3644 /* UMengHelper.m */,
+			);
+			path = UMengHelper;
+			sourceTree = "<group>";
+		};
 		C1ABA4722B0C5D9200CA6E7B /* ListViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1195,7 +1213,7 @@
 		C1B0CEE52B07551900A1173E /* Content */ = {
 			isa = PBXGroup;
 			children = (
-				C1BA9C7F2B1CBFCB00D82BC1 /* BaseUI */,
+				C1CEB7D72B222DF900AA8490 /* Common */,
 				C12B098F2B0F964400108664 /* Details */,
 				C1B0CEF42B09AD3C00A1173E /* Models */,
 				C1B0CEE92B088A7800A1173E /* ContentEnum.h */,
@@ -1240,17 +1258,6 @@
 			path = CollectionViewLayout;
 			sourceTree = "<group>";
 		};
-		C1BA9C7F2B1CBFCB00D82BC1 /* BaseUI */ = {
-			isa = PBXGroup;
-			children = (
-				C1FB99082B1839D3002DA461 /* ContentExcepitonView.h */,
-				C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */,
-				C1BA9C802B1CC01400D82BC1 /* RichTextView */,
-				C1ABA4722B0C5D9200CA6E7B /* ListViewCell */,
-			);
-			path = BaseUI;
-			sourceTree = "<group>";
-		};
 		C1BA9C802B1CC01400D82BC1 /* RichTextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1260,6 +1267,47 @@
 				C12B09972B10853100108664 /* WebContentFileManager.m */,
 			);
 			path = RichTextView;
+			sourceTree = "<group>";
+		};
+		C1CEB7C82B20B1D400AA8490 /* LEECoolButton */ = {
+			isa = PBXGroup;
+			children = (
+				C1CEB7C92B20B1D400AA8490 /* LEECoolButton.h */,
+				C1CEB7CA2B20B1D400AA8490 /* LEECoolButton.m */,
+			);
+			path = LEECoolButton;
+			sourceTree = "<group>";
+		};
+		C1CEB7D72B222DF900AA8490 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C1CEB7D82B22B57200AA8490 /* SharePanel */,
+				C1FB99082B1839D3002DA461 /* ContentExcepitonView.h */,
+				C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */,
+				C1BA9C802B1CC01400D82BC1 /* RichTextView */,
+				C1ABA4722B0C5D9200CA6E7B /* ListViewCell */,
+				C1591A9F2AFE2EBD00351431 /* SkeletonPageView */,
+				C1CEB7C82B20B1D400AA8490 /* LEECoolButton */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		C1CEB7D82B22B57200AA8490 /* SharePanel */ = {
+			isa = PBXGroup;
+			children = (
+				C1CEB7D92B22B77400AA8490 /* SharePanel.h */,
+				C1CEB7DA2B22B77400AA8490 /* SharePanel.m */,
+			);
+			path = SharePanel;
+			sourceTree = "<group>";
+		};
+		C1CEB7E22B24625C00AA8490 /* VideoDetails */ = {
+			isa = PBXGroup;
+			children = (
+				C1CEB7E32B24629400AA8490 /* VideoDetailsViewController.h */,
+				C1CEB7E42B24629400AA8490 /* VideoDetailsViewController.m */,
+			);
+			path = VideoDetails;
 			sourceTree = "<group>";
 		};
 		D715D3D78CDFC8BFEAAECDAB /* Pods */ = {
@@ -1287,6 +1335,7 @@
 				C15919132AFDC43E00351431 /* Frameworks */,
 				C15919142AFDC43E00351431 /* Resources */,
 				BF39D5C547F1943CD2016165 /* [CP] Embed Pods Frameworks */,
+				B811D9CC61C0D87D0CCBABCC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1325,6 +1374,7 @@
 				C15919382AFDC43F00351431 /* Frameworks */,
 				C15919392AFDC43F00351431 /* Resources */,
 				1F815757AF6437D041F8B1BC /* [CP] Embed Pods Frameworks */,
+				AC6D7E31BCEC7494C0C5DFB6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1384,6 +1434,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1CEB7E12B245E5700AA8490 /* AliVideoCert.crt in Resources */,
 				C1051E502B0AF7A800061586 /* resource.bundle in Resources */,
 				C1591B6B2AFFCF6800351431 /* Localizable.strings in Resources */,
 				C1591A742AFDD59F00351431 /* LaunchScreen.storyboard in Resources */,
@@ -1492,6 +1543,40 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		AC6D7E31BCEC7494C0C5DFB6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fadvisor-FadvisorUITests/Pods-Fadvisor-FadvisorUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fadvisor-FadvisorUITests/Pods-Fadvisor-FadvisorUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fadvisor-FadvisorUITests/Pods-Fadvisor-FadvisorUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B811D9CC61C0D87D0CCBABCC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fadvisor/Pods-Fadvisor-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Fadvisor/Pods-Fadvisor-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Fadvisor/Pods-Fadvisor-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		BF39D5C547F1943CD2016165 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1523,6 +1608,7 @@
 				C1591A312AFDCF0400351431 /* YYTextMagnifier.m in Sources */,
 				C1591A632AFDCF0400351431 /* YYAsyncLayer.m in Sources */,
 				C1591A572AFDCF0400351431 /* NSThread+YYAdd.m in Sources */,
+				C1CEB7CB2B20B1D400AA8490 /* LEECoolButton.m in Sources */,
 				C1591A5C2AFDCF0400351431 /* NSString+YYAdd.m in Sources */,
 				C1591B5C2AFF1DC000351431 /* KeyChainHelper.m in Sources */,
 				C1591A212AFDCF0400351431 /* YYImageCache.m in Sources */,
@@ -1552,6 +1638,7 @@
 				C1591A372AFDCF0400351431 /* YYTextSelectionView.m in Sources */,
 				C1591A462AFDCF0400351431 /* UIColor+YYAdd.m in Sources */,
 				C1591A342AFDCF0400351431 /* YYTextInput.m in Sources */,
+				C1CEB7DB2B22B77400AA8490 /* SharePanel.m in Sources */,
 				C159196A2AFDCE5600351431 /* NSBundle+Additions.m in Sources */,
 				C1591A452AFDCF0400351431 /* UIBezierPath+YYAdd.m in Sources */,
 				C1CEB7C32B1E1C2900AA8490 /* BaseScrollViewController.m in Sources */,
@@ -1586,6 +1673,7 @@
 				C1591A202AFDCF0400351431 /* YYMemoryCache.m in Sources */,
 				C1591AC72AFE3FB000351431 /* TabHomeViewController.m in Sources */,
 				C1591B4F2AFF0BBF00351431 /* ItemFloatCoverSkeletonTableViewCell.m in Sources */,
+				C193BFB42B2B4207003D3644 /* UMengHelper.m in Sources */,
 				C1591A1F2AFDCF0400351431 /* YYKVStorage.m in Sources */,
 				C1591A332AFDCF0400351431 /* YYTextEffectWindow.m in Sources */,
 				C1B0CEEC2B08A09B00A1173E /* AuthorModel.m in Sources */,
@@ -1640,6 +1728,8 @@
 				C12B09A52B138EA600108664 /* BaseItemDetailsModel.m in Sources */,
 				C1591A692AFDCF0400351431 /* YYGestureRecognizer.m in Sources */,
 				C15919662AFDCE4900351431 /* UIView+Additions.m in Sources */,
+				C1CEB7E52B24629400AA8490 /* VideoDetailsViewController.m in Sources */,
+				C1CEB7DF2B23757C00AA8490 /* SkeletonPageView.m in Sources */,
 				C1591A5A2AFDCF0400351431 /* NSObject+YYAddForARC.m in Sources */,
 				C1591A592AFDCF0400351431 /* NSTimer+YYAdd.m in Sources */,
 				C1591A2C2AFDCF0400351431 /* YYAnimatedImageView.m in Sources */,
@@ -1834,13 +1924,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 30;
-				DEVELOPMENT_TEAM = J4UMM6RGDR;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6HJDCQJ6WD;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Fadvisor/PrefixHeader.pch";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fadvisor/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "App需要您的同意,才能访问相册";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1854,6 +1947,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pwccn.klcore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "掌上顾问开发";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1867,13 +1961,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 30;
-				DEVELOPMENT_TEAM = 6HJDCQJ6WD;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 6HJDCQJ6WD;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Fadvisor/PrefixHeader.pch";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Fadvisor/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "App需要您的同意,才能访问相册";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1887,6 +1984,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pwccn.klcore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "掌上顾问开发";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

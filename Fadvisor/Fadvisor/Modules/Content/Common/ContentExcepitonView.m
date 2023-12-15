@@ -45,12 +45,11 @@
         self.reloadBtn.myTop = 20;
         [rootLayout addSubview:self.reloadBtn];
         [self addSubview:rootLayout];
-//        self.backgroundColor = [UIColor backgroundColor];
     }
     return self;
 }
 
-- (void)config:(ContentExcepitonType)contentExcepitonType tips:(NSString *)tips reloadButtonBlock:(void (^)(UIButton *sender))block {
+- (void)config:(ContentExcepitonType)contentExcepitonType tips:(nullable NSString *)tips reloadButtonBlock:(void (^)(UIButton *sender))block {
     self.reloadBlock = [block copy];
     switch (contentExcepitonType) {
         case ContentExcepitonTypeNoData: {
@@ -58,6 +57,7 @@
             break;
         };
         case ContentExcepitonTypeNetworkError: {
+            self.imageView.mySize = CGSizeMake(140, 140);
             [self setUI:@"出错了……" descriptionText:tips ? tips : @"网络似乎不太好" imageName:@"exception_error_lamp" hideReloadBtn:block ? NO : YES reloadBtnLabel:@"点击重新加载"];
             break;
         };

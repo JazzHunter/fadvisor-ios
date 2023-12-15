@@ -16,7 +16,7 @@
     // 获取临时缓存目录
     NSString *jqueryJSPath = [[WebContentFileManager getStaticCachePath:@"js"] stringByAppendingPathComponent:@"jquery.min.js"];
 
-    NSString *webContentHandleJSPath = [[WebContentFileManager getStaticCachePath:@"js"] stringByAppendingPathComponent:@"WebContentHandle.js"];
+//    NSString *webContentHandleJSPath = [[WebContentFileManager getStaticCachePath:@"js"] stringByAppendingPathComponent:@"WebContentHandle.js"];
 
     NSString *webContentStyleCSSPath = [[WebContentFileManager getStaticCachePath:@"css"] stringByAppendingPathComponent:@"WebContentStyle.css"];
 
@@ -27,11 +27,11 @@
         [jqueryJS writeToFile:jqueryJSPath atomically:YES encoding:NSUTF8StringEncoding error:NULL];
     }
 
-    if (![[NSFileManager defaultManager] fileExistsAtPath:webContentHandleJSPath]) {
-        NSString *webContentHandleJS = [NSString stringWithContentsOfFile:[contentFileBundle pathForResource:@"WebContentHandle" ofType:@"js"] encoding:NSUTF8StringEncoding error:NULL]; //web内容处理JS
-
-        [webContentHandleJS writeToFile:webContentHandleJSPath atomically:YES encoding:NSUTF8StringEncoding error:NULL];
-    }
+//    if (![[NSFileManager defaultManager] fileExistsAtPath:webContentHandleJSPath]) {
+//        NSString *webContentHandleJS = [NSString stringWithContentsOfFile:[contentFileBundle pathForResource:@"WebContentHandle" ofType:@"js"] encoding:NSUTF8StringEncoding error:NULL]; //web内容处理JS
+//
+//        [webContentHandleJS writeToFile:webContentHandleJSPath atomically:YES encoding:NSUTF8StringEncoding error:NULL];
+//    }
 
     if (![[NSFileManager defaultManager] fileExistsAtPath:webContentStyleCSSPath]) {
         NSString *webContentStyleCSS = [NSString stringWithContentsOfFile:[contentFileBundle pathForResource:@"WebContentStyle" ofType:@"css"] encoding:NSUTF8StringEncoding error:NULL];

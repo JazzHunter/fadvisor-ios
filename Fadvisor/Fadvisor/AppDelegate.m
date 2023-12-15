@@ -8,6 +8,7 @@
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
 #import "TabDiscoveryViewController.h"
+#import "UMengHelper.h"
 
 @interface AppDelegate ()
 
@@ -36,6 +37,12 @@
         .LeeAction(@"好的", ^{})
         .LeeShow();
     }
+    
+    // ⚠️ 友盟初始化
+    [UMengHelper UMStart:ThirdSDKUMConfigInstanceAppKey channel:ThirdSDKUMConfigInstanceChannelId];
+    [UMengHelper UMAnalyticStart];
+    [UMengHelper UMSocialStart:ThirdSDKQQAppKey wechatAppKey:ThirdSDKWeChatAppKey wechatAppSecret:ThirdSDKWeChatAppSecret weiboAppKey:ThirdSDKWeiboAppKey weiboAppSecret:ThirdSDKWeiboAppSecret weiboCallback:ThirdSDKWeiboCallback];
+//    [UMengHelper UMPushStart:launchOptions delegate:self];
     
     #if DEBUG
     [self startDevelopTools];
@@ -73,8 +80,36 @@
     [[NSBundle bundleWithPath:@"/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle"] load];
     // ⚠️ Doraemon
 //    [[DoraemonManager shareInstance] install];
+    
 }
 
+//设置UM系统回调
+-(BOOL)application:(UIApplication*)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id>*)options {
+    BOOL result =[[UMSocialManager defaultManager]  handleOpenURL:url options:options];
+    if (!result) {
+        // 其他如支付等SDK的回调
+        [LEEAlert alert].config
+        .LeeTitle(@"Web应用跳转")
+        .LeeContent(url.query)
+        .LeeAction(@"好的", ^{})
+        .LeeShow();
+    }
+    return result;
+}
+
+#pragma mark - 设置Universal Links系统回调
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring> > *_Nullable))restorationHandler
+{
+    if (userActivity.webpageURL) {
+        NSLog(@"%@", userActivity.webpageURL);
+        [LEEAlert alert].config
+        .LeeTitle(@"其他SDK的回调")
+        .LeeAction(@"好的", ^{})
+        .LeeShow();
+    }
+
+    return YES;
+}
 
 
 @end

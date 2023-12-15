@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BaseScrollViewController : BaseViewController
 
+@property(nonatomic, strong) MyFrameLayout *frameLayout;
+
 @property(nonatomic, strong) MyLinearLayout *contentLayout;
 
 @property(nonatomic, strong) UIScrollView *scrollView;
