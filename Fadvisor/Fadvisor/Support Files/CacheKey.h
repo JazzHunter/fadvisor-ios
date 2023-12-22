@@ -9,6 +9,8 @@
 #ifndef CacheKey_h
 #define CacheKey_h
 
+#define DownloadImageViaWWAN            @"DownloadImageViaWWAN"
+
 #define ContentZoom                   @"ContentZoom"
 
 //Events

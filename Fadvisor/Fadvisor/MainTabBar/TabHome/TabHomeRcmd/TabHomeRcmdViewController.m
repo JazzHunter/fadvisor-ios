@@ -60,6 +60,7 @@
                     [NotificationView showNotificaiton:errorMsg type:NotificationDanger];
                 } else {
                     [weakself.view showNetworkError:errorMsg reloadButtonBlock:^(id sender) {
+                        [weakself.view hideBlankPage];
                         [weakself.tableView.mj_header beginRefreshing];
                     }];
                 }

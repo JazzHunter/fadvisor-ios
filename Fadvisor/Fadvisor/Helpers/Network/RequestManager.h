@@ -33,10 +33,12 @@ typedef BaseResponse * (^ResponseFormat)(BaseResponse *response);
 
 - (void)GET:(NSString *)urlString parameters:(id)parameters completion:(void (^)(BaseResponse *response))completion;
 
+- (void)request:(NSString *)method URL:(NSString *)urlString parameters:(id)parameters isToken:(BOOL)isToken completion:(void (^)(BaseResponse *response))completion;
+
 /*
   上传
    data 数据对应的二进制数据
-   LMJDataName data对应的参数
+   DataName data对应的参数
  */
 - (void)upload:(NSString *)urlString parameters:(id)parameters formDataBlock:(NSDictionary<NSData *, DataName *> * (^)(id<AFMultipartFormData> formData, NSMutableDictionary<NSData *, DataName *> *needFillDataDict))formDataBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(BaseResponse *response))completion;
 

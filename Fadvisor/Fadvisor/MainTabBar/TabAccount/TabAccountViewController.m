@@ -6,8 +6,12 @@
 //
 
 #import "TabAccountViewController.h"
+#import "AccountManager.h"
+#import "TabAccountHeaderNotLoginView.h"
+#import "CustomImageButton.h"
+#import "UserLoginViewController.h"
 
-@interface TabAccountViewController ()
+@interface TabAccountViewController ()<TabAccountHeaderNotLoginView>
 
 @end
 
@@ -33,35 +37,76 @@
     [self initUI];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.view bringSubviewToFront:self.navigationBar];
+}
+
 - (void)initNavigationBar {
     self.navigationBar.delegate = self;
     MyLinearLayout *navigationBarView = [[MyLinearLayout alloc] initWithOrientation:MyOrientation_Horz];
-    navigationBarView.backgroundColor = [UIColor yellowColor];
+    navigationBarView.gravity = MyGravity_Vert_Center;
     navigationBarView.subviewHSpace = 10;
+    navigationBarView.mySize = CGSizeMake(MyLayoutSize.wrap, MyLayoutSize.wrap);
+    navigationBarView.backgroundColor = [UIColor redColor];
     
-    MyLinearLayout *settingBtn = [[MyLinearLayout alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
-    [settingBtn setHighlightedOpacity:0.5];
+    MyLinearLayout *settingBtn = [[MyLinearLayout alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
+    [settingBtn setHighlightedOpacity:0.9];
     [settingBtn setBackgroundImage:[UIImage imageNamed:@"ic_share"]];
-    [settingBtn setTarget:self action:@selector(handleSettingBtnClicked:)];
+    //    [settingBtn setTarget:self action:@selector(handleBtnTouchDown:)];
     settingBtn.centerYPos.equalTo(@0);  //在父视图中居中。
+    [settingBtn setTouchDownTarget:self action:@selector(handleBtnTouchDown:)];
+    //    [settingBtn setTouchDownTarget:self action:@selector(handleBtnTouchDown:)];
     [navigationBarView addSubview:settingBtn];
     
-    MyLinearLayout *nightTehemeBtn = [[MyLinearLayout alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
-    [nightTehemeBtn setHighlightedOpacity:0.5];
-    [nightTehemeBtn setBackgroundImage:[UIImage imageNamed:@"ic_share"]];
-    [nightTehemeBtn setTarget:self action:@selector(handleSettingBtnClicked:)];
-    nightTehemeBtn.centerYPos.equalTo(@0);  //在父视图中居中。
-    [navigationBarView addSubview:nightTehemeBtn];
     
-    MyLinearLayout *scanBtn = [[MyLinearLayout alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
-    [scanBtn setHighlightedOpacity:0.5];
-    [scanBtn setBackgroundImage:[UIImage imageNamed:@"ic_share"]];
-    [scanBtn setTarget:self action:@selector(handleSettingBtnClicked:)];
-    scanBtn.centerYPos.equalTo(@0);  //在父视图中居中。
-    [navigationBarView addSubview:scanBtn];
+    //    MyLinearLayout *nightTehemeBtn = [[MyLinearLayout alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
+    //    [nightTehemeBtn setHighlightedOpacity:0.5];
+    //    [nightTehemeBtn setBackgroundImage:[UIImage imageNamed:@"ic_share"]];
+    //    [nightTehemeBtn setTarget:self action:@selector(handleSettingBtnClicked:)];
+    //    nightTehemeBtn.centerYPos.equalTo(@0);  //在父视图中居中。
+    //    [navigationBarView addSubview:nightTehemeBtn];
+    //
+    //    MyLinearLayout *scanBtn = [[MyLinearLayout alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
+    //    [scanBtn setHighlightedOpacity:0.5];
+    //    [scanBtn setBackgroundImage:[UIImage imageNamed:@"ic_share"]];
+    //    [scanBtn setTarget:self action:@selector(handleSettingBtnClicked:)];
+    //    scanBtn.centerYPos.equalTo(@0);  //在父视图中居中。
+    //    [navigationBarView addSubview:scanBtn];
+    
+    CustomImageButton *loginBtn = [[CustomImageButton alloc] initWithFrame:CGRectMake(0, 0, 36, 36) imageName:@"ic_right_arr"];
+    //    [loginBtn addTarget:self action:@selector(handleBtnTouchDown:) forControlEvents:UIControlEventTouchDown];
+    [loginBtn enableTouchDownAnimation];
+    
+    
+    [loginBtn addTarget:self action:@selector(handleBtnTouchDown:) forControlEvents:UIControlEventTouchDown];
+    
+    [navigationBarView addSubview:loginBtn];
+    self.scrollView.delaysContentTouches = NO;
+    //    self.scrollView.canCancelContentTouches = NO;
     
     self.navigationBar.rightView = navigationBarView;
     
+}
+
+
+- (void)handleBtnTouchDown:(MyBaseLayout *)sender {
+    NSLog(@"点击了");
+    sender.transform = CGAffineTransformIdentity;
+    
+    [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations: ^{
+        [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:1 / 3.0 animations: ^{
+            sender.transform = CGAffineTransformMakeScale(0.8, 0.8);
+        }];
+        
+        [UIView addKeyframeWithRelativeStartTime:1 / 3.0 relativeDuration:1 / 3.0 animations: ^{
+            sender.transform = CGAffineTransformMakeScale(1.2, 1.2);
+        }];
+        
+        [UIView addKeyframeWithRelativeStartTime:2 / 3.0 relativeDuration:1 / 3.0 animations: ^{
+            sender.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        }];
+    } completion:nil];
 }
 
 - (void)initUI {
@@ -72,7 +117,13 @@
     listLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0);
     listLayout.backgroundColor = [UIColor backgroundColor];
     [self.contentLayout addSubview:listLayout];
-
+    
+    if (![AccountManager sharedManager].isLogin) {
+        TabAccountHeaderNotLoginView *notLoginView = [TabAccountHeaderNotLoginView new];
+        notLoginView.delegate = self;
+        [self.contentLayout addSubview:notLoginView];
+    }
+    
     //具有事件处理的layout,以及边界线效果的layout
     MyLinearLayout *layout1 = [self createActionLayout:@"点击 1" action:@selector(handleTap:)];
     
@@ -112,11 +163,12 @@
     label.text = title;
     label.font = [UIFont systemFontOfSize:15];
     label.textColor = [UIColor titleTextColor];
-//    label.adjustsFontSizeToFitWidth = YES;
+    //    label.adjustsFontSizeToFitWidth = YES;
     [label sizeToFit];
     label.tag = 1000;
     label.trailingPos.equalTo(@0.5);  //水平线性布局通过相对间距来实现左右分开排列。
     [actionLayout addSubview:label];
+    
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_right_arr"]];
     [imageView sizeToFit];
@@ -124,6 +176,10 @@
     [actionLayout addSubview:imageView];
     
     return actionLayout;
+    
+}
+
+-(void)onLoginButtonClick:(UIButton*)sender {
     
 }
 
@@ -140,6 +196,7 @@
     NSLog(@"按下取消");
 }
 
+
 #pragma mark - BaseViewControllerDatasource
 - (BOOL)baseViewControllerIsNeedNavBar:(BaseViewController *)baseViewController {
     return YES;
@@ -153,4 +210,12 @@
 
 -(void)handleTap:(MyBaseLayout*)sender{
 }
+
+
+#pragma mark - TabAccountHeaderNotLoginViewDelegate
+- (void)mainLoginClick:(TabAccountHeaderNotLoginView *)view {
+    UserLoginViewController *vc = [UserLoginViewController new];
+//    self 
+}
+
 @end

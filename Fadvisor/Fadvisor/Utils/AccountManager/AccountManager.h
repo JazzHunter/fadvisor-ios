@@ -1,15 +1,16 @@
 //
-//  UserManager.h
+//  AccountManager.h
 //  Fadvisor
 //
 //  Created by 韩建伟 on 2023/11/18.
 //
 
 #import <Foundation/Foundation.h>
+#import "UserProfileModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UserManager : NSObject
+@interface AccountManager : NSObject
 
 + (instancetype)sharedManager;
 
@@ -19,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** token */
 @property (nonatomic, copy) NSString *token;
 
+/** token */
+@property (nonatomic, copy) NSString *refreshToken;
+
 /** 昵称 */
 @property (nonatomic, copy) NSString *userId;
 
@@ -26,7 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *username;
 
 /**是否内部**/
-@property (nonatomic, assign) BOOL internal;
+@property (nonatomic, assign) BOOL isInternal;
+
+/** Profile */
+@property (nonatomic, strong) UserProfileModel *profile;
 
 @end
 

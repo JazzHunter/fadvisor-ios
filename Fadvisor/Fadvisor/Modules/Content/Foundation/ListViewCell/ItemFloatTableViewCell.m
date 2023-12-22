@@ -46,7 +46,7 @@
         _coverImage.visibility = MyVisibility_Gone;
     } else {
         _coverImage.visibility = MyVisibility_Visible;
-        [_coverImage setImageWithURL:model.coverUrl placeholder:[UIImage imageNamed:@"placeholder_img"] options:YYWebImageOptionProgressiveBlur | YYWebImageOptionSetImageWithFadeAnimation completion:nil];
+        [_coverImage setImageWithURL:model.coverUrl];
     }
     
     _titleLabel.text = model.title;

@@ -30,6 +30,7 @@ typedef enum : NSInteger {
 - (void)showEmptyList;
 - (void)showNetworkError:(nullable NSString *)tips reloadButtonBlock:(void (^)(id))block;
 - (void)showPermissionError:(ResultMode)resultMode acquisitionAction:(AcquisitionAction)acquisitionAction model:(ItemModel *)model reloadButtonBlock:(void (^)(UIButton *sender))block;
+- (void)hideBlankPage;
 
 @end
 

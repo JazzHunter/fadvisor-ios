@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 /** 显示Item */
 - (void)showPanelWithItem:(ItemModel *)model;
 
++ (instancetype)manager;
+
 @end
 
 NS_ASSUME_NONNULL_END

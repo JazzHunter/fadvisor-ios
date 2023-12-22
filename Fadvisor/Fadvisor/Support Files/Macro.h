@@ -42,7 +42,7 @@
 #define kIsiPad UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
 
 /// iPhoneX  iPhoneXS  iPhoneXS Max  iPhoneXR 机型判断
-#define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? ((NSInteger)(([[UIScreen mainScreen] currentMode].size.height/[[UIScreen mainScreen] currentMode].size.width)*100) == 216) : NO)
+//#define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? ((NSInteger)(([[UIScreen mainScreen] currentMode].size.height/[[UIScreen mainScreen] currentMode].size.width)*100) == 216) : NO)
 
 #define mainNavigationController          [UIApplication sharedApplication].keyWindow.rootViewController
 

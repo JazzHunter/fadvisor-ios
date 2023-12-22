@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 #import "ItemModel.h"
-#import "UserManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

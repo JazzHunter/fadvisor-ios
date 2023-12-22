@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)GET:(NSString *)URLString parameters:(id)parameters completion:(void (^)(BaseResponse *response))completion;
 
+- (void)request:(NSString *)method URL:(NSString *)urlString parameters:(id)parameters isToken:(BOOL)isToken completion:(void (^)(BaseResponse *response))completion;
+
 @end
 
 NS_ASSUME_NONNULL_END

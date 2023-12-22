@@ -6,7 +6,7 @@
 //
 
 #import "SharePanel.h"
-#import "LEEAlert.h"
+#import <LEEAlert/LEEAlert.h>
 #import "UMengHelper.h"
 
 @interface SharePanel ()
@@ -21,6 +21,8 @@
 /** 分享地址 */
 @property (nonatomic, copy) NSString *shareURL;
 
+@property (nonatomic, strong) MyLinearLayout *weChatShareBtn;
+
 @end
 
 @implementation SharePanel
@@ -28,17 +30,19 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        CGFloat screenWidth = CGRectGetWidth([[UIScreen mainScreen] bounds]);
+        CGFloat screenHeight = CGRectGetHeight([[UIScreen mainScreen] bounds]);
+        self.viewWidth = screenWidth > screenHeight ? screenHeight : screenWidth;
+        
         self.orientation = MyOrientation_Vert;
         self.backgroundColor = [UIColor backgroundColor];
         self.gravity = MyGravity_Horz_Center;
-
-        CGFloat screenWidth = CGRectGetWidth([[UIScreen mainScreen] bounds]);
-        self.viewWidth = screenWidth > 414.0f ? screenWidth : 414.0f;
-
+        self.mySize = CGSizeMake(self.viewWidth, MyLayoutSize.wrap);
         [self setupUI];
     }
     return self;
 }
+
 
 - (void)setupUI {
     UILabel *titleLabel = [[UILabel alloc] init];
@@ -62,8 +66,10 @@
 
     MyLinearLayout *topLayout = [self createBtnsLayout];
     [topScrollView addSubview:topLayout];
-
-    [topLayout addSubview:[self createShareBtn:@"ic_wechat_color" label:@"微信好友" tag:1000]];
+    
+    self.weChatShareBtn = [self createShareBtn:@"ic_wechat_color" label:@"微信好友" tag:1000];
+    
+    [topLayout addSubview:self.weChatShareBtn];
     [topLayout addSubview:[self createShareBtn:@"ic_moments_color" label:@"朋友圈" tag:2000]];
     [topLayout addSubview:[self createShareBtn:@"ic_qq_color" label:@"QQ" tag:3000]];
     [topLayout addSubview:[self createShareBtn:@"ic_weibo_color" label:@"微博" tag:4000]];
@@ -83,7 +89,6 @@
     btnsLayout.myHeight = MyLayoutSize.wrap;
     btnsLayout.subviewHSpace = 10;
     btnsLayout.gravity = MyGravity_Horz_Center;
-    btnsLayout.widthSize.lBound(self.widthSize, 0, 1);
     return btnsLayout;
 }
 
@@ -132,7 +137,7 @@
 
     MyLinearLayout *imageContainer = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
     imageContainer.mySize = CGSizeMake(42, 42);
-    imageContainer.padding = UIEdgeInsetsMake(5, 5, 5, 5);
+    imageContainer.padding = UIEdgeInsetsMake(7, 7, 7, 7);
     imageContainer.layer.cornerRadius = 21;
     imageContainer.layer.masksToBounds = YES;
     imageContainer.backgroundColor = [UIColor colorFromHexString:@"d9d9d9"];
@@ -140,7 +145,7 @@
     
     UIImageView *imageView = [[UIImageView  alloc] initWithImage:[UIImage imageNamed:imageName]];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.frame = CGRectMake(0, 0, 32, 32);
+    imageView.frame = CGRectMake(0, 0, 28, 28);
     [imageContainer addSubview:imageView];
 
     UILabel *btnLabel = [[UILabel alloc] init];
@@ -176,6 +181,8 @@
     self.thumbUrl = @"https://upload.jianshu.io/users/upload_avatars/2784338/0d53044867da.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/90/h/90/format/webp";
     self.shareURL = @"https://upload.jianshu.io/users/upload_avatars/2784338/0d53044867da.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/90/h/90/format/webp";
     
+    Weak(self);
+    
     [LEEAlert actionsheet].config
     .LeeIdentifier(@"sharePanel")
     .LeeAddCustomView(^(LEECustomView *custom) {
@@ -183,16 +190,11 @@
         custom.isAutoWidth = YES;
     })
     .LeeItemInsets(UIEdgeInsetsMake(0, 0, 0, 0))
-    .LeeAddAction(^(LEEAction *action) {
-        action.title = @"取消";
-        action.titleColor = [UIColor descriptionTextColor];
-        action.height = 45.0f;
-    })
     .LeeHeaderInsets(UIEdgeInsetsMake(0, 0, 0, 0))
     .LeeActionSheetBottomMargin(0.0f)
-    .LeeActionSheetBackgroundColor([UIColor whiteColor])
+    .LeeActionSheetBackgroundColor([UIColor backgroundColor])
     .LeeCornerRadius(12.0f)
-    .LeeBackGroundColor([UIColor grayColor])     //屏幕背景颜色
+//    .LeeBackGroundColor([UIColor grayColor])     //屏幕背景颜色
     .LeeBackgroundStyleTranslucent(0.5f)     //屏幕背景半透明样式 参数为透明度
     .LeeConfigMaxWidth(^CGFloat (LEEScreenOrientationType type, CGSize size) {     // 设置最大宽度 (根据横竖屏类型进行设置 最大高度同理)
         // 横屏类型
@@ -210,5 +212,15 @@
     })
     .LeeShow();
 }
+
++ (instancetype)manager {
+    static SharePanel *manager;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        manager = [[self alloc] init];
+    });
+    return manager;
+}
+
 
 @end

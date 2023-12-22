@@ -1,13 +1,14 @@
 //
-//  UserManager.m
+//  AccountManager.m
 //  Fadvisor
 //
 //  Created by 韩建伟 on 2023/11/18.
 //
 
-#import "UserManager.h"
+#import "AccountManager.h"
+#import "BaseRequest.h"
 
-@implementation UserManager
+@implementation AccountManager
 
 static id _instance = nil;
 + (instancetype)sharedManager {
@@ -40,5 +41,4 @@ static id _instance = nil;
     }
     return self;
 }
-
 @end

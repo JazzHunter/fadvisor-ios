@@ -49,24 +49,24 @@ static const void *UIButtonBlockKey = &UIButtonBlockKey;
 
     return image;
 }
-static NSString * key_ActionBlock = @"key_ActionBlock";
-- (void)setHandleButtonActionBlock:(void (^)(UIButton * _Nullable))handleButtonActionBlock{
+
+static NSString *key_ActionBlock = @"key_ActionBlock";
+- (void)setHandleButtonActionBlock:(void (^)(UIButton *_Nullable))handleButtonActionBlock {
     objc_setAssociatedObject(self, (__bridge const void *)key_ActionBlock, handleButtonActionBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
     if (handleButtonActionBlock) {
         [self addTarget:self action:@selector(actionHandler) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
-- (void)actionHandler{
+- (void)actionHandler {
     if (self.handleButtonActionBlock) {
         self.handleButtonActionBlock(self);
     }
 }
 
--  (void (^)(UIButton * _Nullable))handleButtonActionBlock{
+- (void (^)(UIButton *_Nullable))handleButtonActionBlock {
     return objc_getAssociatedObject(self, (__bridge const void *)key_ActionBlock);
 }
-
 
 - (instancetype)initWithFrame:(CGRect)frame buttonTitle:(NSString *)buttonTitle normalBGColor:(UIColor *)normalBGColor selectBGColor:(UIColor *)selectBGColor
                   normalColor:(UIColor *)normalColor selectColor:(UIColor *)selectColor buttonFont:(UIFont *)buttonFont cornerRadius:(CGFloat)cornerRadius
@@ -100,7 +100,6 @@ static NSString * key_ActionBlock = @"key_ActionBlock";
 
     return solidColorButton;
 }
-
 @end
 
 @implementation APRoundedButton

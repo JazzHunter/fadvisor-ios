@@ -9,6 +9,7 @@
 #import "MainTabBarController.h"
 #import "TabDiscoveryViewController.h"
 #import "UMengHelper.h"
+#import <LEEAlert/LEEAlert.h>
 
 @interface AppDelegate ()
 

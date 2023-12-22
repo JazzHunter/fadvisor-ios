@@ -15,6 +15,7 @@
 #import "UIButton+ViolenceBtn.h"
 #import "UIView+GestureCallback.h"
 #import "UIView+Additions.h"
+#import "UIImageView+FitNet.h"
 #import "UIScrollView+Additions.h"
 #import "MBProgressHUD+Additions.h"
 

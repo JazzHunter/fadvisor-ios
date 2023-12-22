@@ -11,24 +11,25 @@
 #import "LocalDataStorage.h"
 #import "KeyCHainHelper.h"
 
-#define ClientIdKey   @"Client_Id"                                        // 平台Key
-#define ClientIdValue @"ios"                                              // 平台Value
-#define AppVersionKey @"App_Version"                                      // 版本Key
+#define ClientIdKey   @"client_Id"                                      // 平台Key
+#define ClientIdValue @"ios"                                            // 平台Value
+#define AppVersionKey @"app_version"                                    // 版本Key
+#define HeaderBasic   @"aW9zOmlvcw=="                                   // 请求头 Basic 加解密 /* https://enc.pig4cloud.com/ 这个网址的 2. 请求头 Basic 加解密 */
 
 @implementation RequestManager
 
 // Post
 - (void)POST:(NSString *)urlString parameters:(id)parameters completion:(void (^)(BaseResponse *))completion {
-    [self request:@"POST" URL:urlString parameters:parameters completion:completion];
+    [self request:@"POST" URL:urlString parameters:parameters isToken:NO completion:completion];
 }
 
 //Get
 - (void)GET:(NSString *)urlString parameters:(id)parameters completion:(void (^)(BaseResponse *))completion {
-    [self request:@"GET" URL:urlString parameters:parameters completion:completion];
+    [self request:@"GET" URL:urlString parameters:parameters isToken:NO completion:completion];
 }
 
 #pragma mark - Post & Get
-- (void)request:(NSString *)method URL:(NSString *)urlString parameters:(id)parameters completion:(void (^)(BaseResponse *response))completion {
+- (void)request:(NSString *)method URL:(NSString *)urlString parameters:(id)parameters isToken:(BOOL)isToken completion:(void (^)(BaseResponse *response))completion {
     if (self.isLocal) {
         [self requestLocal:urlString completion:completion];
         return;
@@ -40,6 +41,16 @@
         response.errorMsg = @"网络似乎不太理想……";
         completion(response);
         return;
+    }
+
+    if (isToken) {
+        [self.requestSerializer setValue:[@"Basic " stringByAppendingString:HeaderBasic] forHTTPHeaderField:@"Authorization"];
+    } else {
+        /** 添加 Token */
+        NSString *token = [KeyChainHelper getToken];
+        if (token) {
+            [self.requestSerializer setValue:[@"Bearer " stringByAppendingString:token] forHTTPHeaderField:@"Authorization"];
+        }
     }
 
     void (^ success)(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) = ^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
@@ -86,7 +97,7 @@ static NSString *jsonFileDirectory = @"LocalJsons";
 #pragma mark - 包装返回的数据
 - (BaseResponse *)convertTask:(NSURLSessionDataTask *)task responseObject:(id)responseObject error:(NSError *)error {
     BaseResponse *response = [BaseResponse new];
-    
+
     // ⚠️ 这里看一下，errorMsg 应该更好
     if (error) {
         response.error = error;
@@ -154,8 +165,6 @@ static NSString *jsonFileDirectory = @"LocalJsons";
 
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     [self.requestSerializer setValue:[infoDictionary objectForKey:@"CFBundleShortVersionString"] forHTTPHeaderField:AppVersionKey];
-
-    [self.requestSerializer setValue:[KeyChainHelper getToken] forHTTPHeaderField:@"Authorization"];
 
     //记录网络状态
     [self.reachabilityManager startMonitoring];

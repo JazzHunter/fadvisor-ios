@@ -1,7 +1,7 @@
 //
 //  KeyChainHelper.m
 //  FadvisorUtils
-//
+//  https://juejin.cn/post/6844903523302424590
 //  Created by 韩建伟 on 2021/3/16.
 //
 
@@ -57,10 +57,7 @@
 #pragma mark
 + (NSString *)getToken {
     NSString *token = [self load:TOKEN_KEY];
-    if (!token) {
-        return @"";
-    }
-    return token;
+    return !token ? @"" : token;
 }
 
 + (void)saveToken:(NSString *)token {

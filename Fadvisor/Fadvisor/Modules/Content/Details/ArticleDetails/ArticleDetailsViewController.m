@@ -24,7 +24,7 @@
 @property (nonatomic, strong) UILabel *pubTimeLabel;
 @property (nonatomic, strong) RichTextView *richTextView;
 
-@property (nonatomic, strong) SharePanel *sharePanel;
+//@property (nonatomic, strong) SharePanel *sharePanel;
 @property (nonatomic, strong) MyLinearLayout *shareBtn;
 
 @end
@@ -118,7 +118,7 @@
 }
 
 -(void)handleSharePanelOpen:(MyBaseLayout*)sender{
-    [self.sharePanel showPanelWithItem:self.info];
+    [[SharePanel manager] showPanelWithItem:self.info];
 }
 
 #pragma mark - BaseViewControllerDatasource
@@ -157,11 +157,11 @@
     return _titleLabel;
 }
 
-- (SharePanel *)sharePanel {
-    if (_sharePanel == nil) {
-        _sharePanel = [[SharePanel alloc] initWithFrame:CGRectMake(0, 0, 120, 240)];
-    }
-    return _sharePanel;
-}
+//- (SharePanel *)sharePanel {
+//    if (_sharePanel == nil) {
+//        _sharePanel = [[SharePanel alloc] initWithFrame:CGRectMake(0, 0, 120, 240)];
+//    }
+//    return _sharePanel;
+//}
 
 @end

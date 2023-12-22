@@ -6,7 +6,7 @@
 //
 
 #import "RcmdItemsServcie.h"
-#import "UserManager.h"
+#import "AccountManager.h"
 
 @interface RcmdItemsServcie ()
 
@@ -32,7 +32,7 @@
     params[@"sortValue1"] = self.sortValue1 ? @"" : self.sortValue1;
     params[@"sortValue2"] = self.sortValue2 ? @"" : self.sortValue2;
 
-    NSString *homeRcmdAPI =  [NSString stringWithFormat:@"/knwlsrch/item%@/home",   [UserManager sharedManager].isLogin ? @"" : @"/anonymous" ];
+    NSString *homeRcmdAPI =  [NSString stringWithFormat:@"/knwlsrch/item%@/home",   [AccountManager sharedManager].isLogin ? @"" : @"/anonymous" ];
 
     [self GET:homeRcmdAPI parameters:params completion:^(BaseResponse *response) {
         // 用户上拉后有快速下拉, 下拉的数据先回来, 上拉的数据后回来

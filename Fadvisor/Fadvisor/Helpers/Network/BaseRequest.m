@@ -31,4 +31,14 @@
     }];
 }
 
+- (void)request:(NSString *)method URL:(NSString *)urlString parameters:(id)parameters isToken:(BOOL)isToken completion:(void (^)(BaseResponse *response))completion {
+    Weak(self);
+    [[RequestManager sharedManager] request:method URL:urlString parameters:parameters isToken:isToken completion:^(BaseResponse *response) {
+        if (!weakself) {
+            return;
+        }
+        !completion ? : completion(response);
+    }];
+}
+
 @end

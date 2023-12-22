@@ -53,6 +53,17 @@ end
 def utils_pods
   # 唯一设备标识
   pod 'FCUUID'
+  # 数据库第三方框架
+  pod 'FMDB'
+  
+end
+
+# 阿里播放器
+def alivc_player
+  
+  pod 'AliPlayerSDK_iOS'
+#  pod 'AliPlayerSDK_iOS_ARTC' # 支持artc协议
+  pod 'RtsSDK' # 播放超低延时直播（RTS）流
   
 end
 
@@ -69,6 +80,7 @@ target 'Fadvisor' do
   base_ui_pods
   network_pods
   utils_pods
+  alivc_player
   
   # DoraemonKit
 #  pod 'DoraemonKit/Core'
@@ -97,9 +109,9 @@ target 'Fadvisor' do
 #  pod 'GKPhotoBrowser'
   pod 'GKPhotoBrowser/YY'
   
-  # 阿里播放器
-#  pod 'AliPlayerPartSDK_iOS'
-
+  # 先跑起来再说
+#  pod 'SDWebImage'
+#  pod 'Masonry'
   
   target 'FadvisorTests' do
     inherit! :search_paths
