@@ -26,6 +26,16 @@ static int _YYWebImageSetterKey;
                completion:nil];
 }
 
+- (void)setImageWithURL:(NSURL *)imageURL
+              transform:(YYWebImageTransformBlock)transform {
+    [self setImageWithURL:imageURL
+              placeholder:nil
+                  options:YYWebImageOptionProgressiveBlur | YYWebImageOptionSetImageWithFadeAnimation
+                 progress:nil
+                transform:transform
+               completion:nil];
+}
+
 
 - (void)setImageWithURL:(NSURL *)imageURL
             placeholder:(UIImage *)placeholder
@@ -86,7 +96,7 @@ static int _YYWebImageSetterKey;
         BOOL networkUnavailable = !netMgr.isReachable;
         if (forbidDownload || networkUnavailable) {
             self.image = placeholder;
-            if(completion) completion(imageFromMemory, imageURL, YYWebImageFromMemoryCacheFast, YYWebImageStageFinished, nil);
+            if(completion) completion(placeholder, imageURL, YYWebImageFromMemoryCacheFast, YYWebImageStageFinished, nil);
             return;
         }
         

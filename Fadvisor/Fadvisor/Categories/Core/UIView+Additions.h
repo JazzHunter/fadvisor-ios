@@ -28,6 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadShakeAnimation;
 
+- (void)showTips:(NSString *)tips;
+
++ (CAGradientLayer *)bgGradientLayer;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

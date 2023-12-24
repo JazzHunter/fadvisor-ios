@@ -21,6 +21,50 @@
 		C12B09A82B13973600108664 /* MediaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C12B09A72B13973600108664 /* MediaModel.m */; };
 		C148E3CA2B0EFC7A00DAA612 /* ItemFloatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C148E3C92B0EFC7A00DAA612 /* ItemFloatTableViewCell.m */; };
 		C155CFFB2B354075004A3AFC /* UIImageView+FitNet.m in Sources */ = {isa = PBXBuildFile; fileRef = C155CFFA2B354075004A3AFC /* UIImageView+FitNet.m */; };
+		C155D0012B35D7E6004A3AFC /* PresentAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0002B35D7E6004A3AFC /* PresentAnimator.m */; };
+		C155D0042B35E3F8004A3AFC /* AlivcPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0032B35E3F8004A3AFC /* AlivcPlayerManager.m */; };
+		C155D0192B36EA0F004A3AFC /* AlivcPlayerEventCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0172B36EA0F004A3AFC /* AlivcPlayerEventCenter.m */; };
+		C155D01C2B3723A3004A3AFC /* AlivcPlayerVidPlayAuthService.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D01B2B3723A3004A3AFC /* AlivcPlayerVidPlayAuthService.m */; };
+		C155D03D2B38082D004A3AFC /* AlivcPlayerAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D03C2B38082D004A3AFC /* AlivcPlayerAsset.m */; };
+		C155D0672B383D80004A3AFC /* AlivcPlayerVideoDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0642B383D80004A3AFC /* AlivcPlayerVideoDBModel.m */; };
+		C155D0682B383D80004A3AFC /* AlivcPlayerVideoDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0662B383D80004A3AFC /* AlivcPlayerVideoDBManager.m */; };
+		C155D0732B383D91004A3AFC /* AUIPlayerFeedListVideoContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0692B383D90004A3AFC /* AUIPlayerFeedListVideoContainer.m */; };
+		C155D0742B383D91004A3AFC /* AUIPlayerLandscapeVideoContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D06A2B383D90004A3AFC /* AUIPlayerLandscapeVideoContainer.m */; };
+		C155D0752B383D91004A3AFC /* AUIPlayerPlayViewLayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D06B2B383D90004A3AFC /* AUIPlayerPlayViewLayerManager.m */; };
+		C155D0762B383D91004A3AFC /* AUIPlayerDetailVideoContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0722B383D91004A3AFC /* AUIPlayerDetailVideoContainer.m */; };
+		C155D0C22B383DAC004A3AFC /* AlivcPlayerListenPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D07A2B383DAB004A3AFC /* AlivcPlayerListenPlugin.m */; };
+		C155D0C32B383DAC004A3AFC /* AUIPlayerListenView.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D07B2B383DAB004A3AFC /* AUIPlayerListenView.m */; };
+		C155D0C42B383DAC004A3AFC /* AlivcPlayerBackgroudModePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D07E2B383DAB004A3AFC /* AlivcPlayerBackgroudModePlugin.m */; };
+		C155D0C52B383DAC004A3AFC /* AUIPlayerSpeedSwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0822B383DAB004A3AFC /* AUIPlayerSpeedSwipeView.m */; };
+		C155D0C62B383DAC004A3AFC /* AUIPlayerZFVolumeBrightnessView.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0832B383DAB004A3AFC /* AUIPlayerZFVolumeBrightnessView.m */; };
+		C155D0C72B383DAC004A3AFC /* AlivcPlayerGesturePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0842B383DAB004A3AFC /* AlivcPlayerGesturePlugin.m */; };
+		C155D0C82B383DAC004A3AFC /* AlivcPlayerPlayControlPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0882B383DAB004A3AFC /* AlivcPlayerPlayControlPlugin.m */; };
+		C155D0C92B383DAC004A3AFC /* AUIPlayerStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D08A2B383DAB004A3AFC /* AUIPlayerStatusBar.m */; };
+		C155D0CA2B383DAC004A3AFC /* AlivcPlayerTopToolPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D08D2B383DAB004A3AFC /* AlivcPlayerTopToolPlugin.m */; };
+		C155D0CB2B383DAC004A3AFC /* AUIPlayerTopActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D08F2B383DAB004A3AFC /* AUIPlayerTopActionView.m */; };
+		C155D0CC2B383DAC004A3AFC /* AUIPlayerTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0902B383DAB004A3AFC /* AUIPlayerTopView.m */; };
+		C155D0CD2B383DAC004A3AFC /* AlivcPlayerRotateAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0932B383DAC004A3AFC /* AlivcPlayerRotateAnimator.m */; };
+		C155D0CE2B383DAC004A3AFC /* AlivcPlayerLandscapePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0942B383DAC004A3AFC /* AlivcPlayerLandscapePlugin.m */; };
+		C155D0CF2B383DAC004A3AFC /* AUIPlayerLandscapeController.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0952B383DAC004A3AFC /* AUIPlayerLandscapeController.m */; };
+		C155D0D02B383DAC004A3AFC /* AUIPlayerSpeedTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D09B2B383DAC004A3AFC /* AUIPlayerSpeedTipView.m */; };
+		C155D0D12B383DAC004A3AFC /* AlivcPlayerPlayPluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D09E2B383DAC004A3AFC /* AlivcPlayerPlayPluginManager.m */; };
+		C155D0D22B383DAC004A3AFC /* AlivcPlayerBottomToolPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0A12B383DAC004A3AFC /* AlivcPlayerBottomToolPlugin.m */; };
+		C155D0D32B383DAC004A3AFC /* AUIPlayerRecommendWatchPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0A42B383DAC004A3AFC /* AUIPlayerRecommendWatchPointView.m */; };
+		C155D0D42B383DAC004A3AFC /* AUIPlayerBomTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0A52B383DAC004A3AFC /* AUIPlayerBomTool.m */; };
+		C155D0D52B383DAC004A3AFC /* AUIPlayerFlowAutoProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0A92B383DAC004A3AFC /* AUIPlayerFlowAutoProgress.m */; };
+		C155D0D62B383DAC004A3AFC /* AUIPlayerBomButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0AB2B383DAC004A3AFC /* AUIPlayerBomButtonView.m */; };
+		C155D0D72B383DAC004A3AFC /* AUIPlayerProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0AE2B383DAC004A3AFC /* AUIPlayerProgressView.m */; };
+		C155D0D82B383DAC004A3AFC /* AUIPlayerWatchPointEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0AF2B383DAC004A3AFC /* AUIPlayerWatchPointEntry.m */; };
+		C155D0D92B383DAC004A3AFC /* AUIPlayerWatchPointContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0B42B383DAC004A3AFC /* AUIPlayerWatchPointContainer.m */; };
+		C155D0DA2B383DAC004A3AFC /* AUIPlayerBomProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0B52B383DAC004A3AFC /* AUIPlayerBomProgressView.m */; };
+		C155D0DB2B383DAC004A3AFC /* AUIPlayerLandScapeSpeedView.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0B62B383DAC004A3AFC /* AUIPlayerLandScapeSpeedView.m */; };
+		C155D0DC2B383DAC004A3AFC /* AUIPlayerWatchPointService.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0B82B383DAC004A3AFC /* AUIPlayerWatchPointService.m */; };
+		C155D0DD2B383DAC004A3AFC /* AUIPlayerThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0B92B383DAC004A3AFC /* AUIPlayerThumbnailView.m */; };
+		C155D0DE2B383DAC004A3AFC /* AUIPlayerBomPortraitButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0BB2B383DAC004A3AFC /* AUIPlayerBomPortraitButtons.m */; };
+		C155D0DF2B383DAC004A3AFC /* AUIPlayerLandScapeResolutionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0BC2B383DAC004A3AFC /* AUIPlayerLandScapeResolutionView.m */; };
+		C155D0E02B383DAC004A3AFC /* AlivcPlayerLockPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0BF2B383DAC004A3AFC /* AlivcPlayerLockPlugin.m */; };
+		C155D0E12B383DAC004A3AFC /* AlivcPlayerBasePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = C155D0C12B383DAC004A3AFC /* AlivcPlayerBasePlugin.m */; };
+		C155D0E32B387BF5004A3AFC /* AlivcPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C155D0E22B387BF5004A3AFC /* AlivcPlayer.bundle */; };
 		C159191B2AFDC43E00351431 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C159191A2AFDC43E00351431 /* AppDelegate.m */; };
 		C159192C2AFDC43F00351431 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C159192B2AFDC43F00351431 /* main.m */; };
 		C15919362AFDC43F00351431 /* FadvisorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C15919352AFDC43F00351431 /* FadvisorTests.m */; };
@@ -165,6 +209,13 @@
 		C1CEB7E12B245E5700AA8490 /* AliVideoCert.crt in Resources */ = {isa = PBXBuildFile; fileRef = C1CEB7E02B245E5700AA8490 /* AliVideoCert.crt */; };
 		C1CEB7E52B24629400AA8490 /* VideoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7E42B24629400AA8490 /* VideoDetailsViewController.m */; };
 		C1FB990A2B1839D3002DA461 /* ContentExcepitonView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */; };
+		C1FE82932B387D3B00F607F8 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE82922B387D3B00F607F8 /* Theme.m */; };
+		C1FE82952B38835300F607F8 /* Foundation.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C1FE82942B38835300F607F8 /* Foundation.bundle */; };
+		C1FE82982B38882F00F607F8 /* Localization.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE82972B38882F00F607F8 /* Localization.m */; };
+		C1FE829B2B38948900F607F8 /* UIImage+FitNet.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE829A2B38948900F607F8 /* UIImage+FitNet.m */; };
+		C1FE829E2B38B71F00F607F8 /* NoActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE829D2B38B71F00F607F8 /* NoActionView.m */; };
+		C1FE82A12B38B74200F607F8 /* ToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE829F2B38B74200F607F8 /* ToastView.m */; };
+		C1FE82A42B38BBE500F607F8 /* NetworkReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE82A32B38BBE500F607F8 /* NetworkReachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -210,6 +261,101 @@
 		C148E3C92B0EFC7A00DAA612 /* ItemFloatTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemFloatTableViewCell.m; sourceTree = "<group>"; };
 		C155CFF92B354075004A3AFC /* UIImageView+FitNet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+FitNet.h"; sourceTree = "<group>"; };
 		C155CFFA2B354075004A3AFC /* UIImageView+FitNet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+FitNet.m"; sourceTree = "<group>"; };
+		C155CFFF2B35D7E6004A3AFC /* PresentAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentAnimator.h; sourceTree = "<group>"; };
+		C155D0002B35D7E6004A3AFC /* PresentAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentAnimator.m; sourceTree = "<group>"; };
+		C155D0022B35E3F8004A3AFC /* AlivcPlayerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerManager.h; sourceTree = "<group>"; };
+		C155D0032B35E3F8004A3AFC /* AlivcPlayerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerManager.m; sourceTree = "<group>"; };
+		C155D0062B35E4BF004A3AFC /* AlivcPlayerEventCenterProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerEventCenterProtocol.h; sourceTree = "<group>"; };
+		C155D0072B35E530004A3AFC /* AlivcPlayerPlayerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerPlayerProtocol.h; sourceTree = "<group>"; };
+		C155D00A2B35E632004A3AFC /* AlivcPlayerListPlayerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerListPlayerProtocol.h; sourceTree = "<group>"; };
+		C155D0102B35E79C004A3AFC /* AlivcPlayerVideoHistoryProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerVideoHistoryProtocol.h; sourceTree = "<group>"; };
+		C155D0172B36EA0F004A3AFC /* AlivcPlayerEventCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerEventCenter.m; sourceTree = "<group>"; };
+		C155D0182B36EA0F004A3AFC /* AlivcPlayerEventCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerEventCenter.h; sourceTree = "<group>"; };
+		C155D01A2B3723A3004A3AFC /* AlivcPlayerVidPlayAuthService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerVidPlayAuthService.h; sourceTree = "<group>"; };
+		C155D01B2B3723A3004A3AFC /* AlivcPlayerVidPlayAuthService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerVidPlayAuthService.m; sourceTree = "<group>"; };
+		C155D03B2B38082D004A3AFC /* AlivcPlayerAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerAsset.h; sourceTree = "<group>"; };
+		C155D03C2B38082D004A3AFC /* AlivcPlayerAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerAsset.m; sourceTree = "<group>"; };
+		C155D0632B383D80004A3AFC /* AlivcPlayerVideoDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerVideoDBManager.h; sourceTree = "<group>"; };
+		C155D0642B383D80004A3AFC /* AlivcPlayerVideoDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerVideoDBModel.m; sourceTree = "<group>"; };
+		C155D0652B383D80004A3AFC /* AlivcPlayerVideoDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerVideoDBModel.h; sourceTree = "<group>"; };
+		C155D0662B383D80004A3AFC /* AlivcPlayerVideoDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerVideoDBManager.m; sourceTree = "<group>"; };
+		C155D0692B383D90004A3AFC /* AUIPlayerFeedListVideoContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerFeedListVideoContainer.m; sourceTree = "<group>"; };
+		C155D06A2B383D90004A3AFC /* AUIPlayerLandscapeVideoContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerLandscapeVideoContainer.m; sourceTree = "<group>"; };
+		C155D06B2B383D90004A3AFC /* AUIPlayerPlayViewLayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerPlayViewLayerManager.m; sourceTree = "<group>"; };
+		C155D06C2B383D91004A3AFC /* AUIPlayerPlayViewLayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerPlayViewLayerManager.h; sourceTree = "<group>"; };
+		C155D06D2B383D91004A3AFC /* AUIPlayerFeedListVideoContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerFeedListVideoContainer.h; sourceTree = "<group>"; };
+		C155D06E2B383D91004A3AFC /* AUIPlayerLandscapeVideoContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerLandscapeVideoContainer.h; sourceTree = "<group>"; };
+		C155D06F2B383D91004A3AFC /* AUIPlayerDetailVideoContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerDetailVideoContainer.h; sourceTree = "<group>"; };
+		C155D0702B383D91004A3AFC /* AUIPlayerPlayContainViewPluginInstallProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerPlayContainViewPluginInstallProtocol.h; sourceTree = "<group>"; };
+		C155D0712B383D91004A3AFC /* AUIPlayerPlayViewLayerManagerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerPlayViewLayerManagerProtocol.h; sourceTree = "<group>"; };
+		C155D0722B383D91004A3AFC /* AUIPlayerDetailVideoContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerDetailVideoContainer.m; sourceTree = "<group>"; };
+		C155D0772B383DAB004A3AFC /* AlivcPlayerBasePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerBasePlugin.h; sourceTree = "<group>"; };
+		C155D0792B383DAB004A3AFC /* AUIPlayerListenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerListenView.h; sourceTree = "<group>"; };
+		C155D07A2B383DAB004A3AFC /* AlivcPlayerListenPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerListenPlugin.m; sourceTree = "<group>"; };
+		C155D07B2B383DAB004A3AFC /* AUIPlayerListenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerListenView.m; sourceTree = "<group>"; };
+		C155D07C2B383DAB004A3AFC /* AlivcPlayerListenPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerListenPlugin.h; sourceTree = "<group>"; };
+		C155D07E2B383DAB004A3AFC /* AlivcPlayerBackgroudModePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerBackgroudModePlugin.m; sourceTree = "<group>"; };
+		C155D07F2B383DAB004A3AFC /* AlivcPlayerBackgroudModePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerBackgroudModePlugin.h; sourceTree = "<group>"; };
+		C155D0812B383DAB004A3AFC /* AlivcPlayerGesturePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerGesturePlugin.h; sourceTree = "<group>"; };
+		C155D0822B383DAB004A3AFC /* AUIPlayerSpeedSwipeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerSpeedSwipeView.m; sourceTree = "<group>"; };
+		C155D0832B383DAB004A3AFC /* AUIPlayerZFVolumeBrightnessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerZFVolumeBrightnessView.m; sourceTree = "<group>"; };
+		C155D0842B383DAB004A3AFC /* AlivcPlayerGesturePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerGesturePlugin.m; sourceTree = "<group>"; };
+		C155D0852B383DAB004A3AFC /* AUIPlayerSpeedSwipeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerSpeedSwipeView.h; sourceTree = "<group>"; };
+		C155D0862B383DAB004A3AFC /* AUIPlayerZFVolumeBrightnessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerZFVolumeBrightnessView.h; sourceTree = "<group>"; };
+		C155D0872B383DAB004A3AFC /* AlivcPlayerPlayControlPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerPlayControlPlugin.h; sourceTree = "<group>"; };
+		C155D0882B383DAB004A3AFC /* AlivcPlayerPlayControlPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerPlayControlPlugin.m; sourceTree = "<group>"; };
+		C155D08A2B383DAB004A3AFC /* AUIPlayerStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerStatusBar.m; sourceTree = "<group>"; };
+		C155D08B2B383DAB004A3AFC /* AUIPlayerTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerTopView.h; sourceTree = "<group>"; };
+		C155D08C2B383DAB004A3AFC /* AUIPlayerTopActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerTopActionView.h; sourceTree = "<group>"; };
+		C155D08D2B383DAB004A3AFC /* AlivcPlayerTopToolPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerTopToolPlugin.m; sourceTree = "<group>"; };
+		C155D08E2B383DAB004A3AFC /* AUIPlayerStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerStatusBar.h; sourceTree = "<group>"; };
+		C155D08F2B383DAB004A3AFC /* AUIPlayerTopActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerTopActionView.m; sourceTree = "<group>"; };
+		C155D0902B383DAB004A3AFC /* AUIPlayerTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerTopView.m; sourceTree = "<group>"; };
+		C155D0912B383DAB004A3AFC /* AlivcPlayerTopToolPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerTopToolPlugin.h; sourceTree = "<group>"; };
+		C155D0932B383DAC004A3AFC /* AlivcPlayerRotateAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerRotateAnimator.m; sourceTree = "<group>"; };
+		C155D0942B383DAC004A3AFC /* AlivcPlayerLandscapePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerLandscapePlugin.m; sourceTree = "<group>"; };
+		C155D0952B383DAC004A3AFC /* AUIPlayerLandscapeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerLandscapeController.m; sourceTree = "<group>"; };
+		C155D0962B383DAC004A3AFC /* AlivcPlayerRotateAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerRotateAnimator.h; sourceTree = "<group>"; };
+		C155D0972B383DAC004A3AFC /* AUIPlayerLandscapeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerLandscapeController.h; sourceTree = "<group>"; };
+		C155D0982B383DAC004A3AFC /* AlivcPlayerLandscapePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerLandscapePlugin.h; sourceTree = "<group>"; };
+		C155D09A2B383DAC004A3AFC /* AUIPlayerSpeedTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerSpeedTipView.h; sourceTree = "<group>"; };
+		C155D09B2B383DAC004A3AFC /* AUIPlayerSpeedTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerSpeedTipView.m; sourceTree = "<group>"; };
+		C155D09C2B383DAC004A3AFC /* AlivcPlayerPluginEventProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerPluginEventProtocol.h; sourceTree = "<group>"; };
+		C155D09D2B383DAC004A3AFC /* AlivcPlayerPlayPluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerPlayPluginManager.h; sourceTree = "<group>"; };
+		C155D09E2B383DAC004A3AFC /* AlivcPlayerPlayPluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerPlayPluginManager.m; sourceTree = "<group>"; };
+		C155D09F2B383DAC004A3AFC /* AlivcPlayerPluginManagerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerPluginManagerProtocol.h; sourceTree = "<group>"; };
+		C155D0A12B383DAC004A3AFC /* AlivcPlayerBottomToolPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerBottomToolPlugin.m; sourceTree = "<group>"; };
+		C155D0A22B383DAC004A3AFC /* AlivcPlayerBottomToolPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerBottomToolPlugin.h; sourceTree = "<group>"; };
+		C155D0A42B383DAC004A3AFC /* AUIPlayerRecommendWatchPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerRecommendWatchPointView.m; sourceTree = "<group>"; };
+		C155D0A52B383DAC004A3AFC /* AUIPlayerBomTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerBomTool.m; sourceTree = "<group>"; };
+		C155D0A62B383DAC004A3AFC /* AUIPlayerLandScapeSpeedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerLandScapeSpeedView.h; sourceTree = "<group>"; };
+		C155D0A72B383DAC004A3AFC /* AUIPlayerWatchPointContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerWatchPointContainer.h; sourceTree = "<group>"; };
+		C155D0A82B383DAC004A3AFC /* AUIPlayerBomProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerBomProgressView.h; sourceTree = "<group>"; };
+		C155D0A92B383DAC004A3AFC /* AUIPlayerFlowAutoProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerFlowAutoProgress.m; sourceTree = "<group>"; };
+		C155D0AA2B383DAC004A3AFC /* AUIPlayerWatchPointService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerWatchPointService.h; sourceTree = "<group>"; };
+		C155D0AB2B383DAC004A3AFC /* AUIPlayerBomButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerBomButtonView.m; sourceTree = "<group>"; };
+		C155D0AC2B383DAC004A3AFC /* AUIPlayerBomPortraitButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerBomPortraitButtons.h; sourceTree = "<group>"; };
+		C155D0AD2B383DAC004A3AFC /* AUIPlayerLandScapeResolutionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerLandScapeResolutionView.h; sourceTree = "<group>"; };
+		C155D0AE2B383DAC004A3AFC /* AUIPlayerProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerProgressView.m; sourceTree = "<group>"; };
+		C155D0AF2B383DAC004A3AFC /* AUIPlayerWatchPointEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerWatchPointEntry.m; sourceTree = "<group>"; };
+		C155D0B02B383DAC004A3AFC /* AUIPlayerThumbnailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerThumbnailView.h; sourceTree = "<group>"; };
+		C155D0B12B383DAC004A3AFC /* AUIPlayerBomTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerBomTool.h; sourceTree = "<group>"; };
+		C155D0B22B383DAC004A3AFC /* AUIPlayerRecommendWatchPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerRecommendWatchPointView.h; sourceTree = "<group>"; };
+		C155D0B32B383DAC004A3AFC /* AUIPlayerFlowAutoProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerFlowAutoProgress.h; sourceTree = "<group>"; };
+		C155D0B42B383DAC004A3AFC /* AUIPlayerWatchPointContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerWatchPointContainer.m; sourceTree = "<group>"; };
+		C155D0B52B383DAC004A3AFC /* AUIPlayerBomProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerBomProgressView.m; sourceTree = "<group>"; };
+		C155D0B62B383DAC004A3AFC /* AUIPlayerLandScapeSpeedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerLandScapeSpeedView.m; sourceTree = "<group>"; };
+		C155D0B72B383DAC004A3AFC /* AUIPlayerBomButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerBomButtonView.h; sourceTree = "<group>"; };
+		C155D0B82B383DAC004A3AFC /* AUIPlayerWatchPointService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerWatchPointService.m; sourceTree = "<group>"; };
+		C155D0B92B383DAC004A3AFC /* AUIPlayerThumbnailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerThumbnailView.m; sourceTree = "<group>"; };
+		C155D0BA2B383DAC004A3AFC /* AUIPlayerWatchPointEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerWatchPointEntry.h; sourceTree = "<group>"; };
+		C155D0BB2B383DAC004A3AFC /* AUIPlayerBomPortraitButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerBomPortraitButtons.m; sourceTree = "<group>"; };
+		C155D0BC2B383DAC004A3AFC /* AUIPlayerLandScapeResolutionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerLandScapeResolutionView.m; sourceTree = "<group>"; };
+		C155D0BD2B383DAC004A3AFC /* AUIPlayerProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerProgressView.h; sourceTree = "<group>"; };
+		C155D0BF2B383DAC004A3AFC /* AlivcPlayerLockPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerLockPlugin.m; sourceTree = "<group>"; };
+		C155D0C02B383DAC004A3AFC /* AlivcPlayerLockPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerLockPlugin.h; sourceTree = "<group>"; };
+		C155D0C12B383DAC004A3AFC /* AlivcPlayerBasePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerBasePlugin.m; sourceTree = "<group>"; };
+		C155D0E22B387BF5004A3AFC /* AlivcPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlivcPlayer.bundle; sourceTree = "<group>"; };
 		C15919162AFDC43E00351431 /* Fadvisor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fadvisor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C15919192AFDC43E00351431 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C159191A2AFDC43E00351431 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -509,6 +655,20 @@
 		C1CEB7E42B24629400AA8490 /* VideoDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoDetailsViewController.m; sourceTree = "<group>"; };
 		C1FB99082B1839D3002DA461 /* ContentExcepitonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentExcepitonView.h; sourceTree = "<group>"; };
 		C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentExcepitonView.m; sourceTree = "<group>"; };
+		C1FE828F2B387CCE00F607F8 /* AlivcPlayerMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerMacro.h; sourceTree = "<group>"; };
+		C1FE82912B387D3B00F607F8 /* Theme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
+		C1FE82922B387D3B00F607F8 /* Theme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Theme.m; sourceTree = "<group>"; };
+		C1FE82942B38835300F607F8 /* Foundation.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Foundation.bundle; sourceTree = "<group>"; };
+		C1FE82962B38882F00F607F8 /* Localization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Localization.h; sourceTree = "<group>"; };
+		C1FE82972B38882F00F607F8 /* Localization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Localization.m; sourceTree = "<group>"; };
+		C1FE82992B38948900F607F8 /* UIImage+FitNet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+FitNet.h"; sourceTree = "<group>"; };
+		C1FE829A2B38948900F607F8 /* UIImage+FitNet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FitNet.m"; sourceTree = "<group>"; };
+		C1FE829C2B38B71F00F607F8 /* NoActionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoActionView.h; sourceTree = "<group>"; };
+		C1FE829D2B38B71F00F607F8 /* NoActionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoActionView.m; sourceTree = "<group>"; };
+		C1FE829F2B38B74200F607F8 /* ToastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToastView.m; sourceTree = "<group>"; };
+		C1FE82A02B38B74200F607F8 /* ToastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToastView.h; sourceTree = "<group>"; };
+		C1FE82A22B38BBE500F607F8 /* NetworkReachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkReachability.h; sourceTree = "<group>"; };
+		C1FE82A32B38BBE500F607F8 /* NetworkReachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkReachability.m; sourceTree = "<group>"; };
 		C8126B4E9064B917D59445AB /* Pods-FadvisorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FadvisorTests.debug.xcconfig"; path = "Target Support Files/Pods-FadvisorTests/Pods-FadvisorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E169AA165A089CABEB289175 /* Pods-FadvisorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FadvisorTests.release.xcconfig"; path = "Target Support Files/Pods-FadvisorTests/Pods-FadvisorTests.release.xcconfig"; sourceTree = "<group>"; };
 		E4CF22C0F536A158DB5DBDBF /* Pods_FadvisorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FadvisorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -595,8 +755,214 @@
 		C155CFFE2B35D6FD004A3AFC /* AlivcPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				C155D0E22B387BF5004A3AFC /* AlivcPlayer.bundle */,
+				C155D03A2B380825004A3AFC /* Foundation */,
+				C155D00F2B35E746004A3AFC /* History */,
+				C155D00D2B35E6F7004A3AFC /* Layer */,
+				C155D00B2B35E685004A3AFC /* Plugin */,
+				C155D0052B35E4B3004A3AFC /* Event */,
+				C155D0022B35E3F8004A3AFC /* AlivcPlayerManager.h */,
+				C155D0032B35E3F8004A3AFC /* AlivcPlayerManager.m */,
+				C155D0072B35E530004A3AFC /* AlivcPlayerPlayerProtocol.h */,
+				C155D00A2B35E632004A3AFC /* AlivcPlayerListPlayerProtocol.h */,
+				C155D01A2B3723A3004A3AFC /* AlivcPlayerVidPlayAuthService.h */,
+				C155D01B2B3723A3004A3AFC /* AlivcPlayerVidPlayAuthService.m */,
 			);
 			path = AlivcPlayer;
+			sourceTree = "<group>";
+		};
+		C155D0052B35E4B3004A3AFC /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				C155D0182B36EA0F004A3AFC /* AlivcPlayerEventCenter.h */,
+				C155D0172B36EA0F004A3AFC /* AlivcPlayerEventCenter.m */,
+				C155D0062B35E4BF004A3AFC /* AlivcPlayerEventCenterProtocol.h */,
+			);
+			path = Event;
+			sourceTree = "<group>";
+		};
+		C155D00B2B35E685004A3AFC /* Plugin */ = {
+			isa = PBXGroup;
+			children = (
+				C155D0772B383DAB004A3AFC /* AlivcPlayerBasePlugin.h */,
+				C155D0C12B383DAC004A3AFC /* AlivcPlayerBasePlugin.m */,
+				C155D0872B383DAB004A3AFC /* AlivcPlayerPlayControlPlugin.h */,
+				C155D0882B383DAB004A3AFC /* AlivcPlayerPlayControlPlugin.m */,
+				C155D09D2B383DAC004A3AFC /* AlivcPlayerPlayPluginManager.h */,
+				C155D09E2B383DAC004A3AFC /* AlivcPlayerPlayPluginManager.m */,
+				C155D09C2B383DAC004A3AFC /* AlivcPlayerPluginEventProtocol.h */,
+				C155D09F2B383DAC004A3AFC /* AlivcPlayerPluginManagerProtocol.h */,
+				C155D07D2B383DAB004A3AFC /* backmode */,
+				C155D0A02B383DAC004A3AFC /* bom */,
+				C155D0802B383DAB004A3AFC /* gesture */,
+				C155D0922B383DAC004A3AFC /* landscape */,
+				C155D0782B383DAB004A3AFC /* listen */,
+				C155D0BE2B383DAC004A3AFC /* lock */,
+				C155D0992B383DAC004A3AFC /* speed */,
+				C155D0892B383DAB004A3AFC /* topTool */,
+			);
+			path = Plugin;
+			sourceTree = "<group>";
+		};
+		C155D00D2B35E6F7004A3AFC /* Layer */ = {
+			isa = PBXGroup;
+			children = (
+				C155D06F2B383D91004A3AFC /* AUIPlayerDetailVideoContainer.h */,
+				C155D0722B383D91004A3AFC /* AUIPlayerDetailVideoContainer.m */,
+				C155D06D2B383D91004A3AFC /* AUIPlayerFeedListVideoContainer.h */,
+				C155D0692B383D90004A3AFC /* AUIPlayerFeedListVideoContainer.m */,
+				C155D06E2B383D91004A3AFC /* AUIPlayerLandscapeVideoContainer.h */,
+				C155D06A2B383D90004A3AFC /* AUIPlayerLandscapeVideoContainer.m */,
+				C155D0702B383D91004A3AFC /* AUIPlayerPlayContainViewPluginInstallProtocol.h */,
+				C155D06C2B383D91004A3AFC /* AUIPlayerPlayViewLayerManager.h */,
+				C155D06B2B383D90004A3AFC /* AUIPlayerPlayViewLayerManager.m */,
+				C155D0712B383D91004A3AFC /* AUIPlayerPlayViewLayerManagerProtocol.h */,
+			);
+			path = Layer;
+			sourceTree = "<group>";
+		};
+		C155D00F2B35E746004A3AFC /* History */ = {
+			isa = PBXGroup;
+			children = (
+				C155D0102B35E79C004A3AFC /* AlivcPlayerVideoHistoryProtocol.h */,
+				C155D0632B383D80004A3AFC /* AlivcPlayerVideoDBManager.h */,
+				C155D0662B383D80004A3AFC /* AlivcPlayerVideoDBManager.m */,
+				C155D0652B383D80004A3AFC /* AlivcPlayerVideoDBModel.h */,
+				C155D0642B383D80004A3AFC /* AlivcPlayerVideoDBModel.m */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		C155D03A2B380825004A3AFC /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				C155D03B2B38082D004A3AFC /* AlivcPlayerAsset.h */,
+				C155D03C2B38082D004A3AFC /* AlivcPlayerAsset.m */,
+				C1FE828F2B387CCE00F607F8 /* AlivcPlayerMacro.h */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		C155D0782B383DAB004A3AFC /* listen */ = {
+			isa = PBXGroup;
+			children = (
+				C155D0792B383DAB004A3AFC /* AUIPlayerListenView.h */,
+				C155D07A2B383DAB004A3AFC /* AlivcPlayerListenPlugin.m */,
+				C155D07B2B383DAB004A3AFC /* AUIPlayerListenView.m */,
+				C155D07C2B383DAB004A3AFC /* AlivcPlayerListenPlugin.h */,
+			);
+			path = listen;
+			sourceTree = "<group>";
+		};
+		C155D07D2B383DAB004A3AFC /* backmode */ = {
+			isa = PBXGroup;
+			children = (
+				C155D07E2B383DAB004A3AFC /* AlivcPlayerBackgroudModePlugin.m */,
+				C155D07F2B383DAB004A3AFC /* AlivcPlayerBackgroudModePlugin.h */,
+			);
+			path = backmode;
+			sourceTree = "<group>";
+		};
+		C155D0802B383DAB004A3AFC /* gesture */ = {
+			isa = PBXGroup;
+			children = (
+				C155D0812B383DAB004A3AFC /* AlivcPlayerGesturePlugin.h */,
+				C155D0822B383DAB004A3AFC /* AUIPlayerSpeedSwipeView.m */,
+				C155D0832B383DAB004A3AFC /* AUIPlayerZFVolumeBrightnessView.m */,
+				C155D0842B383DAB004A3AFC /* AlivcPlayerGesturePlugin.m */,
+				C155D0852B383DAB004A3AFC /* AUIPlayerSpeedSwipeView.h */,
+				C155D0862B383DAB004A3AFC /* AUIPlayerZFVolumeBrightnessView.h */,
+			);
+			path = gesture;
+			sourceTree = "<group>";
+		};
+		C155D0892B383DAB004A3AFC /* topTool */ = {
+			isa = PBXGroup;
+			children = (
+				C155D08A2B383DAB004A3AFC /* AUIPlayerStatusBar.m */,
+				C155D08B2B383DAB004A3AFC /* AUIPlayerTopView.h */,
+				C155D08C2B383DAB004A3AFC /* AUIPlayerTopActionView.h */,
+				C155D08D2B383DAB004A3AFC /* AlivcPlayerTopToolPlugin.m */,
+				C155D08E2B383DAB004A3AFC /* AUIPlayerStatusBar.h */,
+				C155D08F2B383DAB004A3AFC /* AUIPlayerTopActionView.m */,
+				C155D0902B383DAB004A3AFC /* AUIPlayerTopView.m */,
+				C155D0912B383DAB004A3AFC /* AlivcPlayerTopToolPlugin.h */,
+			);
+			path = topTool;
+			sourceTree = "<group>";
+		};
+		C155D0922B383DAC004A3AFC /* landscape */ = {
+			isa = PBXGroup;
+			children = (
+				C155D0932B383DAC004A3AFC /* AlivcPlayerRotateAnimator.m */,
+				C155D0942B383DAC004A3AFC /* AlivcPlayerLandscapePlugin.m */,
+				C155D0952B383DAC004A3AFC /* AUIPlayerLandscapeController.m */,
+				C155D0962B383DAC004A3AFC /* AlivcPlayerRotateAnimator.h */,
+				C155D0972B383DAC004A3AFC /* AUIPlayerLandscapeController.h */,
+				C155D0982B383DAC004A3AFC /* AlivcPlayerLandscapePlugin.h */,
+			);
+			path = landscape;
+			sourceTree = "<group>";
+		};
+		C155D0992B383DAC004A3AFC /* speed */ = {
+			isa = PBXGroup;
+			children = (
+				C155D09A2B383DAC004A3AFC /* AUIPlayerSpeedTipView.h */,
+				C155D09B2B383DAC004A3AFC /* AUIPlayerSpeedTipView.m */,
+			);
+			path = speed;
+			sourceTree = "<group>";
+		};
+		C155D0A02B383DAC004A3AFC /* bom */ = {
+			isa = PBXGroup;
+			children = (
+				C155D0A12B383DAC004A3AFC /* AlivcPlayerBottomToolPlugin.m */,
+				C155D0A22B383DAC004A3AFC /* AlivcPlayerBottomToolPlugin.h */,
+				C155D0A32B383DAC004A3AFC /* bottom */,
+			);
+			path = bom;
+			sourceTree = "<group>";
+		};
+		C155D0A32B383DAC004A3AFC /* bottom */ = {
+			isa = PBXGroup;
+			children = (
+				C155D0A42B383DAC004A3AFC /* AUIPlayerRecommendWatchPointView.m */,
+				C155D0A52B383DAC004A3AFC /* AUIPlayerBomTool.m */,
+				C155D0A62B383DAC004A3AFC /* AUIPlayerLandScapeSpeedView.h */,
+				C155D0A72B383DAC004A3AFC /* AUIPlayerWatchPointContainer.h */,
+				C155D0A82B383DAC004A3AFC /* AUIPlayerBomProgressView.h */,
+				C155D0A92B383DAC004A3AFC /* AUIPlayerFlowAutoProgress.m */,
+				C155D0AA2B383DAC004A3AFC /* AUIPlayerWatchPointService.h */,
+				C155D0AB2B383DAC004A3AFC /* AUIPlayerBomButtonView.m */,
+				C155D0AC2B383DAC004A3AFC /* AUIPlayerBomPortraitButtons.h */,
+				C155D0AD2B383DAC004A3AFC /* AUIPlayerLandScapeResolutionView.h */,
+				C155D0AE2B383DAC004A3AFC /* AUIPlayerProgressView.m */,
+				C155D0AF2B383DAC004A3AFC /* AUIPlayerWatchPointEntry.m */,
+				C155D0B02B383DAC004A3AFC /* AUIPlayerThumbnailView.h */,
+				C155D0B12B383DAC004A3AFC /* AUIPlayerBomTool.h */,
+				C155D0B22B383DAC004A3AFC /* AUIPlayerRecommendWatchPointView.h */,
+				C155D0B32B383DAC004A3AFC /* AUIPlayerFlowAutoProgress.h */,
+				C155D0B42B383DAC004A3AFC /* AUIPlayerWatchPointContainer.m */,
+				C155D0B52B383DAC004A3AFC /* AUIPlayerBomProgressView.m */,
+				C155D0B62B383DAC004A3AFC /* AUIPlayerLandScapeSpeedView.m */,
+				C155D0B72B383DAC004A3AFC /* AUIPlayerBomButtonView.h */,
+				C155D0B82B383DAC004A3AFC /* AUIPlayerWatchPointService.m */,
+				C155D0B92B383DAC004A3AFC /* AUIPlayerThumbnailView.m */,
+				C155D0BA2B383DAC004A3AFC /* AUIPlayerWatchPointEntry.h */,
+				C155D0BB2B383DAC004A3AFC /* AUIPlayerBomPortraitButtons.m */,
+				C155D0BC2B383DAC004A3AFC /* AUIPlayerLandScapeResolutionView.m */,
+				C155D0BD2B383DAC004A3AFC /* AUIPlayerProgressView.h */,
+			);
+			path = bottom;
+			sourceTree = "<group>";
+		};
+		C155D0BE2B383DAC004A3AFC /* lock */ = {
+			isa = PBXGroup;
+			children = (
+				C155D0BF2B383DAC004A3AFC /* AlivcPlayerLockPlugin.m */,
+				C155D0C02B383DAC004A3AFC /* AlivcPlayerLockPlugin.h */,
+			);
+			path = lock;
 			sourceTree = "<group>";
 		};
 		C159190D2AFDC43E00351431 = {
@@ -624,7 +990,6 @@
 		C15919182AFDC43E00351431 /* Fadvisor */ = {
 			isa = PBXGroup;
 			children = (
-				C155CFFD2B35D125004A3AFC /* Libraries */,
 				C1591A6E2AFDCF4100351431 /* PrefixHeader.pch */,
 				C15919192AFDC43E00351431 /* AppDelegate.h */,
 				C159191A2AFDC43E00351431 /* AppDelegate.m */,
@@ -688,6 +1053,8 @@
 				C15919562AFDCE4900351431 /* MBProgressHUD+Additions.m */,
 				C155CFF92B354075004A3AFC /* UIImageView+FitNet.h */,
 				C155CFFA2B354075004A3AFC /* UIImageView+FitNet.m */,
+				C1FE82992B38948900F607F8 /* UIImage+FitNet.h */,
+				C1FE829A2B38948900F607F8 /* UIImage+FitNet.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -973,6 +1340,7 @@
 		C1591A6F2AFDCF9700351431 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				C155CFFD2B35D125004A3AFC /* Libraries */,
 				C1CEB7E02B245E5700AA8490 /* AliVideoCert.crt */,
 				C1591B472AFE826200351431 /* resource.bundle */,
 				C1591B722AFFCFCC00351431 /* InfoPlist.strings */,
@@ -990,6 +1358,13 @@
 		C1591A8D2AFE2E9700351431 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				C1FE82A02B38B74200F607F8 /* ToastView.h */,
+				C1FE829F2B38B74200F607F8 /* ToastView.m */,
+				C1FE829C2B38B71F00F607F8 /* NoActionView.h */,
+				C1FE829D2B38B71F00F607F8 /* NoActionView.m */,
+				C1FE82942B38835300F607F8 /* Foundation.bundle */,
+				C155CFFF2B35D7E6004A3AFC /* PresentAnimator.h */,
+				C155D0002B35D7E6004A3AFC /* PresentAnimator.m */,
 				C10C4C6F2B33C81A00099CF2 /* CustomImageButton */,
 				C1591AD52AFE422D00351431 /* RefreshFooter */,
 				C1591AD82AFE422E00351431 /* RefreshHeader */,
@@ -1001,6 +1376,10 @@
 				C1591A992AFE2EBD00351431 /* NotificationView */,
 				C1591AA22AFE2EBD00351431 /* FTPopOverMenu */,
 				C1591AD02AFE41FA00351431 /* Controller */,
+				C1FE82912B387D3B00F607F8 /* Theme.h */,
+				C1FE82922B387D3B00F607F8 /* Theme.m */,
+				C1FE82962B38882F00F607F8 /* Localization.h */,
+				C1FE82972B38882F00F607F8 /* Localization.m */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1225,6 +1604,8 @@
 				C1591B622AFFC41400351431 /* BaseResponse.m */,
 				C1591B642AFFC41500351431 /* RequestManager.h */,
 				C1591B602AFFC41400351431 /* RequestManager.m */,
+				C1FE82A22B38BBE500F607F8 /* NetworkReachability.h */,
+				C1FE82A32B38BBE500F607F8 /* NetworkReachability.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1492,7 +1873,9 @@
 			files = (
 				C1CEB7E12B245E5700AA8490 /* AliVideoCert.crt in Resources */,
 				C1051E502B0AF7A800061586 /* resource.bundle in Resources */,
+				C1FE82952B38835300F607F8 /* Foundation.bundle in Resources */,
 				C1591B6B2AFFCF6800351431 /* Localizable.strings in Resources */,
+				C155D0E32B387BF5004A3AFC /* AlivcPlayer.bundle in Resources */,
 				C1591A742AFDD59F00351431 /* LaunchScreen.storyboard in Resources */,
 				C1591A762AFE15F100351431 /* Assets.xcassets in Resources */,
 				C1591B752AFFCFCC00351431 /* InfoPlist.strings in Resources */,
@@ -1672,9 +2055,15 @@
 				C1ABA46F2B0C572E00CA6E7B /* NotificationView.m in Sources */,
 				C15919622AFDCE4900351431 /* UIScrollView+Additions.m in Sources */,
 				C1591A532AFDCF0400351431 /* NSNumber+YYAdd.m in Sources */,
+				C155D0C72B383DAC004A3AFC /* AlivcPlayerGesturePlugin.m in Sources */,
+				C1FE82A42B38BBE500F607F8 /* NetworkReachability.m in Sources */,
 				C1591ABA2AFE32D500351431 /* MainTabBarController.m in Sources */,
 				C1591A3E2AFDCF0400351431 /* YYTextParser.m in Sources */,
+				C1FE82982B38882F00F607F8 /* Localization.m in Sources */,
 				C15919652AFDCE4900351431 /* MBProgressHUD+Additions.m in Sources */,
+				C155D0672B383D80004A3AFC /* AlivcPlayerVideoDBModel.m in Sources */,
+				C155D0192B36EA0F004A3AFC /* AlivcPlayerEventCenter.m in Sources */,
+				C155D0C82B383DAC004A3AFC /* AlivcPlayerPlayControlPlugin.m in Sources */,
 				C1591AFF2AFE781F00351431 /* TabAccountViewController.m in Sources */,
 				C1591A232AFDCF0400351431 /* YYSpriteSheetImage.m in Sources */,
 				C1591A662AFDCF0400351431 /* YYTransaction.m in Sources */,
@@ -1682,6 +2071,7 @@
 				C1591AEF2AFE771100351431 /* _XYColor_PrivateView.m in Sources */,
 				C1591B5B2AFF1DC000351431 /* Utils.m in Sources */,
 				C1591A562AFDCF0400351431 /* NSData+YYAdd.m in Sources */,
+				C155D0D82B383DAC004A3AFC /* AUIPlayerWatchPointEntry.m in Sources */,
 				C1591A4C2AFDCF0400351431 /* UIView+YYAdd.m in Sources */,
 				C1591B782B05FCAE00351431 /* RcmdItemsServcie.m in Sources */,
 				C1B0CEEF2B08DE0100A1173E /* TagModel.m in Sources */,
@@ -1689,9 +2079,11 @@
 				C1591A6B2AFDCF0400351431 /* YYTimer.m in Sources */,
 				C1591A412AFDCF0400351431 /* YYTextAttribute.m in Sources */,
 				C1591A642AFDCF0400351431 /* YYThreadSafeDictionary.m in Sources */,
+				C1FE829B2B38948900F607F8 /* UIImage+FitNet.m in Sources */,
 				C1591A612AFDCF0400351431 /* CALayer+YYAdd.m in Sources */,
 				C1591AEB2AFE771100351431 /* UIView+XYColorOC.m in Sources */,
 				C1591A3C2AFDCF0400351431 /* YYTextUtilities.m in Sources */,
+				C155D0C92B383DAC004A3AFC /* AUIPlayerStatusBar.m in Sources */,
 				C1591A372AFDCF0400351431 /* YYTextSelectionView.m in Sources */,
 				C1591A462AFDCF0400351431 /* UIColor+YYAdd.m in Sources */,
 				C1591A342AFDCF0400351431 /* YYTextInput.m in Sources */,
@@ -1699,42 +2091,61 @@
 				C159196A2AFDCE5600351431 /* NSBundle+Additions.m in Sources */,
 				C1591A452AFDCF0400351431 /* UIBezierPath+YYAdd.m in Sources */,
 				C1CEB7C32B1E1C2900AA8490 /* BaseScrollViewController.m in Sources */,
+				C155D0CF2B383DAC004A3AFC /* AUIPlayerLandscapeController.m in Sources */,
 				C1591A502AFDCF0400351431 /* UIControl+YYAdd.m in Sources */,
+				C155D0D72B383DAC004A3AFC /* AUIPlayerProgressView.m in Sources */,
 				C1BA9C7B2B1B48A100D82BC1 /* VerticalFlowLayout.m in Sources */,
 				C1BA9C742B1B315700D82BC1 /* ArticleDetailsHeaderView.m in Sources */,
+				C1FE82A12B38B74200F607F8 /* ToastView.m in Sources */,
 				C1591B652AFFC41500351431 /* RequestManager.m in Sources */,
 				C15919632AFDCE4900351431 /* UIView+GestureCallback.m in Sources */,
 				C1591A362AFDCF0400351431 /* YYTextLine.m in Sources */,
+				C155D0DC2B383DAC004A3AFC /* AUIPlayerWatchPointService.m in Sources */,
 				C1591A1E2AFDCF0400351431 /* YYCache.m in Sources */,
 				C1591A5B2AFDCF0400351431 /* NSDate+YYAdd.m in Sources */,
 				C1591ADD2AFE422E00351431 /* RefreshHeader.m in Sources */,
+				C155D0CA2B383DAC004A3AFC /* AlivcPlayerTopToolPlugin.m in Sources */,
+				C155D0D22B383DAC004A3AFC /* AlivcPlayerBottomToolPlugin.m in Sources */,
+				C155D0DF2B383DAC004A3AFC /* AUIPlayerLandScapeResolutionView.m in Sources */,
 				C1591B4D2AFF0B3100351431 /* BaseTableViewController.m in Sources */,
+				C155D0752B383D91004A3AFC /* AUIPlayerPlayViewLayerManager.m in Sources */,
 				C1591B5A2AFF1DC000351431 /* LocalDataStorage.m in Sources */,
 				C1591A652AFDCF0400351431 /* YYSentinel.m in Sources */,
 				C12B099B2B10E96F00108664 /* ArticleDetailsModel.m in Sources */,
 				C1591A432AFDCF0400351431 /* YYTextRubyAnnotation.m in Sources */,
 				C1591A382AFDCF0400351431 /* YYTextKeyboardManager.m in Sources */,
 				C1591A242AFDCF0400351431 /* YYImage.m in Sources */,
+				C155D0C52B383DAC004A3AFC /* AUIPlayerSpeedSwipeView.m in Sources */,
 				C159191B2AFDC43E00351431 /* AppDelegate.m in Sources */,
 				C1591A682AFDCF0400351431 /* YYKeychain.m in Sources */,
 				C1591A272AFDCF0400351431 /* _YYWebImageSetter.m in Sources */,
+				C155D0E12B383DAC004A3AFC /* AlivcPlayerBasePlugin.m in Sources */,
 				C159192C2AFDC43F00351431 /* main.m in Sources */,
 				C1591A252AFDCF0400351431 /* YYImageCoder.m in Sources */,
 				C1591A2A2AFDCF0400351431 /* MKAnnotationView+YYWebImage.m in Sources */,
 				C12B09A82B13973600108664 /* MediaModel.m in Sources */,
 				C12B09A12B1389B500108664 /* ItemDetailsService.m in Sources */,
+				C155D0C32B383DAC004A3AFC /* AUIPlayerListenView.m in Sources */,
 				C1591AEE2AFE771100351431 /* UIColor+XYColorOC.m in Sources */,
 				C1591A2F2AFDCF0400351431 /* YYClassInfo.m in Sources */,
 				C1591A292AFDCF0400351431 /* UIImageView+YYWebImage.m in Sources */,
 				C1591A352AFDCF0400351431 /* YYTextLayout.m in Sources */,
+				C155D0C42B383DAC004A3AFC /* AlivcPlayerBackgroudModePlugin.m in Sources */,
 				C1591A202AFDCF0400351431 /* YYMemoryCache.m in Sources */,
+				C155D0C22B383DAC004A3AFC /* AlivcPlayerListenPlugin.m in Sources */,
 				C1591AC72AFE3FB000351431 /* TabHomeViewController.m in Sources */,
+				C155D0E02B383DAC004A3AFC /* AlivcPlayerLockPlugin.m in Sources */,
 				C1591B4F2AFF0BBF00351431 /* ItemFloatCoverSkeletonTableViewCell.m in Sources */,
 				C155CFFB2B354075004A3AFC /* UIImageView+FitNet.m in Sources */,
 				C193BFB42B2B4207003D3644 /* UMengHelper.m in Sources */,
 				C1591A1F2AFDCF0400351431 /* YYKVStorage.m in Sources */,
+				C155D0CD2B383DAC004A3AFC /* AlivcPlayerRotateAnimator.m in Sources */,
 				C1591A332AFDCF0400351431 /* YYTextEffectWindow.m in Sources */,
 				C1B0CEEC2B08A09B00A1173E /* AuthorModel.m in Sources */,
+				C155D0D62B383DAC004A3AFC /* AUIPlayerBomButtonView.m in Sources */,
+				C155D0D02B383DAC004A3AFC /* AUIPlayerSpeedTipView.m in Sources */,
+				C155D03D2B38082D004A3AFC /* AlivcPlayerAsset.m in Sources */,
+				C155D0742B383D91004A3AFC /* AUIPlayerLandscapeVideoContainer.m in Sources */,
 				C1591A4E2AFDCF0400351431 /* UIGestureRecognizer+YYAdd.m in Sources */,
 				C1591A3D2AFDCF0400351431 /* NSParagraphStyle+YYText.m in Sources */,
 				C1591ADC2AFE422E00351431 /* AutoRefreshFooter.m in Sources */,
@@ -1742,18 +2153,24 @@
 				C1591AF32AFE776D00351431 /* TabHomeRcmdViewController.m in Sources */,
 				C1BDC13F2B31A9AF003D67FC /* UserLoginViewController.m in Sources */,
 				C1591AFD2AFE781F00351431 /* TabDiscoveryViewController.m in Sources */,
+				C155D0C62B383DAC004A3AFC /* AUIPlayerZFVolumeBrightnessView.m in Sources */,
 				C1591A282AFDCF0400351431 /* UIButton+YYWebImage.m in Sources */,
 				C1591A222AFDCF0400351431 /* YYWebImageManager.m in Sources */,
+				C155D0D92B383DAC004A3AFC /* AUIPlayerWatchPointContainer.m in Sources */,
 				C1BA9C772B1B489200D82BC1 /* BaseCollectionViewController.m in Sources */,
 				C1591A492AFDCF0400351431 /* UITableView+YYAdd.m in Sources */,
 				C1591A4B2AFDCF0400351431 /* UIScreen+YYAdd.m in Sources */,
+				C155D0CE2B383DAC004A3AFC /* AlivcPlayerLandscapePlugin.m in Sources */,
 				C1591A5D2AFDCF0400351431 /* NSNotificationCenter+YYAdd.m in Sources */,
+				C155D0DD2B383DAC004A3AFC /* AUIPlayerThumbnailView.m in Sources */,
 				C1591A582AFDCF0400351431 /* NSKeyedUnarchiver+YYAdd.m in Sources */,
 				C15919642AFDCE4900351431 /* UIColor+Additions.m in Sources */,
 				C1591A2E2AFDCF0400351431 /* NSObject+YYModel.m in Sources */,
 				C12B099E2B10FEC800108664 /* ItemDetailsResultModel.m in Sources */,
+				C155D0D42B383DAC004A3AFC /* AUIPlayerBomTool.m in Sources */,
 				C1591A542AFDCF0400351431 /* NSBundle+YYAdd.m in Sources */,
 				C1591A422AFDCF0400351431 /* YYTextArchiver.m in Sources */,
+				C155D0CC2B383DAC004A3AFC /* AUIPlayerTopView.m in Sources */,
 				C1B0CEF32B090A6600A1173E /* AccountManager.m in Sources */,
 				C1BDC13B2B313B9C003D67FC /* LoginService.m in Sources */,
 				C1591A4D2AFDCF0400351431 /* UIBarButtonItem+YYAdd.m in Sources */,
@@ -1762,15 +2179,19 @@
 				C1591A3B2AFDCF0400351431 /* YYTextRunDelegate.m in Sources */,
 				C1591A482AFDCF0400351431 /* UIApplication+YYAdd.m in Sources */,
 				C1591A512AFDCF0400351431 /* UIFont+YYAdd.m in Sources */,
+				C155D0762B383D91004A3AFC /* AUIPlayerDetailVideoContainer.m in Sources */,
 				C1591A2D2AFDCF0400351431 /* YYWebImageOperation.m in Sources */,
 				C1591A5E2AFDCF0400351431 /* NSDictionary+YYAdd.m in Sources */,
 				C1591A4A2AFDCF0400351431 /* UIScrollView+YYAdd.m in Sources */,
 				C1591A3A2AFDCF0400351431 /* YYLabel.m in Sources */,
+				C1FE829E2B38B71F00F607F8 /* NoActionView.m in Sources */,
 				C1BDC1422B31AADB003D67FC /* TabAccountHeaderNotLoginView.m in Sources */,
 				C1591A402AFDCF0400351431 /* UIPasteboard+YYText.m in Sources */,
 				C1591A552AFDCF0400351431 /* NSObject+YYAdd.m in Sources */,
+				C155D0DB2B383DAC004A3AFC /* AUIPlayerLandScapeSpeedView.m in Sources */,
 				C1591AED2AFE771100351431 /* CALayer+XYColorOC.m in Sources */,
 				C1591A672AFDCF0400351431 /* YYDispatchQueuePool.m in Sources */,
+				C155D0012B35D7E6004A3AFC /* PresentAnimator.m in Sources */,
 				C1591ACF2AFE419300351431 /* BaseViewController.m in Sources */,
 				C1591A622AFDCF0400351431 /* YYWeakProxy.m in Sources */,
 				C12B09932B107C7400108664 /* ArticleDetailsViewController.m in Sources */,
@@ -1780,6 +2201,8 @@
 				C1591A442AFDCF0400351431 /* UITextField+YYAdd.m in Sources */,
 				C1591A6C2AFDCF0400351431 /* YYThreadSafeArray.m in Sources */,
 				C1BA9C7E2B1B8EEC00D82BC1 /* RichTextView.m in Sources */,
+				C155D0DA2B383DAC004A3AFC /* AUIPlayerBomProgressView.m in Sources */,
+				C1FE82932B387D3B00F607F8 /* Theme.m in Sources */,
 				C1FB990A2B1839D3002DA461 /* ContentExcepitonView.m in Sources */,
 				C1591A322AFDCF0400351431 /* YYTextContainerView.m in Sources */,
 				C148E3CA2B0EFC7A00DAA612 /* ItemFloatTableViewCell.m in Sources */,
@@ -1787,22 +2210,31 @@
 				C1591A392AFDCF0400351431 /* YYTextDebugOption.m in Sources */,
 				C1591AEC2AFE771100351431 /* UIView+PrivateView.m in Sources */,
 				C12B09A52B138EA600108664 /* BaseItemDetailsModel.m in Sources */,
+				C155D0CB2B383DAC004A3AFC /* AUIPlayerTopActionView.m in Sources */,
+				C155D0D12B383DAC004A3AFC /* AlivcPlayerPlayPluginManager.m in Sources */,
+				C155D0D32B383DAC004A3AFC /* AUIPlayerRecommendWatchPointView.m in Sources */,
 				C1591A692AFDCF0400351431 /* YYGestureRecognizer.m in Sources */,
 				C15919662AFDCE4900351431 /* UIView+Additions.m in Sources */,
 				C1BDC1362B3127BB003D67FC /* UserProfileModel.m in Sources */,
 				C1CEB7E52B24629400AA8490 /* VideoDetailsViewController.m in Sources */,
+				C155D0682B383D80004A3AFC /* AlivcPlayerVideoDBManager.m in Sources */,
+				C155D0DE2B383DAC004A3AFC /* AUIPlayerBomPortraitButtons.m in Sources */,
+				C155D01C2B3723A3004A3AFC /* AlivcPlayerVidPlayAuthService.m in Sources */,
 				C1CEB7DF2B23757C00AA8490 /* SkeletonPageView.m in Sources */,
 				C1591A5A2AFDCF0400351431 /* NSObject+YYAddForARC.m in Sources */,
 				C1591A592AFDCF0400351431 /* NSTimer+YYAdd.m in Sources */,
+				C155D0042B35E3F8004A3AFC /* AlivcPlayerManager.m in Sources */,
 				C1591A2C2AFDCF0400351431 /* YYAnimatedImageView.m in Sources */,
 				C1591B672AFFC41500351431 /* BaseRequest.m in Sources */,
 				C1591AFE2AFE781F00351431 /* TabColumnViewController.m in Sources */,
+				C155D0D52B383DAC004A3AFC /* AUIPlayerFlowAutoProgress.m in Sources */,
 				C1591A262AFDCF0400351431 /* YYFrameImage.m in Sources */,
 				C1591B662AFFC41500351431 /* BaseResponse.m in Sources */,
 				C15919612AFDCE4900351431 /* UIButton+ViolenceBtn.m in Sources */,
 				C1591A1D2AFDCF0400351431 /* YYDiskCache.m in Sources */,
 				C1591A522AFDCF0400351431 /* NSArray+YYAdd.m in Sources */,
 				C1591A2B2AFDCF0400351431 /* CALayer+YYWebImage.m in Sources */,
+				C155D0732B383D91004A3AFC /* AUIPlayerFeedListVideoContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

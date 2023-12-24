@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UIColor *)colorFromHexString:(NSString *)hexString;
 
++ (UIColor *)colorFromHexString:(NSString *)hexString alpha:(CGFloat)alpha;
+
 + (UIColor *)getColorWithLightColor:(UIColor *)lightColor
                           darkColor:(UIColor *_Nullable)darkColor;
 
