@@ -1,1 +1,13 @@
 
+/*
+ Localizable.strings
+  Fadvisor
+
+  Created by 韩建伟 on 2021/3/20.
+  
+*/
+"TabHomeName" = "Home";
+"TabColumnName" = "Column";
+"TabDiscoveryName" = "Discovery";
+"TabAccountName" = "Account";
+"Share To" = "Share To";

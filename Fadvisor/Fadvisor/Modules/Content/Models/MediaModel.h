@@ -11,6 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MediaModel : NSObject
 
+/** UUID */
+@property (nonatomic, strong) NSUUID *uuid;
+
 /** id，与阿里云一致*/
 @property (nonatomic, copy) NSString *videoId;
 

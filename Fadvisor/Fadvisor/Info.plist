@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AlivcLicenseFile</key>
-	<string>AliVideoCert.crt</string>
+	<string>AlivcLicense.crt</string>
 	<key>AlivcLicenseKey</key>
 	<string>GPQDby7T9mVRDcRgS6af05d15f4694f4e9731178acbbabfd8</string>
 	<key>CFBundleURLTypes</key>
@@ -93,5 +93,9 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 </dict>
 </plist>

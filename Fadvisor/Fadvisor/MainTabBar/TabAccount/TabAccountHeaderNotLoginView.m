@@ -14,7 +14,9 @@
     if (self) {
         self.orientation = MyOrientation_Vert;
         self.myHorzMargin = 0;
-        [self setTouchDownTarget:self action:@selector(handleMainLoginClick:)];
+        self.backgroundColor = [UIColor blueColor];
+        self.mySize = CGSizeMake(MyLayoutSize.wrap, MyLayoutSize.wrap);
+        [self setTarget:self action:@selector(handleMainLoginClick:)];
         
         UILabel *loginTextLable = [[UILabel alloc] init];
         loginTextLable.text = @"点我登录";

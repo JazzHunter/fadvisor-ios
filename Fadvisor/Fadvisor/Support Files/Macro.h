@@ -44,7 +44,7 @@
 /// iPhoneX  iPhoneXS  iPhoneXS Max  iPhoneXR 机型判断
 #define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? ((NSInteger)(([[UIScreen mainScreen] currentMode].size.height/[[UIScreen mainScreen] currentMode].size.width)*100) == 216) : NO)
 
-#define mainNavigationController          [UIApplication sharedApplication].keyWindow.rootViewController
+#define rootNavigationController          [UIApplication sharedApplication].keyWindow.rootViewController
 
 //是否是空对象
 #define IsEmpty(_object) (_object == nil \
@@ -55,9 +55,6 @@
 #define Weak(type)       __weak typeof(type) weak ## type = type
 #define Strong(type)     __strong typeof(&*self) strongSelf = type
 
-#define WeakSelf                          __weak __typeof(&*self) wSelf = self;
-#define StrongSelf                        __strong __typeof(&*self) sSelf = wSelf;
-
 #define ItemMarginVertical                16 // cell 上下留白
 #define ItemMarginHorizon                 18 // cell 左右留白
 #define SectionMarginVertical             12 //Section之间的纵向间隔
@@ -66,5 +63,7 @@
 #define ItemIntroductionFontSize          14
 #define ItemMetaFontSize                  12
 #define NightTheme                        @"NightTheme"
+
+#define FoundationString(key) GetString(key, @"Foundation")
 
 #endif /* Macro_h */

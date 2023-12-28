@@ -12,6 +12,7 @@
 #import "RichTextView.h"
 #import "SharePanel.h"
 #import "SkeletonPageView.h"
+#import <MJExtension.h>
 
 @interface ArticleDetailsViewController ()<UIScrollViewDelegate>
 

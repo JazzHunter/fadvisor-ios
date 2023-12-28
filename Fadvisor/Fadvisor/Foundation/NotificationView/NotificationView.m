@@ -28,7 +28,7 @@
 }
 
 - (NotificationView *)initWithMessage:(NSString *)message type:(NotificationType)type {
-    self = [super initWithFrame:CGRectMake(0, kStatusBarHeight, kScreenWidth, 2 * MarginVertical + MessageTextSize)];
+    self = [super initWithFrame:CGRectMake(0, 0, 0, 0)];
     if (self) {
         self.myWidth = MyLayoutSize.wrap;
         self.myHeight = MyLayoutSize.wrap;

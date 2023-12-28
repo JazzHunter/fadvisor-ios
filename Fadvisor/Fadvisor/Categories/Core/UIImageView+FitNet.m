@@ -12,6 +12,7 @@
 #import "_YYWebImageSetter.h"
 #import "YYKitMacro.h"
 #import <objc/runtime.h>
+#import "CacheKey.h"
 
 static int _YYWebImageSetterKey;
 

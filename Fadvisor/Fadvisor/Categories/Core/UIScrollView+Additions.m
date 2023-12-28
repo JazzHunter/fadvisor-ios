@@ -12,14 +12,14 @@
 
 - (void)setSafeBottomInset {
     UIEdgeInsets contentInset = self.contentInset;
-    contentInset.bottom += [UIApplication sharedApplication].keyWindow.rootViewController.view.safeAreaInsets.bottom;
+    contentInset.bottom += rootNavigationController.view.safeAreaInsets.bottom;
     self.contentInset = contentInset;
 }
 
 - (void)setSafeBottomInsetWithAdditonalSpace:(CGFloat)space{
     UIEdgeInsets contentInset = self.contentInset;
     contentInset.bottom = space;
-    contentInset.bottom += [UIApplication sharedApplication].keyWindow.rootViewController.view.safeAreaInsets.bottom;
+    contentInset.bottom += rootNavigationController.view.safeAreaInsets.bottom;
     self.contentInset = contentInset;
 }
 

@@ -21,7 +21,7 @@
     self = [super init];
     if (self) {
         //TabBar的配置
-        self.tabBarItem.title = NSLocalizedString(@"TabAccountName", nil);;
+        self.tabBarItem.title = FoundationString(@"TabAccountName");
         self.tabBarItem.image = [[UIImage imageNamed:@"tab_account_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         self.tabBarItem.selectedImage = [[UIImage alloc] init];
         [self.navigationController setNavigationBarHidden:YES animated:NO];
@@ -214,8 +214,8 @@
 
 #pragma mark - TabAccountHeaderNotLoginViewDelegate
 - (void)mainLoginClick:(TabAccountHeaderNotLoginView *)view {
-    UserLoginViewController *vc = [UserLoginViewController new];
-//    self 
+    UserLoginViewController *userLoginVC = [UserLoginViewController new];
+    [self presentViewController:userLoginVC animated:YES completion:nil];
 }
 
 @end

@@ -9,46 +9,48 @@
 #import "SkeletonPageView.h"
 #import "TABAnimated.h"
 #import "MyLayout.h"
-@interface SkeletonPageView()
+@interface SkeletonPageView ()
 
 @property (nonatomic, strong) MyBaseLayout *rootLayout;
 
 @end
 
 @implementation SkeletonPageView
-- (instancetype)initWithFrame:(CGRect)frame isNavbarPadding:(BOOL)isNavbarPadding{
+- (instancetype)initWithFrame:(CGRect)frame isNavbarPadding:(BOOL)isNavbarPadding {
     self = [super initWithFrame:frame];
     if (self) {
         _rootLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
         _rootLayout.myMargin = 0;
         _rootLayout.padding = UIEdgeInsetsMake(ItemMarginVertical + (isNavbarPadding ? kDefaultNavBarHeight : 0), ItemMarginHorizon, ItemMarginVertical, ItemMarginHorizon);
         [self addSubview:_rootLayout];
-        self.tabAnimated = TABViewAnimated.new;
-        self.tabAnimated.superAnimationType = TABViewSuperAnimationTypeShimmer;
         self.backgroundColor = [UIColor backgroundColorGray];
     }
     return self;
 }
 
+- (void)initUI {
+}
+
 - (void)show:(SkeletonPageViewType)skeletonPageType {
+    [self.rootLayout removeAllSubviews];
+
     switch (skeletonPageType) {
         case SkeletonPageViewTypeNormal: {
-            [self createNormalSkeletonUI];
+            [self configNormalSkeletonUI];
             break;
         };
         case SkeletonPageViewTypeCell: {
-            [self createNormalSkeletonUI];
+            [self configNormalSkeletonUI];
             break;
         };
         case SkeletonPageViewTypeContentDetail: {
-            [self createNormalSkeletonUI];
+            [self configNormalSkeletonUI];
             break;
         };
     }
-    [self.rootLayout layoutSubviews];
 }
 
-- (void)createNormalSkeletonUI {
+- (void)configNormalSkeletonUI {
     self.rootLayout.gravity = MyGravity_Horz_Center;
     UILabel *label1 = [UILabel new];
     label1.numberOfLines = 6;
@@ -64,10 +66,16 @@
     label2.heightSize.equalTo(self.heightSize).multiply(0.3).add(-ItemMarginVertical);
     [self.rootLayout addSubview:label2];
 
+    [self.rootLayout layoutIfNeeded];
+    
+    self.tabAnimated = TABViewAnimated.new;
+    self.tabAnimated.superAnimationType = TABViewSuperAnimationTypeShimmer;
+    
     self.tabAnimated.adjustBlock = ^(TABComponentManager *_Nonnull manager) {
         manager.animation(0).dropStayTime(0.6).height(16);
         manager.animation(1).height(16);
     };
+    [self tab_startAnimation];
 }
 
 @end
@@ -99,12 +107,11 @@ static void *SkeletonPageViewKey = &SkeletonPageViewKey;
     [self showSkeletonPage:skeletonPageType isNavbarPadding:NO];
 }
 
-- (void)showSkeletonPage:(SkeletonPageViewType)skeletonPageType isNavbarPadding:(BOOL)isNavbarPadding{
+- (void)showSkeletonPage:(SkeletonPageViewType)skeletonPageType isNavbarPadding:(BOOL)isNavbarPadding {
     if (!self.skeletonPageView) {
         self.skeletonPageView = [[SkeletonPageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) isNavbarPadding:isNavbarPadding];
     }
     [self.skeletonPageView show:skeletonPageType];
-    [self.skeletonPageView tab_startAnimation];
     [self addSubview:self.skeletonPageView];
 }
 

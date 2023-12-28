@@ -7,6 +7,7 @@
 
 #import "RcmdItemsServcie.h"
 #import "AccountManager.h"
+#import <MJExtension.h>
 
 @interface RcmdItemsServcie ()
 

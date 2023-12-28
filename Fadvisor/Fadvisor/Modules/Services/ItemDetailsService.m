@@ -7,6 +7,7 @@
 
 #import "ItemDetailsService.h"
 #import "AccountManager.h"
+#import <MJExtension.h>
 
 @implementation ItemDetailsService
 

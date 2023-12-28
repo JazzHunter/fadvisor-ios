@@ -11,14 +11,12 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
+#import "Localization.h"
 #import "Macro.h"
 #import "Constants.h"
-#import "CacheKey.h"
 #import "YYKit.h"
 
 #import "Categories.h"
 #import "XYColorOC.h"
-
-#import <MJExtension.h>
 
 #endif /* PrefixHeader_pch */

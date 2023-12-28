@@ -128,6 +128,12 @@ NS_ASSUME_NONNULL_BEGIN
 /** 下载次数 */
 @property (assign, nonatomic) NSInteger downloadCount;
 
+/** 同后台的 VideoId */
+@property (nonatomic, copy) NSString *mediaId;
+
+/** 媒体文件的 uuid */
+@property (nonatomic, strong) NSUUID *uuid;
+
 @end
 
 NS_ASSUME_NONNULL_END

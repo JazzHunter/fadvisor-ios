@@ -27,7 +27,7 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
     self = [super init];
     if (self) {
         //TabBar的配置
-        self.tabBarItem.title = NSLocalizedString(@"TabHomeName", nil);
+        self.tabBarItem.title = FoundationString(@"TabHomeName");
         self.tabBarItem.image = [[UIImage imageNamed:@"tab_home_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         self.tabBarItem.selectedImage = [[UIImage alloc] init];
         [self.navigationController setNavigationBarHidden:YES animated:NO];

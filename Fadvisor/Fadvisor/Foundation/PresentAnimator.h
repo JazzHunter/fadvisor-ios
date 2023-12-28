@@ -26,6 +26,6 @@
 
 @end
 
-@interface LMJPresentationController : UIPresentationController
+@interface PresentationController : UIPresentationController
 @property (nonatomic, assign) CGRect presentViewFrame;
 @end

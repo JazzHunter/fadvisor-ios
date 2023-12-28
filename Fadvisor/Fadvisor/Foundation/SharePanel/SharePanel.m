@@ -46,7 +46,7 @@
 
 - (void)setupUI {
     UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.text = NSLocalizedString(@"Share To", nil);
+    titleLabel.text = FoundationString(@"Share To");
     titleLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightBold];
     [titleLabel sizeToFit];
     titleLabel.myTop = 12;

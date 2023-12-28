@@ -12,6 +12,7 @@
 #import "NotificationView.h"
 #import "ItemFloatTableViewCell.h"
 #import "ArticleDetailsViewController.h"
+#import "VideoDetailsViewController.h"
 #import "ContentExcepitonView.h"
 #import "SkeletonPageView.h"
 
@@ -31,10 +32,9 @@
     [super viewDidLoad];
 
     [self.tableView registerClass:[ItemFloatTableViewCell class] forCellReuseIdentifier:NSStringFromClass([ItemFloatTableViewCell class])];
-    
+
     // init data
     self.inited = NO;
-    
 
     //添加 Header & Footer
     Weak(self);
@@ -45,9 +45,10 @@
         if (self.rcmdItemsService.noMore) {
             [weakself.tableView.mj_header endRefreshing];
             [NotificationView showNotificaiton:@"没有新数据了" type:NotificationInfo];
+            return;
         }
         if (!weakself.inited) {
-            [weakself.view showSkeletonPage:SkeletonPageViewTypeCell isNavbarPadding:NO ];
+            [weakself.view showSkeletonPage:SkeletonPageViewTypeCell isNavbarPadding:NO];
         }
         [self.rcmdItemsService getHomeRcmdItems:NO completion:^(NSString *errorMsg, BOOL isHaveNewData) {
             [weakself.view hideSkeletonPage];
@@ -66,17 +67,17 @@
                 }
                 return;
             }
-            
+
             if (!weakself.inited) {
                 weakself.inited = YES;
             } else {
                 [NotificationView showNotificaiton:isHaveNewData ? @"已为您加载了新数据" : @"没有新数据了"];
             }
-            
+
             if (isHaveNewData) {
                 [weakself.tableView reloadData];
             }
-            
+
             if (weakself.rcmdItemsService.total == 0) {
                 [weakself.tableView showEmptyList];
                 return;
@@ -107,14 +108,14 @@
                 [weakself.tableView.mj_footer setState:MJRefreshStateIdle];
                 return;
             }
-            
+
             if (isHaveNewData) {
                 [weakself.tableView reloadData];
             }
             [weakself.tableView.mj_footer setState:weakself.rcmdItemsService.noMore ? MJRefreshStateNoMoreData : MJRefreshStateIdle];
         }];
     }];
-    
+
     self.tableView.mj_footer.hidden = YES;
     [self.tableView.mj_header beginRefreshing];
 }
@@ -123,8 +124,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    ArticleDetailsViewController *vc = [[ArticleDetailsViewController alloc] initWithItem:self.rcmdItemsService.rcmdItems[indexPath.row]];
+//    ArticleDetailsViewController *vc = [[ArticleDetailsViewController alloc] initWithItem:self.rcmdItemsService.rcmdItems[indexPath.row]];
 
+    VideoDetailsViewController *vc = [[VideoDetailsViewController alloc] initWithItem:self.rcmdItemsService.rcmdItems[indexPath.row]];
+    
     vc.hidesBottomBarWhenPushed = YES;
 
     [self.navigationController pushViewController:vc animated:YES];

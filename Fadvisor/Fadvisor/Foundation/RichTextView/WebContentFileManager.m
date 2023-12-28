@@ -6,6 +6,7 @@
 //
 
 #import "WebContentFileManager.h"
+#import "CacheKey.h"
 
 @implementation WebContentFileManager
 

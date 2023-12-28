@@ -17,7 +17,7 @@
     self = [super init];
     if (self) {
         //TabBar的配置
-        self.tabBarItem.title = NSLocalizedString(@"TabDiscoveryName", nil);;
+        self.tabBarItem.title = FoundationString(@"TabDiscoveryName");
         self.tabBarItem.image = [[UIImage imageNamed:@"tab_discovery_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         self.tabBarItem.selectedImage = [[UIImage alloc] init];
         [self.navigationController setNavigationBarHidden:YES animated:NO];

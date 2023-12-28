@@ -40,7 +40,7 @@ void *id_key = &id_key;
 
 - (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source {
     //    A presentViewController B 后，a.presentedViewController就是b，b.presentingViewController就是a，
-    LMJPresentationController *presVc = [[LMJPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
+    PresentationController *presVc = [[PresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
     if (!CGRectIsEmpty(_presentViewFrame)) {
         presVc.presentViewFrame = _presentViewFrame;
     }else {
@@ -133,7 +133,7 @@ void *id_key = &id_key;
 @end
 
 
-@implementation LMJPresentationController
+@implementation PresentationController
 
 - (void)containerViewWillLayoutSubviews {
     [super containerViewWillLayoutSubviews];
@@ -141,10 +141,3 @@ void *id_key = &id_key;
 }
 
 @end
-
-
-
-
-
-
-

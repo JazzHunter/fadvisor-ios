@@ -132,7 +132,7 @@
     self.transitioningDelegate = self.customAnimator;
     self.modalPresentationStyle = UIModalPresentationOverFullScreen;
     
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:self animated:YES completion:nil];
+    [rootNavigationController presentViewController:self animated:YES completion:nil];
 }
 
 

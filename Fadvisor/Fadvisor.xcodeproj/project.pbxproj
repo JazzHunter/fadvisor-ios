@@ -12,6 +12,7 @@
 		B7A678E3622A45EE58B91A73 /* Pods_FadvisorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4CF22C0F536A158DB5DBDBF /* Pods_FadvisorTests.framework */; };
 		C1051E502B0AF7A800061586 /* resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C1591B472AFE826200351431 /* resource.bundle */; };
 		C10C4C722B33C83E00099CF2 /* CustomImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C10C4C712B33C83E00099CF2 /* CustomImageButton.m */; };
+		C10EF53F2B3D1A8900B019EB /* UIViewController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C10EF53E2B3D1A8900B019EB /* UIViewController+Additions.m */; };
 		C12B09932B107C7400108664 /* ArticleDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C12B09922B107C7400108664 /* ArticleDetailsViewController.m */; };
 		C12B09982B10853100108664 /* WebContentFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C12B09972B10853100108664 /* WebContentFileManager.m */; };
 		C12B099B2B10E96F00108664 /* ArticleDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C12B099A2B10E96F00108664 /* ArticleDetailsModel.m */; };
@@ -206,7 +207,7 @@
 		C1CEB7CB2B20B1D400AA8490 /* LEECoolButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7CA2B20B1D400AA8490 /* LEECoolButton.m */; };
 		C1CEB7DB2B22B77400AA8490 /* SharePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7DA2B22B77400AA8490 /* SharePanel.m */; };
 		C1CEB7DF2B23757C00AA8490 /* SkeletonPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7DD2B23757C00AA8490 /* SkeletonPageView.m */; };
-		C1CEB7E12B245E5700AA8490 /* AliVideoCert.crt in Resources */ = {isa = PBXBuildFile; fileRef = C1CEB7E02B245E5700AA8490 /* AliVideoCert.crt */; };
+		C1CEB7E12B245E5700AA8490 /* AlivcLicense.crt in Resources */ = {isa = PBXBuildFile; fileRef = C1CEB7E02B245E5700AA8490 /* AlivcLicense.crt */; };
 		C1CEB7E52B24629400AA8490 /* VideoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7E42B24629400AA8490 /* VideoDetailsViewController.m */; };
 		C1FB990A2B1839D3002DA461 /* ContentExcepitonView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */; };
 		C1FE82932B387D3B00F607F8 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE82922B387D3B00F607F8 /* Theme.m */; };
@@ -216,6 +217,7 @@
 		C1FE829E2B38B71F00F607F8 /* NoActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE829D2B38B71F00F607F8 /* NoActionView.m */; };
 		C1FE82A12B38B74200F607F8 /* ToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE829F2B38B74200F607F8 /* ToastView.m */; };
 		C1FE82A42B38BBE500F607F8 /* NetworkReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE82A32B38BBE500F607F8 /* NetworkReachability.m */; };
+		C1FE82A72B3D024F00F607F8 /* AUIPlayerBackScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE82A62B3D024F00F607F8 /* AUIPlayerBackScrollView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -243,6 +245,8 @@
 		A1E3A259A10E4AEC4F951AB5 /* Pods_Fadvisor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fadvisor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C10C4C702B33C83E00099CF2 /* CustomImageButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomImageButton.h; sourceTree = "<group>"; };
 		C10C4C712B33C83E00099CF2 /* CustomImageButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomImageButton.m; sourceTree = "<group>"; };
+		C10EF53D2B3D1A8900B019EB /* UIViewController+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Additions.h"; sourceTree = "<group>"; };
+		C10EF53E2B3D1A8900B019EB /* UIViewController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Additions.m"; sourceTree = "<group>"; };
 		C12B09912B107C7400108664 /* ArticleDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArticleDetailsViewController.h; sourceTree = "<group>"; };
 		C12B09922B107C7400108664 /* ArticleDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArticleDetailsViewController.m; sourceTree = "<group>"; };
 		C12B09962B10853100108664 /* WebContentFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebContentFileManager.h; sourceTree = "<group>"; };
@@ -650,7 +654,7 @@
 		C1CEB7DA2B22B77400AA8490 /* SharePanel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharePanel.m; sourceTree = "<group>"; };
 		C1CEB7DD2B23757C00AA8490 /* SkeletonPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkeletonPageView.m; sourceTree = "<group>"; };
 		C1CEB7DE2B23757C00AA8490 /* SkeletonPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkeletonPageView.h; sourceTree = "<group>"; };
-		C1CEB7E02B245E5700AA8490 /* AliVideoCert.crt */ = {isa = PBXFileReference; lastKnownFileType = text; path = AliVideoCert.crt; sourceTree = "<group>"; };
+		C1CEB7E02B245E5700AA8490 /* AlivcLicense.crt */ = {isa = PBXFileReference; lastKnownFileType = text; path = AlivcLicense.crt; sourceTree = "<group>"; };
 		C1CEB7E32B24629400AA8490 /* VideoDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoDetailsViewController.h; sourceTree = "<group>"; };
 		C1CEB7E42B24629400AA8490 /* VideoDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoDetailsViewController.m; sourceTree = "<group>"; };
 		C1FB99082B1839D3002DA461 /* ContentExcepitonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentExcepitonView.h; sourceTree = "<group>"; };
@@ -669,6 +673,8 @@
 		C1FE82A02B38B74200F607F8 /* ToastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToastView.h; sourceTree = "<group>"; };
 		C1FE82A22B38BBE500F607F8 /* NetworkReachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkReachability.h; sourceTree = "<group>"; };
 		C1FE82A32B38BBE500F607F8 /* NetworkReachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkReachability.m; sourceTree = "<group>"; };
+		C1FE82A52B3D024E00F607F8 /* AUIPlayerBackScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUIPlayerBackScrollView.h; sourceTree = "<group>"; };
+		C1FE82A62B3D024F00F607F8 /* AUIPlayerBackScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUIPlayerBackScrollView.m; sourceTree = "<group>"; };
 		C8126B4E9064B917D59445AB /* Pods-FadvisorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FadvisorTests.debug.xcconfig"; path = "Target Support Files/Pods-FadvisorTests/Pods-FadvisorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E169AA165A089CABEB289175 /* Pods-FadvisorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FadvisorTests.release.xcconfig"; path = "Target Support Files/Pods-FadvisorTests/Pods-FadvisorTests.release.xcconfig"; sourceTree = "<group>"; };
 		E4CF22C0F536A158DB5DBDBF /* Pods_FadvisorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FadvisorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1035,6 +1041,8 @@
 		C15919512AFDCE4900351431 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				C10EF53D2B3D1A8900B019EB /* UIViewController+Additions.h */,
+				C10EF53E2B3D1A8900B019EB /* UIViewController+Additions.m */,
 				C159195D2AFDCE4900351431 /* UIButton+Additions.h */,
 				C15919582AFDCE4900351431 /* UIButton+Additions.m */,
 				C159195A2AFDCE4900351431 /* UIButton+ViolenceBtn.h */,
@@ -1341,7 +1349,7 @@
 			isa = PBXGroup;
 			children = (
 				C155CFFD2B35D125004A3AFC /* Libraries */,
-				C1CEB7E02B245E5700AA8490 /* AliVideoCert.crt */,
+				C1CEB7E02B245E5700AA8490 /* AlivcLicense.crt */,
 				C1591B472AFE826200351431 /* resource.bundle */,
 				C1591B722AFFCFCC00351431 /* InfoPlist.strings */,
 				C1591B682AFFCF6700351431 /* Localizable.strings */,
@@ -1741,6 +1749,8 @@
 		C1CEB7E22B24625C00AA8490 /* VideoDetails */ = {
 			isa = PBXGroup;
 			children = (
+				C1FE82A52B3D024E00F607F8 /* AUIPlayerBackScrollView.h */,
+				C1FE82A62B3D024F00F607F8 /* AUIPlayerBackScrollView.m */,
 				C1CEB7E32B24629400AA8490 /* VideoDetailsViewController.h */,
 				C1CEB7E42B24629400AA8490 /* VideoDetailsViewController.m */,
 			);
@@ -1871,7 +1881,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1CEB7E12B245E5700AA8490 /* AliVideoCert.crt in Resources */,
+				C1CEB7E12B245E5700AA8490 /* AlivcLicense.crt in Resources */,
 				C1051E502B0AF7A800061586 /* resource.bundle in Resources */,
 				C1FE82952B38835300F607F8 /* Foundation.bundle in Resources */,
 				C1591B6B2AFFCF6800351431 /* Localizable.strings in Resources */,
@@ -2083,6 +2093,7 @@
 				C1591A612AFDCF0400351431 /* CALayer+YYAdd.m in Sources */,
 				C1591AEB2AFE771100351431 /* UIView+XYColorOC.m in Sources */,
 				C1591A3C2AFDCF0400351431 /* YYTextUtilities.m in Sources */,
+				C10EF53F2B3D1A8900B019EB /* UIViewController+Additions.m in Sources */,
 				C155D0C92B383DAC004A3AFC /* AUIPlayerStatusBar.m in Sources */,
 				C1591A372AFDCF0400351431 /* YYTextSelectionView.m in Sources */,
 				C1591A462AFDCF0400351431 /* UIColor+YYAdd.m in Sources */,
@@ -2175,6 +2186,7 @@
 				C1BDC13B2B313B9C003D67FC /* LoginService.m in Sources */,
 				C1591A4D2AFDCF0400351431 /* UIBarButtonItem+YYAdd.m in Sources */,
 				C1591A6A2AFDCF0400351431 /* YYFileHash.m in Sources */,
+				C1FE82A72B3D024F00F607F8 /* AUIPlayerBackScrollView.m in Sources */,
 				C12B09982B10853100108664 /* WebContentFileManager.m in Sources */,
 				C1591A3B2AFDCF0400351431 /* YYTextRunDelegate.m in Sources */,
 				C1591A482AFDCF0400351431 /* UIApplication+YYAdd.m in Sources */,

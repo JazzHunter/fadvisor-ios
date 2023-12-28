@@ -5,11 +5,16 @@
 //  Created by 韩建伟 on 2023/12/9.
 //
 
-#import "BaseScrollViewController.h"
+#import "BaseViewController.h"
+#import "ItemModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface VideoDetailsViewController : BaseScrollViewController<NavigationBarDataSource, NavigationBarDelegate>
+@interface VideoDetailsViewController : BaseViewController<NavigationBarDataSource, NavigationBarDelegate>
+
+- (instancetype)initWithItem:(ItemModel *)model;
+
+- (instancetype)initWithId:(NSString *)videoId;
 
 @end
 

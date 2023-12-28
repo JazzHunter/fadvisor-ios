@@ -18,5 +18,5 @@
 #import "UIImageView+FitNet.h"
 #import "UIScrollView+Additions.h"
 #import "MBProgressHUD+Additions.h"
-
+#import "UIViewController+Additions.h"
 #endif /* Categories_h */
