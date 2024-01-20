@@ -61,10 +61,11 @@ end
 # 阿里播放器
 def alivc_player
   
-  pod 'AliPlayerSDK_iOS'
+  pod 'AliPlayerSDK_iOS', '6.8.0'
 #  pod 'AliPlayerSDK_iOS_ARTC' # 支持artc协议
   pod 'RtsSDK' # 播放超低延时直播（RTS）流
-  
+  pod 'MRDLNA' # 投屏
+  pod 'JSONModel'
 end
 
 # 基础

@@ -94,7 +94,7 @@
 
 - (void)addLottieImageInMainThread:(NSInteger)index {
     LOTAnimationView *lottieView = [LOTAnimationView animationNamed:self.lottieAnimationJsonFileArr[index] inBundle:[NSBundle bundleWithPath:[[[NSBundle resourceBundle] resourcePath] stringByAppendingPathComponent:@"TabBarLottieFiles"]]];
-    CGFloat singleW = [UIScreen mainScreen].bounds.size.width / tabBarItemsCount;
+    CGFloat singleW = ScreenWidth / tabBarItemsCount;
 
     CGFloat x = ceilf(index * singleW + (singleW - LOTAnimationViewWidth) / 2.0);
     lottieView.frame = CGRectMake(x - 1, 2, LOTAnimationViewWidth, LOTAnimationViewHeight);

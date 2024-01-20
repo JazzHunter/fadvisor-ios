@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithItem:(ItemModel *)model;
 
-- (instancetype)initWithId:(NSString *)articleId;
+- (instancetype)initWithId:(NSString *)itemId;
 
 @end
 

@@ -6,7 +6,6 @@
 //
 
 #import "ToastView.h"
-#import "Localization.h"
 
 @interface ToastView ()
 

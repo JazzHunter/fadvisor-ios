@@ -14,9 +14,10 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - AliPlayerSDK_iOS (6.8.0):
-    - AliPlayerSDK_iOS/AliPlayerSDK (= 6.8.0)
-  - AliPlayerSDK_iOS/AliPlayerSDK (6.8.0)
+  - AliPlayerSDK_iOS (6.5.0):
+    - AliPlayerSDK_iOS/AliPlayerSDK (= 6.5.0)
+  - AliPlayerSDK_iOS/AliPlayerSDK (6.5.0)
+  - CocoaAsyncSocket (7.6.5)
   - CocoaLumberjack (3.8.2):
     - CocoaLumberjack/Core (= 3.8.2)
   - CocoaLumberjack/Core (3.8.2)
@@ -30,6 +31,7 @@ PODS:
   - GKPhotoBrowser/YY (2.7.3):
     - GKPhotoBrowser/Core
     - YYWebImage
+  - JSONModel (1.8.0)
   - JXCategoryView (1.6.1)
   - JXPagingView/Pager (2.1.2)
   - LEEAlert (1.6.6)
@@ -38,6 +40,11 @@ PODS:
   - MBProgressHUD (1.2.0)
   - MJExtension (3.4.1)
   - MJRefresh (3.7.6)
+  - MRDLNA (0.1.1):
+    - CocoaAsyncSocket
+    - MRDLNA/MRC (= 0.1.1)
+  - MRDLNA/MRC (0.1.1):
+    - CocoaAsyncSocket
   - MyLayout (1.9.10)
   - PrintBeautifulLog (1.2.0)
   - Reachability (3.2)
@@ -90,12 +97,13 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (= 3.2.1)
-  - AliPlayerSDK_iOS
+  - AliPlayerSDK_iOS (= 6.5.0)
   - CocoaLumberjack
   - FCUUID
   - FDFullscreenPopGesture
   - FMDB
   - GKPhotoBrowser/YY
+  - JSONModel
   - JXCategoryView
   - JXPagingView/Pager
   - LEEAlert
@@ -104,6 +112,7 @@ DEPENDENCIES:
   - MBProgressHUD
   - MJExtension
   - MJRefresh
+  - MRDLNA
   - MyLayout
   - PrintBeautifulLog
   - Reachability
@@ -124,11 +133,13 @@ SPEC REPOS:
   trunk:
     - AFNetworking
     - AliPlayerSDK_iOS
+    - CocoaAsyncSocket
     - CocoaLumberjack
     - FCUUID
     - FDFullscreenPopGesture
     - FMDB
     - GKPhotoBrowser
+    - JSONModel
     - JXCategoryView
     - JXPagingView
     - LEEAlert
@@ -137,6 +148,7 @@ SPEC REPOS:
     - MBProgressHUD
     - MJExtension
     - MJRefresh
+    - MRDLNA
     - MyLayout
     - PrintBeautifulLog
     - Reachability
@@ -155,12 +167,14 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: cb604b1c2bded0871f5f61f5d53653739e841d6b
-  AliPlayerSDK_iOS: 32752e57e0cf72e899477970f4c8ad043e4b3035
+  AliPlayerSDK_iOS: 58838e01ba82c298e58be2594ad860e36b67cf42
+  CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   CocoaLumberjack: f8d89a516e7710fdb2e9b8f1560b16ec6040eef0
   FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GKPhotoBrowser: a874c971102da83377d2296d2f45539bf6cdb9ca
+  JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   JXCategoryView: 7b1ee69ede4843c581688afe84d0f047723262f2
   JXPagingView: 90924b364a2ff7e94db534fad1fa50925ff69ee4
   LEEAlert: 7c2ea10bcd6be93d6d102abe947a9ff9708c4b60
@@ -169,6 +183,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   MJRefresh: 2fe7fb43a5167ceda20bb7e63f130c04fd1814a5
+  MRDLNA: 3fe35c6ac57c946413d07896faeb9101c4d8853d
   MyLayout: 39ee012bd780936c973bdc5d8ce0f84e3de489d7
   PrintBeautifulLog: 81bcb5db0e90d2834f7641433f41e314f33c42ed
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
@@ -185,6 +200,6 @@ SPEC CHECKSUMS:
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 3a01d1f1312572d214759150b9d4e7c5937a2cf9
+PODFILE CHECKSUM: beeeb385c589cc28c5faa2260eda01364d1e506b
 
 COCOAPODS: 1.11.3

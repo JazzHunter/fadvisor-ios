@@ -48,9 +48,20 @@
     return hud;
 }
 
++ (MBProgressHUD *)showMessage:(NSString *)message alwaysInView:(UIView *)view{
+    MBProgressHUD  *hud =[MBProgressHUD showHUDAddedTo:view animated:true];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+    hud.bezelView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
+    hud.contentColor = [UIColor whiteColor];
+    hud.label.numberOfLines = 10;
+    hud.label.text = message;
+    return hud;
+}
+
 //加载视图
 + (void)showLoadToView:(UIView *)view {
-    [self showMessage:@"加载中..." ToView:view];
+    [self showMessage:[@"加载中..." localString] ToView:view];
 }
 
 /**

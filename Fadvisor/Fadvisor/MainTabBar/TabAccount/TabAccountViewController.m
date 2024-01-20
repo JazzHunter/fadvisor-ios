@@ -21,7 +21,7 @@
     self = [super init];
     if (self) {
         //TabBar的配置
-        self.tabBarItem.title = FoundationString(@"TabAccountName");
+        self.tabBarItem.title = [@"TabAccountName" localString];
         self.tabBarItem.image = [[UIImage imageNamed:@"tab_account_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         self.tabBarItem.selectedImage = [[UIImage alloc] init];
         [self.navigationController setNavigationBarHidden:YES animated:NO];

@@ -61,6 +61,14 @@
 + (MBProgressHUD *)showMessage:(NSString *)message ToView:(UIView *)view;
 
 /**
+ 一直展示信息
+ 
+ @param message 信息
+ @param view 展示view所在的视图
+ */
++ (MBProgressHUD *)showMessage:(NSString *)message alwaysInView:(UIView *)view;
+
+/**
  *  快速显示一条提示信息
  *
  *  @param message 要显示的文字

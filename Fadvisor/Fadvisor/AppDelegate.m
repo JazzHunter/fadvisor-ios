@@ -11,7 +11,6 @@
 #import "UMengHelper.h"
 #import <LEEAlert/LEEAlert.h>
 #import "CacheKey.h"
-#import "AlivcPlayerManager.h"
 
 @interface AppDelegate ()
 
@@ -113,21 +112,21 @@
     return YES;
 }
 
-- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
-    // 播放器相关横竖屏适配
-    UIInterfaceOrientationMask orientationMask = UIViewController.topViewController.supportedInterfaceOrientations;
-
-    if ([AlivcPlayerManager manager].shouldFlowOrientation) {
-        BOOL landscape = ([AlivcPlayerManager manager].playContainView.window) && [AlivcPlayerManager manager].currentOrientation != 0;
-        orientationMask = landscape ? UIInterfaceOrientationMaskLandscape : UIInterfaceOrientationMaskPortrait;
-    } else {
-        return [UIViewController.topViewController supportedInterfaceOrientations];
-    }
-
-    if (orientationMask == UIInterfaceOrientationMaskAllButUpsideDown || orientationMask == UIInterfaceOrientationMaskAll) {
-        return UIInterfaceOrientationMaskPortrait;
-    }
-    return orientationMask;
-}
+//- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+//    // 播放器相关横竖屏适配
+//    UIInterfaceOrientationMask orientationMask = UIViewController.topViewController.supportedInterfaceOrientations;
+//
+//    if ([AlivcPlayerManager manager].shouldFlowOrientation) {
+//        BOOL landscape = ([AlivcPlayerManager manager].playContainView.window) && [AlivcPlayerManager manager].currentOrientation != 0;
+//        orientationMask = landscape ? UIInterfaceOrientationMaskLandscape : UIInterfaceOrientationMaskPortrait;
+//    } else {
+//        return [UIViewController.topViewController supportedInterfaceOrientations];
+//    }
+//
+//    if (orientationMask == UIInterfaceOrientationMaskAllButUpsideDown || orientationMask == UIInterfaceOrientationMaskAll) {
+//        return UIInterfaceOrientationMaskPortrait;
+//    }
+//    return orientationMask;
+//}
 
 @end

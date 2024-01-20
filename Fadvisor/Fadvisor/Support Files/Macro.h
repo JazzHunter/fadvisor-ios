@@ -8,8 +8,6 @@
 #ifndef Macro_h
 #define Macro_h
 
-//#define kStatusBarHeight                  [UIApplication sharedApplication].windows.firstObject.windowScene.statusBarManager.statusBarFrame.size.height
-
 // 状态栏高度
 #define kStatusBarHeight \
 ({\
@@ -65,5 +63,13 @@
 #define NightTheme                        @"NightTheme"
 
 #define FoundationString(key) GetString(key, @"Foundation")
+
+#define ScreenWidth  [UIScreen mainScreen].bounds.size.width
+#define ScreenHeight  [UIScreen mainScreen].bounds.size.height
+#define SafeTop (([[UIScreen mainScreen] bounds].size.height<812) ? 20 : 44)
+#define SafeBottom (([[UIScreen mainScreen] bounds].size.height<812) ? 0 : 34)
+#define SafeBeautyBottom (([[UIScreen mainScreen] bounds].size.height<812) ? 0 : 12)
+#define StatusBarHeight (([[UIScreen mainScreen] bounds].size.height<812) ? 20 : 44)
+
 
 #endif /* Macro_h */

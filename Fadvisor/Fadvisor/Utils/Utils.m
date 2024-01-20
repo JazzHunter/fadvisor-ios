@@ -8,7 +8,6 @@
 
 #import "Utils.h"
 #import <sys/utsname.h>
-#import <FCUUID/FCUUID.h>
 
 @implementation Utils
 
@@ -180,14 +179,6 @@
     return string;
 }
 
-+ (NSString *)isNullToString:(id)string {
-    if ([string isEqual:@"NULL"] || [string isKindOfClass:[NSNull class]] || [string isEqual:[NSNull null]] || [string isEqual:NULL] || [[string class] isSubclassOfClass:[NSNull class]] || string == nil || string == NULL || [string isKindOfClass:[NSNull class]] || [[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0 || [string isEqualToString:@"<null>"] || [string isEqualToString:@"(null)"]) {
-        return @"";
-    } else {
-        return (NSString *)string;
-    }
-}
-
 + (NSDictionary *)convertToDictionary:(NSString *)jsonStr {
     NSData *data = [jsonStr dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *tempDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
@@ -203,10 +194,6 @@
     NSString *MOBILE = @"^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[06-8])\\d{8}$";
     NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
     return [regextestmobile evaluateWithObject:mobileNum];
-}
-
-+ (NSString *)getDeviceId {
-    return [FCUUID uuidForDevice];
 }
 
 + (UIViewController *)currentViewController {
@@ -227,6 +214,94 @@
     }
 
     return vc;
+}
+
+- (UIViewController *)findSuperViewController:(UIView *)view
+{
+    UIResponder *responder = view;
+    // 循环获取下一个响应者,直到响应者是一个UIViewController类的一个对象为止,然后返回该对象.
+    while ((responder = [responder nextResponder])) {
+        if ([responder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)responder;
+        }
+    }
+    return nil;
+}
+
++ (NSString *)timeformatFromSeconds:(NSInteger)seconds {
+    //format of hour
+    seconds = seconds / 1000;
+    NSString *str_hour = [NSString stringWithFormat:@"%02ld", (long)seconds / 3600];
+    //format of minute
+    NSString *str_minute = [NSString stringWithFormat:@"%02ld", (long)(seconds % 3600) / 60];
+    //format of second
+    NSString *str_second = [NSString stringWithFormat:@"%02ld", (long)seconds % 60];
+    //format of time
+    NSString *format_time = nil;
+    if (seconds / 3600 <= 0) {
+        format_time = [NSString stringWithFormat:@"00:%@:%@", str_minute, str_second];
+    } else {
+        format_time = [NSString stringWithFormat:@"%@:%@:%@", str_hour, str_minute, str_second];
+    }
+    return format_time;
+}
+
++ (void)drawFillRoundRect:(CGRect)rect radius:(CGFloat)radius color:(UIColor *)color context:(CGContextRef)context {
+    CGContextSetAllowsAntialiasing(context, TRUE);
+    CGContextSetFillColor(context, CGColorGetComponents(color.CGColor));
+    //    CGContextSetRGBFillColor(context, red, green, blue, alpha);
+    CGContextBeginPath(context);
+    CGContextMoveToPoint(context, CGRectGetMinX(rect), CGRectGetMidY(rect));
+    CGContextAddArcToPoint(context, CGRectGetMinX(rect), CGRectGetMinY(rect), CGRectGetMidX(rect), CGRectGetMinY(rect), radius);
+    CGContextAddArcToPoint(context, CGRectGetMaxX(rect), CGRectGetMinY(rect), CGRectGetMaxX(rect), CGRectGetMidY(rect), radius);
+    CGContextAddArcToPoint(context, CGRectGetMaxX(rect), CGRectGetMaxY(rect), CGRectGetMidX(rect), CGRectGetMaxY(rect), radius);
+    CGContextAddArcToPoint(context, CGRectGetMinX(rect), CGRectGetMaxY(rect), CGRectGetMinX(rect), CGRectGetMidY(rect), radius);
+    CGContextClosePath(context);
+    CGContextFillPath(context);
+}
+
++ (BOOL)isInterfaceOrientationPortrait {
+    UIInterfaceOrientation o = [[UIApplication sharedApplication] statusBarOrientation];
+    return o == UIInterfaceOrientationPortrait;
+}
+
++ (void)setFullOrHalfScreen {
+    BOOL isFull = [self isInterfaceOrientationPortrait];
+    if (@available(iOS 16.0, *)) {
+        @try {
+            NSArray *array = [[[UIApplication sharedApplication] connectedScenes] allObjects];
+            UIWindowScene *ws = (UIWindowScene *)array[0];
+            Class GeometryPreferences = NSClassFromString(@"UIWindowSceneGeometryPreferencesIOS");
+            id geometryPreferences = [[GeometryPreferences alloc]init];
+            UIInterfaceOrientationMask orientationMask = UIInterfaceOrientationMaskLandscapeRight;
+            if (!isFull) {
+                orientationMask = UIInterfaceOrientationMaskPortrait;
+            }
+            [geometryPreferences setValue:@(orientationMask) forKey:@"interfaceOrientations"];
+            SEL sel_method = NSSelectorFromString(@"requestGeometryUpdateWithPreferences:errorHandler:");
+            void (^ErrorBlock)(NSError *err) = ^(NSError *err){
+                NSLog(@"屏幕旋转出错:%@", [err debugDescription]);
+            };
+            if ([ws respondsToSelector:sel_method]) {
+                (((void (*)(id, SEL,id,id))[ws methodForSelector:sel_method])(ws, sel_method,geometryPreferences,ErrorBlock));
+            }
+        } @catch (NSException *exception) {
+            NSLog(@"屏幕旋转出错:%@", exception.reason);
+        } @finally {
+        }
+    } else {
+        if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
+            SEL selector = NSSelectorFromString(@"setOrientation:");
+            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
+            [invocation setSelector:selector];
+            [invocation setTarget:[UIDevice currentDevice]];
+            int val = isFull ? UIInterfaceOrientationLandscapeRight:UIInterfaceOrientationPortrait;
+            
+            [invocation setArgument:&val atIndex:2];
+            [invocation invoke];
+        }
+        [[UIApplication sharedApplication]setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:YES];
+    }
 }
 
 @end

@@ -38,15 +38,26 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)formatNumberDecimalValue:(double)value;
 
-+ (NSString *)isNullToString:(id)string;
-
 + (NSDictionary *)convertToDictionary:(NSString *)jsonStr;
 
 + (BOOL)isMobileNumber:(NSString *)mobileNum;
 
-+ (NSString *)getDeviceId;
 
 + (UIViewController *)currentViewController;
+
++ (UIViewController *)findSuperViewController:(UIView *)view;
+
+//根据s-》hh:mm:ss
++ (NSString *)timeformatFromSeconds:(NSInteger)seconds;
+
+//绘制
++ (void)drawFillRoundRect:(CGRect)rect radius:(CGFloat)radius color:(UIColor *)color context:(CGContextRef)context;
+
+//是否手机状态条处于竖屏状态
++ (BOOL)isInterfaceOrientationPortrait;
+
+//是否全屏
++ (void)setFullOrHalfScreen;
 
 @end
 

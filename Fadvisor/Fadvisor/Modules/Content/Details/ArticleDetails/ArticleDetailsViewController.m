@@ -16,7 +16,7 @@
 
 @interface ArticleDetailsViewController ()<UIScrollViewDelegate>
 
-@property (nonatomic, copy) NSString *articleId;
+@property (nonatomic, copy) NSString *itemId;
 @property (nonatomic, strong) ItemDetailsService *itemDetailsService;
 @property (nonatomic, strong) ItemModel *info;
 @property (nonatomic, strong) ArticleDetailsModel *detailsModel;
@@ -42,10 +42,10 @@
     return self;
 }
 
-- (instancetype)initWithId:(NSString *)articleId {
+- (instancetype)initWithId:(NSString *)itemId {
     self = [super init];
     if (self) {
-        _articleId = [articleId copy];
+        _itemId = [itemId copy];
     }
     
     return self;
@@ -70,7 +70,7 @@
 - (void)getData {
     [self.view showSkeletonPage:SkeletonPageViewTypeContentDetail isNavbarPadding:YES];
     Weak(self);
-    [self.itemDetailsService getDetails:ItemTypeArticle itemId:self.articleId completion:^(NSString *errorMsg, NSDictionary *detailsDic) {
+    [self.itemDetailsService getDetails:ItemTypeArticle itemId:self.itemId completion:^(NSString *errorMsg, NSDictionary *detailsDic) {
         [self.view hideSkeletonPage];
         weakself.detailsModel = [ArticleDetailsModel mj_objectWithKeyValues:detailsDic];
         
