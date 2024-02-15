@@ -21,7 +21,7 @@
 @interface PlayerDetailsQualityListView : UIView
 @property (nonatomic, weak) id<PlayerDetailsQualityListViewDelegate> delegate;
 @property (nonatomic, copy) NSArray *allSupportQualities;               //清晰度列表信息
-@property (nonatomic, assign) AlvcPlayMethod playMethod; //根据播放方式，确定清晰度 名称
+@property (nonatomic, assign) AlivcPlayMethod playMethod; //根据播放方式，确定清晰度 名称
 
 /*
  * 功能 ：计算清晰度列表所需高度

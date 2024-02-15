@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoDetailsViewController : BaseViewController<NavigationBarDataSource, NavigationBarDelegate>
 
-- (instancetype)initWithItem:(ItemModel *)model;
+- (instancetype)initWithItem:(ItemModel *)itemModel;
 
-- (instancetype)initWithId:(NSString *)videoId;
+- (instancetype)initWithId:(NSString *)itemId;
 
 @end
 

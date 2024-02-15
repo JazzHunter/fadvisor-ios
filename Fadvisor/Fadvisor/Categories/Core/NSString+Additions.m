@@ -10,7 +10,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonHMAC.h>
 
-@implementation NSString (AlivcHelper)
+@implementation NSString (Additions)
 
 - (NSString *)localString{
     return NSLocalizedString(self, nil);

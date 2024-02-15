@@ -7,7 +7,7 @@
 
 #import "ArticleDetailsViewController.h"
 #import "ItemDetailsService.h"
-#import "ContentEnum.h"
+#import "ContentDefine.h"
 #import "ContentExcepitonView.h"
 #import "RichTextView.h"
 #import "SharePanel.h"
@@ -18,7 +18,7 @@
 
 @property (nonatomic, copy) NSString *itemId;
 @property (nonatomic, strong) ItemDetailsService *itemDetailsService;
-@property (nonatomic, strong) ItemModel *info;
+@property (nonatomic, strong) ItemModel *itemModel;
 @property (nonatomic, strong) ArticleDetailsModel *detailsModel;
 
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -32,11 +32,11 @@
 
 @implementation ArticleDetailsViewController
 
-- (instancetype)initWithItem:(ItemModel *)model {
+- (instancetype)initWithItem:(ItemModel *)itemModel {
     self = [super init];
     if (self) {
-        _info = model;
-        _articleId = model.itemId;
+        _itemModel = itemModel;
+        _itemId = itemModel.itemId;
     }
     
     return self;
@@ -64,7 +64,7 @@
 - (void)initNavigationBar {
     self.navigationBar.delegate = self;
     self.navigationBar.dataSource = self;
-    [self.navigationBar setTitleText:self.info ? self.info.title : @"读取中..."];
+    [self.navigationBar setTitleText:self.itemModel ? self.itemModel.title : @"读取中..."];
 }
 
 - (void)getData {
@@ -74,7 +74,7 @@
         [self.view hideSkeletonPage];
         weakself.detailsModel = [ArticleDetailsModel mj_objectWithKeyValues:detailsDic];
         
-        weakself.info = weakself.itemDetailsService.result.info;
+        weakself.itemModel = weakself.itemDetailsService.result.itemModel;
         
         [weakself.richTextView handleHTML:weakself.detailsModel.content];
         [weakself.pubTimeLabel setText:@"编辑于刚刚"];
@@ -119,7 +119,7 @@
 }
 
 -(void)handleSharePanelOpen:(MyBaseLayout*)sender{
-    [[SharePanel manager] showPanelWithItem:self.info];
+    [[SharePanel manager] showPanelWithItem:self.itemModel];
 }
 
 #pragma mark - BaseViewControllerDatasource

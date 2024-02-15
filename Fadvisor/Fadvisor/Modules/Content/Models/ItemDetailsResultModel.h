@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) NSInteger acquisitionAction;
 
 /** Info信息 */
-@property (nonatomic, strong) ItemModel *info;
+@property (nonatomic, strong) ItemModel *itemModel;
 
 /** ViewId */
 @property (nonatomic, copy) NSString *viewId;

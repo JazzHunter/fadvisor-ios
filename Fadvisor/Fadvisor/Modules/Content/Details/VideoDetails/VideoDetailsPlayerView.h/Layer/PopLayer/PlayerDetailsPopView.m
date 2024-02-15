@@ -84,41 +84,34 @@ static const CGFloat PopBackButtonWidth = 24;   //返回按钮宽度
     NSString *tempString = @"unknown";
     PlayerErrorType errorType = PlayerErrorTypeRetry;
     switch (code) {
-        case PlayerPopCodePlayFinish:{
+        case PlayerPopCodePlayFinish:
             tempString = [@"Watch again, please click replay" localString];
             errorType = PlayerErrorTypeReplay;
-        }
-        break;
-        case PlayerPopCodeNetworkTimeOutError:{
+            break;
+        case PlayerPopCodeNetworkTimeOutError:
             tempString = [@"The current network is not good. Please click replay later" localString];
             errorType = PlayerErrorTypeReplay;
-        }
-        break;
-        case PlayerPopCodeUnreachableNetwork:{
+            break;
+        case PlayerPopCodeUnreachableNetwork:
             tempString = [@"No network connection, check the network, click replay" localString];
             errorType = PlayerErrorTypeReplay;
-        }
-        break;
-        case PlayerPopCodeLoadDataError:{
+            break;
+        case PlayerPopCodeLoadDataError:
             tempString = [@"Video loading error, please click replay" localString];
             errorType = PlayerErrorTypeRetry;
-        }
-        break;
-        case PlayerPopCodeServerError:{
+            break;
+        case PlayerPopCodeServerError:
             tempString = popMsg;
             errorType = PlayerErrorTypeRetry;
-        }
-        break;
-        case PlayerPopCodeUseMobileNetwork:{
+            break;
+        case PlayerPopCodeUseMobileNetwork:
             tempString = [@"For mobile networks, click play" localString];
             errorType = PlayerErrorTypePause;
-        }
-        break;
-        case PlayerPopCodeSecurityTokenExpired:{
+            break;
+        case PlayerPopCodeSecurityTokenExpired:
             tempString = popMsg;
             errorType = PlayerErrorTypeStsExpired;
-        }
-        break;
+            break;
         default:
             break;
     }

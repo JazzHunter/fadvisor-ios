@@ -1,17 +1,17 @@
 //
-//  CustomImageButton.m
+//  ImageButton.m
 //  Fadvisor
 //
 //  Created by 韩建伟 on 2023/12/21.
 //
 
-#import "CustomImageButton.h"
-@interface CustomImageButton ()
+#import "ImageButton.h"
+@interface ImageButton ()
 
 
 @end
 
-@implementation CustomImageButton
+@implementation ImageButton
 
 - (instancetype)initWithFrame:(CGRect)frame imageName:(NSString *)imageName {
     self = [super initWithFrame:frame];
@@ -41,7 +41,6 @@
 }
 
 - (void)handleTouchDown:(UIButton *)sender {
-    NSLog(@"点击了");
     self.transform = CGAffineTransformIdentity;
 
     [UIView animateKeyframesWithDuration:0.5 delay:0 options:0 animations: ^{

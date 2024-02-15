@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ContentEnum.h"
+#import "ContentDefine.h"
 #import "ItemModel.h"
 
 NS_ASSUME_NONNULL_BEGIN

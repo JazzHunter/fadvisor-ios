@@ -9,12 +9,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM (int, AlvcPlayMethod) {
-    AlvcPlayMethodUrl = 0,
-    AlvcPlayMethodMPS,
-    AlvcPlayMethodPlayAuth,
-    AlvcPlayMethodSTS,
-    AlvcPlayMethodLocal,
+typedef NS_ENUM (int, AlivcPlayMethod) {
+    AlivcPlayMethodUrl = 0,
+    AlivcPlayMethodMPS,
+    AlivcPlayMethodPlayAuth,
+    AlivcPlayMethodSTS,
+    AlivcPlayMethodLocal,
 };
 
 

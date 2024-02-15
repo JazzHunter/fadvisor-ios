@@ -205,7 +205,7 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
     return [gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]];
 }
 
-- (void)mainTableViewDidScroll:(UIScrollView *)scrollView {
+- (void)pagerView:(JXPagerView *)pagerView mainTableViewDidScroll:(UIScrollView *)scrollView {
     CGFloat thresholdDistance = 44.f;
     CGFloat percent = scrollView.contentOffset.y / thresholdDistance;
     self.headerViewLayout.alpha = 1 - MAX(0, MIN(1, percent));

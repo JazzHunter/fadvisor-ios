@@ -114,7 +114,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *currentVideoId;
 @property (nonatomic, assign) AVPStatus currentPlayStatus;
 @property (nonatomic, assign) AVPSeekMode seekMode;
-@property (nonatomic, assign) AlvcPlayMethod playMethod;
+@property (nonatomic, assign) AlivcPlayMethod playMethod;
 @property (nonatomic, readonly) int64_t duration;
 /**
  @brief 播放器暂停
@@ -153,6 +153,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)reset;
 
 /**
+ @brief 播放器的 playerView
+ */
+- (void)setPlayerView:(UIView *)playerView;
+
+/**
+ @brief 播放器截图
+ */
+- (void)snapShot;
+
+/**
  @brief PlayAuth 播放
  */
 - (void)startPlayWithVidAuth:(NSString *)vid errorBlock:(void (^)(NSString *errorMsg))errorBlock;
@@ -168,6 +178,17 @@ NS_ASSUME_NONNULL_BEGIN
  @brief 获取信息
  */
 - (AVPMediaInfo *)getMediaInfo;
+
+/**
+ @brief 获取指定位置的缩略图
+ @param positionMs 代表在哪个指定位置的缩略图
+ */
+-(void)getThumbnail:(int64_t)positionMs;
+
+@property(nonatomic) float rate;
+
+@property (nonatomic, assign) float volume;
+
 
 @end
 

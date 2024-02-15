@@ -13,7 +13,6 @@
 @interface PlayerDetailsMoreView ()
 
 @property (nonatomic, strong) UIScrollView *containsView;
-@property (nonatomic, strong) UIButton *downLoadBtn;
 
 @property (nonatomic, strong) UIView *playLineView;
 @property (nonatomic, strong) UILabel *speedLabel;
@@ -64,13 +63,6 @@
         _containsView.backgroundColor = [UIColor colorWithRed:28.0 / 255.0 green:31.0 / 255.0 blue:33.0 / 255.0 alpha:0.90];
     }
     return _containsView;
-}
-
-- (UIButton *)downLoadBtn {
-    if (!_downLoadBtn) {
-        _downLoadBtn = [[UIButton alloc]init];
-    }
-    return _downLoadBtn;
 }
 
 - (UIView *)playLineView {
@@ -265,7 +257,6 @@
         self.hidden = YES;
         [self addSubview:self.tipLabel];
         [self addSubview:self.containsView];
-        [self.containsView addSubview:self.downLoadBtn];
         [self.containsView addSubview:self.playLineView];
         [self.containsView addSubview:self.speedLabel];
         [self.containsView addSubview:self.speedSegmentedControl];
@@ -287,71 +278,54 @@
 }
 
 - (void)layoutSubviews {
-    CGFloat width = self.bounds.size.width;
-    CGFloat height = self.bounds.size.height;
-    CGFloat containsViewWidth = 300;
-    if ([Utils isInterfaceOrientationPortrait]) {
-        self.hidden = YES;
-    }
-
-    if (_containsView.frame.origin.x == width) {
-        return;
-    }
-    _containsView.frame = CGRectMake(width - containsViewWidth, 0, containsViewWidth, height);
-
-    _downLoadBtn.frame = CGRectMake(30, 30, 60, 60);
-    [_downLoadBtn setImage:[UIImage imageNamed:@"ic_download"] forState:UIControlStateNormal];
-    [_downLoadBtn setTitle:[@"下载" localString] forState:UIControlStateNormal];
-    _downLoadBtn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
-
-    CGFloat offset = 10.0f;
-    _downLoadBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -_downLoadBtn.imageView.frame.size.width, -_downLoadBtn.imageView.frame.size.height - offset / 2, 0);
-    _downLoadBtn.imageEdgeInsets = UIEdgeInsetsMake(-_downLoadBtn.titleLabel.intrinsicContentSize.height - offset / 2, 0, 0, -_downLoadBtn.titleLabel.intrinsicContentSize.width);
-    [_downLoadBtn addTarget:self action:@selector(downLoadBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-
-    _playLineView.frame = CGRectMake(0, CGRectGetMaxY(_downLoadBtn.frame) + 20, containsViewWidth, 1);
-    _speedLabel.frame = CGRectMake(0, 0, 70, 15);
-    _speedLabel.center = _playLineView.center;
-    _speedSegmentedControl.frame = CGRectMake(30, CGRectGetMaxY(_speedLabel.frame) + 20, containsViewWidth - 60, 30);
-    [_speedSegmentedControl addTarget:self action:@selector(speedSegmentedControlClicked:) forControlEvents:UIControlEventValueChanged];
-
-    _lineView.frame = CGRectMake(0, CGRectGetMaxY(_speedSegmentedControl.frame) + 20, containsViewWidth, 1);
-
-    _leftVolumeIV.frame = CGRectMake(30, CGRectGetMaxY(_lineView.frame) + 20, 30, 30);
-    _volumeSlider.frame = CGRectMake(CGRectGetMaxX(_leftVolumeIV.frame) + 10, CGRectGetMaxY(_lineView.frame) + 20, containsViewWidth - 2 * 30 - 2 * 10 - 2 * 30, 30);
-
-    [_volumeSlider addTarget:self action:@selector(volumeSliderChangeValue:) forControlEvents:UIControlEventValueChanged];
-    _rightVolumeIV.frame = CGRectMake(containsViewWidth - 30 - 30, CGRectGetMaxY(_lineView.frame) + 20, 30, 30);
-
-    _leftBrightIV.frame = CGRectMake(30, CGRectGetMaxY(_rightVolumeIV.frame) + 20, 30, 30);
-    _brightSlider.frame = CGRectMake(CGRectGetMaxX(_leftBrightIV.frame) + 10, CGRectGetMaxY(_rightVolumeIV.frame) + 20, containsViewWidth - 2 * 30 - 2 * 10 - 2 * 30, 30);
-
-    [_brightSlider addTarget:self action:@selector(brightSliderChangeValue:) forControlEvents:UIControlEventValueChanged];
-
-    _rightBrightIV.frame = CGRectMake(containsViewWidth - 30 - 30, CGRectGetMaxY(_rightVolumeIV.frame) + 20, 30, 30);
-
-    //画面比例
-    _scalingLineView.frame = CGRectMake(0, CGRectGetMaxY(_rightBrightIV.frame) + 20, containsViewWidth, 1);
-    _scalingLabel.frame = CGRectMake(0, 0, 70, 15);
-    _scalingLabel.center = _scalingLineView.center;
-    _scalingSegmentedControl.frame = CGRectMake(30, CGRectGetMaxY(_scalingLabel.frame) + 20, containsViewWidth - 60, 30);
-    [_scalingSegmentedControl addTarget:self action:@selector(scalingSegmentedControlClicked:) forControlEvents:UIControlEventValueChanged];
-
-    //循环播放
-    _loopLineView.frame = CGRectMake(0, CGRectGetMaxY(_scalingSegmentedControl.frame) + 20, containsViewWidth, 1);
-    _loopLabel.frame = CGRectMake(0, 0, 70, 15);
-    _loopLabel.center = _loopLineView.center;
-    _loopSegmentedControl.frame = CGRectMake(30, CGRectGetMaxY(_loopLabel.frame) + 20, containsViewWidth - 60, 30);
-    [_loopSegmentedControl addTarget:self action:@selector(loopSegmentedControlClicked:) forControlEvents:UIControlEventValueChanged];
-
-    self.containsView.contentSize = CGSizeMake(self.containsView.frame.size.width, CGRectGetMaxY(_loopSegmentedControl.frame) + 20);
-}
-
-- (void)downLoadBtnClicked:(UIButton *)sender {
-    [self showSpeedViewPushInAnimate];
-    if ([self.delegate respondsToSelector:@selector(moreView:clickedDownloadBtn:)]) {
-        [self.delegate moreView:self clickedDownloadBtn:sender];
-    }
+//    CGFloat width = self.bounds.size.width;
+//    CGFloat height = self.bounds.size.height;
+//    CGFloat containsViewWidth = 300;
+//    if ([Utils isInterfaceOrientationPortrait]) {
+//        self.hidden = YES;
+//    }
+//
+//    if (_containsView.frame.origin.x == width) {
+//        return;
+//    }
+//    _containsView.frame = CGRectMake(width - containsViewWidth, 0, containsViewWidth, height);
+//
+//    _playLineView.frame = CGRectMake(0, CGRectGetMaxY(_downLoadBtn.frame) + 20, containsViewWidth, 1);
+//    _speedLabel.frame = CGRectMake(0, 0, 70, 15);
+//    _speedLabel.center = _playLineView.center;
+//    _speedSegmentedControl.frame = CGRectMake(30, CGRectGetMaxY(_speedLabel.frame) + 20, containsViewWidth - 60, 30);
+//    [_speedSegmentedControl addTarget:self action:@selector(speedSegmentedControlClicked:) forControlEvents:UIControlEventValueChanged];
+//
+//    _lineView.frame = CGRectMake(0, CGRectGetMaxY(_speedSegmentedControl.frame) + 20, containsViewWidth, 1);
+//
+//    _leftVolumeIV.frame = CGRectMake(30, CGRectGetMaxY(_lineView.frame) + 20, 30, 30);
+//    _volumeSlider.frame = CGRectMake(CGRectGetMaxX(_leftVolumeIV.frame) + 10, CGRectGetMaxY(_lineView.frame) + 20, containsViewWidth - 2 * 30 - 2 * 10 - 2 * 30, 30);
+//
+//    [_volumeSlider addTarget:self action:@selector(volumeSliderChangeValue:) forControlEvents:UIControlEventValueChanged];
+//    _rightVolumeIV.frame = CGRectMake(containsViewWidth - 30 - 30, CGRectGetMaxY(_lineView.frame) + 20, 30, 30);
+//
+//    _leftBrightIV.frame = CGRectMake(30, CGRectGetMaxY(_rightVolumeIV.frame) + 20, 30, 30);
+//    _brightSlider.frame = CGRectMake(CGRectGetMaxX(_leftBrightIV.frame) + 10, CGRectGetMaxY(_rightVolumeIV.frame) + 20, containsViewWidth - 2 * 30 - 2 * 10 - 2 * 30, 30);
+//
+//    [_brightSlider addTarget:self action:@selector(brightSliderChangeValue:) forControlEvents:UIControlEventValueChanged];
+//
+//    _rightBrightIV.frame = CGRectMake(containsViewWidth - 30 - 30, CGRectGetMaxY(_rightVolumeIV.frame) + 20, 30, 30);
+//
+//    //画面比例
+//    _scalingLineView.frame = CGRectMake(0, CGRectGetMaxY(_rightBrightIV.frame) + 20, containsViewWidth, 1);
+//    _scalingLabel.frame = CGRectMake(0, 0, 70, 15);
+//    _scalingLabel.center = _scalingLineView.center;
+//    _scalingSegmentedControl.frame = CGRectMake(30, CGRectGetMaxY(_scalingLabel.frame) + 20, containsViewWidth - 60, 30);
+//    [_scalingSegmentedControl addTarget:self action:@selector(scalingSegmentedControlClicked:) forControlEvents:UIControlEventValueChanged];
+//
+//    //循环播放
+//    _loopLineView.frame = CGRectMake(0, CGRectGetMaxY(_scalingSegmentedControl.frame) + 20, containsViewWidth, 1);
+//    _loopLabel.frame = CGRectMake(0, 0, 70, 15);
+//    _loopLabel.center = _loopLineView.center;
+//    _loopSegmentedControl.frame = CGRectMake(30, CGRectGetMaxY(_loopLabel.frame) + 20, containsViewWidth - 60, 30);
+//    [_loopSegmentedControl addTarget:self action:@selector(loopSegmentedControlClicked:) forControlEvents:UIControlEventValueChanged];
+//
+//    self.containsView.contentSize = CGSizeMake(self.containsView.frame.size.width, CGRectGetMaxY(_loopSegmentedControl.frame) + 20);
 }
 
 - (void)speedSegmentedControlClicked:(UISegmentedControl *)sender {

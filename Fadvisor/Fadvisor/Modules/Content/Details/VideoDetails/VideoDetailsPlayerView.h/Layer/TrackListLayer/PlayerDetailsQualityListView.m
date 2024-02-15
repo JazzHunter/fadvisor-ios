@@ -23,7 +23,7 @@ static const CGFloat PlayerDetailsQualityListViewQualityButtonHeight = 32;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _playMethod = AlvcPlayMethodPlayAuth;
+        _playMethod = AlivcPlayMethodPlayAuth;
         self.clipsToBounds = NO;
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
     }

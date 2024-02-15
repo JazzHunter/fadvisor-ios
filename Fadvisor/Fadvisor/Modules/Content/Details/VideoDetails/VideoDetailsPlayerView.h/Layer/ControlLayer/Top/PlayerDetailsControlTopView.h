@@ -4,6 +4,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AlivcPlayerDefine.h"
+#import <MyLayout/MyLayout.h>
 
 @class PlayerDetailsControlTopView;
 
@@ -13,33 +14,23 @@
  * 功能 ： 点击返回按钮
  * 参数 ： topView 对象本身
  */
-- (void)onBackViewClickWithTopView:(PlayerDetailsControlTopView*)topView;
+- (void)onTopViewBackButtonClicked:(UIButton *)sender topView:(PlayerDetailsControlTopView *)topView;
 
 /*
- * 功能 ： 点击下载按钮
+ * 功能 ： 点击右上角的More按钮
  * 参数 ： topView 对象本身
  */
-- (void)onDownloadButtonClickWithTopView:(PlayerDetailsControlTopView*)topView;
 
-/*
- * 功能 ： 点击展示倍速播放界面按钮
- * 参数 ： 对象本身
- */
-- (void)onSpeedViewClickedWithTopView:(PlayerDetailsControlTopView*)topView;
-
-/*
- * 功能 ： 跑马灯按钮
- * 参数 ： 对象本身
- */
-- (void)loopViewClickedWithTopView:(PlayerDetailsControlTopView*)topView;
+- (void)onTopViewMoreButtonClicked:(UIButton *)sender topView:(PlayerDetailsControlTopView *)topView;
 
 @end
 
-@interface PlayerDetailsControlTopView : UIView
+@interface PlayerDetailsControlTopView : MyRelativeLayout
 
-@property (nonatomic, weak  ) id<PlayerDetailsControlTopViewDelegate>delegate;
-@property (nonatomic, copy  ) NSString *topTitle;                   //标题
-@property (nonatomic, strong) UIButton *speedButton;        //倍速播放界面展示按钮，更多按钮
-@property (nonatomic ,assign) AlvcPlayMethod playMethod; //播放方式
+@property (nonatomic, weak) id<PlayerDetailsControlTopViewDelegate>delegate;
+
+- (void)setTitle:(NSString *)titleText;
+
+- (void)resetLayout:(BOOL)isPortrait;
 
 @end

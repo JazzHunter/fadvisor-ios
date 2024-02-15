@@ -5,8 +5,8 @@
 //  Created by 韩建伟 on 2023/11/18.
 //
 
-#ifndef ContentConstants_h
-#define ContentConstants_h
+#ifndef ContentDefine_h
+#define ContentDefine_h
 
 /**
  需要加载的数据类型

@@ -69,7 +69,7 @@ static dispatch_once_t onceToken;
 
 - (void)seekTo:(NSTimeInterval)seekTime {
     if (self.player.duration > 0) {
-        [self.player seekToTime:seekTime seekMode:AVP_SEEKMODE_ACCURATE];
+        [self.player seekToTime:seekTime seekMode:AVP_SEEKMODE_INACCURATE];
     }
 }
 
@@ -95,8 +95,36 @@ static dispatch_once_t onceToken;
     NSLog(@"播放器reset");
 }
 
+- (void)snapShot {
+    [self.player snapShot];
+}
+
 - (AVPMediaInfo *)getMediaInfo {
     return [self.player getMediaInfo];
+}
+
+- (void)setPlayerView:(UIView *)playerView {
+    self.player.playerView = playerView;
+}
+
+- (void)setRate:(float)rate
+{
+    self.player.rate = rate;
+}
+
+- (float)rate
+{
+    return self.player.rate;
+}
+
+- (void)setVolume:(float)volume
+{
+    [self.player setVolume:volume];
+}
+
+- (float)volume
+{
+    return self.player.volume;
 }
 
 #pragma mark - AVPDelegate
@@ -141,7 +169,6 @@ static dispatch_once_t onceToken;
 
 - (void)onBufferedPositionUpdate:(AliPlayer *)player position:(int64_t)position
 {
-    NSLog(@"BufferedProgress:%lld", position);
     if (self.delegate && [self.delegate respondsToSelector:@selector(onBufferedPositionUpdate:position:)]) {
         [self.delegate onBufferedPositionUpdate:self.player position:position];
     }
@@ -228,6 +255,7 @@ static dispatch_once_t onceToken;
         [self saveToLocal:self.currentVideoId];
     }
 
+    self.playMethod = AlivcPlayMethodPlayAuth;
     [self.playAuthService getVidPlayAuth:vid completion:^(NSString *errorMsg, NSString *playAuth) {
         // 错误处理
         if (errorMsg) {
@@ -240,11 +268,11 @@ static dispatch_once_t onceToken;
         authSource.region = @"cn-beijing"; // 点播服务的接入地域，默认为cn-shanghai
         authSource.definitions = @"AUTO";
         if (previewTime > 0) {
-            VidPlayerConfigGenerator* vp = [[VidPlayerConfigGenerator alloc] init];
-            [vp setPreviewTime:previewTime];//20秒试看
+            VidPlayerConfigGenerator *vp = [[VidPlayerConfigGenerator alloc] init];
+            [vp setPreviewTime:previewTime];//试看时间
             authSource.playConfig = [vp generatePlayerConfig];//设置给播放源
         }
-        
+
         [self.player setAuthSource:authSource];
         [self.player prepare];
         self.currentVideoId = vid;
@@ -260,6 +288,10 @@ static dispatch_once_t onceToken;
 
 - (int64_t)duration {
     return self.player.duration;
+}
+
+- (void)getThumbnail:(int64_t)positionMs {
+    [self.player getThumbnail:positionMs];
 }
 
 #pragma mark - AlivcPlayerVideoHistory

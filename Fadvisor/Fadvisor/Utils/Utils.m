@@ -236,14 +236,8 @@
     NSString *str_minute = [NSString stringWithFormat:@"%02ld", (long)(seconds % 3600) / 60];
     //format of second
     NSString *str_second = [NSString stringWithFormat:@"%02ld", (long)seconds % 60];
-    //format of time
-    NSString *format_time = nil;
-    if (seconds / 3600 <= 0) {
-        format_time = [NSString stringWithFormat:@"00:%@:%@", str_minute, str_second];
-    } else {
-        format_time = [NSString stringWithFormat:@"%@:%@:%@", str_hour, str_minute, str_second];
-    }
-    return format_time;
+
+    return seconds / 3600 <= 0 ? [NSString stringWithFormat:@"%@:%@", str_minute, str_second] : [NSString stringWithFormat: @"%@:%@:%@", str_hour, str_minute, str_second];
 }
 
 + (void)drawFillRoundRect:(CGRect)rect radius:(CGFloat)radius color:(UIColor *)color context:(CGContextRef)context {
@@ -279,11 +273,11 @@
             }
             [geometryPreferences setValue:@(orientationMask) forKey:@"interfaceOrientations"];
             SEL sel_method = NSSelectorFromString(@"requestGeometryUpdateWithPreferences:errorHandler:");
-            void (^ErrorBlock)(NSError *err) = ^(NSError *err){
+            void (^ ErrorBlock)(NSError *err) = ^(NSError *err) {
                 NSLog(@"屏幕旋转出错:%@", [err debugDescription]);
             };
             if ([ws respondsToSelector:sel_method]) {
-                (((void (*)(id, SEL,id,id))[ws methodForSelector:sel_method])(ws, sel_method,geometryPreferences,ErrorBlock));
+                (((void (*)(id, SEL, id, id))[ws methodForSelector:sel_method])(ws, sel_method, geometryPreferences, ErrorBlock));
             }
         } @catch (NSException *exception) {
             NSLog(@"屏幕旋转出错:%@", exception.reason);
@@ -295,8 +289,8 @@
             NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
             [invocation setSelector:selector];
             [invocation setTarget:[UIDevice currentDevice]];
-            int val = isFull ? UIInterfaceOrientationLandscapeRight:UIInterfaceOrientationPortrait;
-            
+            int val = isFull ? UIInterfaceOrientationLandscapeRight : UIInterfaceOrientationPortrait;
+
             [invocation setArgument:&val atIndex:2];
             [invocation invoke];
         }

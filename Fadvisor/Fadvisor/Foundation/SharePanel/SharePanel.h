@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SharePanel : MyLinearLayout
 
 /** 显示Item */
-- (void)showPanelWithItem:(ItemModel *)model;
+- (void)showPanelWithItem:(ItemModel *)itemModel;
 
 + (instancetype)manager;
 

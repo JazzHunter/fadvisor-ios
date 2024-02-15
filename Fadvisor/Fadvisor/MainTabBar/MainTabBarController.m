@@ -46,7 +46,6 @@
     selDict[NSForegroundColorAttributeName] = [UIColor mainColor];
     selDict[NSFontAttributeName] = [UIFont systemFontOfSize:14.0f];
     [tabBarItem setTitleTextAttributes:selDict forState:UIControlStateSelected];
-
 }
 
 - (void)viewDidLoad {
@@ -56,11 +55,11 @@
     [self addLottieImage:self.currentIndex];
     [self playLottieAnimation];
     self.delegate = self;
-    
+
     //解决iOS13选中字体变蓝色的情况
     self.tabBar.tintColor = [UIColor mainColor];
     // 改变 tabbar 背景色。https://www.jianshu.com/p/28916945a4ec
-    if(@available(iOS 15.0, *)) {
+    if (@available(iOS 15.0, *)) {
         UITabBarAppearance *apperarance = [[UITabBarAppearance alloc] init];
         [apperarance setBackgroundColor:[UIColor backgroundColor]];
         [apperarance setBackgroundEffect:nil];
@@ -70,8 +69,6 @@
         self.tabBar.translucent =  NO;
         self.tabBar.backgroundColor = [UIColor backgroundColor];
     }
-    
-
 }
 
 - (void)addChildViewControllers {
@@ -143,6 +140,20 @@
         _lottieAnimationJsonFileArr = @[@"tab_home_animate", @"tab_column_animate", @"tab_discovery_animate", @"tab_account_animate"];
     }
     return _lottieAnimationJsonFileArr;
+}
+
+#pragma mark - 屏幕旋转
+
+- (BOOL)shouldAutorotate {
+    return self.selectedViewController.shouldAutorotate;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return self.selectedViewController.supportedInterfaceOrientations;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return self.selectedViewController.preferredInterfaceOrientationForPresentation;
 }
 
 @end

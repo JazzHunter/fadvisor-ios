@@ -173,9 +173,9 @@
 }
 
 /** 显示Item */
-- (void)showPanelWithItem:(ItemModel *)model {
-    self.title = [model.title copy];
-    self.introduction = [model.introduction copy];
+- (void)showPanelWithItem:(ItemModel *)itemModel {
+    self.title = [itemModel.title copy];
+    self.introduction = [itemModel.introduction copy];
 //    self.thumbUrl = [model.coverUrl copy];
 //    self.shareURL = [model.coverUrl copy];
     self.thumbUrl = @"https://upload.jianshu.io/users/upload_avatars/2784338/0d53044867da.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/90/h/90/format/webp";

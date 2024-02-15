@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ArticleDetailsViewController : BaseScrollViewController<NavigationBarDataSource, NavigationBarDelegate>
 
-- (instancetype)initWithItem:(ItemModel *)model;
+- (instancetype)initWithItem:(ItemModel *)itemModel;
 
 - (instancetype)initWithId:(NSString *)itemId;
 

@@ -33,5 +33,7 @@
 
 #define DEFAULT_PAGE_NO                   1
 #define DEFAULT_PAGE_SIZE                 20
+#define JUDGE_IS                          @"1"
+#define JUDGE_NOT                         @"0"
 
 #endif

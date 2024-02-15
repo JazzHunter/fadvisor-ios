@@ -20,4 +20,5 @@
 #import "MBProgressHUD+Additions.h"
 #import "UIViewController+Additions.h"
 #import "NSString+Additions.h"
+#import "UIImage+Additions.h"
 #endif /* Categories_h */

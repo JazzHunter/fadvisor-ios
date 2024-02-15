@@ -11,7 +11,7 @@ static const CGFloat SeekPopupViewWidth = 155;           //view 宽度
 static const CGFloat SeekPopupViewWidthHeight = 155;     //view 高度
 static const CGFloat SeekPopupViewImageWidth = 75;       //imageView 宽度
 static const CGFloat SeekPopupViewImageHeight = 75;      //imageView 高度
-static const CGFloat SeekPopupViewImageTop = 25;              //imageView origin.y
+static const CGFloat SeekPopupViewImageTop = 25;         //imageView origin.y
 static const CGFloat SeekPopupViewTextSize = 29;         //文字font
 static const CGFloat SeekPopupViewLabelMargin = 18;      //显示时间，与图片的间隙
 
@@ -75,7 +75,7 @@ static const CGFloat SeekPopupViewLabelMargin = 18;      //显示时间，与图
     }
     NSString *time = [Utils timeformatFromSeconds:self.time];
     if (time && _textStyle) {
-        [time drawInRect:CGRectMake(0, imgY + imgHeight + SeekPopupViewLabelMargin, rect.size.width, SeekPopupViewTextSize) withAttributes:@{NSFontAttributeName:_textFont, NSForegroundColorAttributeName:[UIColor colorFromHexString:@"373737"], NSParagraphStyleAttributeName:_textStyle}];
+        [time drawInRect:CGRectMake(0, imgY + imgHeight + SeekPopupViewLabelMargin, rect.size.width, SeekPopupViewTextSize) withAttributes:@{ NSFontAttributeName: _textFont, NSForegroundColorAttributeName: [UIColor colorFromHexString:@"373737"], NSParagraphStyleAttributeName: _textStyle }];
     }
     CGContextRestoreGState(context);
 }

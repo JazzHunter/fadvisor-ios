@@ -6,12 +6,12 @@
 //  Copyright © 2019年 com.alibaba. All rights reserved.
 //
 
-#import "PlayerLoopView.h"
+#import "PlayerDetailsBulletView.h"
 
 static CGSize appScreenSize;
 static UIInterfaceOrientation lastOrientation;
 
-@implementation PlayerLoopView
+@implementation PlayerDetailsBulletView
 {
     int currentIndex; //记录
 }

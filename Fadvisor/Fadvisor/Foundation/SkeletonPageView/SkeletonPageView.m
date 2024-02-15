@@ -35,18 +35,15 @@
     [self.rootLayout removeAllSubviews];
 
     switch (skeletonPageType) {
-        case SkeletonPageViewTypeNormal: {
+        case SkeletonPageViewTypeNormal:
             [self configNormalSkeletonUI];
             break;
-        };
-        case SkeletonPageViewTypeCell: {
+        case SkeletonPageViewTypeCell:
             [self configNormalSkeletonUI];
             break;
-        };
-        case SkeletonPageViewTypeContentDetail: {
+        case SkeletonPageViewTypeContentDetail:
             [self configNormalSkeletonUI];
             break;
-        };
     }
 }
 

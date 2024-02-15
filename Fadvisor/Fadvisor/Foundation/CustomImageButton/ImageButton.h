@@ -1,5 +1,5 @@
 //
-//  CustomImageButton.h
+//  ImageButton.h
 //  Fadvisor
 //
 //  Created by 韩建伟 on 2023/12/21.
@@ -9,12 +9,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CustomImageButton : UIButton
+@interface ImageButton : UIButton
 
 - (instancetype)initWithFrame:(CGRect)frame imageName:(NSString *)imageName;
 
 @property (nonatomic) CGSize imageSize;
-
 
 - (void)enableTouchDownAnimation;
 

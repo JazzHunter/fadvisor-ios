@@ -8,7 +8,7 @@
 #import "TabAccountViewController.h"
 #import "AccountManager.h"
 #import "TabAccountHeaderNotLoginView.h"
-#import "CustomImageButton.h"
+#import "ImageButton.h"
 #import "UserLoginViewController.h"
 
 @interface TabAccountViewController ()<TabAccountHeaderNotLoginView>
@@ -74,7 +74,7 @@
     //    scanBtn.centerYPos.equalTo(@0);  //在父视图中居中。
     //    [navigationBarView addSubview:scanBtn];
     
-    CustomImageButton *loginBtn = [[CustomImageButton alloc] initWithFrame:CGRectMake(0, 0, 36, 36) imageName:@"ic_right_arr"];
+    ImageButton *loginBtn = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, 36, 36) imageName:@"ic_right_arr"];
     //    [loginBtn addTarget:self action:@selector(handleBtnTouchDown:) forControlEvents:UIControlEventTouchDown];
     [loginBtn enableTouchDownAnimation];
     

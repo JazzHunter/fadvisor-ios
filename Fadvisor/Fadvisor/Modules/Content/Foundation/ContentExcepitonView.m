@@ -52,64 +52,59 @@
 - (void)config:(ContentExcepitonType)contentExcepitonType tips:(nullable NSString *)tips reloadButtonBlock:(void (^)(UIButton *sender))block {
     self.reloadBlock = [block copy];
     switch (contentExcepitonType) {
-        case ContentExcepitonTypeNoData: {
+        case ContentExcepitonTypeNoData:
             [self setUI:@"没有找到什么内容" descriptionText:@"您可以换一种方式继续试一下" imageName:@"exception_empty" hideReloadBtn:YES reloadBtnLabel:nil];
             break;
-        };
-        case ContentExcepitonTypeNetworkError: {
+        case ContentExcepitonTypeNetworkError:
             self.imageView.mySize = CGSizeMake(140, 140);
             [self setUI:@"出错了……" descriptionText:tips ? tips : @"网络似乎不太好" imageName:@"exception_error_lamp" hideReloadBtn:block ? NO : YES reloadBtnLabel:@"点击重新加载"];
             break;
-        };
-        case ContentExcepitonTypeUnknown: {
+        case ContentExcepitonTypeUnknown:
             [self setUI:@"出现了一些问题" descriptionText:tips ? tips : @"貌似出了点差错……" imageName:@"exception_error_face" hideReloadBtn:block ? NO : YES reloadBtnLabel:@"点击重新加载"];
             break;
-        };
     }
 }
 
 - (void)config:(ResultMode)resultMode acquisitionAction:(AcquisitionAction)acquisitionAction model:(ItemModel *)model reloadButtonBlock:(void (^)(UIButton *sender))block {
     self.reloadBlock = [block copy];
     switch (resultMode) {
-        case ResultModeNotFound: {
+        case ResultModeNotFound:
             [self setUI:@"没有找到相关内容" descriptionText:@"该内容可能已经下架或删除" imageName:@"excepiton_404_ufo" hideReloadBtn:YES reloadBtnLabel:nil];
             break;
-        };
-        case ResultModeWaiting: {
+        case ResultModeWaiting:
             [self setUI:@"相关内容正在处理中" descriptionText:@"您查看的内容当前正在处理中，请您稍后再试" imageName:@"exception_empty_box" hideReloadBtn:YES reloadBtnLabel:nil];
             break;
-        };
-        case ResultModeHalt: {
+        case ResultModeHalt:
             [self setUI:@"相关内容已下架" descriptionText:@"您查看的内容已下架..." imageName:@"exception_empty_box" hideReloadBtn:YES reloadBtnLabel:nil];
             break;
-        };
-        case ResultModeNotAuthorized: {
+        case ResultModeNotAuthorized:
             switch (acquisitionAction) {
-                case AcquisitionActionLoginRequired: {
+                case AcquisitionActionLoginRequired:
                     [self setUI:@"需要登录" descriptionText:@"该内容需要登录后才能查看" imageName:@"exception_login_required" hideReloadBtn:NO reloadBtnLabel:@"进行登录"];
-                };
-                case AcquisitionActionInternalResource: {
+                    break;
+                case AcquisitionActionInternalResource:
                     [self setUI:@"需要内部认证" descriptionText:@"该内容仅限内部使用" imageName:@"exception_no_content" hideReloadBtn:NO reloadBtnLabel:@"内部认证"];
-                };
-                case AcquisitionActionRestrictResource: {
+                    break;
+                case AcquisitionActionRestrictResource:
                     [self setUI:@"私有内容" descriptionText:@"该内容仅开放给特定用户，请与您的对接人联系获取帮助" imageName:@"excepiton_unauthorized" hideReloadBtn:YES reloadBtnLabel:nil];
-                };
-                case AcquisitionActionCodeRequired: {
+                    break;
+                case AcquisitionActionCodeRequired:
                     [self setUI:@"需要验证码" descriptionText:@"该内容需要输入验证码才能查看" imageName:@"exception_code_required" hideReloadBtn:NO reloadBtnLabel:@"输入验证码"];
-                };
-                case AcquisitionActionPayRequired: {
+                    break;
+                case AcquisitionActionPayRequired:
                     [self setUI:@"需要付费" descriptionText:@"该内容需要付费后才能查看" imageName:@"exception_pay_required" hideReloadBtn:NO reloadBtnLabel:@"付费"];
-                };
-                case AcquisitionActionCollRequired: {
+                    break;
+                case AcquisitionActionCollRequired:
                     [self setUI:@"需要取得专栏的权限" descriptionText:@"该内容需要获取合集的权限" imageName:@"excepiton_unauthorized" hideReloadBtn:YES reloadBtnLabel:nil];
-                };
-                case AcquisitionActionNone: {
+                    break;
+                case AcquisitionActionNone:
                     [self setUI:@"无法查看" descriptionText:@"该内容目前无法查看" imageName:@"exception_error_face" hideReloadBtn:YES reloadBtnLabel:nil];
-                };
-                default: break;
+                    break;
+                default:
+                    break;
             }
-        };
-        default: break;
+        default:
+            break;
     }
 }
 

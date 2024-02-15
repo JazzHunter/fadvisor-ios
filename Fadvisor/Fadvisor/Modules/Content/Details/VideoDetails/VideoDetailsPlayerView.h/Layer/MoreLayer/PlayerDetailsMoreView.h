@@ -13,8 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class PlayerDetailsMoreView;
 @protocol PlayerDetailsMoreViewDelegate <NSObject>
 
-- (void)moreView:(PlayerDetailsMoreView *)moreView clickedDownloadBtn:(UIButton *)downloadBtn;
-
 - (void)moreView:(PlayerDetailsMoreView *)moreView speedChanged:(float)speedValue;
 
 - (void)moreView:(PlayerDetailsMoreView *)moreView scalingIndexChanged:(NSInteger)index;
@@ -26,8 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PlayerDetailsMoreView : UIView
 @property (nonatomic, weak) id<PlayerDetailsMoreViewDelegate>delegate;
 
-- (void)showSpeedViewMoveInAnimate;
-- (void)showSpeedViewPushInAnimate;
+- (void)showWithAnimate:(BOOL)isAnimate;
+- (void)hideWithAnimate:(BOOL)isAnimate;
 
 @end
 
