@@ -11,8 +11,6 @@
 #define kLeftRightViewHorzPadding  8.0
 #define kLeftRightViewStandardSize 44.0
 
-static NSString *const BottomViewDefaultTime = @"00:00:00";    //默认时间样式
-
 @interface PlayerDetailsControlBottomView ()
 
 @property (nonatomic, strong) ImageButton *playButton;           //播放按钮
@@ -24,6 +22,7 @@ static NSString *const BottomViewDefaultTime = @"00:00:00";    //默认时间样
 @property (nonatomic, strong) DBSlider *progressSlider; //进度条
 
 @property (nonatomic, strong) UILabel *timeLabel;    //全屏时间
+@property (nonatomic, strong) CAGradientLayer *gradientLayer; //渐变色背景涂层
 
 @property (nonatomic, strong) MyRelativeLayout *portraitLayout;    //竖屏时候的布局
 @property (nonatomic, strong) MyRelativeLayout *horizontalLayout;    //全屏时候的布局
@@ -117,6 +116,18 @@ static NSString *const BottomViewDefaultTime = @"00:00:00";    //默认时间样
     return _trackSelectButton;
 }
 
+- (CAGradientLayer *)gradientLayer {
+    if (!_gradientLayer) {
+        _gradientLayer = [CAGradientLayer layer];
+        _gradientLayer.colors = @[(id)[UIColor colorFromHexString:@"000000" alpha:1].CGColor,(id)[UIColor colorFromHexString:@"000000" alpha:0].CGColor]; //设置渐变颜色
+        _gradientLayer.locations = @[@0.0, @0.8]; //颜色的起点位置，递增，并且数量跟颜色数量相等
+        _gradientLayer.startPoint = CGPointMake(0.5, 1); //
+        _gradientLayer.endPoint = CGPointMake(0.5, 0); //
+        [self.layer insertSublayer:_gradientLayer atIndex:0];
+    }
+    return _gradientLayer;
+}
+
 - (MyRelativeLayout *)portraitLayout {
     if (!_portraitLayout) {
         _portraitLayout = [[MyRelativeLayout alloc] init];
@@ -145,7 +156,6 @@ static NSString *const BottomViewDefaultTime = @"00:00:00";    //默认时间样
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor blueColor];
         [self initUI];
     }
     return self;
@@ -159,37 +169,60 @@ static NSString *const BottomViewDefaultTime = @"00:00:00";    //默认时间样
     [self addSubview:self.horizontalLayout];
 }
 
-- (void)resetLayout:(BOOL)isPortrait {
-    if (isPortrait) {
-        self.horizontalLayout.hidden = YES;
-        self.portraitLayout.hidden = NO;
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.gradientLayer.frame = self.bounds;
+}
 
-        self.playButton.imageSize = CGSizeMake(24, 24);
+- (void)resetLayout:(BOOL)isPortrait {
+    self.horizontalLayout.hidden = isPortrait;
+    self.portraitLayout.hidden = !isPortrait;
+    
+    self.bufferedProgressView.leftPos.equalTo(self.progressSlider.leftPos).offset(4);
+    self.bufferedProgressView.rightPos.equalTo(self.progressSlider.rightPos).offset(4);
+    self.bufferedProgressView.centerYPos.equalTo(self.progressSlider.centerYPos);
+    
+    self.playButton.imageSize = isPortrait ? CGSizeMake(24, 24) : CGSizeMake(32, 32);
+    self.playButton.leftPos.equalTo(self.portraitLayout.leftPos);
+    self.playButton.centerYPos.equalTo(@0);
+    self.playButton.centerYPos.active = isPortrait;
+    self.playButton.bottomPos.active = !isPortrait;
+    
+    self.progressSlider.centerYPos.equalTo(@0);
+    self.progressSlider.centerYPos.active = isPortrait;
+    self.progressSlider.bottomPos.active = !isPortrait;
+
+    self.timeLabel.font = [UIFont systemFontOfSize:isPortrait ? 13 : 14];
+    self.timeLabel.centerYPos.equalTo(@0);
+    self.timeLabel.centerYPos.active = self.timeLabel.rightPos.active = isPortrait;
+    self.timeLabel.leftPos.active = !isPortrait;
+    
+    if (isPortrait) {
         self.playButton.leftPos.equalTo(self.portraitLayout.leftPos);
-        self.playButton.centerYPos.equalTo(@0);
+        
         [self.portraitLayout addSubview:self.playButton];
 
-        self.timeLabel.font = [UIFont systemFontOfSize:13];
-        self.timeLabel.centerYPos.equalTo(@0);
-        self.timeLabel.rightPos.equalTo(self.fullScreenSwitchButton.leftPos).offset(8);
-        [self.portraitLayout addSubview:self.timeLabel];
-
-        self.bufferedProgressView.leftPos.equalTo(self.playButton.rightPos).offset(12);
-        self.bufferedProgressView.rightPos.equalTo(self.timeLabel.leftPos).offset(12);
-        self.bufferedProgressView.centerYPos.equalTo(@0);
         [self.portraitLayout addSubview:self.bufferedProgressView];
-        
         self.progressSlider.leftPos.equalTo(self.playButton.rightPos).offset(8);
         self.progressSlider.rightPos.equalTo(self.timeLabel.leftPos).offset(8);
-        self.progressSlider.centerYPos.equalTo(@0);
         [self.portraitLayout addSubview:self.progressSlider];
         
-
+        self.timeLabel.rightPos.equalTo(self.fullScreenSwitchButton.leftPos).offset(8);
+        [self.portraitLayout addSubview:self.timeLabel];
     } else {
-        self.horizontalLayout.hidden = NO;
-        self.portraitLayout.hidden = YES;
-        self.playButton.imageSize = CGSizeMake(kLeftRightViewStandardSize, kLeftRightViewStandardSize);
+        self.playButton.leftPos.equalTo(self.horizontalLayout.leftPos);
+        self.playButton.bottomPos.equalTo(self.horizontalLayout.bottomPos).offset(20);
         [self.horizontalLayout addSubview:self.playButton];
+        
+        [self.horizontalLayout addSubview:self.bufferedProgressView];
+        self.progressSlider.leftPos.equalTo(self.horizontalLayout.leftPos);
+        self.progressSlider.rightPos.equalTo(self.horizontalLayout.rightPos);
+        self.progressSlider.bottomPos.equalTo(self.playButton.topPos).offset(12);
+        [self.horizontalLayout addSubview:self.progressSlider];
+        
+        self.timeLabel.leftPos.equalTo(self.horizontalLayout.leftPos).offset(6 + 4); // 6 是playButton的内部距离，4 是 progressSlider 的间距
+        self.timeLabel.bottomPos.equalTo(self.progressSlider.topPos).offset(12);
+        [self.horizontalLayout addSubview:self.timeLabel];
     }
 }
 

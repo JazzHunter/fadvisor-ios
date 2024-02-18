@@ -3,13 +3,8 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "PlayerDetailsControlProgressView.h"
 #import <MyLayout/MyLayout.h>
 #import "AliyunPlayer/AliyunPlayer.h"
-
-static const CGFloat BottomViewMargin = 8;                                             //间隙
-static const CGFloat BottomViewFullScreenButtonWidth = 48;                             //全屏按钮宽度
-static const CGFloat BottomViewQualityButtonWidth = 48 + BottomViewMargin * 2;    // 清晰度按钮宽度
 
 @class PlayerDetailsControlBottomView;
 
@@ -38,8 +33,6 @@ static const CGFloat BottomViewQualityButtonWidth = 48 + BottomViewMargin * 2;  
 @interface PlayerDetailsControlBottomView : MyRelativeLayout;
 
 @property (nonatomic, weak) id<PlayerDetailsControlBottomViewDelegate>delegate;
-//@property (nonatomic, assign) float progress;                       //滑动progressValue值
-//@property (nonatomic, assign) float bufferedProgress;               //缓存progressValue
 
 /*
  * 设置垂直 / 水平布局

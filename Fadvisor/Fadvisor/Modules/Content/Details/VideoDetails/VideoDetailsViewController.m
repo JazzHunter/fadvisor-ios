@@ -8,6 +8,7 @@
 #import "VideoDetailsViewController.h"
 #import "ItemDetailsService.h"
 #import "MediaModel.h"
+#import "Utils.h"
 
 #import "JXCategoryView.h"
 #import "JXPagerListRefreshView.h"
@@ -36,7 +37,7 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 
 @property (nonatomic, strong) VideoDetailsPlayerView *playerView;
 @property (assign, nonatomic) CGFloat playerViewHeight;
-@property (nonatomic, strong) UIView *headerView;                   //状态栏PlayerView
+@property (nonatomic, strong) UIView *headerView;                   //竖屏的容器，状态栏 + PlayerView
 
 @end
 
@@ -92,8 +93,10 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 }
 
 - (void)initUI {
+    self.view.backgroundColor = [UIColor clearColor];
+
     NSArray <NSString *> *titles = @[@"内容", @"评论"];
-    _categoryView = [[JXCategoryTitleView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44.f)];
+    _categoryView = [[JXCategoryTitleView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 24.f)];
     self.categoryView.titles = titles;
     self.categoryView.backgroundColor = [UIColor backgroundColor];
     self.categoryView.delegate = self;
@@ -111,19 +114,35 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
     lineView.lineStyle = JXCategoryIndicatorLineStyle_Lengthen;
     self.categoryView.indicators = @[lineView];
 
-    self.pagerView = [[JXPagerListRefreshView alloc] initWithDelegate:self];
+    self.pagerView = [[JXPagerListRefreshView alloc] initWithDelegate:self listContainerType:(JXPagerListContainerType_ScrollView)];
     self.pagerView.mainTableView.gestureDelegate = self;
     self.pagerView.pinSectionHeaderVerticalOffset = kStatusBarHeight;   //悬浮位置
-
+    self.pagerView.mainTableView.backgroundColor = [UIColor clearColor];
     self.pagerView.frame = self.view.bounds;
-    [self.view bringSubviewToFront:self.pagerView];
     [self.view addSubview:self.pagerView];
-
+    
     self.categoryView.listContainer = (id<JXCategoryViewListContainer>)self.pagerView.listContainerView;
 
     //导航栏隐藏的情况，处理扣边返回，下面的代码要加上
     [self.pagerView.listContainerView.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
     [self.pagerView.mainTableView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
+    
+    
+}
+
+- (void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+    BOOL isPortrait = [Utils isInterfaceOrientationPortrait];
+    self.playerView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, self.playerViewHeight);
+    if (isPortrait) {
+        [self.headerView addSubview:self.playerView];
+    } else {
+        [self.view addSubview:self.playerView];
+        [UIView animateWithDuration:0.3 animations:^{
+            self.playerView.frame = self.view.bounds;
+        }];
+    }
+    [self.playerView resetLayout:isPortrait];
 }
 
 - (void)handleDeviceOrientationDidChange:(UIInterfaceOrientation)interfaceOrientation {
@@ -138,15 +157,14 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
         case UIDeviceOrientationFaceDown:
         case UIDeviceOrientationUnknown:
         case UIDeviceOrientationPortraitUpsideDown:
+            
             break;
         case UIDeviceOrientationLandscapeLeft:
         case UIDeviceOrientationLandscapeRight:
-            self.playerView.frame = self.view.bounds;
-            [self.playerView resetLayout:NO];
+            
             break;
         case UIDeviceOrientationPortrait:
-            self.playerView.frame = CGRectMake(0, 0, self.view.width, self.playerViewHeight);
-            [self.playerView resetLayout:YES];
+
             break;
         default:
             break;
@@ -222,14 +240,15 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 #pragma mark - JXPagerMainTableViewGestureDelegate
 
 - (BOOL)mainTableViewGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    //禁止categoryView左右滑动的时候，上下和左右都可以滚动
+    //如果手势来自于categoryView，其他滑动禁止
     if (otherGestureRecognizer == self.categoryView.collectionView.panGestureRecognizer) {
         return NO;
     }
-//    CGPoint point = [gestureRecognizer locationInView:self.view];
-//    if (CGRectContainsPoint(self.playerView.frame, point)) {
-//        return NO;
-//    }
+    //如果手势点自于playerView，其他滑动禁止
+    CGPoint point = [gestureRecognizer locationInView:self.view];
+    if (CGRectContainsPoint(self.playerView.frame, point)) {
+        return NO;
+    }
     return [gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]];
 }
 
@@ -243,17 +262,18 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 - (UIView *)headerView {
     if (!_headerView) {
         _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kStatusBarHeight + _playerViewHeight)];
-        _headerView.backgroundColor = [UIColor grayColor];
+        _headerView.backgroundColor = [UIColor blackColor];
 
         _playerView = [[VideoDetailsPlayerView alloc] init];
         _playerView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, _playerViewHeight);
         _playerView.delegate = self;
 
-        [_headerView addSubview:_playerView];
-        [_headerView layoutSubviews];
+//        [_headerView addSubview:_playerView];
+//        [_headerView layoutSubviews];
     }
     return _headerView;
 }
+
 
 //- (VideoDetailsPlayerView *)playerView {
 //    if (!_playerView) {

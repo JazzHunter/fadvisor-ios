@@ -23,4 +23,11 @@
     self.contentInset = contentInset;
 }
 
+- (void)setSafeTopInset {
+    UIEdgeInsets contentInset = self.contentInset;
+    contentInset.top += rootNavigationController.view.safeAreaInsets.top;
+    self.contentInset = contentInset;
+}
+
+
 @end

@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UILabel *titleLabel;          //标题
 @property (nonatomic, strong) ImageButton *backButton;      //返回按钮
 @property (nonatomic, strong) ImageButton *moreButton;      //返回按钮
+@property (nonatomic, strong) CAGradientLayer *gradientLayer; //渐变色背景涂层
 
 @end
 
@@ -58,6 +59,18 @@
     return _titleLabel;
 }
 
+- (CAGradientLayer *)gradientLayer {
+    if (!_gradientLayer) {
+        _gradientLayer = [CAGradientLayer layer];
+        _gradientLayer.colors = @[(id)[UIColor colorFromHexString:@"000000" alpha:1].CGColor, (id)[UIColor colorFromHexString:@"000000" alpha:0].CGColor]; //设置渐变颜色
+        _gradientLayer.locations = @[@0.0, @0.8]; //颜色的起点位置，递增，并且数量跟颜色数量相等
+        _gradientLayer.startPoint = CGPointMake(0.5, 0); //
+        _gradientLayer.endPoint = CGPointMake(0.5, 1); //
+        [self.layer insertSublayer:_gradientLayer atIndex:0];
+    }
+    return _gradientLayer;
+}
+
 #pragma mark - init
 - (instancetype)init {
     return [self initWithFrame:CGRectZero];
@@ -65,7 +78,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor redColor];
         [self addSubview:self.backButton];
         [self addSubview:self.moreButton];
         [self addSubview:self.titleLabel];
@@ -73,17 +85,22 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.gradientLayer.frame = self.bounds;
+}
+
+
+- (void)resetLayout:(BOOL)isPortrait {
+    if (isPortrait) {
+    } else {
+    }
+}
+
 - (void)setTitle:(NSString *)titleText {
     self.titleLabel.text = titleText;
 }
 
-- (void)resetLayout:(BOOL)isPortrait {
-    if (isPortrait) {
-        
-    } else {
-        
-    }
-}
 
 #pragma mark - ButtonClicked
 - (void)backButtonClicked:(UIButton *)sender {

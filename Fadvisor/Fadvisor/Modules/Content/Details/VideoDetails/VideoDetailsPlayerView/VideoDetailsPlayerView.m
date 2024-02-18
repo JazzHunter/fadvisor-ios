@@ -121,7 +121,14 @@
 }
 
 - (void)initUI {
+    self.insetsPaddingFromSafeArea = UIRectEdgeNone; 
+    
     //设置view
+    self.coverImageView.myMargin = 0;
+    self.coverImageView.centerXPos.equalTo(@0);
+    self.coverImageView.centerYPos.equalTo(@0);
+    [self addSubview:self.coverImageView];
+    
     self.playerView.myMargin = 0;
     self.playerView.centerXPos.equalTo(@0);
     self.playerView.centerYPos.equalTo(@0);
@@ -130,8 +137,12 @@
     self.isPortrait = YES;
     [self setLayoutPortrait];
 
-    [self addSubview:self.coverImageView];
     [self addSubview:self.bulletView];
+    
+    self.thumbnailView.centerXPos.equalTo(@0);
+    self.thumbnailView.centerYPos.equalTo(@0);
+    self.thumbnailView.hidden = YES;
+    [self addSubview:self.thumbnailView];
 
     self.gestureView.myMargin = 0;
     [self addSubview:self.gestureView];
@@ -141,6 +152,7 @@
     self.controlTopView.leftPos.equalTo(self.leftPos);
     self.controlTopView.widthSize.equalTo(self.widthSize);
     self.controlTopView.heightSize.equalTo(@(MyLayoutSize.wrap));
+    self.controlTopView.alpha = 0;
     [self addSubview:self.controlTopView];
 
     self.controlBottomView.delegate = self;
@@ -148,11 +160,10 @@
     self.controlTopView.leftPos.equalTo(self.leftPos);
     self.controlBottomView.widthSize.equalTo(self.widthSize);
     self.controlBottomView.heightSize.equalTo(@(MyLayoutSize.wrap));
+    self.controlBottomView.alpha = 0;
     [self addSubview:self.controlBottomView];
 
-    self.controlTopView.alpha = 0;
-    self.controlBottomView.alpha = 0;
-
+    
     self.moreView.delegate = self;
     self.moreView.centerYPos.equalTo(@0);
     self.moreView.heightSize.equalTo(self.heightSize);
@@ -166,7 +177,6 @@
 
 //    [self addSubview:self.previewView];
 //    [self addSubview:self.loadingView];
-//    [self addSubview:self.thumbnailView];
 }
 
 //- (void)becomeActive {
@@ -485,8 +495,7 @@
 }
 
 - (void)onGetThumbnailSuc:(int64_t)positionMs fromPos:(int64_t)fromPos toPos:(int64_t)toPos image:(id)image {
-    self.thumbnailView.time = positionMs;
-    self.thumbnailView.thumbnailImage = (UIImage *)image;
+    [self.thumbnailView updateThumbnail:image time:positionMs durationTime:[AlivcPlayerManager manager].duration];
     self.thumbnailView.hidden = NO;
 }
 
@@ -510,50 +519,6 @@
         return;
     }
     [CommonFunc saveImage:image inView:self];
-}
-
-#pragma mark - popdelegate
-- (void)showPopViewWithType:(PlayerErrorType)type {
-    self.popLayer.hidden = YES;
-    switch (type) {
-        case PlayerErrorTypeReplay: {
-            //重播
-            [self seekTo:0];
-//            [[AlivcPlayerManager manager] prepare];
-            [[AlivcPlayerManager manager] start];
-        }
-        break;
-        case PlayerErrorTypeRetry: {
-        }
-        break;
-        case PlayerErrorTypePause: {
-        }
-        break;
-            break;
-        default:
-            break;
-    }
-}
-
-- (void)onBackClickedWithPopView:(PlayerDetailsPopView *)popView {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(onBackViewClickWithPlayerView:)]) {
-        [self.delegate onBackViewClickWithPlayerView:self];
-    } else {
-        [self stop];
-    }
-}
-
-//根据错误信息，展示popLayer界面
-- (void)showPopLayerWithErrorModel:(AVPErrorModel *)errorModel {
-//    NSString *errorShowMsg = [NSString stringWithFormat:@"%@\n errorCode:%d", errorModel.message, (int)errorModel.code];
-//
-//    //点击重试后，重新获取信息
-//    if (self.playerConfig && (self.playerConfig.sourceType == SourceTypeNull) && errorModel.code == ERROR_SERVER_POP_UNKNOWN) {
-//        [self.popLayer showPopViewWithCode:ALYPVPlayerPopCodeSecurityTokenExpired popMsg:errorShowMsg];
-//    } else {
-//        [self.popLayer showPopViewWithCode:ALYPVPlayerPopCodeServerError popMsg:errorShowMsg];
-//    }
-//    [self unlockScreen];
 }
 
 #pragma mark - PlayerDetailsControlTopViewDelegate
@@ -582,9 +547,9 @@
             self.mProgressCanUpdate = NO;
             //更新UI上的当前时间
             [self.controlBottomView updateProgressWithCurrentTime:progress * durationTime durationTime:durationTime];
-            if (self.trackHasThumbnai == YES) {
+//            if (self.trackHasThumbnai == YES) {
                 [[AlivcPlayerManager manager] getThumbnail:progress * durationTime];
-            }
+//            }
             break;
         case UIControlEventTouchUpOutside:
         case UIControlEventTouchUpInside:
@@ -655,6 +620,7 @@
 
 - (void)onDoubleTapWithGestureView:(PlayerDetailsGestureView *)gestureView {
     [self playButtonClicked];
+    [self showControlView];
 }
 
 - (void)onHorizontalMovingWithGestureView:(PlayerDetailsGestureView *)gestureView offset:(float)moveOffset {
@@ -663,9 +629,17 @@
 
 
 - (void)onHorizontalMoveEndWithGestureView:(PlayerDetailsGestureView *)gestureView offset:(float)moveOffset {
+    NSInteger durationTime = [AlivcPlayerManager manager].duration;
+    NSTimeInterval moveValue = [self moveValueByOffset:moveOffset];
+    [self seekTo:(durationTime * moveValue)];
+    [self.controlBottomView setProgress:moveValue];
+    self.thumbnailView.hidden = YES;
+}
+
+- (NSTimeInterval)moveValueByOffset:(float)moveOffset {
     CGFloat progress = [self.controlBottomView progress];
     CGFloat width = self.width;
-    CGFloat gap = (moveOffset / self.width);
+    CGFloat gap = (moveOffset / width);
     CGFloat moveValue = progress + gap;
     if (moveValue > 1) {
         moveValue = 1;
@@ -673,9 +647,7 @@
     if (moveValue < 0) {
         moveValue = 0;
     }
-    NSInteger durationTime = [AlivcPlayerManager manager].duration;
-    [self seekTo:(moveValue * durationTime)];
-    [self.controlBottomView setProgress:moveValue];
+    return moveValue;
 }
 
 #pragma mark PlayerMoreViewDelegate
@@ -718,6 +690,50 @@
 //            break;
 //    }
 //}
+
+#pragma mark - popdelegate
+- (void)showPopViewWithType:(PlayerErrorType)type {
+    self.popLayer.hidden = YES;
+    switch (type) {
+        case PlayerErrorTypeReplay: {
+            //重播
+            [self seekTo:0];
+//            [[AlivcPlayerManager manager] prepare];
+            [[AlivcPlayerManager manager] start];
+        }
+        break;
+        case PlayerErrorTypeRetry: {
+        }
+        break;
+        case PlayerErrorTypePause: {
+        }
+        break;
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)onBackClickedWithPopView:(PlayerDetailsPopView *)popView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onBackViewClickWithPlayerView:)]) {
+        [self.delegate onBackViewClickWithPlayerView:self];
+    } else {
+        [self stop];
+    }
+}
+
+//根据错误信息，展示popLayer界面
+- (void)showPopLayerWithErrorModel:(AVPErrorModel *)errorModel {
+//    NSString *errorShowMsg = [NSString stringWithFormat:@"%@\n errorCode:%d", errorModel.message, (int)errorModel.code];
+//
+//    //点击重试后，重新获取信息
+//    if (self.playerConfig && (self.playerConfig.sourceType == SourceTypeNull) && errorModel.code == ERROR_SERVER_POP_UNKNOWN) {
+//        [self.popLayer showPopViewWithCode:ALYPVPlayerPopCodeSecurityTokenExpired popMsg:errorShowMsg];
+//    } else {
+//        [self.popLayer showPopViewWithCode:ALYPVPlayerPopCodeServerError popMsg:errorShowMsg];
+//    }
+//    [self unlockScreen];
+}
 
 #pragma mark - set And get
 - (PlayerDetailsPreviewLogoBtn *)previewLogoBtn {
@@ -798,7 +814,7 @@
 - (UIImageView *)coverImageView {
     if (!_coverImageView) {
         _coverImageView = [[UIImageView alloc] init];
-        _coverImageView.hidden = YES;
+        _coverImageView.hidden = NO;
     }
     return _coverImageView;
 }

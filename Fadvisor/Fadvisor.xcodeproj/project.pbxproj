@@ -1490,14 +1490,14 @@
 			path = History;
 			sourceTree = "<group>";
 		};
-		C16395E72B574C8400B2C71D /* VideoDetailsPlayerView.h */ = {
+		C16395E72B574C8400B2C71D /* VideoDetailsPlayerView */ = {
 			isa = PBXGroup;
 			children = (
 				C16395F42B5B6D4700B2C71D /* Layer */,
 				C16395E82B574CAC00B2C71D /* VideoDetailsPlayerView.h */,
 				C16395E92B574CAC00B2C71D /* VideoDetailsPlayerView.m */,
 			);
-			path = VideoDetailsPlayerView.h;
+			path = VideoDetailsPlayerView;
 			sourceTree = "<group>";
 		};
 		C16395F42B5B6D4700B2C71D /* Layer */ = {
@@ -1689,7 +1689,7 @@
 			isa = PBXGroup;
 			children = (
 				C15105322B5EB720006FA262 /* VideoDetailsContent */,
-				C16395E72B574C8400B2C71D /* VideoDetailsPlayerView.h */,
+				C16395E72B574C8400B2C71D /* VideoDetailsPlayerView */,
 				C1CEB7E32B24629400AA8490 /* VideoDetailsViewController.h */,
 				C1CEB7E42B24629400AA8490 /* VideoDetailsViewController.m */,
 				C16395EE2B57FCE300B2C71D /* VideoDetailsModel.h */,
