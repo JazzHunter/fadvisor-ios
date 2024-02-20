@@ -120,17 +120,15 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
     self.pagerView.mainTableView.backgroundColor = [UIColor clearColor];
     self.pagerView.frame = self.view.bounds;
     [self.view addSubview:self.pagerView];
-    
+
     self.categoryView.listContainer = (id<JXCategoryViewListContainer>)self.pagerView.listContainerView;
 
     //导航栏隐藏的情况，处理扣边返回，下面的代码要加上
     [self.pagerView.listContainerView.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
     [self.pagerView.mainTableView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
-    
-    
 }
 
-- (void)viewWillLayoutSubviews{
+- (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     BOOL isPortrait = [Utils isInterfaceOrientationPortrait];
     self.playerView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, self.playerViewHeight);
@@ -146,29 +144,6 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 }
 
 - (void)handleDeviceOrientationDidChange:(UIInterfaceOrientation)interfaceOrientation {
-    //进后台或者锁定屏幕后不再旋转屏幕
-    if (self.playerView.isScreenLocked) {
-        return;
-    }
-
-    UIDevice *device = [UIDevice currentDevice];
-    switch (device.orientation) {
-        case UIDeviceOrientationFaceUp:
-        case UIDeviceOrientationFaceDown:
-        case UIDeviceOrientationUnknown:
-        case UIDeviceOrientationPortraitUpsideDown:
-            
-            break;
-        case UIDeviceOrientationLandscapeLeft:
-        case UIDeviceOrientationLandscapeRight:
-            
-            break;
-        case UIDeviceOrientationPortrait:
-
-            break;
-        default:
-            break;
-    }
 }
 
 - (void)dealloc {
@@ -216,7 +191,7 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
     return vc;
 }
 
-#pragma mark - PlayerDetailsControlTopViewDelegate
+#pragma mark - VideoDetailsPlayerViewDelegate
 - (void)onBackViewClickWithPlayerView:(VideoDetailsPlayerView *)playerView {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -225,6 +200,17 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 }
 
 - (void)onFinishWithPlayerView:(VideoDetailsPlayerView *)playerView {
+}
+
+- (void)onScreenLockButtonClickWithPlayerView:(VideoDetailsPlayerView *)playerView {
+    if (self.playerView.isScreenLocked) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    } else {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handleDeviceOrientationDidChange:)
+                                                     name:UIDeviceOrientationDidChangeNotification
+                                                   object:nil];
+    }
 }
 
 #pragma mark - BaseViewControllerDatasource
@@ -273,7 +259,6 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
     }
     return _headerView;
 }
-
 
 //- (VideoDetailsPlayerView *)playerView {
 //    if (!_playerView) {

@@ -216,7 +216,7 @@
     return vc;
 }
 
-- (UIViewController *)findSuperViewController:(UIView *)view
++ (UIViewController *)findSuperViewController:(UIView *)view
 {
     UIResponder *responder = view;
     // 循环获取下一个响应者,直到响应者是一个UIViewController类的一个对象为止,然后返回该对象.
@@ -237,7 +237,7 @@
     //format of second
     NSString *str_second = [NSString stringWithFormat:@"%02ld", (long)seconds % 60];
 
-    return seconds / 3600 <= 0 ? [NSString stringWithFormat:@"%@:%@", str_minute, str_second] : [NSString stringWithFormat: @"%@:%@:%@", str_hour, str_minute, str_second];
+    return seconds / 3600 <= 0 ? [NSString stringWithFormat:@"%@:%@", str_minute, str_second] : [NSString stringWithFormat:@"%@:%@:%@", str_hour, str_minute, str_second];
 }
 
 + (void)drawFillRoundRect:(CGRect)rect radius:(CGFloat)radius color:(UIColor *)color context:(CGContextRef)context {
@@ -259,18 +259,14 @@
     return o == UIInterfaceOrientationPortrait;
 }
 
-+ (void)setFullOrHalfScreen {
-    BOOL isFull = [self isInterfaceOrientationPortrait];
++ (void)orientationRotate:(BOOL)isPortrait {
     if (@available(iOS 16.0, *)) {
         @try {
             NSArray *array = [[[UIApplication sharedApplication] connectedScenes] allObjects];
             UIWindowScene *ws = (UIWindowScene *)array[0];
             Class GeometryPreferences = NSClassFromString(@"UIWindowSceneGeometryPreferencesIOS");
             id geometryPreferences = [[GeometryPreferences alloc]init];
-            UIInterfaceOrientationMask orientationMask = UIInterfaceOrientationMaskLandscapeRight;
-            if (!isFull) {
-                orientationMask = UIInterfaceOrientationMaskPortrait;
-            }
+            UIInterfaceOrientationMask orientationMask = isPortrait ? UIInterfaceOrientationMaskPortrait : UIInterfaceOrientationMaskLandscapeRight;
             [geometryPreferences setValue:@(orientationMask) forKey:@"interfaceOrientations"];
             SEL sel_method = NSSelectorFromString(@"requestGeometryUpdateWithPreferences:errorHandler:");
             void (^ ErrorBlock)(NSError *err) = ^(NSError *err) {
@@ -289,7 +285,7 @@
             NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
             [invocation setSelector:selector];
             [invocation setTarget:[UIDevice currentDevice]];
-            int val = isFull ? UIInterfaceOrientationLandscapeRight : UIInterfaceOrientationPortrait;
+            int val = isPortrait ? UIInterfaceOrientationPortrait : UIInterfaceOrientationLandscapeRight;
 
             [invocation setArgument:&val atIndex:2];
             [invocation invoke];

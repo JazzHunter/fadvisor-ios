@@ -7,11 +7,12 @@
 
 #import "UserLoginViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "MaskedLoginButton.h"
+#import <MyLayout/MyLayout.h>
 
 @interface UserLoginViewController ()
 
 @property (nonatomic, strong) AVPlayer *player; /**< 媒体播放器 */
-
 @end
 
 @implementation UserLoginViewController
@@ -22,14 +23,54 @@
     if (self) {
         self.modalPresentationStyle = UIModalPresentationFullScreen;
         [self setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(becomeActive)
+                                                     name:UIApplicationDidBecomeActiveNotification
+                                                   object:nil];
     }
     return self;
 }
 
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor yellowColor];
+
     [self initPlayer];
+    
+    MyRelativeLayout *rootLayout = [[MyRelativeLayout alloc] initWithFrame:self.view.bounds];
+    [self.view addSubview:rootLayout];
+    
+    MaskedLoginButton *button = [[MaskedLoginButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    [button addTarget:self action:@selector(handleLoginButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [button setText:@"点我登录" ];
+    button.centerXPos.equalTo(rootLayout.centerXPos);
+    button.bottomPos.equalTo(@(self.view.height * 0.1));
+    [rootLayout addSubview:button];
+    
+    UILabel *appSlogLabel2 = [[UILabel alloc]init];
+    appSlogLabel2.text = [@"AppSlog" localString];
+    appSlogLabel2.textColor = [UIColor whiteColor];
+    appSlogLabel2.font = [UIFont systemFontOfSize:13 weight:UIFontWeightRegular];
+    [appSlogLabel2 sizeToFit];
+    appSlogLabel2.leftPos.equalTo(button.leftPos);
+    appSlogLabel2.bottomPos.equalTo(button.topPos).offset(32);
+    [rootLayout addSubview:appSlogLabel2];
+    
+    UILabel *appSlogLabel = [[UILabel alloc]init];
+    appSlogLabel.text = [@"AppSlog2" localString];
+    appSlogLabel.textColor = [UIColor whiteColor];
+    appSlogLabel.font = [UIFont systemFontOfSize:15 weight:UIFontWeightRegular];
+    [appSlogLabel sizeToFit];
+    appSlogLabel.leftPos.equalTo(button.leftPos);
+    appSlogLabel.bottomPos.equalTo(appSlogLabel2.topPos).offset(8);
+    [rootLayout addSubview:appSlogLabel];
+    
+    UIImageView *appNameView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 120, 56)];
+    appNameView.image = [UIImage imageNamed:@"app_name"];
+    appNameView.contentMode = UIViewContentModeScaleAspectFit;
+    appNameView.leftPos.equalTo(button.leftPos);
+    appNameView.bottomPos.equalTo(appSlogLabel.topPos).offset(12);
+    [rootLayout addSubview:appNameView];
+    
 }
 
 - (void)initPlayer {
@@ -43,7 +84,7 @@
     // 4、创建AVPlayerLayer，用于呈现视频
     AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
     // 5、设置显示大小和位置
-    playerLayer.frame =self.view.bounds;
+    playerLayer.frame = self.view.bounds;
 
     // 6、设置拉伸模式
     playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
@@ -67,5 +108,16 @@
 
     [self.player play];
 }
+
+- (void)becomeActive {
+    if (self.player.rate == 0) {
+        [_player play];
+    }
+}
+
+-(void)handleLoginButtonClicked:(MaskedLoginButton *)sender {
+    [sender recoveryBackgourndColor];
+}
+
 
 @end

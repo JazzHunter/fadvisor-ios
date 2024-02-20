@@ -138,10 +138,10 @@
                     [UIScreen mainScreen].brightness = brightness;
                 } else {
                     [self.volumeBrightnessView addSystemVolumeView];
-                    CGFloat volume = [AlivcPlayerManager manager].volume / 2.0;
+                    CGFloat volume = PLAYER_MANAGER.volume / 2.0;
                     volume += (-velocity.y / 10000);
                     [self.volumeBrightnessView updateProgress:volume withVolumeBrightnessType:ZFVolumeBrightnessTypeVolume];
-                    [AlivcPlayerManager manager].volume = volume * 2;
+                    PLAYER_MANAGER.volume = volume * 2;
                 }
                 break;
             }
@@ -162,13 +162,13 @@
 
 - (void)onLongPress:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
-        self.currentSpeed = [AlivcPlayerManager manager].rate;
+        self.currentSpeed = PLAYER_MANAGER.rate;
     } else if (sender.state == UIGestureRecognizerStateChanged) {
-        [AlivcPlayerManager manager].rate = 2.0;
+        PLAYER_MANAGER.rate = 2.0;
         [self showSpeedSwiperAtDirection:YES isChange:YES];
     } else if (sender.state == UIGestureRecognizerStateEnded) {
         [self hideSpeedSwiper];
-        [AlivcPlayerManager manager].rate = self.currentSpeed;
+        PLAYER_MANAGER.rate = self.currentSpeed;
     }
 }
 

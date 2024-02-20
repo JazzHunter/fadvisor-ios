@@ -29,6 +29,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onDownloadButtonClickWithPlayerView:(VideoDetailsPlayerView *)playerView;
 
 /**
+ * 功能：锁定屏幕按钮事件
+ * 参数：playerView ：VideoDetailsPlayerView
+ */
+- (void)onScreenLockButtonClickWithPlayerView:(VideoDetailsPlayerView *)playerView;
+
+/**
  * 功能：播放完成事件 ，请区别stop（停止播放）
  * 参数：playerView ： VideoDetailsPlayerView
  */
@@ -41,13 +47,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<VideoDetailsPlayerViewProtocol> delegate; //代理
 
 @property (nonatomic, assign) BOOL isScreenLocked;
+
 @property (nonatomic, assign) BOOL isPreviewMode; //当前播放视频的清晰度信息
 
 @property (assign, nonatomic) CGRect defaultFrame;
 
 // 设置垂直 / 水平布局
 - (void)resetLayout:(BOOL)isPortrait;
-
 
 - (void)startNewPlayWithItem:(ItemModel *)itemModel details:(VideoDetailsModel *)detailsModel;
 

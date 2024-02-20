@@ -12,10 +12,9 @@
 @interface PlayerDetailsControlTopView ()
 
 @property (nonatomic, strong) UILabel *titleLabel;          //标题
+@property (nonatomic, strong) CAGradientLayer *gradientLayer; //渐变色背景涂层
 @property (nonatomic, strong) ImageButton *backButton;      //返回按钮
 @property (nonatomic, strong) ImageButton *moreButton;      //返回按钮
-@property (nonatomic, strong) CAGradientLayer *gradientLayer; //渐变色背景涂层
-
 @end
 
 @implementation PlayerDetailsControlTopView

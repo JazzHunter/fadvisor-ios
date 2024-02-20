@@ -8,6 +8,8 @@
 #import <AliyunPlayer/AliyunPlayer.h>
 #import "AlivcPlayerDefine.h"
 
+#define PLAYER_MANAGER [AlivcPlayerManager manager]
+
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol AlivcPlayerProtocal <NSObject>
@@ -169,6 +171,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)startPlayWithVidAuth:(NSString *)vid errorBlock:(void (^)(NSString *errorMsg))errorBlock previewTime:(int)previewTime;
 
+/**
+ @brief 当前 Vid 的时间
+ */
+- (int64_t)localWatchTime;
 /**
  @brief Url 播放
  */

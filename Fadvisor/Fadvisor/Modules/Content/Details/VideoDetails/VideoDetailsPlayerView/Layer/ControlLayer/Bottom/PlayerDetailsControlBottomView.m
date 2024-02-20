@@ -76,7 +76,7 @@
         _bufferedProgressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
         _bufferedProgressView.progress = 0.0;
         _bufferedProgressView.trackTintColor = [UIColor clearColor];
-        _bufferedProgressView.heightSize.equalTo(@2);
+//        _bufferedProgressView.heightSize.equalTo(@2);
         //设置轨道的颜色
         _bufferedProgressView.progressTintColor = [UIColor colorFromHexString:@"e7e7e7"];
     }
@@ -91,9 +91,9 @@
 
         _progressSlider.minimumTrackTintColor = [UIColor mainColor]; //左侧的颜色
         _progressSlider.maximumTrackTintColor = [UIColor colorWithWhite:0.6 alpha:0.4]; //右侧的颜色
-        _progressSlider.heightSize.equalTo(@2);
+//        _progressSlider.heightSize.equalTo(@2);
         //thumb图片
-        [_progressSlider setThumbImage:[[UIImage imageNamed:@"player_radio_normal"] scaleToSize:CGSizeMake(32, 32)] forState:UIControlStateNormal];
+//        [_progressSlider setThumbImage:[[UIImage imageNamed:@"player_dot_white"] scaleToSize:CGSizeMake(48, 48)] forState:UIControlStateNormal];
         //手指落下
         [_progressSlider addTarget:self action:@selector(sliderDown:) forControlEvents:UIControlEventTouchDown];
         //手指抬起
@@ -182,7 +182,7 @@
     self.bufferedProgressView.rightPos.equalTo(self.progressSlider.rightPos).offset(4);
     self.bufferedProgressView.centerYPos.equalTo(self.progressSlider.centerYPos);
     
-    self.playButton.imageSize = isPortrait ? CGSizeMake(24, 24) : CGSizeMake(32, 32);
+    self.playButton.imageSize = isPortrait ? CGSizeMake(24, 24) : CGSizeMake(28, 28);
     self.playButton.leftPos.equalTo(self.portraitLayout.leftPos);
     self.playButton.centerYPos.equalTo(@0);
     self.playButton.centerYPos.active = isPortrait;
@@ -192,7 +192,7 @@
     self.progressSlider.centerYPos.active = isPortrait;
     self.progressSlider.bottomPos.active = !isPortrait;
 
-    self.timeLabel.font = [UIFont systemFontOfSize:isPortrait ? 13 : 14];
+    self.timeLabel.font = [UIFont systemFontOfSize:13];
     self.timeLabel.centerYPos.equalTo(@0);
     self.timeLabel.centerYPos.active = self.timeLabel.rightPos.active = isPortrait;
     self.timeLabel.leftPos.active = !isPortrait;
@@ -217,11 +217,11 @@
         [self.horizontalLayout addSubview:self.bufferedProgressView];
         self.progressSlider.leftPos.equalTo(self.horizontalLayout.leftPos);
         self.progressSlider.rightPos.equalTo(self.horizontalLayout.rightPos);
-        self.progressSlider.bottomPos.equalTo(self.playButton.topPos).offset(12);
+        self.progressSlider.bottomPos.equalTo(self.playButton.topPos).offset(18);
         [self.horizontalLayout addSubview:self.progressSlider];
         
         self.timeLabel.leftPos.equalTo(self.horizontalLayout.leftPos).offset(6 + 4); // 6 是playButton的内部距离，4 是 progressSlider 的间距
-        self.timeLabel.bottomPos.equalTo(self.progressSlider.topPos).offset(12);
+        self.timeLabel.bottomPos.equalTo(self.progressSlider.topPos).offset(18);
         [self.horizontalLayout addSubview:self.timeLabel];
     }
 }

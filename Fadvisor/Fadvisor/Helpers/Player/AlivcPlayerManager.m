@@ -58,6 +58,7 @@ static dispatch_once_t onceToken;
 - (void)pause {
     [self.player pause];
     self.currentPlayStatus = AVPStatusPaused; // 快速的前后台切换时，播放器状态的变化不能及时传过来
+    [self saveToLocal:self.currentVideoId];
     NSLog(@"播放器pause");
 }
 
@@ -69,13 +70,15 @@ static dispatch_once_t onceToken;
 
 - (void)seekTo:(NSTimeInterval)seekTime {
     if (self.player.duration > 0) {
-        [self.player seekToTime:seekTime seekMode:AVP_SEEKMODE_INACCURATE];
+        [self.player seekToTime:seekTime seekMode:AVP_SEEKMODE_ACCURATE];
     }
+    [self saveToLocal:self.currentVideoId];
 }
 
 - (void)stop {
     [self.player stop];
     self.currentPlayStatus = AVPStatusStopped;
+    [self saveToLocal:self.currentVideoId];
     NSLog(@"播放器stop");
 }
 
@@ -132,8 +135,10 @@ static dispatch_once_t onceToken;
 {
     NSLog(@"AliPlayereventType:%ld", eventType);
     self.playerEventType = eventType;
-
-    [self saveToLocal:self.currentVideoId];
+    
+    if (eventType == AVPEventCompletion) {
+        [self saveToLocal:self.currentVideoId];
+    }
 
     if (self.delegate && [self.delegate respondsToSelector:@selector(onPlayerEvent:eventType:)]) {
         [self.delegate onPlayerEvent:self.player eventType:eventType];
@@ -195,7 +200,6 @@ static dispatch_once_t onceToken;
 
 - (void)onPlayerStatusChanged:(AliPlayer *)player oldStatus:(AVPStatus)oldStatus newStatus:(AVPStatus)newStatus {
     self.currentPlayStatus = newStatus;
-    NSLog(@"播放器状态更新：%lu", (unsigned long)newStatus);
     if (_isEnterBackground) {
         if (self.currentPlayStatus == AVPStatusStarted || self.currentPlayStatus == AVPStatusPrepared) {
             [self pause];
@@ -240,7 +244,7 @@ static dispatch_once_t onceToken;
 
 #pragma mark - 播放
 
-- (void)startPlayWithVidAuth:(NSString *)vid errorBlock:(void (^)(NSString *errorMsg))errorBlock;
+- (void)startPlayWithVidAuth:(NSString *)vid errorBlock:(void (^)(NSString *errorMsg))errorBlock
 {
     [self startPlayWithVidAuth:vid errorBlock:errorBlock previewTime:0];
 }
@@ -249,12 +253,22 @@ static dispatch_once_t onceToken;
     if (![vid isKindOfClass:NSString.class]) {
         return;
     }
-
+    
+    // 当前播放的 Vid 和新添加的 Vid相等
+    if ([self.currentVideoId isEqualToString:vid]) {
+        // 播放完成的话，需要重新启用播放，其他状态都返回
+        if (self.playerEventType != AVPEventCompletion) {
+            return;
+        }
+    }
+    
     //切换的时候保存进度
     if (self.currentVideoId) {
         [self saveToLocal:self.currentVideoId];
     }
-
+    
+    self.currentVideoId = vid;
+    
     self.playMethod = AlivcPlayMethodPlayAuth;
     [self.playAuthService getVidPlayAuth:vid completion:^(NSString *errorMsg, NSString *playAuth) {
         // 错误处理
@@ -275,7 +289,6 @@ static dispatch_once_t onceToken;
 
         [self.player setAuthSource:authSource];
         [self.player prepare];
-        self.currentVideoId = vid;
     }];
 }
 
@@ -298,14 +311,11 @@ static dispatch_once_t onceToken;
 
 - (void)saveToLocal:(NSString *)videoId
 {
-    if (![videoId isNotEmpty]) {
+    if (!videoId) {
         return;
     }
 
-    int64_t watchTime = self.player.currentPosition;
-    if (self.playerEventType == AVPEventCompletion) {
-        watchTime = self.player.duration;
-    }
+    int64_t watchTime = self.playerEventType == AVPEventCompletion ? self.player.duration : self.player.currentPosition;
 
     if (watchTime <= 0) {
         return;
@@ -319,13 +329,13 @@ static dispatch_once_t onceToken;
     [VIDEO_HISTORY_DB addHistoryModel:model];
 }
 
-- (int64_t)localWatchTime:(NSString *)videoId
+- (int64_t)localWatchTime
 {
-    if (videoId.length <= 0) {
+    if (!self.currentVideoId) {
         return 0;
     }
     NSString *userId = [AccountManager sharedManager].userId;
-    AlivcPlayerVideoDBModel *model = [VIDEO_HISTORY_DB getHistoryModelFromVideoId:videoId userId:userId];
+    AlivcPlayerVideoDBModel *model = [VIDEO_HISTORY_DB getHistoryModelFromVideoId:self.currentVideoId userId:userId];
     return model.watchTime.longLongValue;
 }
 

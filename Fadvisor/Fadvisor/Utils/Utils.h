@@ -56,8 +56,8 @@ NS_ASSUME_NONNULL_BEGIN
 //是否手机状态条处于竖屏状态
 + (BOOL)isInterfaceOrientationPortrait;
 
-//是否全屏
-+ (void)setFullOrHalfScreen;
+//旋转屏幕
++(void)orientationRotate:(BOOL)isPortrait;
 
 @end
 

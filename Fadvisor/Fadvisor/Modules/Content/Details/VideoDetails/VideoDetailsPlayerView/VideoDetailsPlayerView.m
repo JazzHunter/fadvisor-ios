@@ -11,11 +11,13 @@
 #import "AlivcPlayerManager.h"
 #import "Utils.h"
 #import "CommonFunc.h"
+#import "ImageButton.h"
 
 //view
 #import "PlayerDetailsControlTopView.h"
 #import "PlayerDetailsControlBottomView.h"
 #import "PlayerDetailsGestureView.h"
+#import "PlayerDetailsWatchTimeTips.h"
 #import "PlayerDetailsMoreView.h"
 #import "PlayerDetailsFirstStartGuideView.h"
 #import "PlayerDetailsPreviewLogoBtn.h"
@@ -31,14 +33,12 @@
 #define FIRST_OPEN_TRUE_VALUE  @"playerDetailsDidFirstOpen"
 #define FIRST_OPEN_FALSE_VALUE @"playerDetailsDidNotFirstOpen"
 
-@interface VideoDetailsPlayerView ()<AlivcPlayerProtocal, PlayerDetailsControlTopViewDelegate, PlayerDetailsControlBottomViewDelegate, PlayerDetailsGestureViewDelegate, PlayerDetailsMoreViewDelegate, PlayerDetailsPopViewDelegate >
+@interface VideoDetailsPlayerView ()<AlivcPlayerProtocal, PlayerDetailsControlTopViewDelegate, PlayerDetailsControlBottomViewDelegate, PlayerDetailsGestureViewDelegate, PlayerDetailsMoreViewDelegate, PlayerDetailsPopViewDelegate>
 
 @property (nonatomic, strong) UIImageView *coverImageView;        //封面
 @property (nonatomic, strong) UIView *playerView;   //播放的界面
 @property (nonatomic, strong) UIImageView *logoImageView;         //右上角的 logo
 
-@property (nonatomic, strong) PlayerDetailsControlTopView *controlTopView;
-@property (nonatomic, strong) PlayerDetailsControlBottomView *controlBottomView;
 @property (nonatomic, strong) PlayerDetailsGestureView *gestureView;
 
 @property (nonatomic, strong) PlayerDetailsPopView *popLayer;  //弹出的提示界面
@@ -53,24 +53,33 @@
 @property (nonatomic, strong) PlayerDetailsPreviewLogoBtn *previewLogoBtn;
 @property (nonatomic, strong) PlayerDetailsPreviewView *previewView;
 
+#pragma mark - 控制
+@property (nonatomic, strong) PlayerDetailsControlTopView *controlTopView;
+@property (nonatomic, strong) PlayerDetailsControlBottomView *controlBottomView;
+@property (nonatomic, strong) PlayerDetailsWatchTimeTips *watchTimeTips;
+
+@property (nonatomic, strong) ImageButton *screenLockButtonRight;
+@property (nonatomic, strong) ImageButton *screenLockButtonLeft;
+@property (nonatomic, strong) ImageButton *snapshotButton;
+@property (nonatomic, assign) CGFloat touchDownProgressValue;
+@property (nonatomic, strong) NSTimer *hideControlViewTimer;
+@property (nonatomic, assign) BOOL isControlViewShow;
+
 #pragma mark - data
-@property (nonatomic, assign) CGRect saveFrame;            //记录竖屏时尺寸,横屏时为全屏状态。
+@property (nonatomic, assign) BOOL isPortrait;             //是否竖屏
+
 @property (nonatomic, assign) BOOL mProgressCanUpdate;     //进度条是否更新，默认是NO
 @property (strong, nonatomic) AVPTrackInfo *currentTrackInfo; //当前播放视频的清晰度信息
 @property (assign, nonatomic) NSUInteger previewTime;
-@property (nonatomic, assign) BOOL trackHasThumbnai; //当前音轨有缩略图
-@property (nonatomic, assign) BOOL isPortrait;             //是否竖屏
+@property (nonatomic, assign) BOOL trackHasThumbnail; //当前音轨有缩略图
 @property (nonatomic, assign) CGFloat gestureViewStartProgress; //水平手势记录开始时的progress
 
-#pragma mark - 播放方式
+#pragma mark - 网络
 @property (nonatomic, strong) Reachability *reachability;       //网络监听
-@property (nonatomic, assign) CGFloat touchDownProgressValue;
-@property (nonatomic, strong) NSTimer *hideControlViewTimer;
 
 @property (nonatomic, assign) NSTimeInterval keyFrameTime;
 @property (nonatomic, assign) float saveCurrentTime;       //保存重试之前的播放时间
 @property (nonatomic, assign) BOOL isLive;
-@property (nonatomic, assign) BOOL isControlViewShow;
 
 //标准网络监听状态，保证只有切换网络时才调用reload
 @property (nonatomic, assign) BOOL isNetChange;
@@ -103,7 +112,7 @@
                                                      name:SVReachabilityChangedNotification
                                                    object:nil];
 
-        [AlivcPlayerManager manager].delegate = self;
+        PLAYER_MANAGER.delegate = self;
 
         [self initUI];
 
@@ -114,31 +123,28 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
         self.isControlViewShow = NO;
-
-        self.backgroundColor = [UIColor blueColor];
     }
     return self;
 }
 
 - (void)initUI {
-    self.insetsPaddingFromSafeArea = UIRectEdgeNone; 
-    
+    self.insetsPaddingFromSafeArea = UIRectEdgeNone;
+
     //设置view
     self.coverImageView.myMargin = 0;
     self.coverImageView.centerXPos.equalTo(@0);
     self.coverImageView.centerYPos.equalTo(@0);
     [self addSubview:self.coverImageView];
-    
+
     self.playerView.myMargin = 0;
     self.playerView.centerXPos.equalTo(@0);
     self.playerView.centerYPos.equalTo(@0);
     [self addSubview:self.playerView];
-    [[AlivcPlayerManager manager] setPlayerView:self.playerView];
-    self.isPortrait = YES;
-    [self setLayoutPortrait];
+    
+    [PLAYER_MANAGER setPlayerView:self.playerView];
 
     [self addSubview:self.bulletView];
-    
+
     self.thumbnailView.centerXPos.equalTo(@0);
     self.thumbnailView.centerYPos.equalTo(@0);
     self.thumbnailView.hidden = YES;
@@ -147,7 +153,6 @@
     self.gestureView.myMargin = 0;
     [self addSubview:self.gestureView];
 
-    self.controlTopView.delegate = self;
     self.controlTopView.topPos.equalTo(self.topPos);
     self.controlTopView.leftPos.equalTo(self.leftPos);
     self.controlTopView.widthSize.equalTo(self.widthSize);
@@ -155,15 +160,31 @@
     self.controlTopView.alpha = 0;
     [self addSubview:self.controlTopView];
 
-    self.controlBottomView.delegate = self;
     self.controlBottomView.bottomPos.equalTo(@0);
-    self.controlTopView.leftPos.equalTo(self.leftPos);
+    self.controlBottomView.leftPos.equalTo(self.leftPos);
     self.controlBottomView.widthSize.equalTo(self.widthSize);
     self.controlBottomView.heightSize.equalTo(@(MyLayoutSize.wrap));
     self.controlBottomView.alpha = 0;
     [self addSubview:self.controlBottomView];
 
+    self.screenLockButtonRight.centerYPos.equalTo(self.centerYPos).offset(36);
+    self.screenLockButtonRight.rightPos.equalTo(self.rightPos).offset(kStatusBarHeight);
+    [self addSubview:self.screenLockButtonRight];
+    self.screenLockButtonRight.alpha = 0;
+
+    self.snapshotButton.centerXPos.equalTo(self.screenLockButtonRight.centerXPos);
+    self.snapshotButton.bottomPos.equalTo(self.screenLockButtonRight.topPos).offset(16);
+    [self addSubview:self.snapshotButton];
+    self.snapshotButton.alpha = 0;
+
+    self.screenLockButtonLeft.leftPos.equalTo(self.leftPos).offset(kStatusBarHeight);
+    self.screenLockButtonLeft.centerYPos.equalTo(self.centerYPos);
+    [self addSubview:self.screenLockButtonLeft];
+    self.screenLockButtonLeft.visibility = MyVisibility_Invisible;
+    self.screenLockButtonLeft.alpha = 0;
     
+    self.watchTimeTips.bottomPos.equalTo(self.controlBottomView.topPos).offset(16);
+
     self.moreView.delegate = self;
     self.moreView.centerYPos.equalTo(@0);
     self.moreView.heightSize.equalTo(self.heightSize);
@@ -177,11 +198,12 @@
 
 //    [self addSubview:self.previewView];
 //    [self addSubview:self.loadingView];
+    
 }
 
 //- (void)becomeActive {
 //    _isEnterBackground = NO;
-//    if ([AlivcPlayerManager manager].currentPlayStatus == AVPStatusPaused && _isPauseByBackground && [Utils currentViewController] == [Utils findSuperViewController:self]) {
+//    if (PLAYER_MANAGER.currentPlayStatus == AVPStatusPaused && _isPauseByBackground && [Utils currentViewController] == [Utils findSuperViewController:self]) {
 //        _isPauseByBackground = NO;
 //        [self resume];
 //    }
@@ -189,7 +211,7 @@
 //
 //- (void)resignActive {
 //    _isEnterBackground = YES;
-//    if ([AlivcPlayerManager manager].currentPlayStatus == AVPStatusStarted || [AlivcPlayerManager manager].currentPlayStatus == AVPStatusPrepared) {
+//    if (PLAYER_MANAGER.currentPlayStatus == AVPStatusStarted || PLAYER_MANAGER.currentPlayStatus == AVPStatusPrepared) {
 //        _isPauseByBackground = YES;
 //        [self pause];
 //    }
@@ -230,8 +252,13 @@
 - (void)hideControlView {
     if (self.isControlViewShow) {
         [UIView animateWithDuration:0.3 animations:^{
-            self.controlTopView.alpha = 0;
-            self.controlBottomView.alpha = 0;
+            if (!self.isScreenLocked) {
+                self.controlTopView.alpha = 0;
+                self.controlBottomView.alpha = 0;
+            }
+            self.screenLockButtonRight.alpha = 0;
+            self.screenLockButtonLeft.alpha = 0;
+            self.snapshotButton.alpha = 0;
             self.isControlViewShow = NO;
         }];
     }
@@ -242,16 +269,21 @@
 }
 
 - (void)showControlView {
+    self.hideControlViewTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideControlView) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:self.hideControlViewTimer forMode:NSRunLoopCommonModes];
+
     if (!self.isControlViewShow) {
         [UIView animateWithDuration:0.3 animations:^{
-            self.controlTopView.alpha = 1.0;
-            self.controlBottomView.alpha = 1.0;
+            if (!self.isScreenLocked) {
+                self.controlTopView.alpha = 1.0;
+                self.controlBottomView.alpha = 1.0;
+            }
+            self.screenLockButtonRight.alpha = 1.0;
+            self.screenLockButtonLeft.alpha = 1.0;
+            self.snapshotButton.alpha = 1.0;
             self.isControlViewShow = YES;
         }];
     }
-
-    self.hideControlViewTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(hideControlView) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:self.hideControlViewTimer forMode:NSRunLoopCommonModes];
 }
 
 #pragma mark - 播放器开始播放入口
@@ -259,8 +291,8 @@
     if ([self networkChangedToShowPopView]) {
         return;
     }
-    [AlivcPlayerManager manager].playMethod = isLocal ? AlivcPlayMethodLocal : AlivcPlayMethodUrl;
-    [[AlivcPlayerManager manager] startPlayWithUrl:url];
+    PLAYER_MANAGER.playMethod = isLocal ? AlivcPlayMethodLocal : AlivcPlayMethodUrl;
+    [PLAYER_MANAGER startPlayWithUrl:url];
     if (!isLocal) {
         [self.loadingView show];
     }
@@ -273,7 +305,7 @@
     }
     [self.loadingView show];
     Weak(self);
-    [[AlivcPlayerManager manager] startPlayWithVidAuth:vid errorBlock:^(NSString *errorMsg) {
+    [PLAYER_MANAGER startPlayWithVidAuth:vid errorBlock:^(NSString *errorMsg) {
         AVPErrorModel *errorModel = [AVPErrorModel new];
         errorModel.message = errorMsg;
         [weakself showPopLayerWithErrorModel:errorModel];
@@ -282,30 +314,30 @@
 }
 
 - (void)start {
-    [[AlivcPlayerManager manager] start];
+    [PLAYER_MANAGER start];
 }
 
 - (void)pause {
-    [[AlivcPlayerManager manager] pause];
+    [PLAYER_MANAGER pause];
 }
 
 - (void)resume {
-    [[AlivcPlayerManager manager] start];
+    [PLAYER_MANAGER start];
 }
 
 - (void)seekTo:(NSTimeInterval)seekTime {
-    [[AlivcPlayerManager manager] seekTo:seekTime];
+    [PLAYER_MANAGER seekTo:seekTime];
     [self.loadingView show];
 }
 
 - (void)stop {
-    [[AlivcPlayerManager manager] stop];
+    [PLAYER_MANAGER stop];
     NSLog(@"播放器stop");
 }
 
 #pragma mark - 网络状态改变
 - (void)reachabilityChanged {
-    if ([AlivcPlayerManager manager].currentPlayStatus != AVPStatusIdle) {
+    if (PLAYER_MANAGER.currentPlayStatus != AVPStatusIdle) {
         [self networkChangedToShowPopView];
     }
     _isNetChange = YES;
@@ -322,7 +354,7 @@
             break;
         case SVNetworkStatusReachableViaWWAN:
             [self reloadWhenNetChange];
-            if ([AlivcPlayerManager manager].playMethod == AlivcPlayMethodLocal) {
+            if (PLAYER_MANAGER.playMethod == AlivcPlayMethodLocal) {
                 return NO;
             }
             // ⚠️显示4G 网络警告
@@ -342,7 +374,7 @@
 
 - (void)reloadWhenNetChange {
     if (_isNetChange) {
-        [[AlivcPlayerManager manager] reload];
+        [PLAYER_MANAGER reload];
     }
 }
 
@@ -354,17 +386,25 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self addSubview:self.guideView];
     }
-    self.isPortrait = NO;
-    self.isScreenLocked = NO;
     [self.controlBottomView resetLayout:NO];
     [self.controlTopView resetLayout:NO];
+
+    self.screenLockButtonRight.visibility = MyVisibility_Visible;
+    self.snapshotButton.visibility = MyVisibility_Visible;
+    self.watchTimeTips.leftPos.equalTo(self.leftPos).offset(kStatusBarHeight);
 }
 
 - (void)setLayoutPortrait {
     [self.guideView removeFromSuperview];
-    self.isPortrait = YES;
+
     [self.controlBottomView resetLayout:YES];
     [self.controlTopView resetLayout:YES];
+
+    self.screenLockButtonRight.visibility = MyVisibility_Invisible;
+    self.snapshotButton.visibility = MyVisibility_Invisible;
+    self.screenLockButtonLeft.visibility = MyVisibility_Invisible;
+    
+    self.watchTimeTips.leftPos.equalTo(self.leftPos).offset(0);
 }
 
 #pragma mark - AlivcPlayerProtocal
@@ -375,14 +415,28 @@
             self.popLayer.hidden = YES;
             AVPTrackInfo *info = [player getCurrentTrack:AVPTRACK_TYPE_SAAS_VOD];
             self.currentTrackInfo = info;
-            [self start];
+            
+            int64_t watchTime = [PLAYER_MANAGER localWatchTime];
+            float duration = PLAYER_MANAGER.duration;
+            if (watchTime > 0 && duration && watchTime < duration) {
+                
+                [PLAYER_MANAGER seekTo:watchTime];
+                
+                CGFloat progress = watchTime/duration;
+                [self.controlBottomView setProgress:progress];
+                [self.controlBottomView setBufferedProgress:progress];
+              
+                [self.watchTimeTips showWatchTimeTips:watchTime];
+                [self addSubview:self.watchTimeTips];
+            }
+            
 
 //            [self.controlView setBottomViewTrackInfo:info];
 
-//            [self updateControlLayerDataWithMediaInfo:[AlivcPlayerManager manager].playMethod == AlivcPlayMethodUrl ? nil : [player getMediaInfo]];
+//            [self updateControlLayerDataWithMediaInfo:PLAYER_MANAGER.playMethod == AlivcPlayMethodUrl ? nil : [player getMediaInfo]];
 
             // 加密视频不支持投屏 非mp4 mov视频不支持airplay
-            AVPMediaInfo *mediaInfo = [[AlivcPlayerManager manager] getMediaInfo];
+            AVPMediaInfo *mediaInfo = [PLAYER_MANAGER getMediaInfo];
             for (AVPTrackInfo *info in mediaInfo.tracks) {
                 NSLog(@"url:::::::%@", info.vodPlayUrl);
             }
@@ -392,7 +446,6 @@
             [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
             //隐藏封面
             self.coverImageView.hidden = YES;
-            NSLog(@"播放器:首帧加载完成封面隐藏");
         } break;
         case AVPEventCompletion: {
             if (self.delegate && [self.delegate respondsToSelector:@selector(onFinishWithPlayerView:)]) {
@@ -437,7 +490,7 @@
 
 - (void)onCurrentPositionUpdate:(AliPlayer *)player position:(int64_t)position {
     NSTimeInterval currentTime = position;
-    NSTimeInterval durationTime = [AlivcPlayerManager manager].duration;
+    NSTimeInterval durationTime = PLAYER_MANAGER.duration;
     self.saveCurrentTime = currentTime / 1000;
 
     if (self.isPreviewMode && self.previewTime > 0 && position >= self.previewTime * 1000) {
@@ -472,11 +525,11 @@
  */
 - (void)onTrackReady:(AliPlayer *)player info:(NSArray<AVPTrackInfo *> *)info {
     AVPMediaInfo *mediaInfo = [player getMediaInfo];
-    if ((nil != mediaInfo.thumbnails) && (0 < [mediaInfo.thumbnails count])) {
+    if (mediaInfo.thumbnails && ([mediaInfo.thumbnails count] > 0)) {
         [player setThumbnailUrl:[mediaInfo.thumbnails objectAtIndex:0].URL];
-        self.trackHasThumbnai = YES;
+        self.trackHasThumbnail = YES;
     } else {
-        self.trackHasThumbnai = NO;
+        self.trackHasThumbnail = NO;
     }
 }
 
@@ -495,7 +548,7 @@
 }
 
 - (void)onGetThumbnailSuc:(int64_t)positionMs fromPos:(int64_t)fromPos toPos:(int64_t)toPos image:(id)image {
-    [self.thumbnailView updateThumbnail:image time:positionMs durationTime:[AlivcPlayerManager manager].duration];
+    [self.thumbnailView updateThumbnail:image time:positionMs durationTime:PLAYER_MANAGER.duration];
     self.thumbnailView.hidden = NO;
 }
 
@@ -531,33 +584,35 @@
 }
 
 - (void)onTopViewBackButtonClicked:(UIButton *)sender topView:(PlayerDetailsControlTopView *)topView {
-    if (self.isPortrait) {
+    if (!self.isPortrait) {
+        [Utils orientationRotate:YES];
+    } else {
         if (self.delegate && [self.delegate respondsToSelector:@selector(onBackViewClickWithPlayerView:)]) {
             [self.delegate onBackViewClickWithPlayerView:self];
         }
-    } else {
     }
+    
 }
 
 #pragma mark - PlayerDetailsControlBottomViewDelegate
 - (void)onBottomViewSliderDrag:(UISlider *)sender progress:(float)progress event:(UIControlEvents)event {
-    NSInteger durationTime = [AlivcPlayerManager manager].duration;
+    NSInteger durationTime = PLAYER_MANAGER.duration;
     switch (event) {
         case UIControlEventValueChanged:
             self.mProgressCanUpdate = NO;
             //更新UI上的当前时间
             [self.controlBottomView updateProgressWithCurrentTime:progress * durationTime durationTime:durationTime];
-//            if (self.trackHasThumbnai == YES) {
-                [[AlivcPlayerManager manager] getThumbnail:progress * durationTime];
+//            if (self.trackHasThumbnail == YES) {
+            [PLAYER_MANAGER getThumbnail:progress * durationTime];
 //            }
             break;
         case UIControlEventTouchUpOutside:
         case UIControlEventTouchUpInside:
         case UIControlEventTouchDownRepeat: {
-            [[AlivcPlayerManager manager] seekTo:(progress * durationTime)];
+            [PLAYER_MANAGER seekTo:(progress * durationTime)];
             [self.loadingView show];
-            if ([AlivcPlayerManager manager].currentPlayStatus == AVPStatusPaused) {
-                [[AlivcPlayerManager manager] start];
+            if (PLAYER_MANAGER.currentPlayStatus == AVPStatusPaused) {
+                [PLAYER_MANAGER start];
             }
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 //在播放器回调的方法里，防止sdk异常不进行seekdone的回调，在3秒后增加处理，防止ui一直异常
@@ -576,7 +631,10 @@
 }
 
 - (void)onBottomViewFullScreenButtonClicked:(UIButton *)sender bottomView:(PlayerDetailsControlBottomView *)bottomView {
-    [self setLayoutLandscape];
+    if (!self.isPortrait) {
+        return;
+    }
+    [Utils orientationRotate:NO];
 }
 
 - (void)onBottomViewPlayButtonClicked:(UIButton *)sender bottomView:(PlayerDetailsControlBottomView *)bottomView {
@@ -584,11 +642,11 @@
 }
 
 - (void)playButtonClicked {
-    AVPStatus playStatus = [AlivcPlayerManager manager].currentPlayStatus;
+    AVPStatus playStatus = PLAYER_MANAGER.currentPlayStatus;
     switch (playStatus) {
         case AVPStatusStarted:
             //如果是直播则stop
-            if ([AlivcPlayerManager manager].duration == 0) {
+            if (PLAYER_MANAGER.duration == 0) {
                 _isLive = YES;
                 [self stop];
             } else {
@@ -619,17 +677,18 @@
 }
 
 - (void)onDoubleTapWithGestureView:(PlayerDetailsGestureView *)gestureView {
+    if (self.isScreenLocked) {
+        return;
+    }
     [self playButtonClicked];
     [self showControlView];
 }
 
 - (void)onHorizontalMovingWithGestureView:(PlayerDetailsGestureView *)gestureView offset:(float)moveOffset {
-    
 }
 
-
 - (void)onHorizontalMoveEndWithGestureView:(PlayerDetailsGestureView *)gestureView offset:(float)moveOffset {
-    NSInteger durationTime = [AlivcPlayerManager manager].duration;
+    NSInteger durationTime = PLAYER_MANAGER.duration;
     NSTimeInterval moveValue = [self moveValueByOffset:moveOffset];
     [self seekTo:(durationTime * moveValue)];
     [self.controlBottomView setProgress:moveValue];
@@ -650,7 +709,23 @@
     return moveValue;
 }
 
-#pragma mark PlayerMoreViewDelegate
+#pragma mark - ScreenLock Actions
+- (void)onScreenLockButtonClicked:(UIButton *)sender {
+    self.isScreenLocked = !self.isScreenLocked;
+    self.screenLockButtonLeft.selected = self.screenLockButtonRight.selected = self.isScreenLocked;
+    self.controlTopView.hidden = self.controlBottomView.hidden = self.isScreenLocked;
+    self.screenLockButtonRight.centerYPos.equalTo(self.centerYPos).offset(self.isScreenLocked ? 0 : 32);
+    self.snapshotButton.visibility = self.isScreenLocked ? MyVisibility_Invisible : MyVisibility_Visible;
+    self.screenLockButtonLeft.visibility = self.isScreenLocked ? MyVisibility_Visible : MyVisibility_Invisible;
+    UIImpactFeedbackGenerator *impactLight = [[UIImpactFeedbackGenerator alloc]initWithStyle:UIImpactFeedbackStyleLight];
+    [impactLight impactOccurred];
+}
+
+- (void)onSnapshotButtonClicked:(UIButton *)sender {
+    [PLAYER_MANAGER snapShot];
+}
+
+#pragma mark - PlayerMoreViewDelegate
 //- (void)moreView:(PlayerDetailsMoreView *)moreView clickedDownloadBtn:(UIButton *)downloadBtn {
 //    if (self.delegate && [self.delegate respondsToSelector:@selector(onDownloadButtonClickWithPlayerView:)]) {
 //        [self.delegate onDownloadButtonClickWithPlayerView:self];
@@ -698,8 +773,8 @@
         case PlayerErrorTypeReplay: {
             //重播
             [self seekTo:0];
-//            [[AlivcPlayerManager manager] prepare];
-            [[AlivcPlayerManager manager] start];
+//            [PLAYER_MANAGER prepare];
+            [PLAYER_MANAGER start];
         }
         break;
         case PlayerErrorTypeRetry: {
@@ -829,6 +904,7 @@
 - (PlayerDetailsControlTopView *)controlTopView {
     if (!_controlTopView) {
         _controlTopView = [[PlayerDetailsControlTopView alloc] init];
+        _controlTopView.delegate = self;
     }
     return _controlTopView;
 }
@@ -836,6 +912,7 @@
 - (PlayerDetailsControlBottomView *)controlBottomView {
     if (!_controlBottomView) {
         _controlBottomView = [[PlayerDetailsControlBottomView alloc] init];
+        _controlBottomView.delegate = self;
     }
     return _controlBottomView;
 }
@@ -846,6 +923,51 @@
         _gestureView.delegate = self;
     }
     return _gestureView;
+}
+
+- (ImageButton *)screenLockButtonRight {
+    if (!_screenLockButtonRight) {
+        _screenLockButtonRight = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44) imageName:@"player_unlock"];
+        [_screenLockButtonRight setImage:[UIImage imageNamed:@"player_lock"] forState:UIControlStateSelected];
+        [_screenLockButtonRight setImageSize:CGSizeMake(24, 24)];
+        _screenLockButtonRight.backgroundColor = [UIColor colorFromHexString:@"000000" alpha:0.4];
+        _screenLockButtonRight.layer.cornerRadius = 6;
+        _screenLockButtonRight.layer.masksToBounds = YES;
+        [_screenLockButtonRight addTarget:self action:@selector(onScreenLockButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _screenLockButtonRight;
+}
+
+- (ImageButton *)screenLockButtonLeft {
+    if (!_screenLockButtonLeft) {
+        _screenLockButtonLeft = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44) imageName:@"player_unlock"];
+        [_screenLockButtonLeft setImage:[UIImage imageNamed:@"player_lock"] forState:UIControlStateSelected];
+        [_screenLockButtonLeft setImageSize:CGSizeMake(24, 24)];
+        _screenLockButtonLeft.backgroundColor = [UIColor colorFromHexString:@"000000" alpha:0.4];
+        _screenLockButtonLeft.layer.cornerRadius = 6;
+        _screenLockButtonLeft.layer.masksToBounds = YES;
+        [_screenLockButtonLeft addTarget:self action:@selector(onScreenLockButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _screenLockButtonLeft;
+}
+
+- (ImageButton *)snapshotButton {
+    if (!_snapshotButton) {
+        _snapshotButton = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44) imageName:@"player_snapshot"];
+        [_snapshotButton setImageSize:CGSizeMake(24, 24)];
+        _snapshotButton.backgroundColor = [UIColor colorFromHexString:@"000000" alpha:0.4];
+        _snapshotButton.layer.cornerRadius = 6;
+        _snapshotButton.layer.masksToBounds = YES;
+        [_snapshotButton addTarget:self action:@selector(onSnapshotButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _snapshotButton;
+}
+
+- (PlayerDetailsWatchTimeTips *)watchTimeTips {
+    if (!_watchTimeTips) {
+        _watchTimeTips = [[PlayerDetailsWatchTimeTips alloc] init];
+    }
+    return _watchTimeTips;
 }
 
 @end

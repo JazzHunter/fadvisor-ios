@@ -59,13 +59,13 @@ static const CGFloat PopBackButtonWidth = 24;   //返回按钮宽度
 
 #pragma mark - onClick
 - (void)onClick:(UIButton *)btn {
-    if (![Utils isInterfaceOrientationPortrait]) {
-        [Utils setFullOrHalfScreen];
-    } else {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(onBackClickedWithPopView:)]) {
-            [self.delegate onBackClickedWithPopView:self];
-        }
-    }
+//    if (![Utils isInterfaceOrientationPortrait]) {
+//        [Utils setFullOrHalfScreen];
+//    } else {
+//        if (self.delegate && [self.delegate respondsToSelector:@selector(onBackClickedWithPopView:)]) {
+//            [self.delegate onBackClickedWithPopView:self];
+//        }
+//    }
 }
 
 #pragma mark - public method

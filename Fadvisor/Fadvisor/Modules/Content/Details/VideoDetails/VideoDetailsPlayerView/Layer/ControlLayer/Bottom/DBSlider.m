@@ -7,8 +7,10 @@
 
 #import "DBSlider.h"
 
-#define thumbBound_x 10
-#define thumbBound_y 20
+//#define thumbBound_x 10
+//#define thumbBound_y 20
+#define thumbBound_x 4
+#define thumbBound_y 4
 
 @interface DBSlider ()
 {

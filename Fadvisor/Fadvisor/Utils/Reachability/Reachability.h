@@ -11,7 +11,7 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <netinet/in.h>
 
-#pragma mark IPv6 Support
+#pragma mark - IPv6 Support
 //Reachability fully support IPv6.  For full details, see ReadMe.md.
 
 typedef NS_ENUM(int, SVNetworkStatus) {
@@ -41,7 +41,7 @@ extern NSString *SVReachabilityChangedNotification;
 + (instancetype)reachabilityForInternetConnection;
 
 
-#pragma mark reachabilityForLocalWiFi
+#pragma mark - reachabilityForLocalWiFi
 //reachabilityForLocalWiFi has been removed from the sample.  See ReadMe.md for more information.
 //+ (instancetype)reachabilityForLocalWiFi;
 
