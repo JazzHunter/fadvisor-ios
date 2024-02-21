@@ -119,7 +119,7 @@
 - (CAGradientLayer *)gradientLayer {
     if (!_gradientLayer) {
         _gradientLayer = [CAGradientLayer layer];
-        _gradientLayer.colors = @[(id)[UIColor colorFromHexString:@"000000" alpha:1].CGColor,(id)[UIColor colorFromHexString:@"000000" alpha:0].CGColor]; //设置渐变颜色
+        _gradientLayer.colors = @[(id)[[UIColor blackColor] colorWithAlphaComponent:1].CGColor,(id)[[UIColor blackColor] colorWithAlphaComponent:0].CGColor]; //设置渐变颜色
         _gradientLayer.locations = @[@0.0, @0.8]; //颜色的起点位置，递增，并且数量跟颜色数量相等
         _gradientLayer.startPoint = CGPointMake(0.5, 1); //
         _gradientLayer.endPoint = CGPointMake(0.5, 0); //

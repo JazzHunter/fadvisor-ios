@@ -145,15 +145,30 @@
 #pragma mark - 屏幕旋转
 
 - (BOOL)shouldAutorotate {
-    return self.selectedViewController.shouldAutorotate;
+    BOOL shouldAutorotate = self.selectedViewController.shouldAutorotate;
+    return shouldAutorotate;
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return self.selectedViewController.supportedInterfaceOrientations;
+    UIInterfaceOrientationMask supportedInterfaceOrientations = self.selectedViewController.supportedInterfaceOrientations;
+    return supportedInterfaceOrientations;
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
     return self.selectedViewController.preferredInterfaceOrientationForPresentation;
+    
+    if (@available(iOS 16.0, *)) {
+        [self.navigationController setNeedsUpdateOfSupportedInterfaceOrientations];
+        
+        NSArray *array = [[[UIApplication sharedApplication] connectedScenes] allObjects];
+        UIWindowScene *ws = (UIWindowScene *)array[0];
+        UIWindowSceneGeometryPreferencesIOS *geometryPreferences = [[UIWindowSceneGeometryPreferencesIOS alloc] init];
+        geometryPreferences.interfaceOrientations = UIInterfaceOrientationMaskLandscapeLeft;
+        [ws requestGeometryUpdateWithPreferences:geometryPreferences
+            errorHandler:^(NSError * _Nonnull error) {
+            //业务代码
+        }];
+    }
 }
 
 @end

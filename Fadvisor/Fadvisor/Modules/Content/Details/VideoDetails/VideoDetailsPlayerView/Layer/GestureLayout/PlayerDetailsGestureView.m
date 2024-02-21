@@ -8,7 +8,8 @@
 #import "PlayerDetailsGestureView.h"
 #import "PlayerZFVolumeBrightnessView.h"
 #import "AlivcPlayerManager.h"
-#import "PlayerSpeedSwipeView.h"
+#import "PlayerDetailsSpeedTips.h"
+#import "PlayerDetailsFirstStartGuideView.h"
 
 @interface PlayerDetailsGestureView ()<UIGestureRecognizerDelegate>
 
@@ -19,8 +20,9 @@
 @property (nonatomic, assign) BOOL isVerticalGesture;
 @property (nonatomic, assign) BOOL isLeft;
 @property (nonatomic, strong) PlayerZFVolumeBrightnessView *volumeBrightnessView;
-@property (nonatomic, strong) PlayerSpeedSwipeView *speedSwiper;
+@property (nonatomic, strong) PlayerDetailsSpeedTips *speedTips;
 @property (nonatomic, assign) CGFloat currentSpeed;
+@property (nonatomic, strong) PlayerDetailsFirstStartGuideView *guideView;     //导航
 
 @end
 
@@ -69,12 +71,20 @@
     return _volumeBrightnessView;
 }
 
-- (PlayerSpeedSwipeView *)speedSwiper {
-    if (!_speedSwiper) {
-        _speedSwiper = [[PlayerSpeedSwipeView alloc] initWithFrame:CGRectMake(0, 0, 130, 36)];
-        _speedSwiper.backgroundColor = [UIColor colorFromHexString:@"FF00FF"];
+- (PlayerDetailsSpeedTips *)speedTips {
+    if (!_speedTips) {
+        _speedTips = [[PlayerDetailsSpeedTips alloc] init];
+        _speedTips.centerXPos.equalTo(self.centerXPos);
+        _speedTips.topPos.equalTo(self.topPos).offset(36);
     }
-    return _speedSwiper;
+    return _speedTips;
+}
+
+- (PlayerDetailsFirstStartGuideView *)guideView {
+    if (!_guideView) {
+        _guideView = [[PlayerDetailsFirstStartGuideView alloc] initWithFrame:self.bounds];
+    }
+    return _guideView;
 }
 
 #pragma mark - init
@@ -93,6 +103,13 @@
         [self.singleTapGesture requireGestureRecognizerToFail:self.doubleTapGesture];
         [self.singleTapGesture requireGestureRecognizerToFail:self.panGesture];
         [self.singleTapGesture requireGestureRecognizerToFail:self.longPressGesture];
+
+        //存储第一次触发saas
+        NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:FIRST_OPEN_KEY];
+        if (!str) {
+            [[NSUserDefaults standardUserDefaults] setValue:FIRST_OPEN_TRUE_VALUE forKey:FIRST_OPEN_KEY];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
     }
     return self;
 }
@@ -148,7 +165,6 @@
             if (self.delegate && [self.delegate respondsToSelector:@selector(onHorizontalMovingWithGestureView:offset:)]) {
                 [self.delegate onHorizontalMovingWithGestureView:self offset:velocity.x];
             }
-            
         } break;
         case UIGestureRecognizerStateEnded:
             if (self.delegate && [self.delegate respondsToSelector:@selector(onHorizontalMoveEndWithGestureView:offset:)]) {
@@ -165,24 +181,23 @@
         self.currentSpeed = PLAYER_MANAGER.rate;
     } else if (sender.state == UIGestureRecognizerStateChanged) {
         PLAYER_MANAGER.rate = 2.0;
-        [self showSpeedSwiperAtDirection:YES isChange:YES];
+        [self addSubview:self.speedTips];
+        [self.speedTips showDirection:YES speedTips:@"2X"];
     } else if (sender.state == UIGestureRecognizerStateEnded) {
-        [self hideSpeedSwiper];
+        [self.speedTips removeFromSuperview];
         PLAYER_MANAGER.rate = self.currentSpeed;
     }
 }
 
-- (void)showSpeedSwiperAtDirection:(BOOL)right isChange:(BOOL)isChange {
-    [self hideSpeedSwiper];
-    self.speedSwiper.frame = CGRectMake((self.width - 130) / 2.0, 36, 130, 36);
-    [self addSubview:self.speedSwiper];
-    [self.speedSwiper updateDirection:YES speed:@"2X"];
-}
-
-- (void)hideSpeedSwiper {
-    if (_speedSwiper) {
-        [self.speedSwiper removeFromSuperview];
-        _speedSwiper = nil;
+- (void)resetLayout:(BOOL)isPortrait {
+    if (isPortrait) {
+        [self.guideView removeFromSuperview];
+    } else {
+        NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:FIRST_OPEN_KEY];
+        if ([str isEqualToString:FIRST_OPEN_TRUE_VALUE]) {
+            self.guideView.myMargin = 0;
+            [self addSubview:self.guideView];
+        }
     }
 }
 

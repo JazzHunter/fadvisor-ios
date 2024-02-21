@@ -20,16 +20,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onDoubleTapWithGestureView:(PlayerDetailsGestureView *)gestureView;
 
 //手势水平移动中
-- (void)onHorizontalMovingWithGestureView:(PlayerDetailsGestureView *)gestureView offset:(float)moveOffset ;
+- (void)onHorizontalMovingWithGestureView:(PlayerDetailsGestureView *)gestureView offset:(float)moveOffset;
 
 //手势水平结束
-- (void)onHorizontalMoveEndWithGestureView:(PlayerDetailsGestureView *)gestureView offset:(float)moveOffset ;
+- (void)onHorizontalMoveEndWithGestureView:(PlayerDetailsGestureView *)gestureView offset:(float)moveOffset;
 
 @end
 
 @interface PlayerDetailsGestureView : UIView
 
 @property (nonatomic, weak) id<PlayerDetailsGestureViewDelegate>delegate;
+
+- (void)resetLayout:(BOOL)isPortrait;
 
 @end
 

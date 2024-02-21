@@ -20,7 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
  * 功能：返回按钮事件
  * 参数：playerView ：VideoDetailsPlayerView
  */
-- (void)onBackViewClickWithPlayerView:(VideoDetailsPlayerView *)playerView;
+- (void)onBackButtonClickWithPlayerView:(VideoDetailsPlayerView *)playerView;
+
+/**
+ * 功能：更多按钮事件
+ * 参数：playerView ：VideoDetailsPlayerView
+ */
+- (void)onMoreButtonClickWithPlayerView:(VideoDetailsPlayerView *)playerView;
 
 /**
  * 功能：下载按钮事件
@@ -32,13 +38,30 @@ NS_ASSUME_NONNULL_BEGIN
  * 功能：锁定屏幕按钮事件
  * 参数：playerView ：VideoDetailsPlayerView
  */
-- (void)onScreenLockButtonClickWithPlayerView:(VideoDetailsPlayerView *)playerView;
+- (void)onScreenLockButtonClickWithPlayerView:(VideoDetailsPlayerView *)playerView isLocked:(BOOL)isLocked;
+
+/**
+ * 功能：强制旋转到竖屏或者横屏
+ * 参数：playerView ：VideoDetailsPlayerView
+ */
+- (void)onRotationToPortraitInterface:(BOOL)isPortrait;
 
 /**
  * 功能：播放完成事件 ，请区别stop（停止播放）
  * 参数：playerView ： VideoDetailsPlayerView
  */
 - (void)onFinishWithPlayerView:(VideoDetailsPlayerView *)playerView;
+
+/**
+ * 功能：侧边工具弹出时候的通知
+ * 参数：是否弹出
+ */
+- (void)onHorzViewPopped:(BOOL)isPopped;
+
+/**
+ * 功能：侧边工具弹出时候的通知
+ * 参数：是否弹出
+ */
 
 @end
 
@@ -47,6 +70,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) id<VideoDetailsPlayerViewProtocol> delegate; //代理
 
 @property (nonatomic, assign) BOOL isScreenLocked;
+@property (nonatomic, assign, readonly) BOOL isHorzViewShow;
+
 
 @property (nonatomic, assign) BOOL isPreviewMode; //当前播放视频的清晰度信息
 

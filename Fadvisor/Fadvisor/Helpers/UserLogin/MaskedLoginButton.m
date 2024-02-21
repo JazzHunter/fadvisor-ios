@@ -6,11 +6,11 @@
 //
 
 #import "MaskedLoginButton.h"
-#import "MaskedLabel.h"
+#import "RSMaskedLabel.h"
 
 @interface MaskedLoginButton ()
 
-@property (nonatomic, strong) MaskedLabel *maskedLabel;           //镂空标签
+@property (nonatomic, strong) RSMaskedLabel *maskedLabel;           //镂空标签
 
 @end
 
@@ -23,7 +23,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        _maskedLabel = [[MaskedLabel alloc] initWithFrame:self.bounds];
+        _maskedLabel = [[RSMaskedLabel alloc] initWithFrame:self.bounds];
         _maskedLabel.font = [UIFont systemFontOfSize:20 weight:UIFontWeightHeavy];
         _maskedLabel.textAlignment = NSTextAlignmentCenter;
         _maskedLabel.backgroundColor = [UIColor whiteColor];
@@ -45,7 +45,7 @@
 
 - (void)buttonTouchDown:(UIButton *)sender {
     [UIView animateWithDuration:0.3 animations:^{
-        self.maskedLabel.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.3];
+        self.maskedLabel.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.7];
     }];
 }
 

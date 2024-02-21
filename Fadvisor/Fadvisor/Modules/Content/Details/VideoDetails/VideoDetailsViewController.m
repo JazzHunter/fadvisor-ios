@@ -22,6 +22,8 @@
 #import "ContentExcepitonView.h"
 #import "SkeletonPageView.h"
 
+#import "UIInterface+HXRotation.h"
+
 static const CGFloat pinSectionHeaderHeight = 64.f;
 
 @interface VideoDetailsViewController ()<VideoDetailsPlayerViewProtocol, JXCategoryViewDelegate, JXPagerViewDelegate, JXPagerMainTableViewGestureDelegate>
@@ -38,6 +40,8 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 @property (nonatomic, strong) VideoDetailsPlayerView *playerView;
 @property (assign, nonatomic) CGFloat playerViewHeight;
 @property (nonatomic, strong) UIView *headerView;                   //竖屏的容器，状态栏 + PlayerView
+
+@property (nonatomic, assign) UIInterfaceOrientationMask currentVCInterfaceOrientationMask;
 
 @end
 
@@ -65,11 +69,11 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 #pragma mark 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleDeviceOrientationDidChange:)
-                                                 name:UIDeviceOrientationDidChangeNotification
-                                               object:nil];
+//    [self addOrRemoveDeviceOrientationChangeNotification:YES];
+
     self.playerViewHeight = kScreenWidth * 9 / 16;
+
+    self.currentVCInterfaceOrientationMask = UIInterfaceOrientationMaskAllButUpsideDown;
     [self initUI];
 
     [self getData];
@@ -128,8 +132,10 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
     [self.pagerView.mainTableView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
 }
 
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
+- (void)viewDidLayoutSubviews {
+    if (self.playerView.isScreenLocked) {
+        return;
+    }
     BOOL isPortrait = [Utils isInterfaceOrientationPortrait];
     self.playerView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, self.playerViewHeight);
     if (isPortrait) {
@@ -143,12 +149,8 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
     [self.playerView resetLayout:isPortrait];
 }
 
-- (void)handleDeviceOrientationDidChange:(UIInterfaceOrientation)interfaceOrientation {
-}
-
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter]removeObserver:self];
-    NSLog(@"~~~释放播放器");
+//    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 #pragma mark - JXPagerViewDelegate
@@ -192,8 +194,11 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 }
 
 #pragma mark - VideoDetailsPlayerViewDelegate
-- (void)onBackViewClickWithPlayerView:(VideoDetailsPlayerView *)playerView {
+- (void)onBackButtonClickWithPlayerView:(VideoDetailsPlayerView *)playerView {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)onMoreButtonClickWithPlayerView:(VideoDetailsPlayerView *)playerView {
 }
 
 - (void)onDownloadButtonClickWithPlayerView:(VideoDetailsPlayerView *)playerView {
@@ -202,14 +207,27 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 - (void)onFinishWithPlayerView:(VideoDetailsPlayerView *)playerView {
 }
 
-- (void)onScreenLockButtonClickWithPlayerView:(VideoDetailsPlayerView *)playerView {
-    if (self.playerView.isScreenLocked) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+- (void)onHorzViewPopped:(BOOL)isPopped {
+//    [self addOrRemoveDeviceOrientationChangeNotification:!isPopped];
+}
+
+- (void)onScreenLockButtonClickWithPlayerView:(VideoDetailsPlayerView *)playerView isLocked:(BOOL)isLocked {
+    if (isLocked) {
+        self.currentVCInterfaceOrientationMask = UIInterfaceOrientationMaskLandscape;
+        [self hx_setNeedsUpdateOfSupportedInterfaceOrientations];
     } else {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(handleDeviceOrientationDidChange:)
-                                                     name:UIDeviceOrientationDidChangeNotification
-                                                   object:nil];
+        self.currentVCInterfaceOrientationMask = UIInterfaceOrientationMaskAllButUpsideDown;
+        [self hx_setNeedsUpdateOfSupportedInterfaceOrientations];
+    }
+}
+
+- (void)onRotationToPortraitInterface:(BOOL)isPortrait {
+    if (isPortrait) {
+        self.currentVCInterfaceOrientationMask = UIInterfaceOrientationMaskAllButUpsideDown;
+        [self hx_rotateToInterfaceOrientation:UIInterfaceOrientationPortrait];
+    } else {
+        self.currentVCInterfaceOrientationMask = UIInterfaceOrientationMaskAllButUpsideDown;
+        [self hx_rotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight];
     }
 }
 
@@ -260,15 +278,6 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
     return _headerView;
 }
 
-//- (VideoDetailsPlayerView *)playerView {
-//    if (!_playerView) {
-//        _playerView = [[VideoDetailsPlayerView alloc] init];
-//        _playerView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, _playerViewHeight);
-//        _playerView.delegate = self;
-//    }
-//    return _playerView;
-//}
-
 - (ItemDetailsService *)itemDetailsService {
     if (_itemDetailsService == nil) {
         _itemDetailsService = [[ItemDetailsService alloc] init];
@@ -277,16 +286,19 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 }
 
 #pragma mark - 屏幕旋转
+// https://gitcode.com/thelittleboy/hxrotationtool/overview?utm_source=csdn_github_accelerator&isLogin=1
+// TheLittleBoy / HXRotationTool
 - (BOOL)shouldAutorotate {
-    return !self.playerView.isScreenLocked;
+    return YES;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
+// 支持哪些屏幕方向
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskAllButUpsideDown;
-}
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    return UIInterfaceOrientationPortrait;
+    return self.currentVCInterfaceOrientationMask;
 }
 
 @end

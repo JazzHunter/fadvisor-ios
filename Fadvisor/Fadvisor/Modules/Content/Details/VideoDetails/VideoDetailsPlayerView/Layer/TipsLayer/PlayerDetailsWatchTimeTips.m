@@ -9,7 +9,7 @@
 #import "AlivcPlayerManager.h"
 #import "Utils.h"
 
-#define kDelayTime 15
+#define kDelayTime 1500
 
 @interface PlayerDetailsWatchTimeTips ()
 
@@ -36,7 +36,7 @@
     self.layer.cornerRadius = 4;
     [self setAttributedText:richText];
     self.textAlignment = NSTextAlignmentCenter;
-    [self setBackgroundColor:[UIColor colorFromHexString:@"000000" alpha:0.4]];
+    self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
     self.font = [UIFont systemFontOfSize:12];
 
     [self sizeToFit];

@@ -9,7 +9,6 @@
 
 #import "Reachability.h"
 #import "AlivcPlayerManager.h"
-#import "Utils.h"
 #import "CommonFunc.h"
 #import "ImageButton.h"
 
@@ -18,8 +17,8 @@
 #import "PlayerDetailsControlBottomView.h"
 #import "PlayerDetailsGestureView.h"
 #import "PlayerDetailsWatchTimeTips.h"
-#import "PlayerDetailsMoreView.h"
-#import "PlayerDetailsFirstStartGuideView.h"
+#import "PlayerDetailsSideMoreView.h"
+
 #import "PlayerDetailsPreviewLogoBtn.h"
 #import "PlayerDetailsThumbnailView.h"
 #import "PlayerDetailsPreviewView.h"
@@ -29,25 +28,19 @@
 //tipsView
 #import "PlayerDetailsPopView.h"
 
-#define FIRST_OPEN_KEY         @"playerDetailsFirstOpen"
-#define FIRST_OPEN_TRUE_VALUE  @"playerDetailsDidFirstOpen"
-#define FIRST_OPEN_FALSE_VALUE @"playerDetailsDidNotFirstOpen"
-
-@interface VideoDetailsPlayerView ()<AlivcPlayerProtocal, PlayerDetailsControlTopViewDelegate, PlayerDetailsControlBottomViewDelegate, PlayerDetailsGestureViewDelegate, PlayerDetailsMoreViewDelegate, PlayerDetailsPopViewDelegate>
+@interface VideoDetailsPlayerView ()<AlivcPlayerProtocal, PlayerDetailsControlTopViewDelegate, PlayerDetailsControlBottomViewDelegate, PlayerDetailsGestureViewDelegate, PlayerDetailsPopViewDelegate>
 
 @property (nonatomic, strong) UIImageView *coverImageView;        //封面
 @property (nonatomic, strong) UIView *playerView;   //播放的界面
 @property (nonatomic, strong) UIImageView *logoImageView;         //右上角的 logo
 
 @property (nonatomic, strong) PlayerDetailsGestureView *gestureView;
+@property (nonatomic, strong) PlayerDetailsSideMoreView *sideMoreView;
 
 @property (nonatomic, strong) PlayerDetailsPopView *popLayer;  //弹出的提示界面
 @property (nonatomic, strong) PlayerDetailsLoadingView *loadingView; //loading
 @property (nonatomic, strong) PlayerDetailsThumbnailView *thumbnailView;  //缩略图功能
 @property (nonatomic, strong) PlayerDetailsBulletView *bulletView;  //跑马灯
-
-@property (nonatomic, strong) PlayerDetailsMoreView *moreView;     //更多界面
-@property (nonatomic, strong) PlayerDetailsFirstStartGuideView *guideView;     //导航
 
 @property (nonatomic, strong) PlayerDetailsLoadingView *qualityLoadingView;  //清晰度loading
 @property (nonatomic, strong) PlayerDetailsPreviewLogoBtn *previewLogoBtn;
@@ -64,6 +57,7 @@
 @property (nonatomic, assign) CGFloat touchDownProgressValue;
 @property (nonatomic, strong) NSTimer *hideControlViewTimer;
 @property (nonatomic, assign) BOOL isControlViewShow;
+@property (nonatomic, assign) BOOL issideMoreViewShow;
 
 #pragma mark - data
 @property (nonatomic, assign) BOOL isPortrait;             //是否竖屏
@@ -73,6 +67,8 @@
 @property (assign, nonatomic) NSUInteger previewTime;
 @property (nonatomic, assign) BOOL trackHasThumbnail; //当前音轨有缩略图
 @property (nonatomic, assign) CGFloat gestureViewStartProgress; //水平手势记录开始时的progress
+
+@property (nonatomic, assign) CGFloat statusBarHeight;
 
 #pragma mark - 网络
 @property (nonatomic, strong) Reachability *reachability;       //网络监听
@@ -114,15 +110,11 @@
 
         PLAYER_MANAGER.delegate = self;
 
-        [self initUI];
-
-        //存储第一次触发saas
-        NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:FIRST_OPEN_KEY];
-        if (!str) {
-            [[NSUserDefaults standardUserDefaults] setValue:FIRST_OPEN_TRUE_VALUE forKey:FIRST_OPEN_KEY];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
         self.isControlViewShow = NO;
+        self.isScreenLocked = NO;
+        self.statusBarHeight = kStatusBarHeight;
+
+        [self initUI];
     }
     return self;
 }
@@ -140,7 +132,7 @@
     self.playerView.centerXPos.equalTo(@0);
     self.playerView.centerYPos.equalTo(@0);
     [self addSubview:self.playerView];
-    
+
     [PLAYER_MANAGER setPlayerView:self.playerView];
 
     [self addSubview:self.bulletView];
@@ -168,7 +160,7 @@
     [self addSubview:self.controlBottomView];
 
     self.screenLockButtonRight.centerYPos.equalTo(self.centerYPos).offset(36);
-    self.screenLockButtonRight.rightPos.equalTo(self.rightPos).offset(kStatusBarHeight);
+    self.screenLockButtonRight.rightPos.equalTo(self.rightPos).offset(self.statusBarHeight);
     [self addSubview:self.screenLockButtonRight];
     self.screenLockButtonRight.alpha = 0;
 
@@ -177,19 +169,22 @@
     [self addSubview:self.snapshotButton];
     self.snapshotButton.alpha = 0;
 
-    self.screenLockButtonLeft.leftPos.equalTo(self.leftPos).offset(kStatusBarHeight);
+    self.screenLockButtonLeft.leftPos.equalTo(self.leftPos).offset(self.statusBarHeight);
     self.screenLockButtonLeft.centerYPos.equalTo(self.centerYPos);
     [self addSubview:self.screenLockButtonLeft];
     self.screenLockButtonLeft.visibility = MyVisibility_Invisible;
     self.screenLockButtonLeft.alpha = 0;
-    
+
     self.watchTimeTips.bottomPos.equalTo(self.controlBottomView.topPos).offset(16);
 
-    self.moreView.delegate = self;
-    self.moreView.centerYPos.equalTo(@0);
-    self.moreView.heightSize.equalTo(self.heightSize);
-    self.moreView.leftPos.equalTo(self.rightPos);
-    [self addSubview:self.moreView];
+    self.sideMoreView.widthSize.equalTo(self.widthSize).multiply(0.45);
+    self.sideMoreView.heightSize.equalTo(self.heightSize);
+    self.sideMoreView.leftPos.equalTo(self.rightPos);
+    self.sideMoreView.leftPos.active = YES;
+    self.sideMoreView.rightPos.active = NO;
+    self.sideMoreView.rightPos.equalTo(self.rightPos);
+    self.sideMoreView.centerYPos.equalTo(@0);
+    [self addSubview:self.sideMoreView];
 
     self.popLayer.delegate = self;
     self.popLayer.centerYPos.equalTo(@0);
@@ -198,24 +193,7 @@
 
 //    [self addSubview:self.previewView];
 //    [self addSubview:self.loadingView];
-    
 }
-
-//- (void)becomeActive {
-//    _isEnterBackground = NO;
-//    if (PLAYER_MANAGER.currentPlayStatus == AVPStatusPaused && _isPauseByBackground && [Utils currentViewController] == [Utils findSuperViewController:self]) {
-//        _isPauseByBackground = NO;
-//        [self resume];
-//    }
-//}
-//
-//- (void)resignActive {
-//    _isEnterBackground = YES;
-//    if (PLAYER_MANAGER.currentPlayStatus == AVPStatusStarted || PLAYER_MANAGER.currentPlayStatus == AVPStatusPrepared) {
-//        _isPauseByBackground = YES;
-//        [self pause];
-//    }
-//}
 
 - (void)startNewPlayWithItem:(ItemModel *)itemModel details:(VideoDetailsModel *)detailsModel {
     self.mProgressCanUpdate = YES;
@@ -380,30 +358,25 @@
 
 #pragma mark - 屏幕旋转
 - (void)setLayoutLandscape {
-    NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:FIRST_OPEN_KEY];
-    if ([str isEqualToString:FIRST_OPEN_TRUE_VALUE]) {
-        [[NSUserDefaults standardUserDefaults] setValue:FIRST_OPEN_FALSE_VALUE forKey:FIRST_OPEN_KEY];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        [self addSubview:self.guideView];
-    }
     [self.controlBottomView resetLayout:NO];
     [self.controlTopView resetLayout:NO];
+    [self.gestureView resetLayout:NO];
 
     self.screenLockButtonRight.visibility = MyVisibility_Visible;
     self.snapshotButton.visibility = MyVisibility_Visible;
-    self.watchTimeTips.leftPos.equalTo(self.leftPos).offset(kStatusBarHeight);
+
+    self.watchTimeTips.leftPos.equalTo(self.leftPos).offset(self.statusBarHeight);
 }
 
 - (void)setLayoutPortrait {
-    [self.guideView removeFromSuperview];
-
     [self.controlBottomView resetLayout:YES];
     [self.controlTopView resetLayout:YES];
+    [self.gestureView resetLayout:YES];
 
     self.screenLockButtonRight.visibility = MyVisibility_Invisible;
     self.snapshotButton.visibility = MyVisibility_Invisible;
     self.screenLockButtonLeft.visibility = MyVisibility_Invisible;
-    
+
     self.watchTimeTips.leftPos.equalTo(self.leftPos).offset(0);
 }
 
@@ -415,24 +388,20 @@
             self.popLayer.hidden = YES;
             AVPTrackInfo *info = [player getCurrentTrack:AVPTRACK_TYPE_SAAS_VOD];
             self.currentTrackInfo = info;
-            
+
             int64_t watchTime = [PLAYER_MANAGER localWatchTime];
             float duration = PLAYER_MANAGER.duration;
             if (watchTime > 0 && duration && watchTime < duration) {
-                
                 [PLAYER_MANAGER seekTo:watchTime];
-                
-                CGFloat progress = watchTime/duration;
+
+                CGFloat progress = watchTime / duration;
                 [self.controlBottomView setProgress:progress];
                 [self.controlBottomView setBufferedProgress:progress];
-              
+
                 [self.watchTimeTips showWatchTimeTips:watchTime];
                 [self addSubview:self.watchTimeTips];
             }
-            
-
 //            [self.controlView setBottomViewTrackInfo:info];
-
 //            [self updateControlLayerDataWithMediaInfo:PLAYER_MANAGER.playMethod == AlivcPlayMethodUrl ? nil : [player getMediaInfo]];
 
             // 加密视频不支持投屏 非mp4 mov视频不支持airplay
@@ -577,21 +546,19 @@
 #pragma mark - PlayerDetailsControlTopViewDelegate
 - (void)onTopViewMoreButtonClicked:(UIButton *)sender topView:(PlayerDetailsControlTopView *)topView {
     if (!self.isPortrait) {
-        [self.moreView showWithAnimate:YES];
-    } else if (self.delegate && [self.delegate respondsToSelector:@selector(onBackViewClickWithPlayerView:)]) {
-        [self.delegate onBackViewClickWithPlayerView:self];
+        [self hideControlView];
+        [self showsideMoreView];
+    } else if (self.delegate && [self.delegate respondsToSelector:@selector(onMoreButtonClickWithPlayerView:)]) {
+        [self.delegate onMoreButtonClickWithPlayerView:self];
     }
 }
 
 - (void)onTopViewBackButtonClicked:(UIButton *)sender topView:(PlayerDetailsControlTopView *)topView {
-    if (!self.isPortrait) {
-        [Utils orientationRotate:YES];
-    } else {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(onBackViewClickWithPlayerView:)]) {
-            [self.delegate onBackViewClickWithPlayerView:self];
-        }
+    if (!self.isPortrait && self.delegate && [self.delegate respondsToSelector:@selector(onRotationToPortraitInterface:)]) {
+        [self.delegate onRotationToPortraitInterface:YES];
+    } else if (self.delegate && [self.delegate respondsToSelector:@selector(onBackButtonClickWithPlayerView:)]) {
+        [self.delegate onBackButtonClickWithPlayerView:self];
     }
-    
 }
 
 #pragma mark - PlayerDetailsControlBottomViewDelegate
@@ -631,10 +598,9 @@
 }
 
 - (void)onBottomViewFullScreenButtonClicked:(UIButton *)sender bottomView:(PlayerDetailsControlBottomView *)bottomView {
-    if (!self.isPortrait) {
-        return;
+    if (self.isPortrait && self.delegate && [self.delegate respondsToSelector:@selector(onRotationToPortraitInterface:)]) {
+        [self.delegate onRotationToPortraitInterface:NO];
     }
-    [Utils orientationRotate:NO];
 }
 
 - (void)onBottomViewPlayButtonClicked:(UIButton *)sender bottomView:(PlayerDetailsControlBottomView *)bottomView {
@@ -673,6 +639,11 @@
 
 #pragma mark - PlayerDetailsGestureViewDelegate
 - (void)onSingleTapWithGestureView:(PlayerDetailsGestureView *)gestureView {
+    if (self.issideMoreViewShow) {
+        [self hidesideMoreView];
+        return;
+    }
+
     self.isControlViewShow ? [self hideControlView] : [self showControlView];
 }
 
@@ -680,6 +651,11 @@
     if (self.isScreenLocked) {
         return;
     }
+
+    if (self.issideMoreViewShow) {
+        return;
+    }
+
     [self playButtonClicked];
     [self showControlView];
 }
@@ -688,6 +664,14 @@
 }
 
 - (void)onHorizontalMoveEndWithGestureView:(PlayerDetailsGestureView *)gestureView offset:(float)moveOffset {
+    if (self.isScreenLocked) {
+        return;
+    }
+
+    if (self.issideMoreViewShow) {
+        return;
+    }
+
     NSInteger durationTime = PLAYER_MANAGER.duration;
     NSTimeInterval moveValue = [self moveValueByOffset:moveOffset];
     [self seekTo:(durationTime * moveValue)];
@@ -698,7 +682,7 @@
 - (NSTimeInterval)moveValueByOffset:(float)moveOffset {
     CGFloat progress = [self.controlBottomView progress];
     CGFloat width = self.width;
-    CGFloat gap = (moveOffset / width);
+    CGFloat gap = (moveOffset / width) / 2;
     CGFloat moveValue = progress + gap;
     if (moveValue > 1) {
         moveValue = 1;
@@ -719,13 +703,44 @@
     self.screenLockButtonLeft.visibility = self.isScreenLocked ? MyVisibility_Visible : MyVisibility_Invisible;
     UIImpactFeedbackGenerator *impactLight = [[UIImpactFeedbackGenerator alloc]initWithStyle:UIImpactFeedbackStyleLight];
     [impactLight impactOccurred];
+
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onScreenLockButtonClickWithPlayerView:isLocked:)]) {
+        [self.delegate onScreenLockButtonClickWithPlayerView:self isLocked:self.isScreenLocked];
+    }
 }
 
 - (void)onSnapshotButtonClicked:(UIButton *)sender {
     [PLAYER_MANAGER snapShot];
 }
 
-#pragma mark - PlayerMoreViewDelegate
+#pragma mark - PlayerDetailssideMoreView
+- (BOOL)isHorzViewShow {
+    return self.issideMoreViewShow;
+}
+
+- (void)showsideMoreView {
+    self.sideMoreView.leftPos.active = NO;
+    self.sideMoreView.rightPos.active = YES;
+
+    [self layoutAnimationWithDuration:0.2];
+    self.issideMoreViewShow = YES;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onHorzViewPopped:)]) {
+        [self.delegate onHorzViewPopped:self.issideMoreViewShow];
+    }
+}
+
+- (void)hidesideMoreView {
+    self.sideMoreView.leftPos.active = YES;
+    self.sideMoreView.rightPos.active = NO;
+
+    [self layoutAnimationWithDuration:0.2];
+    self.issideMoreViewShow = NO;
+
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onHorzViewPopped:)]) {
+        [self.delegate onHorzViewPopped:self.issideMoreViewShow];
+    }
+}
+
 //- (void)moreView:(PlayerDetailsMoreView *)moreView clickedDownloadBtn:(UIButton *)downloadBtn {
 //    if (self.delegate && [self.delegate respondsToSelector:@selector(onDownloadButtonClickWithPlayerView:)]) {
 //        [self.delegate onDownloadButtonClickWithPlayerView:self];
@@ -790,8 +805,8 @@
 }
 
 - (void)onBackClickedWithPopView:(PlayerDetailsPopView *)popView {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(onBackViewClickWithPlayerView:)]) {
-        [self.delegate onBackViewClickWithPlayerView:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onBackButtonClickWithPlayerView:)]) {
+        [self.delegate onBackButtonClickWithPlayerView:self];
     } else {
         [self stop];
     }
@@ -823,20 +838,6 @@
         _playerView = [[UIView alloc]init];
     }
     return _playerView;
-}
-
-- (PlayerDetailsMoreView *)moreView {
-    if (!_moreView) {
-        _moreView = [[PlayerDetailsMoreView alloc] init];
-    }
-    return _moreView;
-}
-
-- (PlayerDetailsFirstStartGuideView *)guideView {
-    if (!_guideView) {
-        _guideView = [[PlayerDetailsFirstStartGuideView alloc] init];
-    }
-    return _guideView;
 }
 
 - (PlayerDetailsPopView *)popLayer {
@@ -930,7 +931,7 @@
         _screenLockButtonRight = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44) imageName:@"player_unlock"];
         [_screenLockButtonRight setImage:[UIImage imageNamed:@"player_lock"] forState:UIControlStateSelected];
         [_screenLockButtonRight setImageSize:CGSizeMake(24, 24)];
-        _screenLockButtonRight.backgroundColor = [UIColor colorFromHexString:@"000000" alpha:0.4];
+        _screenLockButtonRight.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
         _screenLockButtonRight.layer.cornerRadius = 6;
         _screenLockButtonRight.layer.masksToBounds = YES;
         [_screenLockButtonRight addTarget:self action:@selector(onScreenLockButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -943,7 +944,7 @@
         _screenLockButtonLeft = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44) imageName:@"player_unlock"];
         [_screenLockButtonLeft setImage:[UIImage imageNamed:@"player_lock"] forState:UIControlStateSelected];
         [_screenLockButtonLeft setImageSize:CGSizeMake(24, 24)];
-        _screenLockButtonLeft.backgroundColor = [UIColor colorFromHexString:@"000000" alpha:0.4];
+        _screenLockButtonLeft.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
         _screenLockButtonLeft.layer.cornerRadius = 6;
         _screenLockButtonLeft.layer.masksToBounds = YES;
         [_screenLockButtonLeft addTarget:self action:@selector(onScreenLockButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -955,7 +956,7 @@
     if (!_snapshotButton) {
         _snapshotButton = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44) imageName:@"player_snapshot"];
         [_snapshotButton setImageSize:CGSizeMake(24, 24)];
-        _snapshotButton.backgroundColor = [UIColor colorFromHexString:@"000000" alpha:0.4];
+        _snapshotButton.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
         _snapshotButton.layer.cornerRadius = 6;
         _snapshotButton.layer.masksToBounds = YES;
         [_snapshotButton addTarget:self action:@selector(onSnapshotButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -968,6 +969,13 @@
         _watchTimeTips = [[PlayerDetailsWatchTimeTips alloc] init];
     }
     return _watchTimeTips;
+}
+
+- (PlayerDetailsSideMoreView *)sideMoreView {
+    if (!_sideMoreView) {
+        _sideMoreView = [[PlayerDetailsSideMoreView alloc] init];
+    }
+    return _sideMoreView;
 }
 
 @end

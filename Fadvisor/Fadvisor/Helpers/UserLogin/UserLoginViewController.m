@@ -9,6 +9,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "MaskedLoginButton.h"
 #import <MyLayout/MyLayout.h>
+#import "RSMaskedLabel.h"
 
 @interface UserLoginViewController ()
 
@@ -71,6 +72,13 @@
     appNameView.bottomPos.equalTo(appSlogLabel.topPos).offset(12);
     [rootLayout addSubview:appNameView];
     
+    
+    
+    RSMaskedLabel *aaa = [[RSMaskedLabel alloc] init];
+    aaa.frame = CGRectMake(100, 200, 100, 200);
+    [aaa setText:@"啊啊啊测试"];
+    aaa.backgroundColor = [UIColor redColor];
+    [self.view addSubview:aaa];
 }
 
 - (void)initPlayer {

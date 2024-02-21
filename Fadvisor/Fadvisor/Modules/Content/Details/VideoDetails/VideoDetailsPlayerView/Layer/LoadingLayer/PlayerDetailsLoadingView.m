@@ -5,9 +5,9 @@
 #import "PlayerDetailsLoadingView.h"
 #import "PlayerDetailsGifView.h"
 
-static const CGFloat LoadingViewGifViewWidth   = 28;   //gifView 宽度
-static const CGFloat LoadingViewGifViewHeight  = 28;   //gifView 高度
-static const CGFloat LoadingViewMargin         = 2;    //间隙
+static const CGFloat LoadingViewGifViewWidth = 28;     //gifView 宽度
+static const CGFloat LoadingViewGifViewHeight = 28;    //gifView 高度
+static const CGFloat LoadingViewMargin = 2;            //间隙
 static const CGFloat LoadingViewWidth = 130;
 static const CGFloat LoadingViewHeight = 120;
 
@@ -19,7 +19,7 @@ static const CGFloat LoadingViewHeight = 120;
 
 @implementation PlayerDetailsLoadingView
 
-- (PlayerDetailsGifView *)gifView{
+- (PlayerDetailsGifView *)gifView {
     if (!_gifView) {
         _gifView = [[PlayerDetailsGifView alloc] init];
 //        [_gifView setGifImageWithName:@"al_loader"];
@@ -27,7 +27,7 @@ static const CGFloat LoadingViewHeight = 120;
     return _gifView;
 }
 
-- (UILabel *)tipLabelView{
+- (UILabel *)tipLabelView {
     if (!_tipLabelView) {
         _tipLabelView = [[UILabel alloc] init];
         [_tipLabelView setText:[@"Loading" localString]];
@@ -37,7 +37,6 @@ static const CGFloat LoadingViewHeight = 120;
     }
     return _tipLabelView;
 }
-
 
 #pragma mark - init
 - (instancetype)init {
