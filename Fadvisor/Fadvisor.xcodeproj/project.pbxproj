@@ -39,6 +39,7 @@
 		C12B09A52B138EA600108664 /* BaseItemDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C12B09A42B138EA600108664 /* BaseItemDetailsModel.m */; };
 		C12B09A82B13973600108664 /* MediaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C12B09A72B13973600108664 /* MediaModel.m */; };
 		C13F577A2B86196A003ADE05 /* UIInterface+HXRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = C13F57782B86196A003ADE05 /* UIInterface+HXRotation.m */; };
+		C13F577E2B863C6F003ADE05 /* ImageTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C13F577D2B863C6F003ADE05 /* ImageTextButton.m */; };
 		C148E3CA2B0EFC7A00DAA612 /* ItemFloatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C148E3C92B0EFC7A00DAA612 /* ItemFloatTableViewCell.m */; };
 		C15018452B85BF4700847E16 /* RSMaskedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C15018432B85BF4700847E16 /* RSMaskedLabel.m */; };
 		C15105352B5EB797006FA262 /* VideoDetailsContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C15105342B5EB797006FA262 /* VideoDetailsContentViewController.m */; };
@@ -286,6 +287,8 @@
 		C12B09A72B13973600108664 /* MediaModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MediaModel.m; sourceTree = "<group>"; };
 		C13F57782B86196A003ADE05 /* UIInterface+HXRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIInterface+HXRotation.m"; sourceTree = "<group>"; };
 		C13F57792B86196A003ADE05 /* UIInterface+HXRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIInterface+HXRotation.h"; sourceTree = "<group>"; };
+		C13F577C2B863C6F003ADE05 /* ImageTextButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageTextButton.h; sourceTree = "<group>"; };
+		C13F577D2B863C6F003ADE05 /* ImageTextButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageTextButton.m; sourceTree = "<group>"; };
 		C148E3C82B0EFC7A00DAA612 /* ItemFloatTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemFloatTableViewCell.h; sourceTree = "<group>"; };
 		C148E3C92B0EFC7A00DAA612 /* ItemFloatTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemFloatTableViewCell.m; sourceTree = "<group>"; };
 		C15018432B85BF4700847E16 /* RSMaskedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSMaskedLabel.m; sourceTree = "<group>"; };
@@ -746,6 +749,8 @@
 				C15018432B85BF4700847E16 /* RSMaskedLabel.m */,
 				C10C4C702B33C83E00099CF2 /* ImageButton.h */,
 				C10C4C712B33C83E00099CF2 /* ImageButton.m */,
+				C13F577C2B863C6F003ADE05 /* ImageTextButton.h */,
+				C13F577D2B863C6F003ADE05 /* ImageTextButton.m */,
 			);
 			path = CustomImageButton;
 			sourceTree = "<group>";
@@ -2106,6 +2111,7 @@
 				C15105352B5EB797006FA262 /* VideoDetailsContentViewController.m in Sources */,
 				C1591A1F2AFDCF0400351431 /* YYKVStorage.m in Sources */,
 				C1591A332AFDCF0400351431 /* YYTextEffectWindow.m in Sources */,
+				C13F577E2B863C6F003ADE05 /* ImageTextButton.m in Sources */,
 				C1B0CEEC2B08A09B00A1173E /* AuthorModel.m in Sources */,
 				C1591A4E2AFDCF0400351431 /* UIGestureRecognizer+YYAdd.m in Sources */,
 				C19B2BC32B7E27E900BC6384 /* PlayerZFVolumeBrightnessView.m in Sources */,

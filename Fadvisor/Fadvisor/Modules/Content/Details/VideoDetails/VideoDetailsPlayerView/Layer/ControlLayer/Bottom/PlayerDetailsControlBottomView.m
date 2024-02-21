@@ -9,7 +9,6 @@
 #import "DBSlider.h"
 
 #define kLeftRightViewHorzPadding  8.0
-#define kLeftRightViewStandardSize 44.0
 
 @interface PlayerDetailsControlBottomView ()
 
@@ -34,7 +33,7 @@
 #pragma mark - set And get
 - (ImageButton *)playButton {
     if (!_playButton) {
-        _playButton = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, kLeftRightViewStandardSize, kLeftRightViewStandardSize) imageName:@"player_play"];
+        _playButton = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, kButtonStandardSize, kButtonStandardSize) imageName:@"player_play"];
         [_playButton setImage:[UIImage imageNamed:@"player_paused"] forState:UIControlStateSelected];
         [_playButton addTarget:self action:@selector(playButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -57,7 +56,7 @@
 
 - (ImageButton *)fullScreenSwitchButton {
     if (!_fullScreenSwitchButton) {
-        _fullScreenSwitchButton = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, kLeftRightViewStandardSize, kLeftRightViewStandardSize) imageName:@"player_fullscreen"];
+        _fullScreenSwitchButton = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, kButtonStandardSize, kButtonStandardSize) imageName:@"player_fullscreen"];
         _fullScreenSwitchButton.imageSize = CGSizeMake(20, 20);
         [_fullScreenSwitchButton enableTouchDownAnimation];
         [_fullScreenSwitchButton addTarget:self action:@selector(fullScreenButtonClicked:) forControlEvents:UIControlEventTouchUpInside];

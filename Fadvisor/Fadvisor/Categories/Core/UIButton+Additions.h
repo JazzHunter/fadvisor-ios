@@ -14,7 +14,7 @@ typedef void (^TouchedBlock)(NSInteger tag);
 /**
  添加 addtarget
  */
-- (void)addActionHandler:(TouchedBlock _Nonnull )touchHandler;
+- (void)addActionHandler:(TouchedBlock _Nonnull)touchHandler;
 
 /**
  *  @brief  使用颜色设置按钮背景
@@ -39,20 +39,17 @@ typedef void (^TouchedBlock)(NSInteger tag);
  *
  *  @return
  */
-- (instancetype _Nonnull )initWithFrame:(CGRect)frame buttonTitle:(NSString *_Nonnull)buttonTitle normalBGColor:(UIColor *_Nonnull)normalBGColor selectBGColor:(UIColor *_Nonnull)selectBGColor
-                            normalColor:(UIColor *_Nonnull)normalColor selectColor:(UIColor *_Nonnull)selectColor buttonFont:(UIFont *_Nonnull)buttonFont cornerRadius:(CGFloat )cornerRadius
-                              doneBlock:(void(^_Nonnull)(UIButton *_Nonnull))doneBlock;
-
+- (instancetype _Nonnull)initWithFrame:(CGRect)frame buttonTitle:(NSString *_Nonnull)buttonTitle normalBGColor:(UIColor *_Nonnull)normalBGColor selectBGColor:(UIColor *_Nonnull)selectBGColor
+                           normalColor:(UIColor *_Nonnull)normalColor selectColor:(UIColor *_Nonnull)selectColor buttonFont:(UIFont *_Nonnull)buttonFont cornerRadius:(CGFloat)cornerRadius
+                             doneBlock:(void (^_Nonnull)(UIButton *_Nonnull))doneBlock;
 
 + (UIButton *_Nonnull)initWithFrame:(CGRect)frame buttonTitle:(NSString *_Nonnull)buttonTitle normalBGColor:(UIColor *_Nonnull)normalBGColor selectBGColor:(UIColor *_Nonnull)selectBGColor
-                        normalColor:(UIColor *_Nonnull)normalColor selectColor:(UIColor *_Nonnull)selectColor buttonFont:(UIFont *_Nonnull)buttonFont cornerRadius:(CGFloat )cornerRadius
-                          doneBlock:(void(^_Nonnull)(UIButton *_Nonnull))doneBlock;
+                        normalColor:(UIColor *_Nonnull)normalColor selectColor:(UIColor *_Nonnull)selectColor buttonFont:(UIFont *_Nonnull)buttonFont cornerRadius:(CGFloat)cornerRadius
+                          doneBlock:(void (^_Nonnull)(UIButton *_Nonnull))doneBlock;
 
-@property(copy, nonatomic) void(^ _Nullable handleButtonActionBlock)(UIButton * _Nullable sender);
-
+@property (copy, nonatomic) void (^ _Nullable handleButtonActionBlock)(UIButton *_Nullable sender);
 
 @end
-
 
 //
 //  Created by Alberto Pasca on 27/02/14.

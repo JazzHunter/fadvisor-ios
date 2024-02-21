@@ -189,12 +189,22 @@ NS_ASSUME_NONNULL_BEGIN
  @brief 获取指定位置的缩略图
  @param positionMs 代表在哪个指定位置的缩略图
  */
--(void)getThumbnail:(int64_t)positionMs;
+- (void)getThumbnail:(int64_t)positionMs;
 
-@property(nonatomic) float rate;
+@property (nonatomic) float rate;
 
 @property (nonatomic, assign) float volume;
 
+/**
+ @brief 开启画中画 ，同时设置画中画代理代理
+ @param pictureInPictureDelegate 画中画代理
+ */
+- (void)enablePictureInPictureWithDelegate:(id<AliPlayerPictureInPictureDelegate>)pictureInPictureDelegate;
+
+/**
+ @brief 关闭画中画
+ */
+- (void)disablePictureInPicture;
 
 @end
 

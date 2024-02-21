@@ -28,7 +28,7 @@
 //tipsView
 #import "PlayerDetailsPopView.h"
 
-@interface VideoDetailsPlayerView ()<AlivcPlayerProtocal, PlayerDetailsControlTopViewDelegate, PlayerDetailsControlBottomViewDelegate, PlayerDetailsGestureViewDelegate, PlayerDetailsPopViewDelegate>
+@interface VideoDetailsPlayerView ()<AlivcPlayerProtocal, AliPlayerPictureInPictureDelegate, PlayerDetailsControlTopViewDelegate, PlayerDetailsControlBottomViewDelegate, PlayerDetailsGestureViewDelegate, PlayerDetailsPopViewDelegate>
 
 @property (nonatomic, strong) UIImageView *coverImageView;        //封面
 @property (nonatomic, strong) UIView *playerView;   //播放的界面
@@ -57,7 +57,7 @@
 @property (nonatomic, assign) CGFloat touchDownProgressValue;
 @property (nonatomic, strong) NSTimer *hideControlViewTimer;
 @property (nonatomic, assign) BOOL isControlViewShow;
-@property (nonatomic, assign) BOOL issideMoreViewShow;
+@property (nonatomic, assign) BOOL isSideMoreViewShow;
 
 #pragma mark - data
 @property (nonatomic, assign) BOOL isPortrait;             //是否竖屏
@@ -74,13 +74,20 @@
 @property (nonatomic, strong) Reachability *reachability;       //网络监听
 
 @property (nonatomic, assign) NSTimeInterval keyFrameTime;
-@property (nonatomic, assign) float saveCurrentTime;       //保存重试之前的播放时间
 @property (nonatomic, assign) BOOL isLive;
 
 //标准网络监听状态，保证只有切换网络时才调用reload
 @property (nonatomic, assign) BOOL isNetChange;
 @property (nonatomic, assign) BOOL isEnterBackground;
 @property (nonatomic, assign) BOOL isPauseByBackground;
+
+#pragma mark - 画中画
+//https://help.aliyun.com/zh/vod/developer-reference/advanced-features-1#p-93m-izq-1p7
+@property (nonatomic, assign) BOOL isPipPaused; // 监听画中画当前是否是暂停状态
+
+@property (nonatomic, weak) AVPictureInPictureController *pipController; // 设置画中画控制器，在画中画即将启动的回调方法中设置，并需要在页面准备销毁时主动将其设置为nil，建议设置
+
+@property (nonatomic, assign) int64_t currentPosition; // 监听播放器当前播放进度，currentPosition设置为监听视频当前播放位置回调中的position参数值
 
 @end
 
@@ -286,7 +293,7 @@
     [PLAYER_MANAGER startPlayWithVidAuth:vid errorBlock:^(NSString *errorMsg) {
         AVPErrorModel *errorModel = [AVPErrorModel new];
         errorModel.message = errorMsg;
-        [weakself showPopLayerWithErrorModel:errorModel];
+//        [weakself showPopLayerWithErrorModel:errorModel];
     }];
     NSLog(@"播放器playAuth");
 }
@@ -389,6 +396,7 @@
             AVPTrackInfo *info = [player getCurrentTrack:AVPTRACK_TYPE_SAAS_VOD];
             self.currentTrackInfo = info;
 
+            // 定位到上次播放时间
             int64_t watchTime = [PLAYER_MANAGER localWatchTime];
             float duration = PLAYER_MANAGER.duration;
             if (watchTime > 0 && duration && watchTime < duration) {
@@ -401,6 +409,7 @@
                 [self.watchTimeTips showWatchTimeTips:watchTime];
                 [self addSubview:self.watchTimeTips];
             }
+            [PLAYER_MANAGER enablePictureInPictureWithDelegate:self];
 //            [self.controlView setBottomViewTrackInfo:info];
 //            [self updateControlLayerDataWithMediaInfo:PLAYER_MANAGER.playMethod == AlivcPlayMethodUrl ? nil : [player getMediaInfo]];
 
@@ -420,6 +429,10 @@
             if (self.delegate && [self.delegate respondsToSelector:@selector(onFinishWithPlayerView:)]) {
                 [self.delegate onFinishWithPlayerView:self];
             }
+            if (_pipController) {
+                self.isPipPaused = YES;    // 播放结束后，将画中画状态变更为暂停
+                [self.pipController invalidatePlaybackState];
+            }
         } break;
         case AVPEventLoadingStart: {
             [self.loadingView show];
@@ -431,6 +444,9 @@
             self.mProgressCanUpdate = YES;
             [self.loadingView dismiss];
             NSLog(@"seekDone");
+            if (_pipController) {
+                [self.pipController invalidatePlaybackState];
+            }
         } break;
         case AVPEventLoopingStart:
             break;
@@ -453,14 +469,14 @@
     //根据播放器状态处理seek时thumb是否可以拖动
     // [self.controlView updateViewWithPlayerState:self.aliPlayer.playerState isScreenLocked:self.isScreenLocked fixedPortrait:self.isProtrait];
     //根据错误信息，展示popLayer界面
-    [self showPopLayerWithErrorModel:errorModel];
+//    [self showPopLayerWithErrorModel:errorModel];
     NSLog(@"errorCode:%lu errorMessage:%@", (unsigned long)errorModel.code, errorModel.message);
 }
 
 - (void)onCurrentPositionUpdate:(AliPlayer *)player position:(int64_t)position {
     NSTimeInterval currentTime = position;
     NSTimeInterval durationTime = PLAYER_MANAGER.duration;
-    self.saveCurrentTime = currentTime / 1000;
+    self.currentPosition = position;
 
     if (self.isPreviewMode && self.previewTime > 0 && position >= self.previewTime * 1000) {
         [self.controlBottomView updateProgressWithCurrentTime:self.previewTime * 1000 durationTime:durationTime];
@@ -514,6 +530,10 @@
 
 - (void)onPlayerStatusChanged:(AliPlayer *)player oldStatus:(AVPStatus)oldStatus newStatus:(AVPStatus)newStatus {
     [self.controlBottomView updatePlayerState:newStatus];
+
+    if (_pipController) {
+        [self.pipController invalidatePlaybackState];
+    }
 }
 
 - (void)onGetThumbnailSuc:(int64_t)positionMs fromPos:(int64_t)fromPos toPos:(int64_t)toPos image:(id)image {
@@ -543,11 +563,118 @@
     [CommonFunc saveImage:image inView:self];
 }
 
+#pragma mark - AliPlayerPictureInPictureDelegate
+/**
+ @brief 画中画即将启动
+ @param pictureInPictureController 画中画控制器
+ */
+- (void)pictureInPictureControllerWillStartPictureInPicture:(AVPictureInPictureController *)pictureInPictureController {
+    if (!_pipController) {
+        self.pipController = pictureInPictureController;
+    }
+    self.isPipPaused = !(PLAYER_MANAGER.currentPlayStatus == AVPStatusStarted);
+    [pictureInPictureController invalidatePlaybackState];
+}
+
+/**
+ @brief 画中画准备停止
+ @param pictureInPictureController 画中画控制器
+ */
+- (void)pictureInPictureControllerWillStopPictureInPicture:(AVPictureInPictureController *)pictureInPictureController {
+    self.isPipPaused = NO;
+    [pictureInPictureController invalidatePlaybackState];
+}
+
+/**
+ @brief 在画中画停止前告诉代理恢复用户接口
+ @param pictureInPictureController 画中画控制器
+ @param completionHandler 调用并传值YES以允许系统结束恢复播放器用户接口
+ */
+- (void)pictureInPictureController:(AVPictureInPictureController *)pictureInPictureController restoreUserInterfaceForPictureInPictureStopWithCompletionHandler:(void (^)(BOOL restored))completionHandler {
+    if (_pipController) {
+        _pipController = nil;
+    }
+    completionHandler(YES);
+}
+
+/**
+ @brief 通知画中画控制器当前可播放的时间范围
+ @param pictureInPictureController 画中画控制器
+ @return 当前可播放的时间范围
+ */
+- (CMTimeRange)pictureInPictureControllerTimeRangeForPlayback:(nonnull AVPictureInPictureController *)pictureInPictureController layerTime:(CMTime)layerTime {
+    Float64 current64 = CMTimeGetSeconds(layerTime);
+
+    Float64 start;
+    Float64 end;
+
+    if (self.currentPosition <= PLAYER_MANAGER.duration) {
+        double curPostion = self.currentPosition / 1000.0;
+        double duration = PLAYER_MANAGER.duration / 1000.0;
+        double interval = duration - curPostion;
+        start = current64 - curPostion;
+        end = current64 + interval;
+        CMTime t1 = CMTimeMakeWithSeconds(start, layerTime.timescale);
+        CMTime t2 = CMTimeMakeWithSeconds(end, layerTime.timescale);
+        return CMTimeRangeFromTimeToTime(t1, t2);
+    } else {
+        return CMTimeRangeMake(kCMTimeNegativeInfinity, kCMTimePositiveInfinity);
+    }
+}
+
+/**
+ @brief 将暂停或播放状态反映到UI上
+ @param pictureInPictureController 画中画控制器
+ @return 暂停或播放
+ */
+- (BOOL)pictureInPictureControllerIsPlaybackPaused:(nonnull AVPictureInPictureController *)pictureInPictureController {
+    return self.isPipPaused;
+}
+
+/**
+ @brief 点击快进或快退按钮
+ @param pictureInPictureController 画中画控制器
+ @param skipInterval 快进或快退的事件间隔
+ @param completionHandler 一定要调用的闭包，表示跳转操作完成
+ */
+- (void)pictureInPictureController:(nonnull AVPictureInPictureController *)pictureInPictureController skipByInterval:(CMTime)skipInterval completionHandler:(nonnull void (^)(void))completionHandler {
+    int64_t skipTime = skipInterval.value / skipInterval.timescale;
+    int64_t skipPosition = self.currentPosition + skipTime * 1000;
+    if (skipPosition < 0) {
+        skipPosition = 0;
+    } else if (skipPosition > PLAYER_MANAGER.duration) {
+        skipPosition = PLAYER_MANAGER.duration;
+    }
+    [PLAYER_MANAGER seekTo:skipPosition];
+    [pictureInPictureController invalidatePlaybackState];
+}
+
+/**
+ @brief 点击画中画暂停按钮
+ @param pictureInPictureController 画中画控制器
+ @param playing 是否正在播放
+ */
+- (void)pictureInPictureController:(nonnull AVPictureInPictureController *)pictureInPictureController setPlaying:(BOOL)playing {
+    if (!playing) {
+        [self pause];
+        self.isPipPaused = YES;
+    } else {
+        // 建议：如果画中画播放完成，需要重新播放，可额外执行下面if语句的代码
+        if (PLAYER_MANAGER.currentPlayStatus == AVPStatusCompletion) {
+            [PLAYER_MANAGER seekTo:0];
+        }
+
+        [self start];
+        self.isPipPaused = NO;
+    }
+    [pictureInPictureController invalidatePlaybackState];
+}
+
 #pragma mark - PlayerDetailsControlTopViewDelegate
 - (void)onTopViewMoreButtonClicked:(UIButton *)sender topView:(PlayerDetailsControlTopView *)topView {
     if (!self.isPortrait) {
         [self hideControlView];
-        [self showsideMoreView];
+        [self showSideMoreView];
     } else if (self.delegate && [self.delegate respondsToSelector:@selector(onMoreButtonClickWithPlayerView:)]) {
         [self.delegate onMoreButtonClickWithPlayerView:self];
     }
@@ -639,7 +766,7 @@
 
 #pragma mark - PlayerDetailsGestureViewDelegate
 - (void)onSingleTapWithGestureView:(PlayerDetailsGestureView *)gestureView {
-    if (self.issideMoreViewShow) {
+    if (self.isSideMoreViewShow) {
         [self hidesideMoreView];
         return;
     }
@@ -652,7 +779,7 @@
         return;
     }
 
-    if (self.issideMoreViewShow) {
+    if (self.isSideMoreViewShow) {
         return;
     }
 
@@ -667,30 +794,29 @@
     if (self.isScreenLocked) {
         return;
     }
-
-    if (self.issideMoreViewShow) {
+    if (self.isSideMoreViewShow) {
         return;
     }
-
     NSInteger durationTime = PLAYER_MANAGER.duration;
-    NSTimeInterval moveValue = [self moveValueByOffset:moveOffset];
-    [self seekTo:(durationTime * moveValue)];
-    [self.controlBottomView setProgress:moveValue];
+    NSTimeInterval seekProgress = [self moveValueByOffset:moveOffset];
+    
+    [self seekTo:(durationTime * seekProgress)];
+    [self.controlBottomView setProgress:seekProgress];
     self.thumbnailView.hidden = YES;
 }
 
 - (NSTimeInterval)moveValueByOffset:(float)moveOffset {
     CGFloat progress = [self.controlBottomView progress];
     CGFloat width = self.width;
-    CGFloat gap = (moveOffset / width) / 2;
-    CGFloat moveValue = progress + gap;
-    if (moveValue > 1) {
-        moveValue = 1;
+    CGFloat offsetProgress = (moveOffset / width) / 2;
+    CGFloat seekProgress = progress + offsetProgress;
+    if (seekProgress > 1) {
+        seekProgress = 1;
     }
-    if (moveValue < 0) {
-        moveValue = 0;
+    if (seekProgress < 0) {
+        seekProgress = 0;
     }
-    return moveValue;
+    return seekProgress;
 }
 
 #pragma mark - ScreenLock Actions
@@ -713,19 +839,19 @@
     [PLAYER_MANAGER snapShot];
 }
 
-#pragma mark - PlayerDetailssideMoreView
+#pragma mark - PlayerDetailsSideMoreView
 - (BOOL)isHorzViewShow {
-    return self.issideMoreViewShow;
+    return self.isSideMoreViewShow;
 }
 
-- (void)showsideMoreView {
+- (void)showSideMoreView {
     self.sideMoreView.leftPos.active = NO;
     self.sideMoreView.rightPos.active = YES;
 
     [self layoutAnimationWithDuration:0.2];
-    self.issideMoreViewShow = YES;
+    self.isSideMoreViewShow = YES;
     if (self.delegate && [self.delegate respondsToSelector:@selector(onHorzViewPopped:)]) {
-        [self.delegate onHorzViewPopped:self.issideMoreViewShow];
+        [self.delegate onHorzViewPopped:self.isSideMoreViewShow];
     }
 }
 
@@ -734,95 +860,11 @@
     self.sideMoreView.rightPos.active = NO;
 
     [self layoutAnimationWithDuration:0.2];
-    self.issideMoreViewShow = NO;
+    self.isSideMoreViewShow = NO;
 
     if (self.delegate && [self.delegate respondsToSelector:@selector(onHorzViewPopped:)]) {
-        [self.delegate onHorzViewPopped:self.issideMoreViewShow];
+        [self.delegate onHorzViewPopped:self.isSideMoreViewShow];
     }
-}
-
-//- (void)moreView:(PlayerDetailsMoreView *)moreView clickedDownloadBtn:(UIButton *)downloadBtn {
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(onDownloadButtonClickWithPlayerView:)]) {
-//        [self.delegate onDownloadButtonClickWithPlayerView:self];
-//    }
-//}
-//
-//- (void)moreView:(PlayerDetailsMoreView *)moreView speedChanged:(float)speedValue {
-//    [self.aliPlayer setRate:speedValue];
-//}
-//
-//- (void)moreView:(PlayerDetailsMoreView *)moreView scalingIndexChanged:(NSInteger)index {
-//    switch (index) {
-//        case 0:
-//            self.aliPlayer.scalingMode = AVP_SCALINGMODE_SCALEASPECTFIT;
-//            break;
-//        case 1:
-//            self.aliPlayer.scalingMode = AVP_SCALINGMODE_SCALETOFILL;
-//            break;
-//        case 2:
-//            self.aliPlayer.scalingMode = AVP_SCALINGMODE_SCALEASPECTFILL;
-//            break;
-//        default:
-//            break;
-//    }
-//    NSLog(@"选择了画面比例模式 %ld", (long)index);
-//}
-//
-//- (void)moreView:(PlayerDetailsMoreView *)moreView loopIndexChanged:(NSInteger)index {
-//    switch (index) {
-//        case 0:
-//            self.aliPlayer.loop = YES;
-//            break;
-//        case 1:
-//            self.aliPlayer.loop = NO;
-//            break;
-//        default:
-//            break;
-//    }
-//}
-
-#pragma mark - popdelegate
-- (void)showPopViewWithType:(PlayerErrorType)type {
-    self.popLayer.hidden = YES;
-    switch (type) {
-        case PlayerErrorTypeReplay: {
-            //重播
-            [self seekTo:0];
-//            [PLAYER_MANAGER prepare];
-            [PLAYER_MANAGER start];
-        }
-        break;
-        case PlayerErrorTypeRetry: {
-        }
-        break;
-        case PlayerErrorTypePause: {
-        }
-        break;
-            break;
-        default:
-            break;
-    }
-}
-
-- (void)onBackClickedWithPopView:(PlayerDetailsPopView *)popView {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(onBackButtonClickWithPlayerView:)]) {
-        [self.delegate onBackButtonClickWithPlayerView:self];
-    } else {
-        [self stop];
-    }
-}
-
-//根据错误信息，展示popLayer界面
-- (void)showPopLayerWithErrorModel:(AVPErrorModel *)errorModel {
-//    NSString *errorShowMsg = [NSString stringWithFormat:@"%@\n errorCode:%d", errorModel.message, (int)errorModel.code];
-//
-//    //点击重试后，重新获取信息
-//    if (self.playerConfig && (self.playerConfig.sourceType == SourceTypeNull) && errorModel.code == ERROR_SERVER_POP_UNKNOWN) {
-//        [self.popLayer showPopViewWithCode:ALYPVPlayerPopCodeSecurityTokenExpired popMsg:errorShowMsg];
-//    } else {
-//        [self.popLayer showPopViewWithCode:ALYPVPlayerPopCodeServerError popMsg:errorShowMsg];
-//    }
-//    [self unlockScreen];
 }
 
 #pragma mark - set And get
@@ -928,7 +970,7 @@
 
 - (ImageButton *)screenLockButtonRight {
     if (!_screenLockButtonRight) {
-        _screenLockButtonRight = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44) imageName:@"player_unlock"];
+        _screenLockButtonRight = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, kButtonStandardSize, kButtonStandardSize) imageName:@"player_unlock"];
         [_screenLockButtonRight setImage:[UIImage imageNamed:@"player_lock"] forState:UIControlStateSelected];
         [_screenLockButtonRight setImageSize:CGSizeMake(24, 24)];
         _screenLockButtonRight.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
@@ -941,7 +983,7 @@
 
 - (ImageButton *)screenLockButtonLeft {
     if (!_screenLockButtonLeft) {
-        _screenLockButtonLeft = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44) imageName:@"player_unlock"];
+        _screenLockButtonLeft = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, kButtonStandardSize, kButtonStandardSize) imageName:@"player_unlock"];
         [_screenLockButtonLeft setImage:[UIImage imageNamed:@"player_lock"] forState:UIControlStateSelected];
         [_screenLockButtonLeft setImageSize:CGSizeMake(24, 24)];
         _screenLockButtonLeft.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
@@ -954,7 +996,7 @@
 
 - (ImageButton *)snapshotButton {
     if (!_snapshotButton) {
-        _snapshotButton = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44) imageName:@"player_snapshot"];
+        _snapshotButton = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, kButtonStandardSize, kButtonStandardSize) imageName:@"player_snapshot"];
         [_snapshotButton setImageSize:CGSizeMake(24, 24)];
         _snapshotButton.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
         _snapshotButton.layer.cornerRadius = 6;

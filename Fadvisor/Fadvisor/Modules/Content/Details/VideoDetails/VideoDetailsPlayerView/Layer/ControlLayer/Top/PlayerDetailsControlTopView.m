@@ -7,7 +7,6 @@
 #import "ImageButton.h"
 
 #define kLeftRightViewHorzPadding  8.0
-#define kLeftRightViewStandardSize 44.0
 
 @interface PlayerDetailsControlTopView ()
 
@@ -23,10 +22,10 @@
 
 - (ImageButton *)backButton {
     if (!_backButton) {
-        _backButton = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, kLeftRightViewStandardSize, kLeftRightViewStandardSize) imageName:@"player_back"];
+        _backButton = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, kButtonStandardSize, kButtonStandardSize) imageName:@"player_back"];
         _backButton.imageSize = CGSizeMake(36, 36);
         _backButton.leftPos.equalTo(self.leftPos);
-        _backButton.centerYPos.equalTo(@0);
+        self.backButton.centerYPos.equalTo(self.centerYPos).offset(0);
         [_backButton addTarget:self action:@selector(backButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backButton;
@@ -34,7 +33,7 @@
 
 - (ImageButton *)moreButton {
     if (!_moreButton) {
-        _moreButton = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, kLeftRightViewStandardSize, kLeftRightViewStandardSize) imageName:@"player_more"];
+        _moreButton = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, kButtonStandardSize, kButtonStandardSize) imageName:@"player_more"];
         _moreButton.imageSize = CGSizeMake(32, 32);
         _moreButton.rightPos.equalTo(self.rightPos);
         _moreButton.centerYPos.equalTo(@0);
@@ -52,7 +51,7 @@
         _titleLabel.myHeight = MyLayoutSize.wrap;
         _titleLabel.leftPos.equalTo(_backButton.rightPos);
         _titleLabel.rightPos.equalTo(_moreButton.leftPos);
-        _titleLabel.centerYPos.equalTo(@0);
+        _titleLabel.centerYPos.equalTo(_backButton.centerYPos);
         _titleLabel.numberOfLines = 1;
     }
     return _titleLabel;
@@ -89,7 +88,6 @@
     self.gradientLayer.frame = self.bounds;
 }
 
-
 - (void)resetLayout:(BOOL)isPortrait {
     if (isPortrait) {
     } else {
@@ -99,7 +97,6 @@
 - (void)setTitle:(NSString *)titleText {
     self.titleLabel.text = titleText;
 }
-
 
 #pragma mark - ButtonClicked
 - (void)backButtonClicked:(UIButton *)sender {

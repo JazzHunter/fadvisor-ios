@@ -100,6 +100,7 @@ static NSString *key_ActionBlock = @"key_ActionBlock";
 
     return solidColorButton;
 }
+
 @end
 
 @implementation APRoundedButton

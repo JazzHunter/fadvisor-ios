@@ -9,7 +9,6 @@
 #import "NavigationBar.h"
 
 #define kLeftRightViewHorzPadding  8.0
-#define kLeftRightViewStandardSize 44.0
 
 @interface NavigationBar ()
 
@@ -48,12 +47,12 @@
             self.rootLayout.paddingTop = kStatusBarHeight;
         break;
         case UIDeviceOrientationLandscapeLeft:
-            self.frame = CGRectMake(0, 0, kScreenHeight, 44.0);
+            self.frame = CGRectMake(0, 0, kScreenHeight, kButtonStandardSize);
             self.bgView.frame = self.frame;
             self.rootLayout.paddingTop = 0;
         break;
         case UIDeviceOrientationLandscapeRight:
-            self.frame = CGRectMake(0, 0, kScreenHeight, 44.0);
+            self.frame = CGRectMake(0, 0, kScreenHeight, kButtonStandardSize);
             self.bgView.frame = self.frame;
             self.rootLayout.paddingTop = 0;
         break;
@@ -167,14 +166,14 @@
     } else if ([self.dataSource respondsToSelector:@selector(navigationBarLeftView:)]) {
         _leftView = [self.dataSource navigationBarLeftView:self];
     } else if ([self.dataSource respondsToSelector:@selector(navigationBarLeftButtonImage:navigationBar:)]) {
-        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kLeftRightViewStandardSize, kLeftRightViewStandardSize)];
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kButtonStandardSize, kButtonStandardSize)];
         UIImage *image = [self.dataSource navigationBarLeftButtonImage:btn navigationBar:self];
         if (image) {
             [btn setImage:image forState:UIControlStateNormal];
         }
         _leftView = btn;
     } else {
-        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kLeftRightViewStandardSize, kLeftRightViewStandardSize)];
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kButtonStandardSize, kButtonStandardSize)];
         [btn setImage:[UIImage imageNamed:@"navgationbar_back_pre"] forState:UIControlStateHighlighted];
         [btn setImage:[UIImage imageNamed:@"navgationbar_back_nor"] forState:UIControlStateNormal];
         _leftView = btn;
@@ -194,14 +193,14 @@
     } else if ([self.dataSource respondsToSelector:@selector(navigationBarRightView:)]) {
         _rightView = [self.dataSource navigationBarRightView:self];
     } else if ([self.dataSource respondsToSelector:@selector(navigationBarRightButtonImage:navigationBar:)]) {
-        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kLeftRightViewStandardSize, kLeftRightViewStandardSize)];
+        UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kButtonStandardSize, kButtonStandardSize)];
         UIImage *image = [self.dataSource navigationBarRightButtonImage:btn navigationBar:self];
         if (image) {
             [btn setImage:image forState:UIControlStateNormal];
         }
         _rightView = btn;
     } else {
-        _rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kLeftRightViewStandardSize, kLeftRightViewStandardSize)];
+        _rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kButtonStandardSize, kButtonStandardSize)];
     }
     if ([_rightView isKindOfClass:[UIButton class]]) {
         UIButton *btn = (UIButton *)_rightView;
@@ -230,7 +229,7 @@
     } else {
         MyBaseLayout *titleView = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Horz];
         titleView.gravity = MyGravity_Center;
-        titleView.mySize = CGSizeMake(kScreenWidth - 2 * (2 * kLeftRightViewHorzPadding + kLeftRightViewStandardSize), MyLayoutSize.wrap);
+        titleView.mySize = CGSizeMake(kScreenWidth - 2 * (2 * kLeftRightViewHorzPadding + kButtonStandardSize), MyLayoutSize.wrap);
         titleView.subviewHSpace = 12;
         _titleView = titleView;
         _titleView.centerXPos.equalTo(@0);

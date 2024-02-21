@@ -122,7 +122,7 @@
  *  隐藏ProgressView
  *
  *  @param view superView
-
+ 
  */
 + (void)hideHUDForView:(UIView *)view;
 

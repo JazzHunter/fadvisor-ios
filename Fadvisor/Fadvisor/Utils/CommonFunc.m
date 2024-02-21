@@ -17,9 +17,9 @@
 + (void)saveImage:(UIImage *)image inView:(UIView *)view {
     PHAuthorizationStatus status = [PHPhotoLibrary authorizationStatus];
     if (status == PHAuthorizationStatusRestricted) {
-        [MBProgressHUD showMessage:[@"因为系统原因, 保存到相册失败" localString] ToView:view];
+        [MBProgressHUD showAutoMessage:[@"因为系统原因, 保存到相册失败" localString] ToView:view];
     } else if (status == PHAuthorizationStatusDenied) {
-        [MBProgressHUD showMessage:[@"因为权限原因, 保存到相册失败" localString] ToView:view];
+        [MBProgressHUD showAutoMessage:[@"因为权限原因, 保存到相册失败" localString] ToView:view];
     } else if (status == PHAuthorizationStatusAuthorized) {
         [self saveImageHasAuthority:image inView:view];
     } else if (status == PHAuthorizationStatusNotDetermined) {
@@ -48,14 +48,14 @@
         }
     } completionHandler:^(BOOL success, NSError * _Nullable error) {
         if (success == NO) {
-            [MBProgressHUD showMessage:[@"保存图片失败!" localString] ToView:view];
+            [MBProgressHUD showAutoMessage:[@"保存图片失败!" localString] ToView:view];
             return;
         }
         
         // 2.获得相簿
         PHAssetCollection *createdAssetCollection = [self createdAssetCollection];
         if (createdAssetCollection == nil) {
-            [MBProgressHUD showMessage:[@"创建相簿失败!" localString] ToView:view];
+            [MBProgressHUD showAutoMessage:[@"创建相簿失败!" localString] ToView:view];
             return;
         }
         

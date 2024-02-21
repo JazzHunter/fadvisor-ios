@@ -307,6 +307,15 @@ static dispatch_once_t onceToken;
     [self.player getThumbnail:positionMs];
 }
 
+- (void)enablePictureInPictureWithDelegate:(id<AliPlayerPictureInPictureDelegate>)pictureInPictureDelegate{
+    [self.player setPictureInPictureEnable:YES];
+    [self.player setPictureinPictureDelegate:pictureInPictureDelegate];
+}
+
+- (void)disablePictureInPicture {
+    [self.player setPictureInPictureEnable:NO];
+}
+
 #pragma mark - AlivcPlayerVideoHistory
 
 - (void)saveToLocal:(NSString *)videoId
