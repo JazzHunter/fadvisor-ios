@@ -240,6 +240,19 @@
     return seconds / 3600 <= 0 ? [NSString stringWithFormat:@"%@:%@", str_minute, str_second] : [NSString stringWithFormat:@"%@:%@:%@", str_hour, str_minute, str_second];
 }
 
++ (NSString *)speedformatFromBytes:(int64_t)speed {
+    if (speed < 1048576) {
+        return [NSString stringWithFormat:@"%.2fKB", (double)speed / 1024];
+    }
+    if (speed >= 1048576 && speed < 1073741824) {
+        return [NSString stringWithFormat:@"%.2fMB", (double)speed / (1024 * 1024)];
+    }
+    if (speed >= 1073741824 && speed < 1099511627776) {
+        return [NSString stringWithFormat:@"%.2fGB", (double)speed / (1024 * 1024 * 1024)];
+    }
+    return @">1TB";
+}
+
 + (void)drawFillRoundRect:(CGRect)rect radius:(CGFloat)radius color:(UIColor *)color context:(CGContextRef)context {
     CGContextSetAllowsAntialiasing(context, TRUE);
     CGContextSetFillColor(context, CGColorGetComponents(color.CGColor));

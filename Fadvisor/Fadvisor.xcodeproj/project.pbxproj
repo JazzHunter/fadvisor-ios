@@ -19,8 +19,6 @@
 		C10BDAD72B4D908900C40BEC /* PlayerDetailsGestureSeekPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = C10BDAA12B4D908900C40BEC /* PlayerDetailsGestureSeekPopupView.m */; };
 		C10BDADB2B4D908900C40BEC /* PlayerDetailsControlBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = C10BDAAE2B4D908900C40BEC /* PlayerDetailsControlBottomView.m */; };
 		C10BDADC2B4D908900C40BEC /* PlayerDetailsQualityListView.m in Sources */ = {isa = PBXBuildFile; fileRef = C10BDAAF2B4D908900C40BEC /* PlayerDetailsQualityListView.m */; };
-		C10BDADE2B4D908900C40BEC /* PlayerDetailsLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C10BDAB42B4D908900C40BEC /* PlayerDetailsLoadingView.m */; };
-		C10BDADF2B4D908900C40BEC /* PlayerDetailsGifView.m in Sources */ = {isa = PBXBuildFile; fileRef = C10BDAB62B4D908900C40BEC /* PlayerDetailsGifView.m */; };
 		C10BDAE12B4D908900C40BEC /* PlayerDetailsFirstStartGuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = C10BDABB2B4D908900C40BEC /* PlayerDetailsFirstStartGuideView.m */; };
 		C10BDAE42B4D979100C40BEC /* PlayerDetailsThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = C10BDAE22B4D979100C40BEC /* PlayerDetailsThumbnailView.m */; };
 		C10BDAEC2B4E2C1400C40BEC /* PlayerDetailsPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = C10BDAEB2B4E2C1400C40BEC /* PlayerDetailsPreviewView.m */; };
@@ -176,6 +174,9 @@
 		C16395F02B57FCE300B2C71D /* VideoDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C16395EF2B57FCE300B2C71D /* VideoDetailsModel.m */; };
 		C16395F32B5AD5F800B2C71D /* CommonFunc.m in Sources */ = {isa = PBXBuildFile; fileRef = C16395F22B5AD5F800B2C71D /* CommonFunc.m */; };
 		C16396052B5C10E100B2C71D /* AlivcPlayerDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = C16396042B5C10E100B2C71D /* AlivcPlayerDefine.m */; };
+		C167826E2B86F98B0092326F /* PlayerDetailsLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C167826D2B86F98B0092326F /* PlayerDetailsLoadingView.m */; };
+		C16782722B872E780092326F /* PlayerDetailsWatchTimeTips.m in Sources */ = {isa = PBXBuildFile; fileRef = C16782712B872E780092326F /* PlayerDetailsWatchTimeTips.m */; };
+		C16782752B875E310092326F /* PlayerDetailsPopErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C16782742B875E310092326F /* PlayerDetailsPopErrorView.m */; };
 		C193BFB42B2B4207003D3644 /* UMengHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C193BFB32B2B4207003D3644 /* UMengHelper.m */; };
 		C19B2BB42B7D27C000BC6384 /* UIImage+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C19B2BB32B7D27C000BC6384 /* UIImage+Additions.m */; };
 		C19B2BB72B7DAC8100BC6384 /* DBSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = C19B2BB62B7DAC8100BC6384 /* DBSlider.m */; };
@@ -194,13 +195,14 @@
 		C1BDC13B2B313B9C003D67FC /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BDC13A2B313B9C003D67FC /* LoginService.m */; };
 		C1BDC13F2B31A9AF003D67FC /* UserLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BDC13E2B31A9AF003D67FC /* UserLoginViewController.m */; };
 		C1BDC1422B31AADB003D67FC /* TabAccountHeaderNotLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BDC1412B31AADB003D67FC /* TabAccountHeaderNotLoginView.m */; };
-		C1C9F3C32B84C56E00D1BA55 /* PlayerDetailsWatchTimeTips.m in Sources */ = {isa = PBXBuildFile; fileRef = C1C9F3C22B84C56E00D1BA55 /* PlayerDetailsWatchTimeTips.m */; };
 		C1CEB7C32B1E1C2900AA8490 /* BaseScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7C22B1E1C2900AA8490 /* BaseScrollViewController.m */; };
 		C1CEB7CB2B20B1D400AA8490 /* LEECoolButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7CA2B20B1D400AA8490 /* LEECoolButton.m */; };
 		C1CEB7DB2B22B77400AA8490 /* SharePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7DA2B22B77400AA8490 /* SharePanel.m */; };
 		C1CEB7DF2B23757C00AA8490 /* SkeletonPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7DD2B23757C00AA8490 /* SkeletonPageView.m */; };
 		C1CEB7E12B245E5700AA8490 /* AlivcLicense.crt in Resources */ = {isa = PBXBuildFile; fileRef = C1CEB7E02B245E5700AA8490 /* AlivcLicense.crt */; };
 		C1CEB7E52B24629400AA8490 /* VideoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7E42B24629400AA8490 /* VideoDetailsViewController.m */; };
+		C1D17F1F2B8901E300026EF7 /* PlayerDetailsBottomProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D17F1E2B8901E300026EF7 /* PlayerDetailsBottomProgressView.m */; };
+		C1D17F222B890B0700026EF7 /* AlivcCacheGlobalSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D17F202B890B0700026EF7 /* AlivcCacheGlobalSetting.m */; };
 		C1FB990A2B1839D3002DA461 /* ContentExcepitonView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */; };
 		C1FE82932B387D3B00F607F8 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE82922B387D3B00F607F8 /* Theme.m */; };
 		C1FE829B2B38948900F607F8 /* UIImage+FitNet.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE829A2B38948900F607F8 /* UIImage+FitNet.m */; };
@@ -247,10 +249,6 @@
 		C10BDAAB2B4D908900C40BEC /* PlayerDetailsControlBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerDetailsControlBottomView.h; sourceTree = "<group>"; };
 		C10BDAAE2B4D908900C40BEC /* PlayerDetailsControlBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailsControlBottomView.m; sourceTree = "<group>"; };
 		C10BDAAF2B4D908900C40BEC /* PlayerDetailsQualityListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailsQualityListView.m; sourceTree = "<group>"; };
-		C10BDAB32B4D908900C40BEC /* PlayerDetailsGifView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerDetailsGifView.h; sourceTree = "<group>"; };
-		C10BDAB42B4D908900C40BEC /* PlayerDetailsLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailsLoadingView.m; sourceTree = "<group>"; };
-		C10BDAB52B4D908900C40BEC /* PlayerDetailsLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerDetailsLoadingView.h; sourceTree = "<group>"; };
-		C10BDAB62B4D908900C40BEC /* PlayerDetailsGifView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailsGifView.m; sourceTree = "<group>"; };
 		C10BDABB2B4D908900C40BEC /* PlayerDetailsFirstStartGuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailsFirstStartGuideView.m; sourceTree = "<group>"; };
 		C10BDABC2B4D908900C40BEC /* PlayerDetailsFirstStartGuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerDetailsFirstStartGuideView.h; sourceTree = "<group>"; };
 		C10BDAE22B4D979100C40BEC /* PlayerDetailsThumbnailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailsThumbnailView.m; sourceTree = "<group>"; };
@@ -570,6 +568,12 @@
 		C16395F22B5AD5F800B2C71D /* CommonFunc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonFunc.m; sourceTree = "<group>"; };
 		C16396032B5C10E100B2C71D /* AlivcPlayerDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlivcPlayerDefine.h; sourceTree = "<group>"; };
 		C16396042B5C10E100B2C71D /* AlivcPlayerDefine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlivcPlayerDefine.m; sourceTree = "<group>"; };
+		C167826C2B86F98B0092326F /* PlayerDetailsLoadingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerDetailsLoadingView.h; sourceTree = "<group>"; };
+		C167826D2B86F98B0092326F /* PlayerDetailsLoadingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailsLoadingView.m; sourceTree = "<group>"; };
+		C16782702B872E780092326F /* PlayerDetailsWatchTimeTips.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerDetailsWatchTimeTips.h; sourceTree = "<group>"; };
+		C16782712B872E780092326F /* PlayerDetailsWatchTimeTips.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailsWatchTimeTips.m; sourceTree = "<group>"; };
+		C16782732B875E310092326F /* PlayerDetailsPopErrorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerDetailsPopErrorView.h; sourceTree = "<group>"; };
+		C16782742B875E310092326F /* PlayerDetailsPopErrorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailsPopErrorView.m; sourceTree = "<group>"; };
 		C193BFB22B2B4207003D3644 /* UMengHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMengHelper.h; sourceTree = "<group>"; };
 		C193BFB32B2B4207003D3644 /* UMengHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMengHelper.m; sourceTree = "<group>"; };
 		C19B2BB22B7D27C000BC6384 /* UIImage+Additions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+Additions.h"; sourceTree = "<group>"; };
@@ -609,8 +613,6 @@
 		C1BDC13E2B31A9AF003D67FC /* UserLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserLoginViewController.m; sourceTree = "<group>"; };
 		C1BDC1402B31AADB003D67FC /* TabAccountHeaderNotLoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabAccountHeaderNotLoginView.h; sourceTree = "<group>"; };
 		C1BDC1412B31AADB003D67FC /* TabAccountHeaderNotLoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabAccountHeaderNotLoginView.m; sourceTree = "<group>"; };
-		C1C9F3C12B84C56E00D1BA55 /* PlayerDetailsWatchTimeTips.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerDetailsWatchTimeTips.h; sourceTree = "<group>"; };
-		C1C9F3C22B84C56E00D1BA55 /* PlayerDetailsWatchTimeTips.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailsWatchTimeTips.m; sourceTree = "<group>"; };
 		C1CEB7C12B1E1C2900AA8490 /* BaseScrollViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseScrollViewController.h; sourceTree = "<group>"; };
 		C1CEB7C22B1E1C2900AA8490 /* BaseScrollViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseScrollViewController.m; sourceTree = "<group>"; };
 		C1CEB7C92B20B1D400AA8490 /* LEECoolButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LEECoolButton.h; sourceTree = "<group>"; };
@@ -622,6 +624,10 @@
 		C1CEB7E02B245E5700AA8490 /* AlivcLicense.crt */ = {isa = PBXFileReference; lastKnownFileType = text; path = AlivcLicense.crt; sourceTree = "<group>"; };
 		C1CEB7E32B24629400AA8490 /* VideoDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoDetailsViewController.h; sourceTree = "<group>"; };
 		C1CEB7E42B24629400AA8490 /* VideoDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoDetailsViewController.m; sourceTree = "<group>"; };
+		C1D17F1D2B8901E300026EF7 /* PlayerDetailsBottomProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerDetailsBottomProgressView.h; sourceTree = "<group>"; };
+		C1D17F1E2B8901E300026EF7 /* PlayerDetailsBottomProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailsBottomProgressView.m; sourceTree = "<group>"; };
+		C1D17F202B890B0700026EF7 /* AlivcCacheGlobalSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcCacheGlobalSetting.m; sourceTree = "<group>"; };
+		C1D17F212B890B0700026EF7 /* AlivcCacheGlobalSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcCacheGlobalSetting.h; sourceTree = "<group>"; };
 		C1FB99082B1839D3002DA461 /* ContentExcepitonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentExcepitonView.h; sourceTree = "<group>"; };
 		C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentExcepitonView.m; sourceTree = "<group>"; };
 		C1FE82912B387D3B00F607F8 /* Theme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
@@ -676,17 +682,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C10BDA962B4D908900C40BEC /* PopLayer */ = {
-			isa = PBXGroup;
-			children = (
-				C10BDA9A2B4D908900C40BEC /* PlayerDetailsPopView.h */,
-				C10BDA972B4D908900C40BEC /* PlayerDetailsPopView.m */,
-				C10BDA992B4D908900C40BEC /* PlayerDetailsErrorView.h */,
-				C10BDA982B4D908900C40BEC /* PlayerDetailsErrorView.m */,
-			);
-			path = PopLayer;
-			sourceTree = "<group>";
-		};
 		C10BDA9B2B4D908900C40BEC /* ControlLayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -725,10 +720,14 @@
 		C10BDAA82B4D908900C40BEC /* Bottom */ = {
 			isa = PBXGroup;
 			children = (
+				C10BDAE32B4D979100C40BEC /* PlayerDetailsThumbnailView.h */,
+				C10BDAE22B4D979100C40BEC /* PlayerDetailsThumbnailView.m */,
 				C10BDAAB2B4D908900C40BEC /* PlayerDetailsControlBottomView.h */,
 				C10BDAAE2B4D908900C40BEC /* PlayerDetailsControlBottomView.m */,
 				C19B2BB52B7DAC8100BC6384 /* DBSlider.h */,
 				C19B2BB62B7DAC8100BC6384 /* DBSlider.m */,
+				C1D17F1D2B8901E300026EF7 /* PlayerDetailsBottomProgressView.h */,
+				C1D17F1E2B8901E300026EF7 /* PlayerDetailsBottomProgressView.m */,
 			);
 			path = Bottom;
 			sourceTree = "<group>";
@@ -755,13 +754,15 @@
 			path = CustomImageButton;
 			sourceTree = "<group>";
 		};
-		C12ABE1D2B8595020065F84B /* SideDrawerLayer */ = {
+		C12ABE1D2B8595020065F84B /* SideLayer */ = {
 			isa = PBXGroup;
 			children = (
+				C10BDAAA2B4D908900C40BEC /* PlayerDetailsQualityListView.h */,
+				C10BDAAF2B4D908900C40BEC /* PlayerDetailsQualityListView.m */,
 				C12ABE1E2B85977B0065F84B /* PlayerDetailsSideMoreView.h */,
 				C12ABE1F2B85977B0065F84B /* PlayerDetailsSideMoreView.m */,
 			);
-			path = SideDrawerLayer;
+			path = SideLayer;
 			sourceTree = "<group>";
 		};
 		C12B098F2B0F964400108664 /* Details */ = {
@@ -802,15 +803,6 @@
 				C15105342B5EB797006FA262 /* VideoDetailsContentViewController.m */,
 			);
 			path = VideoDetailsContent;
-			sourceTree = "<group>";
-		};
-		C15105362B5FA02A006FA262 /* BulletLayer */ = {
-			isa = PBXGroup;
-			children = (
-				C10BDA6D2B4D908900C40BEC /* PlayerDetailsBulletView.h */,
-				C10BDA642B4D908900C40BEC /* PlayerDetailsBulletView.m */,
-			);
-			path = BulletLayer;
 			sourceTree = "<group>";
 		};
 		C15105372B60C5B1006FA262 /* Toast */ = {
@@ -1500,6 +1492,8 @@
 				C16395DF2B56510F00B2C71D /* History */,
 				C16396032B5C10E100B2C71D /* AlivcPlayerDefine.h */,
 				C16396042B5C10E100B2C71D /* AlivcPlayerDefine.m */,
+				C1D17F212B890B0700026EF7 /* AlivcCacheGlobalSetting.h */,
+				C1D17F202B890B0700026EF7 /* AlivcCacheGlobalSetting.m */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -1528,47 +1522,22 @@
 		C16395F42B5B6D4700B2C71D /* Layer */ = {
 			isa = PBXGroup;
 			children = (
-				C12ABE1D2B8595020065F84B /* SideDrawerLayer */,
+				C167826F2B8719610092326F /* SupportingLayer */,
+				C12ABE1D2B8595020065F84B /* SideLayer */,
 				C1C9F3C02B84C55600D1BA55 /* TipsLayer */,
 				C10BDAA02B4D908900C40BEC /* GestureLayout */,
-				C16395F92B5BD96600B2C71D /* TrackListLayer */,
-				C15105362B5FA02A006FA262 /* BulletLayer */,
-				C10BDA962B4D908900C40BEC /* PopLayer */,
 				C16395FE2B5BF8D800B2C71D /* PreviewLayer */,
-				C16395FD2B5BF5E700B2C71D /* LoadingLayer */,
 				C16395FB2B5BF34700B2C71D /* ThumbnailLayer */,
 				C10BDA9B2B4D908900C40BEC /* ControlLayer */,
 			);
 			path = Layer;
 			sourceTree = "<group>";
 		};
-		C16395F92B5BD96600B2C71D /* TrackListLayer */ = {
-			isa = PBXGroup;
-			children = (
-				C10BDAAA2B4D908900C40BEC /* PlayerDetailsQualityListView.h */,
-				C10BDAAF2B4D908900C40BEC /* PlayerDetailsQualityListView.m */,
-			);
-			path = TrackListLayer;
-			sourceTree = "<group>";
-		};
 		C16395FB2B5BF34700B2C71D /* ThumbnailLayer */ = {
 			isa = PBXGroup;
 			children = (
-				C10BDAE32B4D979100C40BEC /* PlayerDetailsThumbnailView.h */,
-				C10BDAE22B4D979100C40BEC /* PlayerDetailsThumbnailView.m */,
 			);
 			path = ThumbnailLayer;
-			sourceTree = "<group>";
-		};
-		C16395FD2B5BF5E700B2C71D /* LoadingLayer */ = {
-			isa = PBXGroup;
-			children = (
-				C10BDAB32B4D908900C40BEC /* PlayerDetailsGifView.h */,
-				C10BDAB62B4D908900C40BEC /* PlayerDetailsGifView.m */,
-				C10BDAB52B4D908900C40BEC /* PlayerDetailsLoadingView.h */,
-				C10BDAB42B4D908900C40BEC /* PlayerDetailsLoadingView.m */,
-			);
-			path = LoadingLayer;
 			sourceTree = "<group>";
 		};
 		C16395FE2B5BF8D800B2C71D /* PreviewLayer */ = {
@@ -1580,6 +1549,17 @@
 				C10BDA5B2B4D8A3500C40BEC /* PlayerDetailsPreviewLogoBtn.m */,
 			);
 			path = PreviewLayer;
+			sourceTree = "<group>";
+		};
+		C167826F2B8719610092326F /* SupportingLayer */ = {
+			isa = PBXGroup;
+			children = (
+				C167826C2B86F98B0092326F /* PlayerDetailsLoadingView.h */,
+				C167826D2B86F98B0092326F /* PlayerDetailsLoadingView.m */,
+				C10BDA6D2B4D908900C40BEC /* PlayerDetailsBulletView.h */,
+				C10BDA642B4D908900C40BEC /* PlayerDetailsBulletView.m */,
+			);
+			path = SupportingLayer;
 			sourceTree = "<group>";
 		};
 		C193BFB12B2B4207003D3644 /* UMengHelper */ = {
@@ -1686,8 +1666,14 @@
 		C1C9F3C02B84C55600D1BA55 /* TipsLayer */ = {
 			isa = PBXGroup;
 			children = (
-				C1C9F3C12B84C56E00D1BA55 /* PlayerDetailsWatchTimeTips.h */,
-				C1C9F3C22B84C56E00D1BA55 /* PlayerDetailsWatchTimeTips.m */,
+				C16782702B872E780092326F /* PlayerDetailsWatchTimeTips.h */,
+				C16782712B872E780092326F /* PlayerDetailsWatchTimeTips.m */,
+				C10BDA9A2B4D908900C40BEC /* PlayerDetailsPopView.h */,
+				C10BDA972B4D908900C40BEC /* PlayerDetailsPopView.m */,
+				C10BDA992B4D908900C40BEC /* PlayerDetailsErrorView.h */,
+				C10BDA982B4D908900C40BEC /* PlayerDetailsErrorView.m */,
+				C16782732B875E310092326F /* PlayerDetailsPopErrorView.h */,
+				C16782742B875E310092326F /* PlayerDetailsPopErrorView.m */,
 			);
 			path = TipsLayer;
 			sourceTree = "<group>";
@@ -2045,7 +2031,6 @@
 				C1591A562AFDCF0400351431 /* NSData+YYAdd.m in Sources */,
 				C1591A4C2AFDCF0400351431 /* UIView+YYAdd.m in Sources */,
 				C1591B782B05FCAE00351431 /* RcmdItemsServcie.m in Sources */,
-				C10BDADE2B4D908900C40BEC /* PlayerDetailsLoadingView.m in Sources */,
 				C10BDAE42B4D979100C40BEC /* PlayerDetailsThumbnailView.m in Sources */,
 				C1B0CEEF2B08DE0100A1173E /* TagModel.m in Sources */,
 				C1591A5F2AFDCF0400351431 /* NSObject+YYAddForKVO.m in Sources */,
@@ -2059,6 +2044,7 @@
 				C1591A3C2AFDCF0400351431 /* YYTextUtilities.m in Sources */,
 				C10EF53F2B3D1A8900B019EB /* UIViewController+Additions.m in Sources */,
 				C1591A372AFDCF0400351431 /* YYTextSelectionView.m in Sources */,
+				C16782722B872E780092326F /* PlayerDetailsWatchTimeTips.m in Sources */,
 				C1591A462AFDCF0400351431 /* UIColor+YYAdd.m in Sources */,
 				C1591A342AFDCF0400351431 /* YYTextInput.m in Sources */,
 				C1CEB7DB2B22B77400AA8490 /* SharePanel.m in Sources */,
@@ -2076,7 +2062,6 @@
 				C15919632AFDCE4900351431 /* UIView+GestureCallback.m in Sources */,
 				C1591A362AFDCF0400351431 /* YYTextLine.m in Sources */,
 				C1591A1E2AFDCF0400351431 /* YYCache.m in Sources */,
-				C1C9F3C32B84C56E00D1BA55 /* PlayerDetailsWatchTimeTips.m in Sources */,
 				C1591A5B2AFDCF0400351431 /* NSDate+YYAdd.m in Sources */,
 				C1591ADD2AFE422E00351431 /* RefreshHeader.m in Sources */,
 				C1591B4D2AFF0B3100351431 /* BaseTableViewController.m in Sources */,
@@ -2089,6 +2074,7 @@
 				C159191B2AFDC43E00351431 /* AppDelegate.m in Sources */,
 				C1591A682AFDCF0400351431 /* YYKeychain.m in Sources */,
 				C1591A272AFDCF0400351431 /* _YYWebImageSetter.m in Sources */,
+				C1D17F222B890B0700026EF7 /* AlivcCacheGlobalSetting.m in Sources */,
 				C10BDADB2B4D908900C40BEC /* PlayerDetailsControlBottomView.m in Sources */,
 				C16395EA2B574CAC00B2C71D /* VideoDetailsPlayerView.m in Sources */,
 				C159192C2AFDC43F00351431 /* main.m in Sources */,
@@ -2106,7 +2092,6 @@
 				C1591B4F2AFF0BBF00351431 /* ItemFloatCoverSkeletonTableViewCell.m in Sources */,
 				C155CFFB2B354075004A3AFC /* UIImageView+FitNet.m in Sources */,
 				C193BFB42B2B4207003D3644 /* UMengHelper.m in Sources */,
-				C10BDADF2B4D908900C40BEC /* PlayerDetailsGifView.m in Sources */,
 				C10BDAF12B4E331600C40BEC /* Reachability.m in Sources */,
 				C15105352B5EB797006FA262 /* VideoDetailsContentViewController.m in Sources */,
 				C1591A1F2AFDCF0400351431 /* YYKVStorage.m in Sources */,
@@ -2119,10 +2104,12 @@
 				C1591ADC2AFE422E00351431 /* AutoRefreshFooter.m in Sources */,
 				C1591A6D2AFDCF0400351431 /* YYReachability.m in Sources */,
 				C1591AF32AFE776D00351431 /* TabHomeRcmdViewController.m in Sources */,
+				C16782752B875E310092326F /* PlayerDetailsPopErrorView.m in Sources */,
 				C1BDC13F2B31A9AF003D67FC /* UserLoginViewController.m in Sources */,
 				C1591AFD2AFE781F00351431 /* TabDiscoveryViewController.m in Sources */,
 				C1591A282AFDCF0400351431 /* UIButton+YYWebImage.m in Sources */,
 				C1591A222AFDCF0400351431 /* YYWebImageManager.m in Sources */,
+				C167826E2B86F98B0092326F /* PlayerDetailsLoadingView.m in Sources */,
 				C10BDA5D2B4D8A3500C40BEC /* PlayerDetailsPreviewLogoBtn.m in Sources */,
 				C16395E52B56510F00B2C71D /* AlivcPlayerVideoDBModel.m in Sources */,
 				C1BA9C772B1B489200D82BC1 /* BaseCollectionViewController.m in Sources */,
@@ -2158,6 +2145,7 @@
 				C16395F32B5AD5F800B2C71D /* CommonFunc.m in Sources */,
 				C1BDC1422B31AADB003D67FC /* TabAccountHeaderNotLoginView.m in Sources */,
 				C1591A402AFDCF0400351431 /* UIPasteboard+YYText.m in Sources */,
+				C1D17F1F2B8901E300026EF7 /* PlayerDetailsBottomProgressView.m in Sources */,
 				C10BDAD52B4D908900C40BEC /* PlayerDetailsControlTopView.m in Sources */,
 				C12ABE1C2B8586700065F84B /* PlayerDetailsSpeedTips.m in Sources */,
 				C1591A552AFDCF0400351431 /* NSObject+YYAdd.m in Sources */,

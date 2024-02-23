@@ -15,6 +15,7 @@
 //view
 #import "PlayerDetailsControlTopView.h"
 #import "PlayerDetailsControlBottomView.h"
+#import "PlayerDetailsBottomProgressView.h"
 #import "PlayerDetailsGestureView.h"
 #import "PlayerDetailsWatchTimeTips.h"
 #import "PlayerDetailsSideMoreView.h"
@@ -26,9 +27,9 @@
 #import "PlayerDetailsBulletView.h"
 
 //tipsView
-#import "PlayerDetailsPopView.h"
+#import "PlayerDetailsPopErrorView.h"
 
-@interface VideoDetailsPlayerView ()<AlivcPlayerProtocal, AliPlayerPictureInPictureDelegate, PlayerDetailsControlTopViewDelegate, PlayerDetailsControlBottomViewDelegate, PlayerDetailsGestureViewDelegate, PlayerDetailsPopViewDelegate>
+@interface VideoDetailsPlayerView ()<AlivcPlayerProtocal, AliPlayerPictureInPictureDelegate, PlayerDetailsControlTopViewDelegate, PlayerDetailsControlBottomViewDelegate, PlayerDetailsGestureViewDelegate, PlayerDetailsPopErrorViewDelegate>
 
 @property (nonatomic, strong) UIImageView *coverImageView;        //封面
 @property (nonatomic, strong) UIView *playerView;   //播放的界面
@@ -37,10 +38,11 @@
 @property (nonatomic, strong) PlayerDetailsGestureView *gestureView;
 @property (nonatomic, strong) PlayerDetailsSideMoreView *sideMoreView;
 
-@property (nonatomic, strong) PlayerDetailsPopView *popLayer;  //弹出的提示界面
 @property (nonatomic, strong) PlayerDetailsLoadingView *loadingView; //loading
+
 @property (nonatomic, strong) PlayerDetailsThumbnailView *thumbnailView;  //缩略图功能
 @property (nonatomic, strong) PlayerDetailsBulletView *bulletView;  //跑马灯
+@property (nonatomic, strong) PlayerDetailsPopErrorView *popErrorView;
 
 @property (nonatomic, strong) PlayerDetailsLoadingView *qualityLoadingView;  //清晰度loading
 @property (nonatomic, strong) PlayerDetailsPreviewLogoBtn *previewLogoBtn;
@@ -49,6 +51,7 @@
 #pragma mark - 控制
 @property (nonatomic, strong) PlayerDetailsControlTopView *controlTopView;
 @property (nonatomic, strong) PlayerDetailsControlBottomView *controlBottomView;
+@property (nonatomic, strong) PlayerDetailsBottomProgressView *bottomProgressView;
 @property (nonatomic, strong) PlayerDetailsWatchTimeTips *watchTimeTips;
 
 @property (nonatomic, strong) ImageButton *screenLockButtonRight;
@@ -80,14 +83,6 @@
 @property (nonatomic, assign) BOOL isNetChange;
 @property (nonatomic, assign) BOOL isEnterBackground;
 @property (nonatomic, assign) BOOL isPauseByBackground;
-
-#pragma mark - 画中画
-//https://help.aliyun.com/zh/vod/developer-reference/advanced-features-1#p-93m-izq-1p7
-@property (nonatomic, assign) BOOL isPipPaused; // 监听画中画当前是否是暂停状态
-
-@property (nonatomic, weak) AVPictureInPictureController *pipController; // 设置画中画控制器，在画中画即将启动的回调方法中设置，并需要在页面准备销毁时主动将其设置为nil，建议设置
-
-@property (nonatomic, assign) int64_t currentPosition; // 监听播放器当前播放进度，currentPosition设置为监听视频当前播放位置回调中的position参数值
 
 @end
 
@@ -131,16 +126,21 @@
 
     //设置view
     self.coverImageView.myMargin = 0;
-    self.coverImageView.centerXPos.equalTo(@0);
-    self.coverImageView.centerYPos.equalTo(@0);
     [self addSubview:self.coverImageView];
 
-    self.playerView.myMargin = 0;
-    self.playerView.centerXPos.equalTo(@0);
-    self.playerView.centerYPos.equalTo(@0);
-    [self addSubview:self.playerView];
+    UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
+    blurView.alpha = 0.9; // 控制模糊程度
+    blurView.myMargin = 0;
+    [self addSubview:blurView];
 
+    self.playerView.myMargin = 0;
+    [self addSubview:self.playerView];
     [PLAYER_MANAGER setPlayerView:self.playerView];
+    
+    self.bottomProgressView.widthSize.equalTo(self.widthSize);
+    self.bottomProgressView.bottomPos.equalTo(self.bottomPos);
+    self.bottomProgressView.leftPos.equalTo(self.leftPos);
+    [self addSubview:self.bottomProgressView];
 
     [self addSubview:self.bulletView];
 
@@ -148,6 +148,10 @@
     self.thumbnailView.centerYPos.equalTo(@0);
     self.thumbnailView.hidden = YES;
     [self addSubview:self.thumbnailView];
+
+    self.loadingView.centerXPos.equalTo(@0);
+    self.loadingView.centerYPos.equalTo(@0);
+    [self addSubview:self.loadingView];
 
     self.gestureView.myMargin = 0;
     [self addSubview:self.gestureView];
@@ -193,13 +197,10 @@
     self.sideMoreView.centerYPos.equalTo(@0);
     [self addSubview:self.sideMoreView];
 
-    self.popLayer.delegate = self;
-    self.popLayer.centerYPos.equalTo(@0);
-    self.popLayer.heightSize.equalTo(self.heightSize);
-//    [self addSubview:self.popLayer];
+    self.popErrorView.myMargin = 0;
+    [self addSubview:self.popErrorView];
 
 //    [self addSubview:self.previewView];
-//    [self addSubview:self.loadingView];
 }
 
 - (void)startNewPlayWithItem:(ItemModel *)itemModel details:(VideoDetailsModel *)detailsModel {
@@ -220,8 +221,16 @@
     // 跑马灯
     self.bulletView.hidden = ![JUDGE_IS isEqual:detailsModel.bulletScreen];
 
+    if ([PLAYER_MANAGER.currentVideoId isEqualToString:detailsModel.videoId]) {
+        if (PLAYER_MANAGER.currentPlayStatus != AVPStatusCompletion) {
+            [self.controlBottomView updatePlayerStatus:PLAYER_MANAGER.currentPlayStatus];
+            return;
+        }
+    }
+
     // 初始化进度条,把上一条播放视频的进度条 设置为0
     [self.controlBottomView updateProgressWithCurrentTime:0 durationTime:itemModel.duration];
+    [self.bottomProgressView setProgress:0];
 
     [self playViewPrepareWithVid:detailsModel.videoId];
 }
@@ -279,7 +288,7 @@
     PLAYER_MANAGER.playMethod = isLocal ? AlivcPlayMethodLocal : AlivcPlayMethodUrl;
     [PLAYER_MANAGER startPlayWithUrl:url];
     if (!isLocal) {
-        [self.loadingView show];
+        [self.loadingView showLoading];
     }
     NSLog(@"播放器prepareWithURL");
 }
@@ -288,12 +297,10 @@
     if ([self networkChangedToShowPopView]) {
         return;
     }
-    [self.loadingView show];
+    [self.loadingView showLoading];
     Weak(self);
     [PLAYER_MANAGER startPlayWithVidAuth:vid errorBlock:^(NSString *errorMsg) {
-        AVPErrorModel *errorModel = [AVPErrorModel new];
-        errorModel.message = errorMsg;
-//        [weakself showPopLayerWithErrorModel:errorModel];
+        [weakself.popErrorView showWithMessage:errorMsg];
     }];
     NSLog(@"播放器playAuth");
 }
@@ -312,7 +319,7 @@
 
 - (void)seekTo:(NSTimeInterval)seekTime {
     [PLAYER_MANAGER seekTo:seekTime];
-    [self.loadingView show];
+    [self.loadingView showLoading];
 }
 
 - (void)stop {
@@ -345,9 +352,7 @@
             // ⚠️显示4G 网络警告
 //            [self stop];
 //            [self unlockScreen];
-            [self.popLayer showPopViewWithCode:PlayerPopCodeUseMobileNetwork popMsg:nil];
-            [self.loadingView dismiss];
-            [self.qualityLoadingView dismiss];
+//            [self.popLayer showPopViewWithCode:PlayerPopCodeUseMobileNetwork popMsg:nil];
             NSLog(@"播放器展示4G提醒");
             ret = YES;
             break;
@@ -367,7 +372,9 @@
 - (void)setLayoutLandscape {
     [self.controlBottomView resetLayout:NO];
     [self.controlTopView resetLayout:NO];
+    [self.bottomProgressView resetLayout:NO];
     [self.gestureView resetLayout:NO];
+    [self.popErrorView resetLayout:NO];
 
     self.screenLockButtonRight.visibility = MyVisibility_Visible;
     self.snapshotButton.visibility = MyVisibility_Visible;
@@ -378,7 +385,9 @@
 - (void)setLayoutPortrait {
     [self.controlBottomView resetLayout:YES];
     [self.controlTopView resetLayout:YES];
+    [self.bottomProgressView resetLayout:YES];
     [self.gestureView resetLayout:YES];
+    [self.popErrorView resetLayout:YES];
 
     self.screenLockButtonRight.visibility = MyVisibility_Invisible;
     self.snapshotButton.visibility = MyVisibility_Invisible;
@@ -391,8 +400,7 @@
 - (void)onPlayerEvent:(AliPlayer *)player eventType:(AVPEventType)eventType {
     switch (eventType) {
         case AVPEventPrepareDone: {
-            [self.loadingView dismiss];
-            self.popLayer.hidden = YES;
+            [self.loadingView stopLoading];
             AVPTrackInfo *info = [player getCurrentTrack:AVPTRACK_TYPE_SAAS_VOD];
             self.currentTrackInfo = info;
 
@@ -404,12 +412,12 @@
 
                 CGFloat progress = watchTime / duration;
                 [self.controlBottomView setProgress:progress];
+                [self.bottomProgressView setProgress:progress];
                 [self.controlBottomView setBufferedProgress:progress];
 
                 [self.watchTimeTips showWatchTimeTips:watchTime];
                 [self addSubview:self.watchTimeTips];
             }
-            [PLAYER_MANAGER enablePictureInPictureWithDelegate:self];
 //            [self.controlView setBottomViewTrackInfo:info];
 //            [self updateControlLayerDataWithMediaInfo:PLAYER_MANAGER.playMethod == AlivcPlayMethodUrl ? nil : [player getMediaInfo]];
 
@@ -423,30 +431,22 @@
             //开启常亮状态
             [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
             //隐藏封面
-            self.coverImageView.hidden = YES;
+//            self.coverImageView.hidden = YES;
         } break;
         case AVPEventCompletion: {
             if (self.delegate && [self.delegate respondsToSelector:@selector(onFinishWithPlayerView:)]) {
                 [self.delegate onFinishWithPlayerView:self];
             }
-            if (_pipController) {
-                self.isPipPaused = YES;    // 播放结束后，将画中画状态变更为暂停
-                [self.pipController invalidatePlaybackState];
-            }
         } break;
         case AVPEventLoadingStart: {
-            [self.loadingView show];
+            [self.loadingView showLoading];
         } break;
         case AVPEventLoadingEnd: {
-            [self.loadingView dismiss];
+            [self.loadingView stopLoading];
         } break;
         case AVPEventSeekEnd:{
             self.mProgressCanUpdate = YES;
-            [self.loadingView dismiss];
-            NSLog(@"seekDone");
-            if (_pipController) {
-                [self.pipController invalidatePlaybackState];
-            }
+            [self.loadingView stopLoading];
         } break;
         case AVPEventLoopingStart:
             break;
@@ -458,28 +458,26 @@
 - (void)onPlayerEvent:(AliPlayer *)player eventWithString:(AVPEventWithString)eventWithString description:(NSString *)description {
     //过滤EVENT_PLAYER_DIRECT_COMPONENT_MSG 打印信息
     if (eventWithString != EVENT_PLAYER_DIRECT_COMPONENT_MSG) {
-        [MBProgressHUD showMessage:description ToView:self];
+        [MBProgressHUD showAutoMessage:description ToView:self];
     }
 }
 
 - (void)onError:(AliPlayer *)player errorModel:(AVPErrorModel *)errorModel {
     //关闭loading动画
-    [self.loadingView dismiss];
+    [self.loadingView stopLoading];
 
-    //根据播放器状态处理seek时thumb是否可以拖动
-    // [self.controlView updateViewWithPlayerState:self.aliPlayer.playerState isScreenLocked:self.isScreenLocked fixedPortrait:self.isProtrait];
-    //根据错误信息，展示popLayer界面
-//    [self showPopLayerWithErrorModel:errorModel];
+    NSString *errorMessage = [NSString stringWithFormat:@"%@\n errorCode:%d", errorModel.message, (int)errorModel.code];
+    [self.popErrorView showWithMessage:errorMessage];
     NSLog(@"errorCode:%lu errorMessage:%@", (unsigned long)errorModel.code, errorModel.message);
 }
 
 - (void)onCurrentPositionUpdate:(AliPlayer *)player position:(int64_t)position {
     NSTimeInterval currentTime = position;
     NSTimeInterval durationTime = PLAYER_MANAGER.duration;
-    self.currentPosition = position;
 
     if (self.isPreviewMode && self.previewTime > 0 && position >= self.previewTime * 1000) {
         [self.controlBottomView updateProgressWithCurrentTime:self.previewTime * 1000 durationTime:durationTime];
+        [self.bottomProgressView setProgress:self.previewTime * 1000 / durationTime];
         [self stop];
     }
 
@@ -489,6 +487,7 @@
             return;
         }
         [self.controlBottomView updateProgressWithCurrentTime:currentTime durationTime:durationTime];
+        [self.bottomProgressView setProgress:currentTime / durationTime];
         self.keyFrameTime = 0;
     }
 }
@@ -522,18 +521,15 @@
     //选中切换
     NSLog(@"%@", info.trackDefinition);
     self.currentTrackInfo = info;
-    [self.loadingView dismiss];
+    [self.loadingView stopLoading];
 //    [self.controlView setBottomViewTrackInfo:info];
     NSString *showString = [NSString stringWithFormat:@"%@%@", [@"已为你切换至" localString], [info.trackDefinition localString]];
     [MBProgressHUD showMessage:showString ToView:nil];
 }
 
 - (void)onPlayerStatusChanged:(AliPlayer *)player oldStatus:(AVPStatus)oldStatus newStatus:(AVPStatus)newStatus {
-    [self.controlBottomView updatePlayerState:newStatus];
+    [self.controlBottomView updatePlayerStatus:newStatus];
 
-    if (_pipController) {
-        [self.pipController invalidatePlaybackState];
-    }
 }
 
 - (void)onGetThumbnailSuc:(int64_t)positionMs fromPos:(int64_t)fromPos toPos:(int64_t)toPos image:(id)image {
@@ -563,115 +559,16 @@
     [CommonFunc saveImage:image inView:self];
 }
 
-#pragma mark - AliPlayerPictureInPictureDelegate
-/**
- @brief 画中画即将启动
- @param pictureInPictureController 画中画控制器
- */
-- (void)pictureInPictureControllerWillStartPictureInPicture:(AVPictureInPictureController *)pictureInPictureController {
-    if (!_pipController) {
-        self.pipController = pictureInPictureController;
+- (void)onCurrentDownloadSpeed:(AliPlayer *)player speed:(int64_t)speed {
+    if (self.loadingView.isLoadingShow) {
+        [self.loadingView setDownloadSpeed:speed];
     }
-    self.isPipPaused = !(PLAYER_MANAGER.currentPlayStatus == AVPStatusStarted);
-    [pictureInPictureController invalidatePlaybackState];
-}
-
-/**
- @brief 画中画准备停止
- @param pictureInPictureController 画中画控制器
- */
-- (void)pictureInPictureControllerWillStopPictureInPicture:(AVPictureInPictureController *)pictureInPictureController {
-    self.isPipPaused = NO;
-    [pictureInPictureController invalidatePlaybackState];
-}
-
-/**
- @brief 在画中画停止前告诉代理恢复用户接口
- @param pictureInPictureController 画中画控制器
- @param completionHandler 调用并传值YES以允许系统结束恢复播放器用户接口
- */
-- (void)pictureInPictureController:(AVPictureInPictureController *)pictureInPictureController restoreUserInterfaceForPictureInPictureStopWithCompletionHandler:(void (^)(BOOL restored))completionHandler {
-    if (_pipController) {
-        _pipController = nil;
-    }
-    completionHandler(YES);
-}
-
-/**
- @brief 通知画中画控制器当前可播放的时间范围
- @param pictureInPictureController 画中画控制器
- @return 当前可播放的时间范围
- */
-- (CMTimeRange)pictureInPictureControllerTimeRangeForPlayback:(nonnull AVPictureInPictureController *)pictureInPictureController layerTime:(CMTime)layerTime {
-    Float64 current64 = CMTimeGetSeconds(layerTime);
-
-    Float64 start;
-    Float64 end;
-
-    if (self.currentPosition <= PLAYER_MANAGER.duration) {
-        double curPostion = self.currentPosition / 1000.0;
-        double duration = PLAYER_MANAGER.duration / 1000.0;
-        double interval = duration - curPostion;
-        start = current64 - curPostion;
-        end = current64 + interval;
-        CMTime t1 = CMTimeMakeWithSeconds(start, layerTime.timescale);
-        CMTime t2 = CMTimeMakeWithSeconds(end, layerTime.timescale);
-        return CMTimeRangeFromTimeToTime(t1, t2);
-    } else {
-        return CMTimeRangeMake(kCMTimeNegativeInfinity, kCMTimePositiveInfinity);
-    }
-}
-
-/**
- @brief 将暂停或播放状态反映到UI上
- @param pictureInPictureController 画中画控制器
- @return 暂停或播放
- */
-- (BOOL)pictureInPictureControllerIsPlaybackPaused:(nonnull AVPictureInPictureController *)pictureInPictureController {
-    return self.isPipPaused;
-}
-
-/**
- @brief 点击快进或快退按钮
- @param pictureInPictureController 画中画控制器
- @param skipInterval 快进或快退的事件间隔
- @param completionHandler 一定要调用的闭包，表示跳转操作完成
- */
-- (void)pictureInPictureController:(nonnull AVPictureInPictureController *)pictureInPictureController skipByInterval:(CMTime)skipInterval completionHandler:(nonnull void (^)(void))completionHandler {
-    int64_t skipTime = skipInterval.value / skipInterval.timescale;
-    int64_t skipPosition = self.currentPosition + skipTime * 1000;
-    if (skipPosition < 0) {
-        skipPosition = 0;
-    } else if (skipPosition > PLAYER_MANAGER.duration) {
-        skipPosition = PLAYER_MANAGER.duration;
-    }
-    [PLAYER_MANAGER seekTo:skipPosition];
-    [pictureInPictureController invalidatePlaybackState];
-}
-
-/**
- @brief 点击画中画暂停按钮
- @param pictureInPictureController 画中画控制器
- @param playing 是否正在播放
- */
-- (void)pictureInPictureController:(nonnull AVPictureInPictureController *)pictureInPictureController setPlaying:(BOOL)playing {
-    if (!playing) {
-        [self pause];
-        self.isPipPaused = YES;
-    } else {
-        // 建议：如果画中画播放完成，需要重新播放，可额外执行下面if语句的代码
-        if (PLAYER_MANAGER.currentPlayStatus == AVPStatusCompletion) {
-            [PLAYER_MANAGER seekTo:0];
-        }
-
-        [self start];
-        self.isPipPaused = NO;
-    }
-    [pictureInPictureController invalidatePlaybackState];
 }
 
 #pragma mark - PlayerDetailsControlTopViewDelegate
 - (void)onTopViewMoreButtonClicked:(UIButton *)sender topView:(PlayerDetailsControlTopView *)topView {
+    PLAYER_MANAGER.startPip;
+    return;
     if (!self.isPortrait) {
         [self hideControlView];
         [self showSideMoreView];
@@ -704,7 +601,6 @@
         case UIControlEventTouchUpInside:
         case UIControlEventTouchDownRepeat: {
             [PLAYER_MANAGER seekTo:(progress * durationTime)];
-            [self.loadingView show];
             if (PLAYER_MANAGER.currentPlayStatus == AVPStatusPaused) {
                 [PLAYER_MANAGER start];
             }
@@ -799,9 +695,10 @@
     }
     NSInteger durationTime = PLAYER_MANAGER.duration;
     NSTimeInterval seekProgress = [self moveValueByOffset:moveOffset];
-    
+
     [self seekTo:(durationTime * seekProgress)];
     [self.controlBottomView setProgress:seekProgress];
+    [self.bottomProgressView setProgress:seekProgress];
     self.thumbnailView.hidden = YES;
 }
 
@@ -837,6 +734,12 @@
 
 - (void)onSnapshotButtonClicked:(UIButton *)sender {
     [PLAYER_MANAGER snapShot];
+}
+
+#pragma mark - PlayerDetailsPopErrorViewDelegate
+- (void)onButtonClickedWithPopErrorView:(UIButton *)sender errorView:(PlayerDetailsPopErrorView *)errorView {
+    [self.popErrorView hide];
+    NSLog(@"错误按钮点击");
 }
 
 #pragma mark - PlayerDetailsSideMoreView
@@ -882,13 +785,12 @@
     return _playerView;
 }
 
-- (PlayerDetailsPopView *)popLayer {
-    if (!_popLayer) {
-        _popLayer = [[PlayerDetailsPopView alloc] init];
-        _popLayer.frame = self.bounds;
-        _popLayer.hidden = YES;
+- (PlayerDetailsPopErrorView *)popErrorView {
+    if (!_popErrorView) {
+        _popErrorView = [[PlayerDetailsPopErrorView alloc] init];
+        _popErrorView.delegate = self;
     }
-    return _popLayer;
+    return _popErrorView;
 }
 
 - (PlayerDetailsPreviewView *)previewView {
@@ -932,7 +834,6 @@
 - (UIImageView *)coverImageView {
     if (!_coverImageView) {
         _coverImageView = [[UIImageView alloc] init];
-        _coverImageView.hidden = NO;
     }
     return _coverImageView;
 }
@@ -958,6 +859,13 @@
         _controlBottomView.delegate = self;
     }
     return _controlBottomView;
+}
+
+- (PlayerDetailsBottomProgressView *)bottomProgressView {
+    if (!_bottomProgressView) {
+        _bottomProgressView = [[PlayerDetailsBottomProgressView alloc] init];
+    }
+    return _bottomProgressView;
 }
 
 - (PlayerDetailsGestureView *)gestureView {

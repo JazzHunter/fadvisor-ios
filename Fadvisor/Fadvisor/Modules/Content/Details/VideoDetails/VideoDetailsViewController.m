@@ -271,9 +271,6 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
         _playerView = [[VideoDetailsPlayerView alloc] init];
         _playerView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, _playerViewHeight);
         _playerView.delegate = self;
-
-//        [_headerView addSubview:_playerView];
-//        [_headerView layoutSubviews];
     }
     return _headerView;
 }
@@ -291,10 +288,6 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 - (BOOL)shouldAutorotate {
     return YES;
 }
-
-//- (UIStatusBarStyle)preferredStatusBarStyle {
-//    return UIStatusBarStyleLightContent;
-//}
 
 // 支持哪些屏幕方向
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {

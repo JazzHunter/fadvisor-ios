@@ -32,21 +32,23 @@
     return self;
 }
 
--(void)viewDidLoad {
+- (void)viewDidLoad {
     [super viewDidLoad];
 
     [self initPlayer];
-    
+
+    [self initGesture];
+
     MyRelativeLayout *rootLayout = [[MyRelativeLayout alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:rootLayout];
-    
+
     MaskedLoginButton *button = [[MaskedLoginButton alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
     [button addTarget:self action:@selector(handleLoginButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [button setText:@"点我登录" ];
     button.centerXPos.equalTo(rootLayout.centerXPos);
     button.bottomPos.equalTo(@(self.view.height * 0.1));
     [rootLayout addSubview:button];
-    
+
     UILabel *appSlogLabel2 = [[UILabel alloc]init];
     appSlogLabel2.text = [@"AppSlog" localString];
     appSlogLabel2.textColor = [UIColor whiteColor];
@@ -55,7 +57,7 @@
     appSlogLabel2.leftPos.equalTo(button.leftPos);
     appSlogLabel2.bottomPos.equalTo(button.topPos).offset(32);
     [rootLayout addSubview:appSlogLabel2];
-    
+
     UILabel *appSlogLabel = [[UILabel alloc]init];
     appSlogLabel.text = [@"AppSlog2" localString];
     appSlogLabel.textColor = [UIColor whiteColor];
@@ -64,16 +66,14 @@
     appSlogLabel.leftPos.equalTo(button.leftPos);
     appSlogLabel.bottomPos.equalTo(appSlogLabel2.topPos).offset(8);
     [rootLayout addSubview:appSlogLabel];
-    
+
     UIImageView *appNameView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 120, 56)];
     appNameView.image = [UIImage imageNamed:@"app_name"];
     appNameView.contentMode = UIViewContentModeScaleAspectFit;
     appNameView.leftPos.equalTo(button.leftPos);
     appNameView.bottomPos.equalTo(appSlogLabel.topPos).offset(12);
     [rootLayout addSubview:appNameView];
-    
-    
-    
+
     RSMaskedLabel *aaa = [[RSMaskedLabel alloc] init];
     aaa.frame = CGRectMake(100, 200, 100, 200);
     [aaa setText:@"啊啊啊测试"];
@@ -123,9 +123,31 @@
     }
 }
 
--(void)handleLoginButtonClicked:(MaskedLoginButton *)sender {
+- (void)handleLoginButtonClicked:(MaskedLoginButton *)sender {
     [sender recoveryBackgourndColor];
 }
 
+- (void)initGesture {
+    // 添加一个手势识别器来检测下滑动作
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    [self.view addGestureRecognizer:panGestureRecognizer];
+}
+
+- (void)handlePan:(UIPanGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded || gestureRecognizer.state == UIGestureRecognizerStateCancelled) {
+        return;
+    }
+
+    CGPoint translation = [gestureRecognizer translationInView:self.view];
+    // 判断滑动的距离是否足够大以触发返回操作
+    if (translation.y > 50) {
+        // 取消当前的presentedViewController
+        [self dismissViewControllerAnimated:YES completion:nil];
+        // 用户向上滑动，不做处理
+    } else if (translation.y < 0) {
+    }
+
+    [gestureRecognizer setTranslation:CGPointZero inView:self.view];
+}
 
 @end

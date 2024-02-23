@@ -240,7 +240,7 @@
     [self.progressSlider setValue:currentTime / durationTime animated:YES];
 }
 
-- (void)updatePlayerState:(AVPStatus)status {
+- (void)updatePlayerStatus:(AVPStatus)status {
     switch (status) {
         case AVPStatusIdle:
             [self.playButton setSelected:NO];

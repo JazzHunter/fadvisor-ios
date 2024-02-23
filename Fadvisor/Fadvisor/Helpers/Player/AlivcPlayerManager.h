@@ -105,6 +105,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)onCaptureScreen:(AliPlayer *)player image:(AVPImage *)image;
 
+/**
+ @brief 当前下载速度回调
+ @param player 播放器player指针
+ @param speed bits per second
+ */
+- (void)onCurrentDownloadSpeed:(AliPlayer *)player speed:(int64_t)speed;
+
 @end
 
 @interface AlivcPlayerManager : NSObject
@@ -112,6 +119,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)manager;
 
 @property (nonatomic, weak) id<AlivcPlayerProtocal> delegate; //代理
+//@property (nonatomic, strong) AliListPlayer *player;
 @property (nonatomic, strong) AliListPlayer *player;
 @property (nonatomic, copy) NSString *currentVideoId;
 @property (nonatomic, assign) AVPStatus currentPlayStatus;
@@ -152,7 +160,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  @brief 播放器 reset
  */
-- (void)reset;
+//- (void)reset;
 
 /**
  @brief 播放器的 playerView
@@ -205,6 +213,8 @@ NS_ASSUME_NONNULL_BEGIN
  @brief 关闭画中画
  */
 - (void)disablePictureInPicture;
+
+- (void)startPip;
 
 @end
 

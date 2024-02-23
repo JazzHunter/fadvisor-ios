@@ -56,7 +56,7 @@
  * 功能 ：根据播放器状态，改变状态
  * 参数 ：state 播放器状态
  */
-- (void)updatePlayerState:(AVPStatus)status;
+- (void)updatePlayerStatus:(AVPStatus)status;
 
 
 - (void)setProgress:(float)progress;

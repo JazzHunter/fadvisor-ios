@@ -9,7 +9,6 @@
 //@class BaseResponse;
 #import "BaseResponse.h"
 
-NS_ASSUME_NONNULL_BEGIN
 
 @interface BaseRequest : NSObject
 
@@ -20,5 +19,3 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)request:(NSString *)method URL:(NSString *)urlString parameters:(id)parameters isToken:(BOOL)isToken completion:(void (^)(BaseResponse *response))completion;
 
 @end
-
-NS_ASSUME_NONNULL_END

@@ -50,6 +50,9 @@ NS_ASSUME_NONNULL_BEGIN
 //根据s-》hh:mm:ss
 + (NSString *)timeformatFromSeconds:(NSInteger)seconds;
 
+//根据byte-》速度
++ (NSString *)speedformatFromBytes:(int64_t)seconds;
+
 //绘制
 + (void)drawFillRoundRect:(CGRect)rect radius:(CGFloat)radius color:(UIColor *)color context:(CGContextRef)context;
 
