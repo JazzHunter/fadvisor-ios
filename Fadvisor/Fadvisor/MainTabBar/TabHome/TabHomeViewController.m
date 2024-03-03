@@ -111,7 +111,7 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
 
         UILabel *placeholderLabel = [UILabel new];
         placeholderLabel.text = @"请输入文章、作者、专题或者栏目";
-        placeholderLabel.font = [UIFont systemFontOfSize:ItemIntroductionFontSize];
+        placeholderLabel.font = [UIFont systemFontOfSize:ListIntroductionFontSize];
         placeholderLabel.textColor = [UIColor descriptionTextColor];
         placeholderLabel.myLeft = 6;
         [placeholderLabel sizeToFit];

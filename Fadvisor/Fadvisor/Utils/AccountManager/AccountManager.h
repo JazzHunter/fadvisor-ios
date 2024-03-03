@@ -8,6 +8,8 @@
 #import <Foundation/Foundation.h>
 #import "UserProfileModel.h"
 
+#define ACCOUNT_MANAGER [AccountManager sharedManager]
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AccountManager : NSObject

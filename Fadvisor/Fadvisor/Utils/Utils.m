@@ -51,6 +51,31 @@
     return timeString;
 }
 
++ (NSString *)formatBackendTimeString:(NSString *)timeString {
+    NSDate *date = [NSDate dateWithString:timeString format:@"yyyy-MM-dd HH:mm:ss"];
+
+    //    NSDateComponents *cmps = [NSDate dateFromStringDate:_created_at withDateStrFormat:LMJDateStringFormat toDate:[NSDate date]];
+
+    NSCalendarUnit unit = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    NSDateComponents *cmps = [[NSCalendar currentCalendar] components:unit fromDate:date toDate:[NSDate date] options:NSCalendarWrapComponents];
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    if (fabs([date timeIntervalSinceNow]) < 60.0) {
+        return @"刚刚";
+    }
+    if (date.isToday) {
+        return fabs([date timeIntervalSinceNow]) < 3600.0 ? [NSString stringWithFormat:@"%zd分钟前", cmps.minute] : [NSString stringWithFormat:@"%zd小时前", cmps.hour];
+    }
+    if ([date isYesterday]) {
+        fmt.dateFormat = @"昨天 HH:mm:ss";
+        return [fmt stringFromDate:date];
+    }
+    if (cmps.year == [[NSDate date] year]) {
+        fmt.dateFormat = @"MM-dd HH:mm:ss";
+        return [fmt stringFromDate:date];
+    }
+    return timeString;
+}
+
 + (NSString *)formatFloat:(double)f
 {
     if (fmod(f, 1) == 0) {//如果有一位小数点

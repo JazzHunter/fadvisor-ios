@@ -38,12 +38,16 @@ static NSString *const ScriptName_loadGifImage = @"loadGifImage";
     wkWebViewConfig.preferences.javaScriptCanOpenWindowsAutomatically = NO; // 在iOS上默认为NO，表示不能自动通过窗口打开
     self = [super initWithFrame:frame configuration:wkWebViewConfig];
     if (self) {
+        //WKWebView对象直接设置背景色后，上面依然有白色的背景，需要设置参数opaque=NO即可
+        //https://www.jianshu.com/p/941c5bd97152
+        self.opaque = NO;
+        
         self.navigationDelegate = self;
-        self.scrollView.bounces = NO;
         self.scrollView.bouncesZoom = NO;
         self.scrollView.showsHorizontalScrollIndicator = NO;
         self.scrollView.directionalLockEnabled = YES;
         self.scrollView.scrollEnabled = NO;
+        self.scrollView.backgroundColor = [UIColor clearColor];
 
         [WebContentFileManager initData];
     }
@@ -61,7 +65,7 @@ static NSString *const ScriptName_loadGifImage = @"loadGifImage";
         Strong(weakself);
         if (!strongSelf) return;
 
-        NSString *contentZoom = @"1.2";
+        NSString *contentZoom = @"1";
         NSString *frame = [NSString stringWithFormat:@"\
                            <html class=\"%@\">\
                            <head>\
@@ -70,12 +74,12 @@ static NSString *const ScriptName_loadGifImage = @"loadGifImage";
                            <title></title>\
                            <link href=\"./static/css/WebContentStyle.css\" rel=\"stylesheet\" type=\"text/css\"/>\
                            </head>\
-                           <body style=\"zoom:%@;\">\
+                           <body style=\"zoom:%@; margin: 0px;\">\
                            <div class=\"content\">%@</div>\
                            </body>\
                            </html>", @"night-theme", contentZoom, contentHTMLString];
 
-        NSString *htmlPath = [[WebContentFileManager getCachePath] stringByAppendingPathComponent:@"newsContent.html"];
+        NSString *htmlPath = [[WebContentFileManager getCachePath] stringByAppendingPathComponent:@"richContent.html"];
         NSURL *htmlUrl = [NSURL fileURLWithPath:htmlPath];
         NSError *error = nil;
         [frame writeToURL:htmlUrl atomically:YES encoding:NSUTF8StringEncoding error:&error];

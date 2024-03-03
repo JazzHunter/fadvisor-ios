@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 //获取当前的时间戳
 + (NSString *)currentTimeStr;
 
+// 发布时间字符串的格式化
++ (NSString *)formatBackendTimeString:(NSString *)timeString;
+
 + (NSString *)deviceModelName;
 
 + (NSString *)formatFloat:(double)f;
@@ -42,7 +45,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)isMobileNumber:(NSString *)mobileNum;
 
-
 + (UIViewController *)currentViewController;
 
 + (UIViewController *)findSuperViewController:(UIView *)view;
@@ -58,7 +60,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 //是否手机状态条处于竖屏状态
 + (BOOL)isInterfaceOrientationPortrait;
-
 
 @end
 

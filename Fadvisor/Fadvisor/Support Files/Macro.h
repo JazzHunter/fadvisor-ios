@@ -53,13 +53,14 @@
 #define Strong(type)     __strong typeof(&*self) strongSelf = type
 #define kButtonStandardSize      44.0
 
-#define ItemMarginVertical       16          // cell 上下留白
-#define ItemMarginHorizon        18          // cell 左右留白
+#define ViewVerticalMargin       16          // cell 上下留白
+#define ViewHorizonlMargin       18          // cell 左右留白
 #define SectionMarginVertical    12          //Section之间的纵向间隔
 
-#define ItemTitleFontSize        16
-#define ItemIntroductionFontSize 14
-#define ItemMetaFontSize         12
+#define ListTitleFontSize        16
+#define ListIntroductionFontSize 14
+#define ListMetaFontSize         12
+#define DetailsTitleFontSize     20
 #define NightTheme               @"NightTheme"
 
 #define FoundationString(key) GetString(key, @"Foundation")

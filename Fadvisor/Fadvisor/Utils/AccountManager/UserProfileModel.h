@@ -33,17 +33,17 @@ NS_ASSUME_NONNULL_BEGIN
 /** 状态 */
 @property (nonatomic, assign) UserStatus *status;
 
-/** ⚠️上次登陆时间 */
-@property (assign, nonatomic) NSTimeInterval *lastLoginTime;
+/** 上次登陆时间 */
+@property (nonatomic, copy) NSString *lastLoginTime;
 
 /** 上次登陆位置 */
 @property (nonatomic, copy) NSString *lastLoginRegion;
 
-/** ⚠️上次登陆客户端 */
+/** 上次登陆客户端 */
 @property (nonatomic, copy) NSString *lastLoginClient;
 
-/** ⚠️创建时间 */
-@property (assign, nonatomic) NSTimeInterval *createTime;
+/** 创建时间 */
+@property (nonatomic, copy) NSString *createTime;
 
 /** 微信unionId */
 @property (nonatomic, copy) NSString *wxUnionid;

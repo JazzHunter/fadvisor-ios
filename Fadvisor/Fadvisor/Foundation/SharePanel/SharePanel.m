@@ -124,7 +124,7 @@
 
     [bottomLayout addSubview:[self createShareRoundBtn:@"ic_link_plain" label:@"拷贝链接" tag:6000]];
     [bottomLayout addSubview:[self createShareRoundBtn:@"ic_safari_plain" label:@"浏览器" tag:7000]];
-    [bottomLayout addSubview:[self createShareRoundBtn:@"ic_more_plain" label:@"更多" tag:8000]];
+    [bottomLayout addSubview:[self createShareRoundBtn:@"ic_more" label:@"更多" tag:8000]];
     return bottomScrollView;
 }
 

@@ -127,7 +127,7 @@
 //    ArticleDetailsViewController *vc = [[ArticleDetailsViewController alloc] initWithItem:self.rcmdItemsService.rcmdItems[indexPath.row]];
 
     VideoDetailsViewController *vc = [[VideoDetailsViewController alloc] initWithItem:self.rcmdItemsService.rcmdItems[indexPath.row]];
-    
+
     vc.hidesBottomBarWhenPushed = YES;
 
     [self.navigationController pushViewController:vc animated:YES];
@@ -148,6 +148,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ItemFloatTableViewCell *cell = (ItemFloatTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ItemFloatTableViewCell class]) forIndexPath:indexPath];
+    
     [cell setModel:self.rcmdItemsService.rcmdItems[indexPath.item]];
 
     //这里设置其他位置有间隔线而最后一行没有下划线。我们可以借助布局视图本身所提供的边界线来代替掉系统默认的cell之间的间隔线，因为布局视图的边界线所提供的能力要大于默认的间隔线。
@@ -158,6 +159,11 @@
         cell.rootLayout.bottomBorderline = bld;
     }
     return cell;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    // 传递滑动
+    !self.scrollCallback ? : self.scrollCallback(scrollView);
 }
 
 #pragma mark - JXPagingViewListViewDelegate

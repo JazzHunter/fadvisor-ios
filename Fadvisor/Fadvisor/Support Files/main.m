@@ -27,7 +27,7 @@
 　　　　　 　　　'ｰ'　　!_,.:
  
  🚀 All You Need Is Love. 🔥
-By Jianwei.Han@PricewaterhouseCoopers Zhong Tian LLP on 2020
+By Jianwei.Han @PricewaterhouseCoopers Zhong Tian LLP on 2020
 *********************************************************************************/
 #import <UIKit/UIKit.h>
 

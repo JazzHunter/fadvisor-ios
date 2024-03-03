@@ -367,7 +367,7 @@ static dispatch_once_t onceToken;
         return;
     }
 
-    NSString *userId = [AccountManager sharedManager].userId;
+    NSString *userId = ACCOUNT_MANAGER.userId;
     AlivcPlayerVideoDBModel *model = [AlivcPlayerVideoDBModel new];
     model.userId = userId;
     model.videoId = videoId;
@@ -380,7 +380,7 @@ static dispatch_once_t onceToken;
     if (!self.currentVideoId) {
         return 0;
     }
-    NSString *userId = [AccountManager sharedManager].userId;
+    NSString *userId = ACCOUNT_MANAGER.userId;
     AlivcPlayerVideoDBModel *model = [VIDEO_HISTORY_DB getHistoryModelFromVideoId:self.currentVideoId userId:userId];
     return model.watchTime.longLongValue;
 }

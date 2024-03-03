@@ -118,7 +118,7 @@
     listLayout.backgroundColor = [UIColor backgroundColor];
     [self.contentLayout addSubview:listLayout];
     
-    if (![AccountManager sharedManager].isLogin) {
+    if (!ACCOUNT_MANAGER.isLogin) {
         TabAccountHeaderNotLoginView *notLoginView = [TabAccountHeaderNotLoginView new];
         notLoginView.delegate = self;
         [self.contentLayout addSubview:notLoginView];

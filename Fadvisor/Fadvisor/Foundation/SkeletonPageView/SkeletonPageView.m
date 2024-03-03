@@ -21,7 +21,7 @@
     if (self) {
         _rootLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
         _rootLayout.myMargin = 0;
-        _rootLayout.padding = UIEdgeInsetsMake(ItemMarginVertical + (isNavbarPadding ? kDefaultNavBarHeight : 0), ItemMarginHorizon, ItemMarginVertical, ItemMarginHorizon);
+        _rootLayout.padding = UIEdgeInsetsMake(ViewVerticalMargin + (isNavbarPadding ? kDefaultNavBarHeight : 0), ViewHorizonlMargin, ViewVerticalMargin, ViewHorizonlMargin);
         [self addSubview:_rootLayout];
         self.backgroundColor = [UIColor backgroundColorGray];
     }
@@ -51,7 +51,7 @@
     self.rootLayout.gravity = MyGravity_Horz_Center;
     UILabel *label1 = [UILabel new];
     label1.numberOfLines = 6;
-    label1.widthSize.equalTo(self.widthSize).add(-3 * ItemMarginHorizon);
+    label1.widthSize.equalTo(self.widthSize).add(-3 * ViewHorizonlMargin);
     label1.myHeight = 160;
     label1.myTop = 20;
 
@@ -59,8 +59,8 @@
 
     UILabel *label2 = [UILabel new];
     label2.numberOfLines = 4;
-    label2.widthSize.equalTo(self.widthSize).add(-3 * ItemMarginHorizon);
-    label2.heightSize.equalTo(self.heightSize).multiply(0.3).add(-ItemMarginVertical);
+    label2.widthSize.equalTo(self.widthSize).add(-3 * ViewHorizonlMargin);
+    label2.heightSize.equalTo(self.heightSize).multiply(0.3).add(-ViewVerticalMargin);
     [self.rootLayout addSubview:label2];
 
     [self.rootLayout layoutIfNeeded];

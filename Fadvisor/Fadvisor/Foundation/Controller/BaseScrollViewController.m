@@ -14,10 +14,13 @@
 @implementation BaseScrollViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self setupBaseScrollViewUI];
 }
 
 - (void)setupBaseScrollViewUI {
+    [self.view addSubview:self.scrollView];
+    
     if ([self baseViewControllerIsNeedNavBar:self]) {
         UIEdgeInsets contentInset = self.scrollView.contentInset;
         contentInset.top += kDefaultNavBarHeight;
@@ -37,7 +40,6 @@
 - (UIScrollView *)scrollView {
     if (_scrollView == nil) {
         UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-        [self.view addSubview:scrollView];
         scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _scrollView = scrollView;
     }

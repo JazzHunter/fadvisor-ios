@@ -67,15 +67,6 @@
     }
 }
 
-// 在这里写支持的旋转方向，为了防止横屏方向，应用启动时候界面变为横屏模式
-//- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
-//    // 可以这么写
-//    if (self.allowOrentitaionRotation) {
-//        return UIInterfaceOrientationMaskAllButUpsideDown;
-//    }
-//    return UIInterfaceOrientationMaskPortrait;
-//}
-
 #pragma mark
 - (void)startDevelopTools {
     // ⚠️ InjectionIII
@@ -111,22 +102,5 @@
 
     return YES;
 }
-
-//- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
-//    // 播放器相关横竖屏适配
-//    UIInterfaceOrientationMask orientationMask = UIViewController.topViewController.supportedInterfaceOrientations;
-//
-//    if ([AlivcPlayerManager manager].shouldFlowOrientation) {
-//        BOOL landscape = ([AlivcPlayerManager manager].playContainView.window) && [AlivcPlayerManager manager].currentOrientation != 0;
-//        orientationMask = landscape ? UIInterfaceOrientationMaskLandscape : UIInterfaceOrientationMaskPortrait;
-//    } else {
-//        return [UIViewController.topViewController supportedInterfaceOrientations];
-//    }
-//
-//    if (orientationMask == UIInterfaceOrientationMaskAllButUpsideDown || orientationMask == UIInterfaceOrientationMaskAll) {
-//        return UIInterfaceOrientationMaskPortrait;
-//    }
-//    return orientationMask;
-//}
 
 @end

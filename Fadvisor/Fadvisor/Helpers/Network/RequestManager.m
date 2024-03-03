@@ -180,6 +180,10 @@ static NSString *jsonFileDirectory = @"LocalJsons";
     // 是否在证书域字段中验证域名
     securityPolicy.validatesDomainName = NO;
     self.securityPolicy = securityPolicy;
+
+//    [self.requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, id parameters, NSError *__autoreleasing *error) {
+//        return JM_AFQueryStringFromParameters(parameters);
+//    }];
 }
 
 #pragma mark - 处理返回序列化

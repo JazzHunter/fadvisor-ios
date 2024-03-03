@@ -42,3 +42,7 @@ figcaption{
   text-align: center;
   color: var(--meta-text-color);
 }
+
+body {
+  margin: 0px !important;
+}
