@@ -50,10 +50,7 @@
     self.commentView = [CommentView new];
 
     _rootLayout = self.commentView;
-    _rootLayout.paddingTop = 10;
-    _rootLayout.paddingBottom = 10;
-    _rootLayout.paddingLeft = 16;
-    _rootLayout.paddingRight = 16;
+    _rootLayout.padding = UIEdgeInsetsMake(10, 16, 10, 16);
 
     //这个属性只局限于在UITableViewCell中使用，用来优化tableviewcell的高度自适应的性能，其他地方请不要使用！！！
     _rootLayout.cacheEstimatedRect = YES;

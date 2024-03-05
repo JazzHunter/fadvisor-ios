@@ -46,6 +46,7 @@
     [self.tableView registerClass:[CommentCell class] forCellReuseIdentifier:NSStringFromClass([CommentCell class])];
 //    
     CommentView *masterCommentView = [[CommentView alloc] init];
+    masterCommentView.padding = UIEdgeInsetsMake(10, 16, 10, 16);
     [masterCommentView setModel:self.masterCommentModel];
     masterCommentView.myWidth = self.tableView.width;
     MyBorderline *bld = [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:12];
