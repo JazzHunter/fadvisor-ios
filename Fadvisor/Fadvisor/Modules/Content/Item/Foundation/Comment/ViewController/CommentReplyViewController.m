@@ -1,58 +1,67 @@
 //
-//  CommentsViewController.m
+//  CommentReplyViewController.m
 //  Fadvisor
 //
-//  Created by 韩建伟 on 2024/3/2.
+//  Created by 韩建伟 on 2024/3/4.
 //
 
-#import "CommentsViewController.h"
-#import "CommentsService.h"
+#import "CommentReplyViewController.h"
 #import "CommentCell.h"
-#import "CommentSetCell.h"
+#import "CommentRepliesService.h"
 #import "AutoRefreshFooter.h"
 #import "RefreshHeader.h"
 #import "NotificationView.h"
 #import "SkeletonPageView.h"
 #import "ContentExcepitonView.h"
+#import "CommentCell.h"
+#import "CommentView.h"
 
-@interface CommentsViewController ()<CommentCellDelegate>
+@interface CommentReplyViewController ()
 
-@property (nonatomic, copy) void (^ scrollCallback)(UIScrollView *scrollView);
+@property (nonatomic, strong) CommentModel *masterCommentModel;
 
-@property (nonatomic, strong) CommentsService *commentsService;
-@property (nonatomic, strong) ItemModel *itemModel;
+@property (nonatomic, strong) CommentRepliesService *repliesService;
 
 @property (nonatomic, assign) BOOL inited;
 
 @end
 
-@implementation CommentsViewController
+@implementation CommentReplyViewController
 
-- (instancetype)initWithModel:(ItemModel *)model {
+- (instancetype)initWithMasterComment:(CommentModel *)model {
     self = [super init];
     if (self) {
-        self.itemModel = model;
+        self.masterCommentModel = model;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.repliesService = [[CommentRepliesService alloc] initWithMasterComment:self.masterCommentModel];
+    
     [self.tableView setSafeBottomInset];
-
+//
     [self.tableView registerClass:[CommentCell class] forCellReuseIdentifier:NSStringFromClass([CommentCell class])];
-    [self.tableView registerClass:[CommentSetCell class] forCellReuseIdentifier:NSStringFromClass([CommentSetCell class])];
-
-    // init data
-    self.inited = NO;
-
+//    
+    CommentView *masterCommentView = [[CommentView alloc] init];
+    [masterCommentView setModel:self.masterCommentModel];
+    masterCommentView.myWidth = self.tableView.width;
+    MyBorderline *bld = [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:12];
+    masterCommentView.bottomBorderline = bld;
+    [masterCommentView layoutIfNeeded];
+    
+    self.tableView.tableHeaderView = masterCommentView;
+    
+   
     //添加 Header & Footer
     Weak(self);
     self.tableView.mj_header = [RefreshHeader headerWithRefreshingBlock:^{
         if ([weakself.tableView.mj_footer isRefreshing]) {
             [weakself.tableView.mj_header endRefreshing];
         }
-        if (self.commentsService.noMore) {
+        if (self.repliesService.noMore) {
             [weakself.tableView.mj_header endRefreshing];
             [NotificationView showNotificaiton:@"没有新数据了" type:NotificationInfo];
             return;
@@ -60,7 +69,7 @@
         if (!weakself.inited) {
             [weakself.view showSkeletonPage:SkeletonPageViewTypeCell isNavbarPadding:NO];
         }
-        [self.commentsService getComments:NO completion:^(NSString *errorMsg, BOOL isHaveNewData) {
+        [self.repliesService getReplies:NO completion:^(NSString *errorMsg, BOOL isHaveNewData) {
             [weakself.view hideSkeletonPage];
             // 结束刷新状态
             ![weakself.tableView.mj_header isRefreshing] ? : [weakself.tableView.mj_header endRefreshing];
@@ -88,17 +97,17 @@
                 [weakself.tableView reloadData];
             }
 
-            if (weakself.commentsService.total == 0) {
+            if (weakself.repliesService.total == 0) {
                 [weakself.tableView showEmptyList];
                 return;
             } else if (weakself.tableView.mj_footer.hidden == YES) {
                 weakself.tableView.mj_footer.hidden = NO;
-                [weakself.tableView.mj_footer setState:weakself.commentsService.noMore ? MJRefreshStateNoMoreData : MJRefreshStateIdle];
+                [weakself.tableView.mj_footer setState:weakself.repliesService.noMore ? MJRefreshStateNoMoreData : MJRefreshStateIdle];
             }
         }];
     }];
     self.tableView.mj_footer = [AutoRefreshFooter footerWithRefreshingBlock:^{
-        if (weakself.commentsService.noMore) {
+        if (weakself.repliesService.noMore) {
             [weakself.tableView.mj_footer endRefreshing];
             [weakself.tableView.mj_footer setState:MJRefreshStateNoMoreData];
             return;
@@ -108,7 +117,7 @@
             [weakself.tableView.mj_footer endRefreshing];
             return;
         }
-        [self.commentsService getComments:YES completion:^(NSString *errorMsg, BOOL isHaveNewData) {
+        [self.repliesService getReplies:YES completion:^(NSString *errorMsg, BOOL isHaveNewData) {
             // 结束刷新状态
             ![weakself.tableView.mj_header isRefreshing] ? : [weakself.tableView.mj_header endRefreshing];
             ![weakself.tableView.mj_footer isRefreshing] ? : [weakself.tableView.mj_footer endRefreshing];
@@ -122,29 +131,13 @@
             if (isHaveNewData) {
                 [weakself.tableView reloadData];
             }
-            [weakself.tableView.mj_footer setState:weakself.commentsService.noMore ? MJRefreshStateNoMoreData : MJRefreshStateIdle];
+            [weakself.tableView.mj_footer setState:weakself.repliesService.noMore ? MJRefreshStateNoMoreData : MJRefreshStateIdle];
         }];
     }];
 
     self.tableView.mj_footer.hidden = YES;
     [self.tableView.mj_header beginRefreshing];
-}
 
-#pragma mark - CommentCellDelegate
-- (void)expendButtonTappted:(UIButton *)sender cell:(UITableViewCell *)cell {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    if (indexPath) {
-        if ([self.commentsService.orderType isEqualToString:COMMENTS_ORDER_TYPE_SET]) {
-            self.commentsService.commentSets[indexPath.row].contentExpanded = sender.selected;
-        } else {
-            self.commentsService.comments[indexPath.row].contentExpanded = sender.selected;
-        }
-
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        if (cell != nil) {
-            [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
-    }
 }
 
 #pragma mark - UITableViewDelegate
@@ -159,76 +152,20 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.commentsService.orderType isEqualToString:COMMENTS_ORDER_TYPE_SET] ? self.commentsService.commentSets.count : self.commentsService.comments.count;
+    return self.repliesService.replies.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.commentsService.orderType isEqualToString:COMMENTS_ORDER_TYPE_SET]) {
-        CommentSetCell *cell = (CommentSetCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CommentSetCell class]) forIndexPath:indexPath];
-
-        [cell setModel:self.commentsService.commentSets[indexPath.item]];
-        //这里设置其他位置有间隔线而最后一行没有下划线。我们可以借助布局视图本身所提供的边界线来代替掉系统默认的cell之间的间隔线，因为布局视图的边界线所提供的能力要大于默认的间隔线。
-        if (indexPath.row  == self.commentsService.commentSets.count - 1) {
-            cell.rootLayout.bottomBorderline = nil;
-        } else {
-            MyBorderline *bld = [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:6];
-            cell.rootLayout.bottomBorderline = bld;
-        }
-        return cell;
-    }
-
     CommentCell *cell = (CommentCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CommentCell class]) forIndexPath:indexPath];
-    cell.delegate = self;
-    [cell setModel:self.commentsService.comments[indexPath.item]];
+    [cell setModel:self.repliesService.replies[indexPath.item]];
     //这里设置其他位置有间隔线而最后一行没有下划线。我们可以借助布局视图本身所提供的边界线来代替掉系统默认的cell之间的间隔线，因为布局视图的边界线所提供的能力要大于默认的间隔线。
-    if (indexPath.row  == self.commentsService.comments.count - 1) {
+    if (indexPath.row  == self.repliesService.replies.count - 1) {
         cell.rootLayout.bottomBorderline = nil;
     } else {
         MyBorderline *bld = [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:6];
         cell.rootLayout.bottomBorderline = bld;
     }
     return cell;
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    // 传递滑动
-    !self.scrollCallback ? : self.scrollCallback(scrollView);
-}
-
-#pragma mark - JXPagingViewListViewDelegate
-
-- (UIView *)listView {
-    return self.view;
-}
-
-- (UIScrollView *)listScrollView {
-    return self.tableView;
-}
-
-- (void)listViewDidScrollCallback:(void (^)(UIScrollView *))callback {
-    self.scrollCallback = callback;
-}
-
-- (void)listWillAppear {
-}
-
-- (void)listDidAppear {
-}
-
-- (void)listWillDisappear {
-}
-
-- (void)listDidDisappear {
-}
-
-#pragma mark - getters and setters
-- (CommentsService *)commentsService {
-    if (_commentsService == nil) {
-        _commentsService = [[CommentsService alloc] initWithItemType:self.itemModel.itemType itemId:self.itemModel.itemId commentMode:self.itemModel.commentMode];
-
-        _commentsService.orderType = COMMENTS_ORDER_TYPE_TIME;
-    }
-    return _commentsService;
 }
 
 @end

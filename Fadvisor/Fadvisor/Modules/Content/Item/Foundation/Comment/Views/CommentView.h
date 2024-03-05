@@ -7,20 +7,18 @@
 
 #import <MyLayout/MyLayout.h>
 #import "CommentModel.h"
+#import "UserAvatarWithWrapper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol CommentViewDelegate <NSObject>
-
-@optional
-
-- (void)expendButtonTappted:(UIButton *)sender;
-
-@end
+typedef enum : NSInteger {
+    CommentViewSizeNormal,
+    CommentViewSizeSmall
+} CommentViewSize;
 
 @interface CommentView : MyRelativeLayout
 
-@property (nonatomic, weak) id<CommentViewDelegate>delegate;
+- (instancetype)initWithSize:(CommentViewSize)size;
 
 - (void)setModel:(CommentModel *)model;
 

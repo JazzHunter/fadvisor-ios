@@ -8,7 +8,7 @@
 #import "CommentCell.h"
 #import "CommentView.h"
 
-@interface CommentCell ()<CommentViewDelegate>
+@interface CommentCell ()
 
 @property (nonatomic, strong) CommentView *commentView;
 
@@ -48,7 +48,6 @@
 - (void)createLayout
 {
     self.commentView = [CommentView new];
-    self.commentView.delegate = self;
 
     _rootLayout = self.commentView;
     _rootLayout.paddingTop = 10;
@@ -61,14 +60,6 @@
     _rootLayout.heightSize.equalTo(@(MyLayoutSize.wrap));
     _rootLayout.widthSize.equalTo(nil);
     [self.contentView addSubview:_rootLayout];
-}
-
-#pragma mark - CommentViewDelegate
-- (void)expendButtonTappted:(UIButton *)sender {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(expendButtonTappted:cell:)]) {
-        UITableViewCell *cell = (UITableViewCell *)self;
-        [self.delegate expendButtonTappted:sender cell:cell];
-    }
 }
 
 @end

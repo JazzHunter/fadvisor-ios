@@ -1,42 +1,37 @@
 //
-//  CommentsService.m
+//  CommentRepliesServices.m
 //  Fadvisor
 //
-//  Created by 韩建伟 on 2024/2/29.
+//  Created by 韩建伟 on 2024/3/4.
 //
 
-#import "CommentsService.h"
+#import "CommentRepliesService.h"
 #import "AccountManager.h"
 #import <MJExtension.h>
 
-@interface CommentsService ()
+@interface CommentRepliesService ()
 
 @property (assign, nonatomic) NSUInteger current;
 @property (assign, nonatomic) NSUInteger size;
 
-@property (nonatomic, assign) NSUInteger itemType;
-@property (nonatomic, copy) NSString *itemId;
-@property (nonatomic, copy) NSString *commentMode;
+@property (nonatomic, strong) CommentModel *masterCommentModel;
 
 @property (nonatomic, strong) NSDictionary *latestParams;
 
 @end
 
-@implementation CommentsService
+@implementation CommentRepliesService
 
-- (instancetype)initWithItemType:(NSUInteger)itemType itemId:(NSString *)itemId commentMode:(NSString *)commentMode {
+- (instancetype)initWithMasterComment:(CommentModel *)masterComment {
     self = [super init];
     if (self) {
-        self.itemType = itemType;
-        self.itemId = itemId;
-        self.commentMode = commentMode;
-        self.orderType = COMMENTS_ORDER_TYPE_SET;
-        [self reset];
+        [self resetWithMasterComment:masterComment];
+
     }
     return self;
 }
 
-- (void)getComments:(BOOL)isFromBottom completion:(void (^)(NSString *errorMsg, BOOL isHaveNewData))completion {
+- (void)getReplies:(BOOL)isFromBottom completion:(void (^)(NSString *errorMsg, BOOL isHaveNewData))completion {
     if (self.noMore) {
         return;
     }
@@ -44,19 +39,13 @@
     params[@"current"] = [NSString stringWithFormat:@"%lu", (unsigned long)self.current];
     params[@"size"] = [NSString stringWithFormat:@"%lu", (unsigned long)self.size];
 
-    params[@"descs"] = @[@"top", @"top_time", @"create_time"];
-
-    if ([self.commentMode isEqualToString:COMMENT_MODE_FREE]) {
-        params[@"order"] = self.orderType;
-    } else if ([self.commentMode isEqualToString:COMMENT_MODE_FEATURE]) {
-        params[@"feature"] = JUDGE_IS;
-    }
+    params[@"descs"] = @[@"create_time"];
 
     self.latestParams = params;
 
-    NSString *fetchCommentPageAPI = [NSString stringWithFormat:@"/knwlact/comment%@/page/%lu/%@", ACCOUNT_MANAGER.isLogin ? @"" : @"/anonymous", self.itemType, self.itemId];
+    NSString *fetchReplyPageAPI = [NSString stringWithFormat:@"/knwlact/comment%@/reply/page/%@", ACCOUNT_MANAGER.isLogin ? @"" : @"/anonymous", self.masterCommentModel.commentId];
 
-    [self GET:fetchCommentPageAPI parameters:params completion:^(BaseResponse *response) {
+    [self GET:fetchReplyPageAPI parameters:params completion:^(BaseResponse *response) {
         // 用户上拉后有快速下拉, 下拉的数据先回来, 上拉的数据后回来
         if (self.latestParams != params) {
             return;
@@ -78,27 +67,29 @@
         }
 
         NSMutableArray<CommentModel *> *records = [CommentModel mj_objectArrayWithKeyValuesArray:response.responseObject[@"records"]];
-//        if (records.count == 0 || total == records.count) {
-//            self.noMore = YES;
-//        }
         // 读取更多是插入到最后，否则是插入到最前面
         if (isFromBottom) {
-            [self.comments addObjectsFromArray:records];
+            [self.replies addObjectsFromArray:records];
         } else {
             NSRange range = NSMakeRange(0, records.count);
             NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:range];
-            [self.comments insertObjects:records atIndexes:set];
+            [self.replies insertObjects:records atIndexes:set];
         }
         completion(nil, records.count > 0);
     }];
 }
 
 - (void)reset {
-    self.comments = [NSMutableArray array];
+    self.replies = [NSMutableArray array];
     self.noMore = NO;
     self.total = 0;
     self.current = DEFAULT_PAGE_NO;
     self.size = DEFAULT_PAGE_SIZE;
+}
+
+- (void)resetWithMasterComment:(CommentModel *)masterComment {
+    [self reset];
+    self.masterCommentModel = masterComment;
 }
 
 @end

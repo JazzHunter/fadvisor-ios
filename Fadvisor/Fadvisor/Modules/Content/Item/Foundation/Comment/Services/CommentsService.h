@@ -6,7 +6,7 @@
 //
 
 #import "BaseRequest.h"
-#import "CommentSetModel.h"
+#import "CommentModel.h"
 
 #define COMMENTS_ORDER_TYPE_SET @"set"
 #define COMMENTS_ORDER_TYPE_TIME @"time"
@@ -21,9 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 初始化*/
 - (instancetype)initWithItemType:(NSUInteger)itemType itemId:(NSString *)itemId commentMode:(NSString *)commentMode;
-
-/** CommentSet  数组 */
-@property (nonatomic, strong) NSMutableArray<CommentSetModel *> *commentSets;
 
 /** comment 数组*/
 @property (nonatomic, strong) NSMutableArray<CommentModel *> *comments;

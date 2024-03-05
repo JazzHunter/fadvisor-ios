@@ -6,7 +6,6 @@
 //
 
 #import "CommentView.h"
-#import "UserAvatarWithWrapper.h"
 #import "ImageButton.h"
 #import "LEECoolButton.h"
 #import "Utils.h"
@@ -21,7 +20,9 @@
 @property (nonatomic, strong) ImageButton *replyButton;
 @property (nonatomic, strong) LEECoolButton *commentVoteButton;
 
-@property (nonatomic, strong) UIButton *expandButton;
+@property (nonatomic, assign) CommentViewSize commentViewSize;
+
+#define ContentTextUnexpandNumberOfLines 3
 
 @end
 
@@ -29,12 +30,14 @@
 
 #pragma mark - Life Cycle
 - (instancetype)init {
-    return [self initWithFrame:CGRectZero];
+    return [self initWithSize:CommentViewSizeNormal];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)initWithSize:(CommentViewSize)size {
+    self = [super init];
     if (self) {
+        self.commentViewSize = size;
+
         self.myHeight = MyLayoutSize.wrap;
 
         self.userAvatar.leftPos.equalTo(self.leftPos);
@@ -55,15 +58,11 @@
 
         self.contentTextLabel.leftPos.equalTo(self.nicknameLabel.leftPos);
         self.contentTextLabel.rightPos.equalTo(self.moreButton.rightPos);
-        self.contentTextLabel.topPos.equalTo(self.nicknameLabel.bottomPos).offset(8);
+        self.contentTextLabel.topPos.equalTo(self.nicknameLabel.bottomPos).offset(4);
         [self addSubview:self.contentTextLabel];
 
-        self.expandButton.leftPos.equalTo(self.contentTextLabel.leftPos);
-        self.expandButton.topPos.equalTo(self.contentTextLabel.bottomPos);
-        [self addSubview:self.expandButton];
-
         self.createTimeLabel.leftPos.equalTo(self.contentTextLabel.leftPos);
-        self.createTimeLabel.topPos.equalTo(self.expandButton.bottomPos).offset(8);
+        self.createTimeLabel.topPos.equalTo(self.contentTextLabel.bottomPos).offset(8);
         [self addSubview:self.createTimeLabel];
 
         self.commentVoteButton.rightPos.equalTo(self.rightPos);
@@ -77,16 +76,6 @@
     return self;
 }
 
-#pragma mark - Actions
-
-- (void)expandButtonTapped:(UIButton *)sender {
-    sender.selected = !sender.selected;
-    self.contentTextLabel.numberOfLines = sender.selected ? 0 : 4;
-    if (self.delegate && [self.delegate respondsToSelector:@selector(expendButtonTappted:)]) {
-        [self.delegate expendButtonTappted:sender];
-    }
-}
-
 #pragma mark - set & get
 - (void)setModel:(CommentModel *)model {
     [self.userAvatar setAvatarUrlWithInternal:model.userFrom.avatar internal:model.userFrom.internal];
@@ -94,38 +83,42 @@
     self.nicknameLabel.text = model.userFrom.nickname;
     [self.nicknameLabel sizeToFit];
 
-    NSString *contentText = [[model.content stringByReplacingOccurrencesOfString:@"%n" withString:@"\r\n"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//    NSString *contentText = [[model.content stringByReplacingOccurrencesOfString:@"\%n" withString:@"\r\n"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
+    NSString *contentText = [self filterBlankAndBlankLines:model.content];
+
+    CGFloat contentTextFontSize = self.commentViewSize == CommentViewSizeNormal ? 14 : 13;
 
     if (model.userTo != nil) {
         NSString *prefixText = @"回复";
         NSString *repliedUserNickname = model.userTo.nickname;
         contentText = [NSString stringWithFormat:@"%@%@ %@", prefixText, repliedUserNickname, contentText];
-
+        NSMutableAttributedString *contentTextAttr = [[NSMutableAttributedString alloc] initWithString:contentText attributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:contentTextFontSize], NSForegroundColorAttributeName: [UIColor contentTextColor] }];
         NSRange repliedUserNicknameRange = [contentText rangeOfString:repliedUserNickname];
-
-        NSMutableAttributedString *contentTextAttr = [[NSMutableAttributedString alloc] initWithString:contentText attributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:ListIntroductionFontSize], NSForegroundColorAttributeName: [UIColor contentTextColor] }];
-
         [contentTextAttr setTextHighlightRange:repliedUserNicknameRange color:[UIColor mainColor] backgroundColor:[UIColor clearColor] userInfo:@{ @"a": @"b" } tapAction:^(UIView *_Nonnull containerView, NSAttributedString *_Nonnull text, NSRange range, CGRect rect) {
             NSLog(@"%@", containerView);
         } longPressAction:^(UIView *_Nonnull containerView, NSAttributedString *_Nonnull text, NSRange range, CGRect rect) {
             NSLog(@"%@", containerView);
         }];
+
         self.contentTextLabel.attributedText = contentTextAttr;
     } else {
-        self.contentTextLabel.text = contentText;
+        NSMutableAttributedString *contentTextAttr = [[NSMutableAttributedString alloc] initWithString:contentText attributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:contentTextFontSize], NSForegroundColorAttributeName: [UIColor contentTextColor] }];
+        self.contentTextLabel.attributedText = contentTextAttr;
     }
-    
-    self.expandButton.selected = model.contentExpanded;
-    self.contentTextLabel.numberOfLines = model.contentExpanded ? 0 : 4;
-    
+    YYTextLinePositionSimpleModifier *modifier = [YYTextLinePositionSimpleModifier new];
+    modifier.fixedLineHeight = contentTextFontSize * 1.5;
+    self.contentTextLabel.linePositionModifier = modifier;
+
     self.createTimeLabel.text = [Utils formatBackendTimeString:model.createTime];
+    [self.createTimeLabel sizeToFit];
 
     self.commentVoteButton.selected = model.voted;
 }
 
 - (UserAvatarWithWrapper *)userAvatar {
     if (!_userAvatar) {
-        _userAvatar = [[UserAvatarWithWrapper alloc] init];
+        _userAvatar = self.commentViewSize == CommentViewSizeNormal ? [[UserAvatarWithWrapper alloc] init] : [[UserAvatarWithWrapper alloc] initWithFrame:CGRectMake(0, 0, UserAvatarWithWrapperWidthSmall, UserAvatarWithWrapperWidthSmall)];
     }
     return _userAvatar;
 }
@@ -134,7 +127,7 @@
     if (!_nicknameLabel) {
         _nicknameLabel = [UILabel new];
         _nicknameLabel.textColor = [UIColor titleTextColor];
-        _nicknameLabel.font = [UIFont systemFontOfSize:ListTitleFontSize weight:UIFontWeightSemibold];
+        _nicknameLabel.font = [UIFont systemFontOfSize:self.commentViewSize == CommentViewSizeNormal ? ListContentFontSize : ListIntroductionFontSize weight:UIFontWeightSemibold];
         _nicknameLabel.numberOfLines = 1;
         _nicknameLabel.myHeight = MyLayoutSize.wrap;
     }
@@ -152,10 +145,9 @@
     if (!_contentTextLabel) {
         _contentTextLabel = [[YYLabel alloc]init];
         _contentTextLabel.myHeight = MyLayoutSize.wrap;
-//        _contentTextLabel.backgroundColor = [UIColor clearColor];
-        _contentTextLabel.font = [UIFont systemFontOfSize:ListIntroductionFontSize];
         _contentTextLabel.textColor = [UIColor contentTextColor];
-        _contentTextLabel.numberOfLines = 5;
+        _contentTextLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        _contentTextLabel.numberOfLines = self.commentViewSize == CommentViewSizeNormal ? 0 : ContentTextUnexpandNumberOfLines;
     }
     return _contentTextLabel;
 }
@@ -171,7 +163,7 @@
 
 - (ImageButton *)replyButton {
     if (!_replyButton) {
-        _replyButton = [[ImageButton alloc]initWithFrame:CGRectMake(0, 0, 24, 24) imageName:@"ic_reply"];
+        _replyButton = [[ImageButton alloc]initWithFrame:CGRectMake(0, 0, 16, 16) imageName:@"ic_reply"];
     }
     return _replyButton;
 }
@@ -187,17 +179,26 @@
     return _commentVoteButton;
 }
 
-- (UIButton *)expandButton {
-    if (!_expandButton) {
-        _expandButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _expandButton.titleLabel.font = [UIFont systemFontOfSize:ListIntroductionFontSize weight:UIFontWeightSemibold];
-        [_expandButton setTitleColor:[UIColor mainColor] forState:UIControlStateNormal];
-        [_expandButton setTitle:@"展开" forState:UIControlStateNormal];
-        [_expandButton setTitle:@"收起" forState:UIControlStateSelected];
-        [_expandButton sizeToFit];
-        [_expandButton addTarget:self action:@selector(expandButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+- (NSString *)filterBlankAndBlankLines:(NSString *)str
+{
+    NSMutableString *Mstr = [NSMutableString string];
+
+    NSArray *arr = [[str stringByReplacingOccurrencesOfString:@"\%n" withString:@"\n"] componentsSeparatedByString:@"\n"];
+
+    for (int i = 0; i < arr.count; i++) {
+        NSString *tempStr = (NSString *)arr[i];
+        [tempStr stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+        [tempStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        [tempStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]; //去除掉首尾的空白字符和换行字符
+        if (tempStr.length != 0) {
+            [Mstr appendString:arr[i]];
+            if (i < [arr count] - 1) {
+                [Mstr appendString:@"\n"];
+            }
+        }
     }
-    return _expandButton;
+
+    return Mstr;
 }
 
 @end

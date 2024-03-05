@@ -16,7 +16,7 @@
 @implementation UserAvatarWithWrapper
 
 - (instancetype)init {
-    return [self initWithFrame:CGRectMake(0, 0, UserAvatarWithWrapperWidth, UserAvatarWithWrapperWidth)];
+    return [self initWithFrame:CGRectMake(0, 0, UserAvatarWithWrapperWidthNormal, UserAvatarWithWrapperWidthNormal)];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -27,7 +27,7 @@
 //        [self xy_setLayerBorderColor:[UIColor borderColor]];
         self.layer.borderWidth = 1;
 
-        NSUInteger padding = frame.size.width / 15;
+        CGFloat padding = frame.size.width * 0.05;
         self.avatarImage = [[YYAnimatedImageView alloc] initWithFrame:CGRectMake(padding, padding, frame.size.width - 2 * padding, frame.size.height - 2 * padding)];
         self.avatarImage.contentMode = UIViewContentModeScaleAspectFill;
         self.avatarImage.layer.masksToBounds = YES;

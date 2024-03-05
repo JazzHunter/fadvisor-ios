@@ -7,7 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
-#define UserAvatarWithWrapperWidth       36          // cell 上下留白
+#define UserAvatarWithWrapperWidthNormal 36               // cell 上下留白
+#define UserAvatarWithWrapperWidthSmall  28               // cell 上下留白
 
 NS_ASSUME_NONNULL_BEGIN
 

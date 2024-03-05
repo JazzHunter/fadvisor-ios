@@ -205,16 +205,20 @@
 		C1D0A0662B8A4F69000BEBDE /* AuthorAvatarWithWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D0A0652B8A4F69000BEBDE /* AuthorAvatarWithWrapper.m */; };
 		C1D17F1F2B8901E300026EF7 /* PlayerDetailsBottomProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D17F1E2B8901E300026EF7 /* PlayerDetailsBottomProgressView.m */; };
 		C1D17F222B890B0700026EF7 /* AlivcCacheGlobalSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D17F202B890B0700026EF7 /* AlivcCacheGlobalSetting.m */; };
+		C1E0186F2B95663900FF9CB5 /* CommentReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E0186E2B95663900FF9CB5 /* CommentReplyViewController.m */; };
+		C1E018722B95F2AB00FF9CB5 /* CommentRepliesService.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E018712B95F2AB00FF9CB5 /* CommentRepliesService.m */; };
+		C1E018762B96C46C00FF9CB5 /* PopRepliesNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E018752B96C46C00FF9CB5 /* PopRepliesNavViewController.m */; };
+		C1E018792B96C4EF00FF9CB5 /* CommentsPagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E018782B96C4EF00FF9CB5 /* CommentsPagerView.m */; };
 		C1E882752B8B80510017521C /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E882742B8B80510017521C /* CommentCell.m */; };
 		C1E882782B8B80AC0017521C /* CommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E882772B8B80AC0017521C /* CommentModel.m */; };
-		C1E8827C2B8B81360017521C /* BaseCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E8827B2B8B81360017521C /* BaseCommentModel.m */; };
 		C1E882802B8B835B0017521C /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E8827F2B8B835B0017521C /* UserModel.m */; };
-		C1E882832B8B88680017521C /* CommentSetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E882822B8B88680017521C /* CommentSetModel.m */; };
 		C1E882862B8B8BCE0017521C /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E882852B8B8BCE0017521C /* CommentView.m */; };
 		C1E882892B8B8D370017521C /* UserAvatarWithWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E882882B8B8D370017521C /* UserAvatarWithWrapper.m */; };
 		C1E882952B90BE480017521C /* CommentsService.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E882942B90BE480017521C /* CommentsService.m */; };
 		C1E882982B92C5330017521C /* CommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E882972B92C5330017521C /* CommentsViewController.m */; };
 		C1E8829B2B92C7EC0017521C /* CommentSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E8829A2B92C7EC0017521C /* CommentSetCell.m */; };
+		C1EB069D2B9708AA005A87AA /* PopRepliesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1EB069C2B9708AA005A87AA /* PopRepliesViewController.m */; };
+		C1EB06A02B975432005A87AA /* PopNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1EB069F2B975432005A87AA /* PopNavView.m */; };
 		C1FB990A2B1839D3002DA461 /* ContentExcepitonView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */; };
 		C1FE82932B387D3B00F607F8 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE82922B387D3B00F607F8 /* Theme.m */; };
 		C1FE829B2B38948900F607F8 /* UIImage+FitNet.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE829A2B38948900F607F8 /* UIImage+FitNet.m */; };
@@ -645,16 +649,20 @@
 		C1D17F1E2B8901E300026EF7 /* PlayerDetailsBottomProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailsBottomProgressView.m; sourceTree = "<group>"; };
 		C1D17F202B890B0700026EF7 /* AlivcCacheGlobalSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcCacheGlobalSetting.m; sourceTree = "<group>"; };
 		C1D17F212B890B0700026EF7 /* AlivcCacheGlobalSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcCacheGlobalSetting.h; sourceTree = "<group>"; };
+		C1E0186D2B95663900FF9CB5 /* CommentReplyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentReplyViewController.h; sourceTree = "<group>"; };
+		C1E0186E2B95663900FF9CB5 /* CommentReplyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentReplyViewController.m; sourceTree = "<group>"; };
+		C1E018702B95F2AB00FF9CB5 /* CommentRepliesService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentRepliesService.h; sourceTree = "<group>"; };
+		C1E018712B95F2AB00FF9CB5 /* CommentRepliesService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentRepliesService.m; sourceTree = "<group>"; };
+		C1E018742B96C46C00FF9CB5 /* PopRepliesNavViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopRepliesNavViewController.h; sourceTree = "<group>"; };
+		C1E018752B96C46C00FF9CB5 /* PopRepliesNavViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopRepliesNavViewController.m; sourceTree = "<group>"; };
+		C1E018772B96C4EF00FF9CB5 /* CommentsPagerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentsPagerView.h; sourceTree = "<group>"; };
+		C1E018782B96C4EF00FF9CB5 /* CommentsPagerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentsPagerView.m; sourceTree = "<group>"; };
 		C1E882732B8B80510017521C /* CommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
 		C1E882742B8B80510017521C /* CommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
 		C1E882762B8B80AC0017521C /* CommentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentModel.h; sourceTree = "<group>"; };
 		C1E882772B8B80AC0017521C /* CommentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentModel.m; sourceTree = "<group>"; };
-		C1E8827A2B8B81360017521C /* BaseCommentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseCommentModel.h; sourceTree = "<group>"; };
-		C1E8827B2B8B81360017521C /* BaseCommentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseCommentModel.m; sourceTree = "<group>"; };
 		C1E8827E2B8B835B0017521C /* UserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		C1E8827F2B8B835B0017521C /* UserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
-		C1E882812B8B88680017521C /* CommentSetModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentSetModel.h; sourceTree = "<group>"; };
-		C1E882822B8B88680017521C /* CommentSetModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentSetModel.m; sourceTree = "<group>"; };
 		C1E882842B8B8BCE0017521C /* CommentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentView.h; sourceTree = "<group>"; };
 		C1E882852B8B8BCE0017521C /* CommentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentView.m; sourceTree = "<group>"; };
 		C1E882872B8B8D370017521C /* UserAvatarWithWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserAvatarWithWrapper.h; sourceTree = "<group>"; };
@@ -665,6 +673,10 @@
 		C1E882972B92C5330017521C /* CommentsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentsViewController.m; sourceTree = "<group>"; };
 		C1E882992B92C7EC0017521C /* CommentSetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentSetCell.h; sourceTree = "<group>"; };
 		C1E8829A2B92C7EC0017521C /* CommentSetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentSetCell.m; sourceTree = "<group>"; };
+		C1EB069B2B9708AA005A87AA /* PopRepliesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopRepliesViewController.h; sourceTree = "<group>"; };
+		C1EB069C2B9708AA005A87AA /* PopRepliesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PopRepliesViewController.m; sourceTree = "<group>"; };
+		C1EB069E2B975432005A87AA /* PopNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopNavView.h; sourceTree = "<group>"; };
+		C1EB069F2B975432005A87AA /* PopNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopNavView.m; sourceTree = "<group>"; };
 		C1FB99082B1839D3002DA461 /* ContentExcepitonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentExcepitonView.h; sourceTree = "<group>"; };
 		C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentExcepitonView.m; sourceTree = "<group>"; };
 		C1FE82912B387D3B00F607F8 /* Theme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
@@ -1811,6 +1823,17 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		C1E018732B96C30D00FF9CB5 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C1E882962B92C5330017521C /* CommentsViewController.h */,
+				C1E882972B92C5330017521C /* CommentsViewController.m */,
+				C1E0186D2B95663900FF9CB5 /* CommentReplyViewController.h */,
+				C1E0186E2B95663900FF9CB5 /* CommentReplyViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		C1E882712B8B7EF80017521C /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -1822,11 +1845,18 @@
 		C1E882722B8B7F080017521C /* Comment */ = {
 			isa = PBXGroup;
 			children = (
+				C1EB069E2B975432005A87AA /* PopNavView.h */,
+				C1EB069F2B975432005A87AA /* PopNavView.m */,
+				C1E018732B96C30D00FF9CB5 /* ViewController */,
 				C1E882922B90B0420017521C /* Services */,
 				C1E882912B90B02E0017521C /* Views */,
 				C1E882792B8B811E0017521C /* Models */,
-				C1E882962B92C5330017521C /* CommentsViewController.h */,
-				C1E882972B92C5330017521C /* CommentsViewController.m */,
+				C1E018742B96C46C00FF9CB5 /* PopRepliesNavViewController.h */,
+				C1E018752B96C46C00FF9CB5 /* PopRepliesNavViewController.m */,
+				C1E018772B96C4EF00FF9CB5 /* CommentsPagerView.h */,
+				C1E018782B96C4EF00FF9CB5 /* CommentsPagerView.m */,
+				C1EB069B2B9708AA005A87AA /* PopRepliesViewController.h */,
+				C1EB069C2B9708AA005A87AA /* PopRepliesViewController.m */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
@@ -1836,10 +1866,6 @@
 			children = (
 				C1E882762B8B80AC0017521C /* CommentModel.h */,
 				C1E882772B8B80AC0017521C /* CommentModel.m */,
-				C1E8827A2B8B81360017521C /* BaseCommentModel.h */,
-				C1E8827B2B8B81360017521C /* BaseCommentModel.m */,
-				C1E882812B8B88680017521C /* CommentSetModel.h */,
-				C1E882822B8B88680017521C /* CommentSetModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1871,6 +1897,8 @@
 			children = (
 				C1E882932B90BE480017521C /* CommentsService.h */,
 				C1E882942B90BE480017521C /* CommentsService.m */,
+				C1E018702B95F2AB00FF9CB5 /* CommentRepliesService.h */,
+				C1E018712B95F2AB00FF9CB5 /* CommentRepliesService.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2185,6 +2213,7 @@
 				C1FE82A42B38BBE500F607F8 /* NetworkReachability.m in Sources */,
 				C1591ABA2AFE32D500351431 /* MainTabBarController.m in Sources */,
 				C16395DE2B56418100B2C71D /* AlivcPlayerManager.m in Sources */,
+				C1EB06A02B975432005A87AA /* PopNavView.m in Sources */,
 				C1591A3E2AFDCF0400351431 /* YYTextParser.m in Sources */,
 				C15919652AFDCE4900351431 /* MBProgressHUD+Additions.m in Sources */,
 				C16395E62B56510F00B2C71D /* AlivcPlayerVideoDBManager.m in Sources */,
@@ -2259,6 +2288,7 @@
 				C1591A2F2AFDCF0400351431 /* YYClassInfo.m in Sources */,
 				C1591A292AFDCF0400351431 /* UIImageView+YYWebImage.m in Sources */,
 				C1591A352AFDCF0400351431 /* YYTextLayout.m in Sources */,
+				C1E018722B95F2AB00FF9CB5 /* CommentRepliesService.m in Sources */,
 				C1591A202AFDCF0400351431 /* YYMemoryCache.m in Sources */,
 				C1591AC72AFE3FB000351431 /* TabHomeViewController.m in Sources */,
 				C1591B4F2AFF0BBF00351431 /* ItemFloatCoverSkeletonTableViewCell.m in Sources */,
@@ -2267,6 +2297,7 @@
 				C1E882802B8B835B0017521C /* UserModel.m in Sources */,
 				C10BDAF12B4E331600C40BEC /* Reachability.m in Sources */,
 				C15105352B5EB797006FA262 /* VideoDetailsContentViewController.m in Sources */,
+				C1E0186F2B95663900FF9CB5 /* CommentReplyViewController.m in Sources */,
 				C1591A1F2AFDCF0400351431 /* YYKVStorage.m in Sources */,
 				C1591A332AFDCF0400351431 /* YYTextEffectWindow.m in Sources */,
 				C13F577E2B863C6F003ADE05 /* ImageTextButton.m in Sources */,
@@ -2278,7 +2309,6 @@
 				C1591A6D2AFDCF0400351431 /* YYReachability.m in Sources */,
 				C1591AF32AFE776D00351431 /* TabHomeRcmdViewController.m in Sources */,
 				C16782752B875E310092326F /* PlayerDetailsPopErrorView.m in Sources */,
-				C1E8827C2B8B81360017521C /* BaseCommentModel.m in Sources */,
 				C1BDC13F2B31A9AF003D67FC /* UserLoginViewController.m in Sources */,
 				C1591AFD2AFE781F00351431 /* TabDiscoveryViewController.m in Sources */,
 				C1591A282AFDCF0400351431 /* UIButton+YYWebImage.m in Sources */,
@@ -2299,6 +2329,7 @@
 				C1591A2E2AFDCF0400351431 /* NSObject+YYModel.m in Sources */,
 				C16396052B5C10E100B2C71D /* AlivcPlayerDefine.m in Sources */,
 				C12B099E2B10FEC800108664 /* ItemDetailsResultModel.m in Sources */,
+				C1E018792B96C4EF00FF9CB5 /* CommentsPagerView.m in Sources */,
 				C1591A542AFDCF0400351431 /* NSBundle+YYAdd.m in Sources */,
 				C1591A422AFDCF0400351431 /* YYTextArchiver.m in Sources */,
 				C1B0CEF32B090A6600A1173E /* AccountManager.m in Sources */,
@@ -2323,9 +2354,11 @@
 				C1D17F1F2B8901E300026EF7 /* PlayerDetailsBottomProgressView.m in Sources */,
 				C10BDAD52B4D908900C40BEC /* PlayerDetailsControlTopView.m in Sources */,
 				C12ABE1C2B8586700065F84B /* PlayerDetailsSpeedTips.m in Sources */,
+				C1E018762B96C46C00FF9CB5 /* PopRepliesNavViewController.m in Sources */,
 				C1591A552AFDCF0400351431 /* NSObject+YYAdd.m in Sources */,
 				C1591AED2AFE771100351431 /* CALayer+XYColorOC.m in Sources */,
 				C1591A672AFDCF0400351431 /* YYDispatchQueuePool.m in Sources */,
+				C1EB069D2B9708AA005A87AA /* PopRepliesViewController.m in Sources */,
 				C155D0012B35D7E6004A3AFC /* PresentAnimator.m in Sources */,
 				C1591ACF2AFE419300351431 /* BaseViewController.m in Sources */,
 				C1591A622AFDCF0400351431 /* YYWeakProxy.m in Sources */,
@@ -2359,7 +2392,6 @@
 				C1E882892B8B8D370017521C /* UserAvatarWithWrapper.m in Sources */,
 				C12ABE202B85977B0065F84B /* PlayerDetailsSideMoreView.m in Sources */,
 				C1591AFE2AFE781F00351431 /* TabColumnViewController.m in Sources */,
-				C1E882832B8B88680017521C /* CommentSetModel.m in Sources */,
 				C1591A262AFDCF0400351431 /* YYFrameImage.m in Sources */,
 				C1591B662AFFC41500351431 /* BaseResponse.m in Sources */,
 				C15919612AFDCE4900351431 /* UIButton+ViolenceBtn.m in Sources */,

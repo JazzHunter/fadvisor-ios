@@ -58,6 +58,7 @@
 #define SectionMarginVertical    12          //Section之间的纵向间隔
 
 #define ListTitleFontSize        16
+#define ListContentFontSize      15
 #define ListIntroductionFontSize 14
 #define ListMetaFontSize         12
 #define DetailsTitleFontSize     20

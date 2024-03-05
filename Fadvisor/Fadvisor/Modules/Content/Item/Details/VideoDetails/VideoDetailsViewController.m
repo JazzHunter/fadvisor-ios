@@ -15,7 +15,7 @@
 
 #import "VideoDetailsPlayerView.h"
 #import "VideoDetailsContentViewController.h"
-#import "CommentsViewController.h"
+#import "CommentsPagerView.h"
 
 #import <MJExtension.h>
 #import "ItemDetailsService.h"
@@ -45,7 +45,7 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 @property (nonatomic, assign) UIInterfaceOrientationMask currentVCInterfaceOrientationMask;
 
 @property (nonatomic, strong) VideoDetailsContentViewController *contentViewController;
-@property (nonatomic, strong) CommentsViewController *commentsViewController;
+@property (nonatomic, strong) CommentsPagerView *commentsPagerView;
 
 @end
 
@@ -189,7 +189,7 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
             break;
         }
         case 1: {
-            vc = self.commentsViewController;
+            vc = self.commentsPagerView;
             break;
         }
         default:
@@ -294,11 +294,11 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
     return _contentViewController;
 }
 
-- (CommentsViewController *)commentsViewController {
-    if (!_commentsViewController) {
-        _commentsViewController = [[CommentsViewController alloc] initWithModel:self.itemModel];
+- (CommentsPagerView *)commentsPagerView {
+    if (!_commentsPagerView) {
+        _commentsPagerView = [[CommentsPagerView alloc] initWithModel:self.itemModel];
     }
-    return _commentsViewController;
+    return _commentsPagerView;
 }
 
 #pragma mark - 屏幕旋转
