@@ -114,7 +114,7 @@ target 'Fadvisor' do
   
   # 先跑起来再说
 #  pod 'SDWebImage'
-  pod 'Masonry'
+#  pod 'Masonry'
   
   target 'FadvisorTests' do
     inherit! :search_paths

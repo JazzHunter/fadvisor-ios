@@ -46,6 +46,8 @@
     [UMengHelper UMSocialStart:ThirdSDKQQAppKey wechatAppKey:ThirdSDKWeChatAppKey wechatAppSecret:ThirdSDKWeChatAppSecret weiboAppKey:ThirdSDKWeiboAppKey weiboAppSecret:ThirdSDKWeiboAppSecret weiboCallback:ThirdSDKWeiboCallback];
 //    [UMengHelper UMPushStart:launchOptions delegate:self];
 
+    
+//    [PopCommentInputManager manager];
     #if DEBUG
     [self startDevelopTools];
     #endif

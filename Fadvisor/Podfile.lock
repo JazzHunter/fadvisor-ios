@@ -37,7 +37,6 @@ PODS:
   - JXPagingView/Pager (2.1.2)
   - LEEAlert (1.6.6)
   - lottie-ios (2.5.3)
-  - Masonry (1.1.0)
   - MBProgressHUD (1.2.0)
   - MJExtension (3.4.1)
   - MJRefresh (3.7.6)
@@ -110,7 +109,6 @@ DEPENDENCIES:
   - JXPagingView/Pager
   - LEEAlert
   - lottie-ios (= 2.5.3)
-  - Masonry
   - MBProgressHUD
   - MJExtension
   - MJRefresh
@@ -147,7 +145,6 @@ SPEC REPOS:
     - JXPagingView
     - LEEAlert
     - lottie-ios
-    - Masonry
     - MBProgressHUD
     - MJExtension
     - MJRefresh
@@ -183,7 +180,6 @@ SPEC CHECKSUMS:
   JXPagingView: 90924b364a2ff7e94db534fad1fa50925ff69ee4
   LEEAlert: 7c2ea10bcd6be93d6d102abe947a9ff9708c4b60
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
-  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJExtension: 21c5f6f8c4d5d8844b7ae8fbae08fed0b501f961
   MJRefresh: 2fe7fb43a5167ceda20bb7e63f130c04fd1814a5
@@ -204,6 +200,6 @@ SPEC CHECKSUMS:
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYWebImage: 5f7f36aee2ae293f016d418c7d6ba05c4863e928
 
-PODFILE CHECKSUM: 5a32d73f6e92102b45ae5b0aca30556fec3ac1c9
+PODFILE CHECKSUM: 3d7aaa1a8f249918b12be7a10b3946e623fd69eb
 
 COCOAPODS: 1.11.3

@@ -25,6 +25,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self != nil) {
         self.backgroundColor = [UIColor backgroundColor];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
 
         [self createLayout];
         //如果是代码实现autolayout的话必须要将translatesAutoresizingMaskIntoConstraints 设置为NO。

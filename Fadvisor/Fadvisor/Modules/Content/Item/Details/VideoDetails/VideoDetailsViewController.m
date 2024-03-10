@@ -135,6 +135,7 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
     //导航栏隐藏的情况，处理扣边返回，下面的代码要加上
     [self.pagerView.listContainerView.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
     [self.pagerView.mainTableView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
+    
 }
 
 - (void)viewDidLayoutSubviews {
@@ -249,7 +250,7 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 #pragma mark - JXPagerMainTableViewGestureDelegate
 
 - (BOOL)mainTableViewGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    //如果手势来自于categoryView，其他滑动禁止
+    //如果手势来自于categoryView，其他滑动需要禁止
     if (otherGestureRecognizer == self.categoryView.collectionView.panGestureRecognizer) {
         return NO;
     }
@@ -296,7 +297,7 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 
 - (CommentsPagerView *)commentsPagerView {
     if (!_commentsPagerView) {
-        _commentsPagerView = [[CommentsPagerView alloc] initWithModel:self.itemModel];
+        _commentsPagerView = [[CommentsPagerView alloc] initWithItem:self.itemModel];
     }
     return _commentsPagerView;
 }

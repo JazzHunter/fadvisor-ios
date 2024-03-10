@@ -6,9 +6,7 @@
 //  Copyright © 2020 普华永道迪祺通数据服务（上海）有限公司. All rights reserved.
 //
 
-//@class BaseResponse;
 #import "BaseResponse.h"
-
 
 @interface BaseRequest : NSObject
 

@@ -16,6 +16,7 @@
 #import "ContentExcepitonView.h"
 #import "PopRepliesNavViewController.h"
 #import <HWPanModal/HWPanModal.h>
+#import "PopCommentInputManager.h"
 
 @interface CommentsViewController ()<CommentSetCellDelegate>
 
@@ -28,10 +29,10 @@
 
 @implementation CommentsViewController
 
-- (instancetype)initWithModel:(ItemModel *)model {
+- (instancetype)initWithItem:(ItemModel *)itemModel {
     self = [super init];
     if (self) {
-        self.itemModel = model;
+        self.itemModel = itemModel;
     }
     return self;
 }
@@ -45,7 +46,7 @@
 
     // init data
     self.inited = NO;
-
+    
     //添加 Header & Footer
     Weak(self);
     self.tableView.mj_header = [RefreshHeader headerWithRefreshingBlock:^{
@@ -55,7 +56,7 @@
         if (self.commentsService.noMore) {
             [weakself.tableView.mj_header endRefreshing];
             [NotificationView showNotificaiton:@"没有新数据了" type:NotificationInfo];
-            
+
             return;
         }
         if (!weakself.inited) {
@@ -133,7 +134,8 @@
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [[PopCommentInputManager manager] pop];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

@@ -6,12 +6,13 @@
 //
 #import "BaseTableViewController.h"
 #import "ItemModel.h"
+#import "CommentModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CommentsViewController : BaseTableViewController
 
-- (instancetype)initWithModel:(ItemModel *)model;
+- (instancetype)initWithItem:(ItemModel *)itemModel;
 
 @end
 
