@@ -32,7 +32,8 @@
     MyLinearLayout *contentLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
     contentLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0); //设置布局内的子视图离自己的边距.
     contentLayout.myHorzMargin = 0;                          //同时指定左右边距为0表示宽度和父视图一样宽
-    contentLayout.heightSize.lBound(_scrollView.heightSize, 0, 1); //高度虽然是自适应的。但是最小的高度不能低于父视图的高度.
+//    contentLayout.heightSize.lBound(_scrollView.heightSize, 0, 1); //高度虽然是自适应的。但是最小的高度不能低于父视图的高度.
+    
     [_scrollView addSubview:contentLayout];
     self.contentLayout = contentLayout;
 }

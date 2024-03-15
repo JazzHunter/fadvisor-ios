@@ -14,15 +14,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setupUI];
-    }
-    return self;
-}
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self setupUI];
+        self.imageSize = frame.size;
     }
     return self;
 }
@@ -34,11 +26,22 @@
 
 - (CGRect)imageRectForContentRect:(CGRect)contentRect
 {
-    CGRect rect = [super imageRectForContentRect:contentRect];
-    rect.origin.x = (CGRectGetWidth(contentRect)  - CGRectGetWidth(rect)) / 2.0;
-    rect.origin.y = CGRectGetHeight(contentRect) * 0.2;
+//    CGRect rect = [super imageRectForContentRect:contentRect];
+//    rect.origin.x = (CGRectGetWidth(contentRect)  - CGRectGetWidth(rect)) / 2.0;
+//    rect.origin.y = CGRectGetHeight(contentRect) * 0.2;
+//
+//    return rect;
+    
+    if (CGSizeEqualToSize(self.imageSize, CGSizeZero)) {
+        return [super imageRectForContentRect:contentRect];
+    }
 
-    return rect;
+    CGSize size = self.imageSize;
+
+    CGFloat x = (contentRect.size.width - size.width) / 2;
+    CGFloat y = (contentRect.size.height) * 0.1;
+    
+    return CGRectMake(x, y, size.width, size.height);
 }
 
 - (CGRect)titleRectForContentRect:(CGRect)contentRect

@@ -7,16 +7,14 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface ImageButton : UIButton
 
 - (instancetype)initWithFrame:(CGRect)frame imageName:(NSString *)imageName;
+
+- (instancetype)initWithFrame:(CGRect)frame imageName:(NSString *)imageName color:(UIColor *)color;
 
 @property (nonatomic) CGSize imageSize;
 
 - (void)enableTouchDownAnimation;
 
 @end
-
-NS_ASSUME_NONNULL_END

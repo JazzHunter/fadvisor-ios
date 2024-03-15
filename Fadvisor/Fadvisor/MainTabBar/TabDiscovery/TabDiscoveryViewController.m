@@ -6,6 +6,7 @@
 //
 
 #import "TabDiscoveryViewController.h"
+#import "DemoAudioCallViewController.h"
 
 @interface TabDiscoveryViewController ()
 
@@ -28,17 +29,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor yellowColor];
-    // Do any additional setup after loading the view.
+    
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:[@"点击我" localString] forState:UIControlStateNormal];
+    [btn setTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    btn.frame = CGRectMake(100, 100, 200, 120);
+    
+    [self.view addSubview:btn];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)btnClicked:(UIButton *)sender {
+    DemoAudioCallViewController *vc = [DemoAudioCallViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
-*/
 
 @end

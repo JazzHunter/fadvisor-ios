@@ -8,16 +8,25 @@
 #import "ImageButton.h"
 @interface ImageButton ()
 
-
 @end
 
 @implementation ImageButton
 
 - (instancetype)initWithFrame:(CGRect)frame imageName:(NSString *)imageName {
+    return [self initWithFrame:frame imageName:imageName color:nil];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame imageName:(NSString *)imageName color:(UIColor *)color {
     self = [super initWithFrame:frame];
     if (self) {
         self.imageSize = frame.size;
-        [self setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+        if (color) {
+            [self setImage:[[UIImage imageNamed:imageName] imageWithRenderingMode:(UIImageRenderingModeAlwaysTemplate)] forState:UIControlStateNormal];
+            self.tintColor = color;
+        } else {
+            [self setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+        }
+
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     }
     return self;
@@ -32,7 +41,7 @@
 
     CGFloat x = (contentRect.size.width - size.width) / 2;
     CGFloat y = (contentRect.size.height - size.height) / 2;
-
+    
     return CGRectMake(x, y, size.width, size.height);
 }
 

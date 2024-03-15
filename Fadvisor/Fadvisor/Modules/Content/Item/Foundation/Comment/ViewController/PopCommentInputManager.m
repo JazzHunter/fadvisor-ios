@@ -229,6 +229,7 @@ static dispatch_once_t onceToken;
         _textView.wzb_placeholder = @"良言一句三冬暖，恶语伤人六月寒";
         _textView.font = [UIFont systemFontOfSize:ListContentFontSize];
         _textView.textColor = [UIColor contentTextColor];
+        _textView.backgroundColor = [UIColor clearColor];
     }
     return _textView;
 }
@@ -237,7 +238,6 @@ static dispatch_once_t onceToken;
     if (!_fullScreenSwitchButton) {
         _fullScreenSwitchButton = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24) imageName:@"ic_fullscreen"];
         [_fullScreenSwitchButton setImage:[UIImage imageNamed:@"ic_fullscreen_resume"] forState:UIControlStateSelected];
-//        _fullScreenSwitchButton.imageSize = CGSizeMake(24, 24);
         [_fullScreenSwitchButton enableTouchDownAnimation];
         [_fullScreenSwitchButton addTarget:self action:@selector(fullScreenButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -253,8 +253,6 @@ static dispatch_once_t onceToken;
         [_submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_submitButton setTitle:[@"发布" localString] forState:UIControlStateNormal];
         _submitButton.clipsToBounds = YES;
-//        [_submitButton.layer setBorderColor:[UIColor mainColor].CGColor];
-//        _submitButton.layer.borderWidth = 2;
         [_submitButton setCornerRadius:6];
         _submitButton.backgroundColor = [UIColor mainColor];
         [_submitButton addTarget:self action:@selector(submitButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
