@@ -237,8 +237,7 @@
 		C1F624C52B9FFAB000CF1EBC /* TabAccountInternalBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = C1F624C42B9FFAB000CF1EBC /* TabAccountInternalBanner.m */; };
 		C1F624D02BA3E29600CF1EBC /* TabAccountGeneralFuncsView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1F624CF2BA3E29600CF1EBC /* TabAccountGeneralFuncsView.m */; };
 		C1F624D32BA4411000CF1EBC /* TabAccountBottomCardsView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1F624D22BA4411000CF1EBC /* TabAccountBottomCardsView.m */; };
-		C1F624D62BA458F700CF1EBC /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1F624D52BA458F700CF1EBC /* SettingViewController.m */; };
-		C1F624DB2BA4591D00CF1EBC /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1F624D92BA4591D00CF1EBC /* SettingViewController.m */; };
+		C1F624DE2BA4921900CF1EBC /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1F624DD2BA4921900CF1EBC /* SettingViewController.m */; };
 		C1FB990A2B1839D3002DA461 /* ContentExcepitonView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */; };
 		C1FE82932B387D3B00F607F8 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE82922B387D3B00F607F8 /* Theme.m */; };
 		C1FE829B2B38948900F607F8 /* UIImage+FitNet.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE829A2B38948900F607F8 /* UIImage+FitNet.m */; };
@@ -738,10 +737,8 @@
 		C1F624CF2BA3E29600CF1EBC /* TabAccountGeneralFuncsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabAccountGeneralFuncsView.m; sourceTree = "<group>"; };
 		C1F624D12BA4411000CF1EBC /* TabAccountBottomCardsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabAccountBottomCardsView.h; sourceTree = "<group>"; };
 		C1F624D22BA4411000CF1EBC /* TabAccountBottomCardsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabAccountBottomCardsView.m; sourceTree = "<group>"; };
-		C1F624D42BA458F700CF1EBC /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SettingViewController.h; path = Fadvisor/MainTabBar/TabAccount/SettingViewController.h; sourceTree = SOURCE_ROOT; };
-		C1F624D52BA458F700CF1EBC /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
-		C1F624D82BA4591D00CF1EBC /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
-		C1F624D92BA4591D00CF1EBC /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		C1F624DC2BA4921900CF1EBC /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		C1F624DD2BA4921900CF1EBC /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		C1FB99082B1839D3002DA461 /* ContentExcepitonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentExcepitonView.h; sourceTree = "<group>"; };
 		C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentExcepitonView.m; sourceTree = "<group>"; };
 		C1FE82912B387D3B00F607F8 /* Theme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Theme.h; sourceTree = "<group>"; };
@@ -2037,9 +2034,7 @@
 		C1F624D72BA4590300CF1EBC /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				C1F624D42BA458F700CF1EBC /* SettingViewController.h */,
 				C1F624DA2BA4591D00CF1EBC /* Setting */,
-				C1F624D52BA458F700CF1EBC /* SettingViewController.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -2047,8 +2042,8 @@
 		C1F624DA2BA4591D00CF1EBC /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				C1F624D82BA4591D00CF1EBC /* SettingViewController.h */,
-				C1F624D92BA4591D00CF1EBC /* SettingViewController.m */,
+				C1F624DC2BA4921900CF1EBC /* SettingViewController.h */,
+				C1F624DD2BA4921900CF1EBC /* SettingViewController.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -2358,7 +2353,6 @@
 				C1591A5C2AFDCF0400351431 /* NSString+YYAdd.m in Sources */,
 				C1591B5C2AFF1DC000351431 /* KeyChainHelper.m in Sources */,
 				C1591A212AFDCF0400351431 /* YYImageCache.m in Sources */,
-				C1F624DB2BA4591D00CF1EBC /* SettingViewController.m in Sources */,
 				C19B2BB42B7D27C000BC6384 /* UIImage+Additions.m in Sources */,
 				C1ABA46F2B0C572E00CA6E7B /* NotificationView.m in Sources */,
 				C151FF462B9CCFFA009EEC02 /* UITextView+WZB.m in Sources */,
@@ -2488,7 +2482,7 @@
 				C1591A5D2AFDCF0400351431 /* NSNotificationCenter+YYAdd.m in Sources */,
 				C1591A582AFDCF0400351431 /* NSKeyedUnarchiver+YYAdd.m in Sources */,
 				C15919642AFDCE4900351431 /* UIColor+Additions.m in Sources */,
-				C1F624D62BA458F700CF1EBC /* SettingViewController.m in Sources */,
+				C1F624DE2BA4921900CF1EBC /* SettingViewController.m in Sources */,
 				C1591A2E2AFDCF0400351431 /* NSObject+YYModel.m in Sources */,
 				C16396052B5C10E100B2C71D /* AlivcPlayerDefine.m in Sources */,
 				C12B099E2B10FEC800108664 /* ItemDetailsResultModel.m in Sources */,

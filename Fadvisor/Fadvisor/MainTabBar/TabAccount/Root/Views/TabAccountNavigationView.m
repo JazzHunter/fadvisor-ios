@@ -7,6 +7,7 @@
 
 #import "TabAccountNavigationView.h"
 #import "ImageButton.h"
+#import "SettingViewController.h"
 
 #define btnSize 26.f
 
@@ -55,6 +56,8 @@
 }
 
 - (void)settingBtnClicked:(UIButton *)sender {
+    SettingViewController *vc = [SettingViewController new];
+    [self.viewController.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)messageBtnClicked:(UIButton *)sender {

@@ -174,8 +174,7 @@
         _leftView = btn;
     } else {
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kButtonStandardSize, kButtonStandardSize)];
-        [btn setImage:[UIImage imageNamed:@"navgationbar_back_pre"] forState:UIControlStateHighlighted];
-        [btn setImage:[UIImage imageNamed:@"navgationbar_back_nor"] forState:UIControlStateNormal];
+        [btn setImage:[[[UIImage imageNamed:@"ic_left_arr"] imageWithTintColor:[UIColor metaTextColor]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
         _leftView = btn;
     }
     if ([self.leftView isKindOfClass:[UIButton class]]) {

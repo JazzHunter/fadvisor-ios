@@ -5,11 +5,11 @@
 //  Created by 韩建伟 on 2024/3/15.
 //
 
-#import <MyLayout/MyLayout.h>
+#import "BaseScrollViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SettingViewController : MyLinearLayout
+@interface SettingViewController : BaseScrollViewController
 
 @end
 
