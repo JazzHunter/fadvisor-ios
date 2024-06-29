@@ -1,5 +1,5 @@
 //
-//  ImageTextButton.h
+//  ImageTextVButton.h
 //  Fadvisor
 //
 //  Created by 韩建伟 on 2024/2/21.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ImageTextButton : UIButton
+@interface ImageTextVButton : UIButton
 
 @property (nonatomic) CGSize imageSize;
 

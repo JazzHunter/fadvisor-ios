@@ -7,7 +7,7 @@
 
 #import "PlayerDetailsSideMoreView.h"
 #import <MyLayout/MyLayout.h>
-#import "ImageTextButton.h"
+#import "ImageTextVButton.h"
 
 @interface PlayerDetailsSideMoreView ()
 
@@ -41,7 +41,7 @@
 
 - (void)initUI {
     // 创建上部分区域
-    ImageTextButton *button = [[ImageTextButton alloc]initWithFrame:CGRectMake(0, 0, 56, 56)];
+    ImageTextVButton *button = [[ImageTextVButton alloc]initWithFrame:CGRectMake(0, 0, 56, 56)];
     button.titleLabel.font = [UIFont systemFontOfSize:12];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor mainColor] forState:UIControlStateSelected];

@@ -62,6 +62,7 @@
 #define ListIntroductionFontSize 14
 #define ListMetaFontSize         12
 #define DetailsTitleFontSize     20
+#define IconImgHeight            14 //图标图片的高度
 #define NightTheme               @"NightTheme"
 
 #define FoundationString(key) GetString(key, @"Foundation")

@@ -6,7 +6,7 @@
 //
 
 #import "TabAccountGeneralFuncsView.h"
-#import "ImageTextButton.h"
+#import "ImageTextVButton.h"
 
 @implementation TabAccountGeneralFuncsView
 
@@ -32,32 +32,32 @@
 
         CGFloat spaceWidth = (kScreenWidth - 16 * 2 - 16 * 2 - 4 * 56) / 3;
 
-        ImageTextButton *historyButton = [self createButtonWithTitleText:@"浏览记录" imageName:@"ic_history"];
+        ImageTextVButton *historyButton = [self createButtonWithTitleText:@"浏览记录" imageName:@"ic_history"];
         historyButton.topPos.equalTo(sectionLabel.bottomPos).offset(12);
         historyButton.leftPos.equalTo(sectionLabel.leftPos);
         [self addSubview:historyButton];
 
-        ImageTextButton *favoritesButton = [self createButtonWithTitleText:@"我的收藏" imageName:@"ic_favorites"];
+        ImageTextVButton *favoritesButton = [self createButtonWithTitleText:@"我的收藏" imageName:@"ic_favorites"];
         favoritesButton.centerYPos.equalTo(historyButton.centerYPos);
         favoritesButton.leftPos.equalTo(historyButton.rightPos).offset(spaceWidth);
         [self addSubview:favoritesButton];
 
-        ImageTextButton *followButton = [self createButtonWithTitleText:@"我的关注" imageName:@"ic_author"];
+        ImageTextVButton *followButton = [self createButtonWithTitleText:@"我的关注" imageName:@"ic_author"];
         followButton.centerYPos.equalTo(historyButton.centerYPos);
         followButton.leftPos.equalTo(favoritesButton.rightPos).offset(spaceWidth);
         [self addSubview:followButton];
 
-        ImageTextButton *voteButton = [self createButtonWithTitleText:@"我的点赞" imageName:@"ic_heart"];
+        ImageTextVButton *voteButton = [self createButtonWithTitleText:@"我的点赞" imageName:@"ic_heart_solid"];
         voteButton.centerYPos.equalTo(historyButton.centerYPos);
         voteButton.leftPos.equalTo(followButton.rightPos).offset(spaceWidth);
         [self addSubview:voteButton];
         
-        ImageTextButton *docButton = [self createButtonWithTitleText:@"我的文档" imageName:@"ic_book"];
+        ImageTextVButton *docButton = [self createButtonWithTitleText:@"我的文档" imageName:@"ic_book"];
         docButton.topPos.equalTo(historyButton.bottomPos).offset(12);
         docButton.leftPos.equalTo(historyButton.leftPos);
         [self addSubview:docButton];
         
-        ImageTextButton *feedbackButton = [self createButtonWithTitleText:@"意见反馈" imageName:@"ic_feedback"];
+        ImageTextVButton *feedbackButton = [self createButtonWithTitleText:@"意见反馈" imageName:@"ic_feedback"];
         feedbackButton.centerYPos.equalTo(docButton.centerYPos);
         feedbackButton.leftPos.equalTo(docButton.rightPos).offset(spaceWidth);
         [self addSubview:feedbackButton];
@@ -65,13 +65,13 @@
     return self;
 }
 
-- (ImageTextButton *)createButtonWithTitleText:(NSString *)titleText imageName:(NSString *)imageName {
-    ImageTextButton *button = [[ImageTextButton alloc]initWithFrame:CGRectMake(0, 0, 56, 56)];
+- (ImageTextVButton *)createButtonWithTitleText:(NSString *)titleText imageName:(NSString *)imageName {
+    ImageTextVButton *button = [[ImageTextVButton alloc]initWithFrame:CGRectMake(0, 0, 56, 56)];
     button.imageSize = CGSizeMake(28, 28);
     button.titleLabel.font = [UIFont systemFontOfSize:13];
     [button setTitleColor:[UIColor titleTextColor] forState:UIControlStateNormal];
     [button setTitle:[titleText localString] forState:UIControlStateNormal];
-    [button setImage:[[[UIImage imageNamed:imageName] imageWithTintColor:[UIColor mainColor]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+    [button setImage:[[[UIImage imageNamed:imageName] imageWithTintColor:[UIColor lightMainColor]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
     return button;
 }
 

@@ -70,7 +70,7 @@
  * 功能 ：设置下载速率
  */
 - (void)setDownloadSpeed:(int64_t)speed {
-    _textLabel.text = [NSString stringWithFormat:@"%@... %@", [@"正在缓冲" localString], [Utils speedformatFromBytes:speed]];
+    _textLabel.text = [NSString stringWithFormat:@"%@... %@", [@"正在缓冲" localString], [Utils formatFromBytes:speed]];
     [_textLabel sizeToFit];
 }
 

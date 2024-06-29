@@ -66,14 +66,17 @@
         return fabs([date timeIntervalSinceNow]) < 3600.0 ? [NSString stringWithFormat:@"%zd分钟前", cmps.minute] : [NSString stringWithFormat:@"%zd小时前", cmps.hour];
     }
     if ([date isYesterday]) {
-        fmt.dateFormat = @"昨天 HH:mm:ss";
+//        fmt.dateFormat = @"昨天 HH:mm:ss";
+        fmt.dateFormat = @"昨天";
         return [fmt stringFromDate:date];
     }
     if (cmps.year == [[NSDate date] year]) {
-        fmt.dateFormat = @"MM-dd HH:mm:ss";
+//        fmt.dateFormat = @"MM-dd HH:mm:ss";
+        fmt.dateFormat = @"MM-dd";
         return [fmt stringFromDate:date];
     }
-    return timeString;
+//    return timeString;
+    return [timeString substringToIndex:10];
 }
 
 + (NSString *)formatFloat:(double)f
@@ -265,7 +268,7 @@
     return seconds / 3600 <= 0 ? [NSString stringWithFormat:@"%@:%@", str_minute, str_second] : [NSString stringWithFormat:@"%@:%@:%@", str_hour, str_minute, str_second];
 }
 
-+ (NSString *)speedformatFromBytes:(int64_t)speed {
++ (NSString *)formatFromBytes:(int64_t)speed {
     if (speed < 1048576) {
         return [NSString stringWithFormat:@"%.2fKB", (double)speed / 1024];
     }

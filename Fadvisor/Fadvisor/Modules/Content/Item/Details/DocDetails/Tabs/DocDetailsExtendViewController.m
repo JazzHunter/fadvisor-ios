@@ -1,16 +1,16 @@
 //
-//  VideoDetailsContentViewController.m
+//  DocDetailsContentViewController.m
 //  Fadvisor
 //
-//  Created by 韩建伟 on 2024/1/22.
+//  Created by 韩建伟 on 2024/3/23.
 //
 
-#import "VideoDetailsContentViewController.h"
+#import "DocDetailsExtendViewController.h"
 #import "RichTextView.h"
 #import "SharePanel.h"
 #import "AuthorSection.h"
 
-@interface VideoDetailsContentViewController ()<UIScrollViewDelegate>
+@interface DocDetailsExtendViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, copy) void (^ scrollCallback)(UIScrollView *scrollView);
 
@@ -24,13 +24,11 @@
 
 @end
 
-@implementation VideoDetailsContentViewController
-
-#pragma mark - Life Cycle
+@implementation DocDetailsExtendViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self initUI];
 }
 
@@ -112,7 +110,7 @@
 
 #pragma mark - getters and setters
 
-- (void)setModel:(ItemModel *)itemModel details:(VideoDetailsModel *)detailsModel {
+- (void)setModel:(ItemModel *)itemModel details:(DocDetailsModel *)detailsModel {
     self.itemModel = itemModel;
 
     [self.authorSection setModels:itemModel.authors];
@@ -144,5 +142,6 @@
     }
     return _richTextView;
 }
+
 
 @end

@@ -10,11 +10,16 @@
 #import "AutoRefreshFooter.h"
 #import "RefreshHeader.h"
 #import "NotificationView.h"
-#import "ItemFloatTableViewCell.h"
 #import "ArticleDetailsViewController.h"
 #import "VideoDetailsViewController.h"
+#import "DocDetailsViewController.h"
 #import "ContentExcepitonView.h"
 #import "SkeletonPageView.h"
+
+#import "ItemFloatCoverTableViewCell.h"
+#import "ArticleFloatCoverTableViewCell.h"
+#import "VideoLongCoverTableViewCell.h"
+#import "DocFloatTypeTableViewCell.h"
 
 @interface TabHomeRcmdViewController ()
 
@@ -31,7 +36,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.tableView registerClass:[ItemFloatTableViewCell class] forCellReuseIdentifier:NSStringFromClass([ItemFloatTableViewCell class])];
+    [self.tableView registerClass:[ItemFloatCoverTableViewCell class] forCellReuseIdentifier:NSStringFromClass([ItemFloatCoverTableViewCell class])];
+    [self.tableView registerClass:[ArticleFloatCoverTableViewCell class] forCellReuseIdentifier:NSStringFromClass([ArticleFloatCoverTableViewCell class])];
+    [self.tableView registerClass:[VideoLongCoverTableViewCell class] forCellReuseIdentifier:NSStringFromClass([VideoLongCoverTableViewCell class])];
+    [self.tableView registerClass:[DocFloatTypeTableViewCell class] forCellReuseIdentifier:NSStringFromClass([DocFloatTypeTableViewCell class])];
 
     // init data
     self.inited = NO;
@@ -124,13 +132,26 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-//    ArticleDetailsViewController *vc = [[ArticleDetailsViewController alloc] initWithItem:self.rcmdItemsService.rcmdItems[indexPath.row]];
-
-    VideoDetailsViewController *vc = [[VideoDetailsViewController alloc] initWithItem:self.rcmdItemsService.rcmdItems[indexPath.row]];
-
-    vc.hidesBottomBarWhenPushed = YES;
-
-    [self.navigationController pushViewController:vc animated:YES];
+    ItemModel *model = self.rcmdItemsService.rcmdItems[indexPath.row];
+    switch (model.itemType) {
+        case ItemTypeArticle:{
+            ArticleDetailsViewController *vc = [[ArticleDetailsViewController alloc] initWithItem:model];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        } break;
+            
+        case ItemTypeDoc:{
+            DocDetailsViewController *vc = [[DocDetailsViewController alloc] initWithItem:model];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        } break;
+            
+        default:{
+            VideoDetailsViewController *vc = [[VideoDetailsViewController alloc] initWithItem:model];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        } break;
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -140,25 +161,43 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    if ([self numberOfSectionsInTableView:tableView] == 1) {
-//        return self.topicCmtService.latestCmts.count;
-//    }
     return self.rcmdItemsService.rcmdItems.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ItemFloatTableViewCell *cell = (ItemFloatTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ItemFloatTableViewCell class]) forIndexPath:indexPath];
-    
-    [cell setModel:self.rcmdItemsService.rcmdItems[indexPath.item]];
-
-    //这里设置其他位置有间隔线而最后一行没有下划线。我们可以借助布局视图本身所提供的边界线来代替掉系统默认的cell之间的间隔线，因为布局视图的边界线所提供的能力要大于默认的间隔线。
-    if (indexPath.row  == self.rcmdItemsService.rcmdItems.count - 1) {
-        cell.rootLayout.bottomBorderline = nil;
-    } else {
-        MyBorderline *bld = [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:6];
-        cell.rootLayout.bottomBorderline = bld;
+    switch (self.rcmdItemsService.rcmdItems[indexPath.item].itemType) {
+        case ItemTypeArticle:{
+            ArticleFloatCoverTableViewCell *cell = (ArticleFloatCoverTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ArticleFloatCoverTableViewCell class]) forIndexPath:indexPath];
+            [cell setModel:self.rcmdItemsService.rcmdItems[indexPath.item]];
+            //这里设置其他位置有间隔线而最后一行没有下划线。我们可以借助布局视图本身所提供的边界线来代替掉系统默认的cell之间的间隔线，因为布局视图的边界线所提供的能力要大于默认的间隔线。
+            cell.rootLayout.bottomBorderline = (indexPath.row  == self.rcmdItemsService.rcmdItems.count - 1) ? nil : [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:6];
+            return cell;
+        } break;
+            
+        case ItemTypeDoc:{
+            DocFloatTypeTableViewCell *cell = (DocFloatTypeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([DocFloatTypeTableViewCell class]) forIndexPath:indexPath];
+            [cell setModel:self.rcmdItemsService.rcmdItems[indexPath.item]];
+            //这里设置其他位置有间隔线而最后一行没有下划线。我们可以借助布局视图本身所提供的边界线来代替掉系统默认的cell之间的间隔线，因为布局视图的边界线所提供的能力要大于默认的间隔线。
+            cell.rootLayout.bottomBorderline = (indexPath.row  == self.rcmdItemsService.rcmdItems.count - 1) ? nil : [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:6];
+            return cell;
+        } break;
+            
+        case ItemTypeVideo:{
+            VideoLongCoverTableViewCell *cell = (VideoLongCoverTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([VideoLongCoverTableViewCell class]) forIndexPath:indexPath];
+            [cell setModel:self.rcmdItemsService.rcmdItems[indexPath.item]];
+            //这里设置其他位置有间隔线而最后一行没有下划线。我们可以借助布局视图本身所提供的边界线来代替掉系统默认的cell之间的间隔线，因为布局视图的边界线所提供的能力要大于默认的间隔线。
+            cell.rootLayout.bottomBorderline = (indexPath.row  == self.rcmdItemsService.rcmdItems.count - 1) ? nil : [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:6];
+            return cell;
+        } break;
+            
+        default:{
+            ItemFloatCoverTableViewCell *cell = (ItemFloatCoverTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ItemFloatCoverTableViewCell class]) forIndexPath:indexPath];
+            [cell setModel:self.rcmdItemsService.rcmdItems[indexPath.item]];
+            //这里设置其他位置有间隔线而最后一行没有下划线。我们可以借助布局视图本身所提供的边界线来代替掉系统默认的cell之间的间隔线，因为布局视图的边界线所提供的能力要大于默认的间隔线。
+            cell.rootLayout.bottomBorderline = (indexPath.row  == self.rcmdItemsService.rcmdItems.count - 1) ? nil : [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:6];
+            return cell;
+        } break;
     }
-    return cell;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

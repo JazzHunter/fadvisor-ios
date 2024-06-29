@@ -70,7 +70,6 @@
     [self.view showSkeletonPage:SkeletonPageViewTypeContentDetail isNavbarPadding:YES];
     Weak(self);
     [self.itemDetailsService getDetails:ItemTypeArticle itemId:self.itemId completion:^(NSString *errorMsg, NSDictionary *detailsDic) {
-        [self.view hideSkeletonPage];
         weakself.detailsModel = [ArticleDetailsModel mj_objectWithKeyValues:detailsDic];
 
         weakself.itemModel = weakself.itemDetailsService.result.itemModel;
@@ -89,6 +88,8 @@
         if (height > 0) {
             weakself.richTextView.myHeight = height;
             weakself.richTextView.alpha = 0.0f;
+            // 富文本读取后取消隐藏
+            [weakself.view hideSkeletonPage];
             [UIView animateWithDuration:0.3f animations:^{
                 weakself.richTextView.alpha = 1.0f;
             }];
@@ -97,12 +98,9 @@
         }
     };
 
-    UIView *test = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 1000)];
-    test.backgroundColor = [UIColor greenColor];
-
     [self.contentLayout addSubview:self.titleLabel];
-    [self.contentLayout addSubview:test];
-//    [self.contentLayout addSubview:self.richTextView];
+    
+    [self.contentLayout addSubview:self.richTextView];
 
     UILabel *pubTimeLabel = [[UILabel alloc] init];
     self.pubTimeLabel = pubTimeLabel;

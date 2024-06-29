@@ -1,54 +1,47 @@
 //
-//  VideoDetailsViewController.m
+//  DocDetailsViewController.m
 //  Fadvisor
 //
-//  Created by 韩建伟 on 2023/12/9.
+//  Created by 韩建伟 on 2024/3/23.
 //
 
-#import "VideoDetailsViewController.h"
+#import "DocDetailsViewController.h"
 #import "ItemDetailsService.h"
-#import "MediaModel.h"
-#import "Utils.h"
 
 #import "JXCategoryView.h"
 #import "JXPagerListRefreshView.h"
 
-#import "VideoDetailsPlayerView.h"
-#import "VideoDetailsContentViewController.h"
+#import "DocDetailsContentViewController.h"
+#import "DocDetailsExtendViewController.h"
 #import "CommentsPagerView.h"
+#import "DocDetailsHeaderView.h"
 
 #import <MJExtension.h>
-#import "ContentDefine.h"
 #import "ContentExcepitonView.h"
 #import "SkeletonPageView.h"
 
-#import "UIInterface+HXRotation.h"
 
-static const CGFloat pinSectionHeaderHeight = 64.f;
+static const CGFloat pinSectionHeaderHeight = 44.f;
 
-@interface VideoDetailsViewController ()<VideoDetailsPlayerViewProtocol, JXCategoryViewDelegate, JXPagerViewDelegate, JXPagerMainTableViewGestureDelegate>
+@interface DocDetailsViewController ()<JXCategoryViewDelegate, JXPagerViewDelegate, JXPagerMainTableViewGestureDelegate>
 
-// Data
 @property (nonatomic, copy) NSString *itemId;
 @property (nonatomic, strong) ItemDetailsService *itemDetailsService;
 @property (nonatomic, strong) ItemModel *itemModel;
-@property (nonatomic, strong) VideoDetailsModel *detailsModel;
+@property (nonatomic, strong) DocDetailsModel *detailsModel;
 
 @property (nonatomic, strong) JXCategoryTitleView *categoryView;
 @property (nonatomic, strong) JXPagerView *pagerView;
 
-@property (nonatomic, strong) VideoDetailsPlayerView *playerView;
-@property (assign, nonatomic) CGFloat playerViewHeight;
-@property (nonatomic, strong) UIView *headerView;                   //竖屏的容器，状态栏 + PlayerView
-
-@property (nonatomic, assign) UIInterfaceOrientationMask currentVCInterfaceOrientationMask;
-
-@property (nonatomic, strong) VideoDetailsContentViewController *contentViewController;
+@property (nonatomic, strong) DocDetailsContentViewController *contentViewController;
+@property (nonatomic, strong) DocDetailsExtendViewController *extendViewController;
 @property (nonatomic, strong) CommentsPagerView *commentsPagerView;
+
+@property (nonatomic, strong) DocDetailsHeaderView *headerView;
 
 @end
 
-@implementation VideoDetailsViewController
+@implementation DocDetailsViewController
 
 - (instancetype)initWithItem:(ItemModel *)itemModel {
     self = [super init];
@@ -72,38 +65,38 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 #pragma mark 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self addOrRemoveDeviceOrientationChangeNotification:YES];
 
-    self.playerViewHeight = kScreenWidth * 9 / 16;
-
-    self.currentVCInterfaceOrientationMask = UIInterfaceOrientationMaskAllButUpsideDown;
     [self initUI];
+    [self initNavigationBar];
 
     [self getData];
+}
+
+- (void)initNavigationBar {
+    self.navigationBar.delegate = self;
+    self.navigationBar.dataSource = self;
+    [self.navigationBar setTitleText:self.itemModel ? self.itemModel.title : @"读取中..."];
 }
 
 - (void)getData {
     [self.view showSkeletonPage:SkeletonPageViewTypeContentDetail isNavbarPadding:YES];
     Weak(self);
-    [self.itemDetailsService getDetails:ItemTypeVideo itemId:self.itemId completion:^(NSString *errorMsg, NSDictionary *detailsDic) {
+    [self.itemDetailsService getDetails:ItemTypeDoc itemId:self.itemId completion:^(NSString *errorMsg, NSDictionary *detailsDic) {
         [self.view hideSkeletonPage];
 
-        weakself.detailsModel = [VideoDetailsModel mj_objectWithKeyValues:detailsDic];
+        weakself.detailsModel = [DocDetailsModel mj_objectWithKeyValues:detailsDic];
         weakself.itemModel = weakself.itemDetailsService.result.itemModel;
-//        if (weakself.detailsModel.width && weakself.detailsModel.height && weakself.detailsModel.width > 0 && weakself.detailsModel.height > 0) {
-//            weakself.playerViewHeight = self.view.width * weakself.detailsModel.width / weakself.detailsModel.height;
-//        } else {
-//            weakself.playerViewHeight = self.view.width * 16 / 9;
-//        }
-        [weakself.playerView startNewPlayWithItem:weakself.itemModel details:weakself.detailsModel];
+
+        [weakself.headerView setModel:weakself.itemModel];
         [weakself.contentViewController setModel:weakself.itemModel details:weakself.detailsModel];
+        [weakself.extendViewController setModel:weakself.itemModel details:weakself.detailsModel];
     }];
 }
 
 - (void)initUI {
     self.view.backgroundColor = [UIColor clearColor];
 
-    NSArray <NSString *> *titles = @[@"内容", @"评论"];
+    NSArray <NSString *> *titles = @[@"内容", @"介绍", @"评论"];
     _categoryView = [[JXCategoryTitleView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 24.f)];
     self.categoryView.titles = titles;
     self.categoryView.backgroundColor = [UIColor backgroundColor];
@@ -134,28 +127,11 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
     //导航栏隐藏的情况，处理扣边返回，下面的代码要加上
     [self.pagerView.listContainerView.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
     [self.pagerView.mainTableView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
-    
 }
 
-- (void)viewDidLayoutSubviews {
-    if (self.playerView.isScreenLocked) {
-        return;
-    }
-    BOOL isPortrait = [Utils isInterfaceOrientationPortrait];
-    self.playerView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, self.playerViewHeight);
-    if (isPortrait) {
-        [self.headerView addSubview:self.playerView];
-    } else {
-        [self.view addSubview:self.playerView];
-        [UIView animateWithDuration:0.3 animations:^{
-            self.playerView.frame = self.view.bounds;
-        }];
-    }
-    [self.playerView resetLayout:isPortrait];
-}
-
-- (void)dealloc {
-//    [[NSNotificationCenter defaultCenter]removeObserver:self];
+#pragma mark - BaseViewControllerDatasource
+- (BOOL)baseViewControllerIsNeedNavBar:(BaseViewController *)baseViewController {
+    return YES;
 }
 
 #pragma mark - JXPagerViewDelegate
@@ -165,7 +141,7 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 }
 
 - (NSUInteger)tableHeaderViewHeightInPagerView:(JXPagerView *)pagerView {
-    return self.playerViewHeight + kStatusBarHeight;
+    return DocDetailsHeaderViewHeight + kDefaultNavBarHeight;
 }
 
 - (NSUInteger)heightForPinSectionHeaderInPagerView:(JXPagerView *)pagerView {
@@ -189,6 +165,10 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
             break;
         }
         case 1: {
+            vc = self.extendViewController;
+            break;
+        }
+        case 2: {
             vc = self.commentsPagerView;
             break;
         }
@@ -196,49 +176,6 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
             break;
     }
     return vc;
-}
-
-#pragma mark - VideoDetailsPlayerViewDelegate
-- (void)onBackButtonClickWithPlayerView:(VideoDetailsPlayerView *)playerView {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)onMoreButtonClickWithPlayerView:(VideoDetailsPlayerView *)playerView {
-}
-
-- (void)onDownloadButtonClickWithPlayerView:(VideoDetailsPlayerView *)playerView {
-}
-
-- (void)onFinishWithPlayerView:(VideoDetailsPlayerView *)playerView {
-}
-
-- (void)onHorzViewPopped:(BOOL)isPopped {
-//    [self addOrRemoveDeviceOrientationChangeNotification:!isPopped];
-}
-
-- (void)onScreenLockButtonClickWithPlayerView:(VideoDetailsPlayerView *)playerView isLocked:(BOOL)isLocked {
-    if (isLocked) {
-        self.currentVCInterfaceOrientationMask = UIInterfaceOrientationMaskLandscape;
-        [self hx_setNeedsUpdateOfSupportedInterfaceOrientations];
-    } else {
-        self.currentVCInterfaceOrientationMask = UIInterfaceOrientationMaskAllButUpsideDown;
-        [self hx_setNeedsUpdateOfSupportedInterfaceOrientations];
-    }
-}
-
-- (void)onRotationToPortraitInterface:(BOOL)isPortrait {
-    if (isPortrait) {
-        self.currentVCInterfaceOrientationMask = UIInterfaceOrientationMaskAllButUpsideDown;
-        [self hx_rotateToInterfaceOrientation:UIInterfaceOrientationPortrait];
-    } else {
-        self.currentVCInterfaceOrientationMask = UIInterfaceOrientationMaskAllButUpsideDown;
-        [self hx_rotateToInterfaceOrientation:UIInterfaceOrientationLandscapeRight];
-    }
-}
-
-#pragma mark - BaseViewControllerDatasource
-- (BOOL)baseViewControllerIsNeedNavBar:(BaseViewController *)baseViewController {
-    return NO;
 }
 
 #pragma mark - JXCategoryViewDelegate
@@ -253,11 +190,6 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
     if (otherGestureRecognizer == self.categoryView.collectionView.panGestureRecognizer) {
         return NO;
     }
-    //如果手势点自于playerView，其他滑动禁止
-    CGPoint point = [gestureRecognizer locationInView:self.view];
-    if (CGRectContainsPoint(self.playerView.frame, point)) {
-        return NO;
-    }
     return [gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]];
 }
 
@@ -268,17 +200,6 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 }
 
 #pragma mark - getter & setter
-- (UIView *)headerView {
-    if (!_headerView) {
-        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kStatusBarHeight + _playerViewHeight)];
-        _headerView.backgroundColor = [UIColor blackColor];
-
-        _playerView = [[VideoDetailsPlayerView alloc] init];
-        _playerView.frame = CGRectMake(0, kStatusBarHeight, kScreenWidth, _playerViewHeight);
-        _playerView.delegate = self;
-    }
-    return _headerView;
-}
 
 - (ItemDetailsService *)itemDetailsService {
     if (_itemDetailsService == nil) {
@@ -287,11 +208,18 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
     return _itemDetailsService;
 }
 
-- (VideoDetailsContentViewController *)contentViewController {
+- (DocDetailsContentViewController *)contentViewController {
     if (!_contentViewController) {
-        _contentViewController = [[VideoDetailsContentViewController alloc] init];
+        _contentViewController = [[DocDetailsContentViewController alloc] init];
     }
     return _contentViewController;
+}
+
+- (DocDetailsExtendViewController *)extendViewController {
+    if (!_extendViewController) {
+        _extendViewController = [[DocDetailsExtendViewController alloc] init];
+    }
+    return _extendViewController;
 }
 
 - (CommentsPagerView *)commentsPagerView {
@@ -301,16 +229,14 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
     return _commentsPagerView;
 }
 
-#pragma mark - 屏幕旋转
-// https://gitcode.com/thelittleboy/hxrotationtool/overview?utm_source=csdn_github_accelerator&isLogin=1
-// TheLittleBoy / HXRotationTool
-- (BOOL)shouldAutorotate {
-    return YES;
-}
-
-// 支持哪些屏幕方向
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return self.currentVCInterfaceOrientationMask;
+- (UIView *)headerView {
+    if (!_headerView) {
+        _headerView = [[DocDetailsHeaderView alloc] init];
+        _headerView.myHeight = DocDetailsHeaderViewHeight + kDefaultNavBarHeight;
+        _headerView.myHorzMargin = 0;
+        _headerView.bottomBorderline = [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:SectionMarginVertical];
+    }
+    return _headerView;
 }
 
 @end
