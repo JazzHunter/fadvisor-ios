@@ -6,7 +6,8 @@
 //
 
 #import "TabHomeRcmdViewController.h"
-#import "RcmdItemsServcie.h"
+#import "RcmdItemsService.h"
+#import "RcmdAuthorsService.h"
 #import "AutoRefreshFooter.h"
 #import "RefreshHeader.h"
 #import "NotificationView.h"
@@ -21,11 +22,14 @@
 #import "VideoLongCoverTableViewCell.h"
 #import "DocFloatTypeTableViewCell.h"
 
+#import "TabHomeRcmdAuthorsTableViewCell.h"
+
 @interface TabHomeRcmdViewController ()
 
 @property (nonatomic, copy) void (^ scrollCallback)(UIScrollView *scrollView);
 
-@property (nonatomic, strong) RcmdItemsServcie *rcmdItemsService;
+@property (nonatomic, strong) RcmdItemsService *rcmdItemsService;
+@property (nonatomic, strong) RcmdAuthorsService *rcmdAuthorsService;
 
 @property (nonatomic, assign) BOOL inited;
 
@@ -40,6 +44,7 @@
     [self.tableView registerClass:[ArticleFloatCoverTableViewCell class] forCellReuseIdentifier:NSStringFromClass([ArticleFloatCoverTableViewCell class])];
     [self.tableView registerClass:[VideoLongCoverTableViewCell class] forCellReuseIdentifier:NSStringFromClass([VideoLongCoverTableViewCell class])];
     [self.tableView registerClass:[DocFloatTypeTableViewCell class] forCellReuseIdentifier:NSStringFromClass([DocFloatTypeTableViewCell class])];
+    [self.tableView registerClass:[TabHomeRcmdAuthorsTableViewCell class] forCellReuseIdentifier:NSStringFromClass([TabHomeRcmdAuthorsTableViewCell class])];
 
     // init data
     self.inited = NO;
@@ -139,13 +144,13 @@
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         } break;
-            
+
         case ItemTypeDoc:{
             DocDetailsViewController *vc = [[DocDetailsViewController alloc] initWithItem:model];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         } break;
-            
+
         default:{
             VideoDetailsViewController *vc = [[VideoDetailsViewController alloc] initWithItem:model];
             vc.hidesBottomBarWhenPushed = YES;
@@ -165,36 +170,60 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (self.rcmdItemsService.rcmdItems[indexPath.item].itemType) {
+    NSInteger index = indexPath.item;
+    if (index == 3) {
+        TabHomeRcmdAuthorsTableViewCell *cell = (TabHomeRcmdAuthorsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TabHomeRcmdAuthorsTableViewCell class]) forIndexPath:indexPath];
+        Weak(self);
+        if (!self.rcmdAuthorsService.inited) {
+            [cell showLoading];
+            [self.rcmdAuthorsService getRcmdAuthors:^(NSString *errorMsg) {
+                // 错误处理
+                if (errorMsg) {
+                    return;
+                }
+                [cell setAuthorModels:weakself.rcmdAuthorsService.rcmdAuthors];
+                [cell hideLoading];
+            }];
+        }
+        
+        return cell;
+    }
+
+    index = index > 3 ? index - 1 : index;
+
+    ItemModel *item = self.rcmdItemsService.rcmdItems[index];
+
+    MyBorderline *bottomBorderLine = (index  == self.rcmdItemsService.rcmdItems.count - 1) ? nil : [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:6];
+    switch (item.itemType) {
         case ItemTypeArticle:{
             ArticleFloatCoverTableViewCell *cell = (ArticleFloatCoverTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ArticleFloatCoverTableViewCell class]) forIndexPath:indexPath];
-            [cell setModel:self.rcmdItemsService.rcmdItems[indexPath.item]];
+            [cell setModel:item];
             //这里设置其他位置有间隔线而最后一行没有下划线。我们可以借助布局视图本身所提供的边界线来代替掉系统默认的cell之间的间隔线，因为布局视图的边界线所提供的能力要大于默认的间隔线。
-            cell.rootLayout.bottomBorderline = (indexPath.row  == self.rcmdItemsService.rcmdItems.count - 1) ? nil : [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:6];
+            cell.rootLayout.bottomBorderline = bottomBorderLine;
             return cell;
         } break;
-            
+
         case ItemTypeDoc:{
             DocFloatTypeTableViewCell *cell = (DocFloatTypeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([DocFloatTypeTableViewCell class]) forIndexPath:indexPath];
-            [cell setModel:self.rcmdItemsService.rcmdItems[indexPath.item]];
+            [cell setModel:item];
             //这里设置其他位置有间隔线而最后一行没有下划线。我们可以借助布局视图本身所提供的边界线来代替掉系统默认的cell之间的间隔线，因为布局视图的边界线所提供的能力要大于默认的间隔线。
-            cell.rootLayout.bottomBorderline = (indexPath.row  == self.rcmdItemsService.rcmdItems.count - 1) ? nil : [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:6];
+            cell.rootLayout.bottomBorderline = bottomBorderLine;
             return cell;
         } break;
-            
+
         case ItemTypeVideo:{
             VideoLongCoverTableViewCell *cell = (VideoLongCoverTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([VideoLongCoverTableViewCell class]) forIndexPath:indexPath];
-            [cell setModel:self.rcmdItemsService.rcmdItems[indexPath.item]];
+            [cell setModel:item];
             //这里设置其他位置有间隔线而最后一行没有下划线。我们可以借助布局视图本身所提供的边界线来代替掉系统默认的cell之间的间隔线，因为布局视图的边界线所提供的能力要大于默认的间隔线。
-            cell.rootLayout.bottomBorderline = (indexPath.row  == self.rcmdItemsService.rcmdItems.count - 1) ? nil : [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:6];
+            cell.rootLayout.bottomBorderline = bottomBorderLine;
             return cell;
         } break;
-            
+
         default:{
             ItemFloatCoverTableViewCell *cell = (ItemFloatCoverTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ItemFloatCoverTableViewCell class]) forIndexPath:indexPath];
-            [cell setModel:self.rcmdItemsService.rcmdItems[indexPath.item]];
+            [cell setModel:item];
             //这里设置其他位置有间隔线而最后一行没有下划线。我们可以借助布局视图本身所提供的边界线来代替掉系统默认的cell之间的间隔线，因为布局视图的边界线所提供的能力要大于默认的间隔线。
-            cell.rootLayout.bottomBorderline = (indexPath.row  == self.rcmdItemsService.rcmdItems.count - 1) ? nil : [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:6];
+            cell.rootLayout.bottomBorderline = bottomBorderLine;
             return cell;
         } break;
     }
@@ -232,11 +261,18 @@
 }
 
 #pragma mark - getters and setters
-- (RcmdItemsServcie *)rcmdItemsService {
+- (RcmdItemsService *)rcmdItemsService {
     if (_rcmdItemsService == nil) {
-        _rcmdItemsService = [[RcmdItemsServcie alloc] init];
+        _rcmdItemsService = [[RcmdItemsService alloc] init];
     }
     return _rcmdItemsService;
+}
+
+- (RcmdAuthorsService *)rcmdAuthorsService {
+    if (_rcmdAuthorsService == nil) {
+        _rcmdAuthorsService = [[RcmdAuthorsService alloc] init];
+    }
+    return _rcmdAuthorsService;
 }
 
 @end

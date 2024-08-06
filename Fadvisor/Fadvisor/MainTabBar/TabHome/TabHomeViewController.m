@@ -6,7 +6,9 @@
 //
 
 #import "TabHomeViewController.h"
-#import "JXCategoryView.h"
+//#import "JXCategoryView.h"
+#import <JXCategoryViewExt/JXCategoryView.h>
+
 #import "JXPagerListRefreshView.h"
 #import "TabHomeRcmdViewController.h"
 

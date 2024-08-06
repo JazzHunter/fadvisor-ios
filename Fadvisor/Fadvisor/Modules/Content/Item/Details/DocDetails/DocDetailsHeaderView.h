@@ -5,8 +5,6 @@
 //  Created by 韩建伟 on 2024/3/23.
 //
 
-#define DocDetailsHeaderViewHeight 114
-
 #import <Foundation/Foundation.h>
 #import <MyLayout/MyLayout.h>
 #import "ItemModel.h"
@@ -19,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setModel:(ItemModel *)itemModel;
 
+@property (nonatomic, copy) void (^ loadedFinishBlock)(CGFloat);
 
 @end
 

@@ -41,9 +41,9 @@
     }
 
     // ⚠️ 友盟初始化
-    [UMengHelper UMStart:ThirdSDKUMConfigInstanceAppKey channel:ThirdSDKUMConfigInstanceChannelId];
-    [UMengHelper UMAnalyticStart];
-    [UMengHelper UMSocialStart:ThirdSDKQQAppKey wechatAppKey:ThirdSDKWeChatAppKey wechatAppSecret:ThirdSDKWeChatAppSecret weiboAppKey:ThirdSDKWeiboAppKey weiboAppSecret:ThirdSDKWeiboAppSecret weiboCallback:ThirdSDKWeiboCallback];
+//    [UMengHelper UMStart:ThirdSDKUMConfigInstanceAppKey channel:ThirdSDKUMConfigInstanceChannelId];
+//    [UMengHelper UMAnalyticStart];
+//    [UMengHelper UMSocialStart:ThirdSDKQQAppKey wechatAppKey:ThirdSDKWeChatAppKey wechatAppSecret:ThirdSDKWeChatAppSecret weiboAppKey:ThirdSDKWeiboAppKey weiboAppSecret:ThirdSDKWeiboAppSecret weiboCallback:ThirdSDKWeiboCallback];
 //    [UMengHelper UMPushStart:launchOptions delegate:self];
 
     

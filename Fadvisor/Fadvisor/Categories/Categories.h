@@ -21,4 +21,5 @@
 #import "UIViewController+Additions.h"
 #import "NSString+Additions.h"
 #import "UIImage+Additions.h"
+#import "UILabel+Additions.h"
 #endif /* Categories_h */

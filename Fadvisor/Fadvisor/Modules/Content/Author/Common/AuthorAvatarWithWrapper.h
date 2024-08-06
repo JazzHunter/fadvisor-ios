@@ -7,7 +7,7 @@
 
 #import <MyLayout/MyLayout.h>
 
-#define AuthorAvatarWithWrapperWidth       46          // cell 上下留白
+#define AuthorAvatarWithWrapperWidth       46          // 默认的带边框头像的宽度
 
 NS_ASSUME_NONNULL_BEGIN
 

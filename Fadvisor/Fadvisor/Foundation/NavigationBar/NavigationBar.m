@@ -255,6 +255,8 @@
 - (void)leftBtnClick:(UIButton *)btn {
     if ([self.delegate respondsToSelector:@selector(leftButtonEvent:navigationBar:)]) {
         [self.delegate leftButtonEvent:btn navigationBar:self];
+    } else {
+        [self.viewController.navigationController popViewControllerAnimated:YES];
     }
 }
 

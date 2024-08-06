@@ -14,7 +14,7 @@
 #import "SkeletonPageView.h"
 #import <MJExtension.h>
 
-@interface ArticleDetailsViewController ()<UIScrollViewDelegate>
+@interface ArticleDetailsViewController ()<NavigationBarDataSource, NavigationBarDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, copy) NSString *itemId;
 @property (nonatomic, strong) ItemDetailsService *itemDetailsService;
@@ -99,7 +99,7 @@
     };
 
     [self.contentLayout addSubview:self.titleLabel];
-    
+
     [self.contentLayout addSubview:self.richTextView];
 
     UILabel *pubTimeLabel = [[UILabel alloc] init];

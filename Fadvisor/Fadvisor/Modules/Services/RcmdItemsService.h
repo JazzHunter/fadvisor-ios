@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RcmdItemsServcie : BaseRequest
+@interface RcmdItemsService : BaseRequest
 
 /** 推荐 Item 数组 */
 @property (nonatomic, strong) NSMutableArray<ItemModel *> *rcmdItems;

@@ -5,11 +5,11 @@
 //  Created by 韩建伟 on 2023/11/16.
 //
 
-#import "RcmdItemsServcie.h"
+#import "RcmdItemsService.h"
 #import "AccountManager.h"
 #import <MJExtension.h>
 
-@interface RcmdItemsServcie ()
+@interface RcmdItemsService ()
 
 @property (nonatomic, copy) NSString *sortValue1;
 @property (nonatomic, copy) NSString *sortValue2;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation RcmdItemsServcie
+@implementation RcmdItemsService
 
 - (void)getHomeRcmdItems:(BOOL)isFromBottom completion:(void (^)(NSString *errorMsg, BOOL isHaveNewData))completion {
     if (self.noMore) {

@@ -9,6 +9,9 @@
 #import "RichTextView.h"
 #import "SharePanel.h"
 #import "AuthorSection.h"
+#import "SkeletonPageView.h"
+#import "AuthorDetailsViewController.h"
+#import "GKDBViewController.h"
 
 @interface DocDetailsExtendViewController ()<UIScrollViewDelegate>
 
@@ -44,6 +47,9 @@
     self.titleLabel.myHeight = MyLayoutSize.wrap;
     self.titleLabel.myLeft = self.titleLabel.myRight = ViewHorizonlMargin;
     [self.contentLayout addSubview:self.titleLabel];
+    
+//    [self.view showSkeletonPage:SkeletonPageViewTypeContentDetail isNavbarPadding:NO];
+//    [self.view hideSkeletonPage];
 
     Weak(self);
     self.richTextView.loadedFinishBlock = ^(CGFloat height) {
@@ -57,6 +63,8 @@
             // 加载失败 提示用户
         }
     };
+    
+    
     self.richTextView.myLeft = self.richTextView.myRight = ViewHorizonlMargin;
     [self.contentLayout addSubview:self.richTextView];
 
@@ -74,6 +82,12 @@
 
 - (void)handleSharePanelOpen:(MyBaseLayout *)sender {
     [[SharePanel manager] showPanelWithItem:self.itemModel];
+}
+
+- (void)handleAuthorTap:(MyBaseLayout*)sender {
+    AuthorDetailsViewController *vc = [[AuthorDetailsViewController alloc] initWithAuthor:self.itemModel.authors[0]];
+//    GKDBViewController *vc = [GKDBViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - JXPagingViewListViewDelegate
@@ -122,6 +136,7 @@
 - (AuthorSection *)authorSection {
     if (!_authorSection) {
         _authorSection = [[AuthorSection alloc] init];
+        [_authorSection setTarget:self action:@selector(handleAuthorTap:)];
     }
     return _authorSection;
 }

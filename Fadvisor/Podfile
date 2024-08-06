@@ -100,7 +100,14 @@ target 'Fadvisor' do
   pod 'lottie-ios', '2.5.3'
   
   # 横向的列表切换
-  pod 'JXCategoryView'
+#  pod 'JXCategoryView'
+  pod 'JXCategoryViewExt/Title'
+  pod 'JXCategoryViewExt/Indicator/Line'
+  pod 'JXCategoryViewExt/SubTitleImage'
+  pod 'JXCategoryViewExt/Indicator/AlignmentLine'
+  
+  pod 'GKNavigationBar'
+  pod 'Masonry'
   
   # Page页切换
   pod 'JXPagingView/Pager'

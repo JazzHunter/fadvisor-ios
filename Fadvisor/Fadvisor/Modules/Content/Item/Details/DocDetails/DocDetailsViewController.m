@@ -19,7 +19,8 @@
 #import <MJExtension.h>
 #import "ContentExcepitonView.h"
 #import "SkeletonPageView.h"
-
+#import <FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.h>
+#import "FullScreenGestureScrollView.h"
 
 static const CGFloat pinSectionHeaderHeight = 44.f;
 
@@ -38,6 +39,7 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
 @property (nonatomic, strong) CommentsPagerView *commentsPagerView;
 
 @property (nonatomic, strong) DocDetailsHeaderView *headerView;
+@property (atomic, assign) CGFloat headerHeight; //顶部试图高度
 
 @end
 
@@ -141,7 +143,7 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
 }
 
 - (NSUInteger)tableHeaderViewHeightInPagerView:(JXPagerView *)pagerView {
-    return DocDetailsHeaderViewHeight + kDefaultNavBarHeight;
+    return self.headerHeight;
 }
 
 - (NSUInteger)heightForPinSectionHeaderInPagerView:(JXPagerView *)pagerView {
@@ -176,6 +178,10 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
             break;
     }
     return vc;
+}
+
+- (Class)scrollViewClassInlistContainerViewInPagerView:(JXPagerView *)pagerView {
+    return [FullScreenGestureScrollView class];
 }
 
 #pragma mark - JXCategoryViewDelegate
@@ -232,9 +238,13 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
 - (UIView *)headerView {
     if (!_headerView) {
         _headerView = [[DocDetailsHeaderView alloc] init];
-        _headerView.myHeight = DocDetailsHeaderViewHeight + kDefaultNavBarHeight;
         _headerView.myHorzMargin = 0;
         _headerView.bottomBorderline = [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:SectionMarginVertical];
+        Weak(self);
+        _headerView.loadedFinishBlock = ^(CGFloat height) {
+            weakself.headerHeight = height;
+            [weakself.pagerView resizeTableHeaderViewHeightWithAnimatable:YES duration:0 curve:0];
+        };
     }
     return _headerView;
 }

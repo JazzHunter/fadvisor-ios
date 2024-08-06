@@ -41,7 +41,7 @@ static NSString *const ScriptName_loadGifImage = @"loadGifImage";
         //WKWebView对象直接设置背景色后，上面依然有白色的背景，需要设置参数opaque=NO即可
         //https://www.jianshu.com/p/941c5bd97152
         self.opaque = NO;
-        
+
         self.navigationDelegate = self;
         self.scrollView.bouncesZoom = NO;
         self.scrollView.showsHorizontalScrollIndicator = NO;
@@ -223,7 +223,7 @@ static NSString *const ScriptName_loadGifImage = @"loadGifImage";
     return document.getElementsByTagName('body')[0].offsetHeight;\
     }";
     [self evaluateJavaScript:getContentHeightJS completionHandler:nil];
-    
+
     Weak(self);
     [self evaluateJavaScript:@"getBodyHeight();" completionHandler:^(id _Nullable response, NSError *_Nullable error) {
         if (!error) {
