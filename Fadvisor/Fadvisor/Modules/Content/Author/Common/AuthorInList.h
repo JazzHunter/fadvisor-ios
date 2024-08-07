@@ -8,10 +8,9 @@
 #import <MyLayout/MyLayout.h>
 #import "AuthorModel.h"
 
+@interface AuthorInList : MyRelativeLayout
 
-@interface AuthorSection : MyLinearLayout
-
-- (void)setModels:(NSArray<AuthorModel *> *)models;
+- (void)setModel:(AuthorModel *)model;
 - (void)setShowCount:(BOOL)isShowCount;
 
 @end

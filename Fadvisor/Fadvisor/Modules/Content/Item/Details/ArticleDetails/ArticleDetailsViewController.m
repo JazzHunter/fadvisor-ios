@@ -10,6 +10,7 @@
 #import "ContentDefine.h"
 #import "ContentExcepitonView.h"
 #import "RichTextView.h"
+#import "AuthorSection.h"
 #import "SharePanel.h"
 #import "SkeletonPageView.h"
 #import <MJExtension.h>
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *pubTimeLabel;
 @property (nonatomic, strong) RichTextView *richTextView;
+@property (nonatomic, strong) AuthorSection *authorSection;
 
 //@property (nonatomic, strong) SharePanel *sharePanel;
 @property (nonatomic, strong) MyLinearLayout *shareBtn;
@@ -74,6 +76,9 @@
 
         weakself.itemModel = weakself.itemDetailsService.result.itemModel;
 
+        weakself.titleLabel.text = weakself.itemModel.title;
+        [weakself.titleLabel sizeToFit];
+        [weakself.authorSection setModels:weakself.itemModel.authors];
         [weakself.richTextView handleHTML:weakself.detailsModel.content];
         [weakself.pubTimeLabel setText:@"编辑于刚刚"];
         [weakself.pubTimeLabel sizeToFit];
@@ -99,6 +104,8 @@
     };
 
     [self.contentLayout addSubview:self.titleLabel];
+
+    [self.contentLayout addSubview:self.authorSection];
 
     [self.contentLayout addSubview:self.richTextView];
 
@@ -149,8 +156,17 @@
 - (UILabel *)titleLabel {
     if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] init];
+        _titleLabel.font = [UIFont systemFontOfSize:DetailsTitleFontSize weight:UIFontWeightSemibold];
+        _titleLabel.textColor = [UIColor titleTextColor];
     }
     return _titleLabel;
+}
+
+- (AuthorSection *)authorSection {
+    if (_authorSection == nil) {
+        _authorSection = [[AuthorSection alloc] init];
+    }
+    return _authorSection;
 }
 
 //- (SharePanel *)sharePanel {

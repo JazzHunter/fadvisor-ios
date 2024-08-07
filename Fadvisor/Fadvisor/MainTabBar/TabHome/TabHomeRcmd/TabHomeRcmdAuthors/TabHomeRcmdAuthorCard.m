@@ -53,6 +53,8 @@
     self.backgroundColor = [UIColor backgroundColor];
     self.layer.cornerRadius = 4;
     self.layer.masksToBounds = YES;
+    [self xy_setLayerBorderColor:[UIColor borderColor]];
+    self.layer.borderWidth = 1;
 
     self.avatar = [[AuthorAvatarWithWrapper alloc] initWithFrame:CGRectMake(0, 0, AvatarImgHeight, AvatarImgHeight)];
 

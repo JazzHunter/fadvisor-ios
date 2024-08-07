@@ -203,6 +203,8 @@
 		C167826E2B86F98B0092326F /* PlayerDetailsLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C167826D2B86F98B0092326F /* PlayerDetailsLoadingView.m */; };
 		C16782722B872E780092326F /* PlayerDetailsWatchTimeTips.m in Sources */ = {isa = PBXBuildFile; fileRef = C16782712B872E780092326F /* PlayerDetailsWatchTimeTips.m */; };
 		C16782752B875E310092326F /* PlayerDetailsPopErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C16782742B875E310092326F /* PlayerDetailsPopErrorView.m */; };
+		C1803FBA2C63B55F0089AECC /* AuthorSectionAuthorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1803FB92C63B55F0089AECC /* AuthorSectionAuthorsViewController.m */; };
+		C1803FBD2C63BE800089AECC /* AuthorSectionAuthorsPanModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1803FBC2C63BE800089AECC /* AuthorSectionAuthorsPanModalView.m */; };
 		C1828EF82C5DF060006C4F89 /* RcmdAuthorsService.m in Sources */ = {isa = PBXBuildFile; fileRef = C1828EF72C5DF060006C4F89 /* RcmdAuthorsService.m */; };
 		C18D2EA82C37A08E003F4073 /* GKPageDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = C18D2EA02C37A08D003F4073 /* GKPageDefine.m */; };
 		C18D2EA92C37A08E003F4073 /* GKPageTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C18D2EA22C37A08D003F4073 /* GKPageTableView.m */; };
@@ -246,10 +248,11 @@
 		C1CEB7E52B24629400AA8490 /* VideoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7E42B24629400AA8490 /* VideoDetailsViewController.m */; };
 		C1D0A04F2B8A1489000BEBDE /* AuthorFollowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D0A04E2B8A1489000BEBDE /* AuthorFollowButton.m */; };
 		C1D0A0532B8A1878000BEBDE /* AuthorFollowService.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D0A0522B8A1878000BEBDE /* AuthorFollowService.m */; };
-		C1D0A0632B8A4237000BEBDE /* AuthorSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D0A0622B8A4237000BEBDE /* AuthorSection.m */; };
+		C1D0A0632B8A4237000BEBDE /* AuthorInList.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D0A0622B8A4237000BEBDE /* AuthorInList.m */; };
 		C1D0A0662B8A4F69000BEBDE /* AuthorAvatarWithWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D0A0652B8A4F69000BEBDE /* AuthorAvatarWithWrapper.m */; };
 		C1D17F1F2B8901E300026EF7 /* PlayerDetailsBottomProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D17F1E2B8901E300026EF7 /* PlayerDetailsBottomProgressView.m */; };
 		C1D17F222B890B0700026EF7 /* AlivcCacheGlobalSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D17F202B890B0700026EF7 /* AlivcCacheGlobalSetting.m */; };
+		C1D4F91B2C63047C00FB338E /* AuthorSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D4F91A2C63047C00FB338E /* AuthorSection.m */; };
 		C1E0186F2B95663900FF9CB5 /* CommentReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E0186E2B95663900FF9CB5 /* CommentReplyViewController.m */; };
 		C1E018722B95F2AB00FF9CB5 /* CommentRepliesService.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E018712B95F2AB00FF9CB5 /* CommentRepliesService.m */; };
 		C1E018762B96C46C00FF9CB5 /* PopRepliesNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E018752B96C46C00FF9CB5 /* PopRepliesNavViewController.m */; };
@@ -715,6 +718,10 @@
 		C16782712B872E780092326F /* PlayerDetailsWatchTimeTips.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailsWatchTimeTips.m; sourceTree = "<group>"; };
 		C16782732B875E310092326F /* PlayerDetailsPopErrorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerDetailsPopErrorView.h; sourceTree = "<group>"; };
 		C16782742B875E310092326F /* PlayerDetailsPopErrorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailsPopErrorView.m; sourceTree = "<group>"; };
+		C1803FB82C63B55F0089AECC /* AuthorSectionAuthorsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorSectionAuthorsViewController.h; sourceTree = "<group>"; };
+		C1803FB92C63B55F0089AECC /* AuthorSectionAuthorsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthorSectionAuthorsViewController.m; sourceTree = "<group>"; };
+		C1803FBB2C63BE800089AECC /* AuthorSectionAuthorsPanModalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorSectionAuthorsPanModalView.h; sourceTree = "<group>"; };
+		C1803FBC2C63BE800089AECC /* AuthorSectionAuthorsPanModalView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthorSectionAuthorsPanModalView.m; sourceTree = "<group>"; };
 		C1828EF62C5DF060006C4F89 /* RcmdAuthorsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RcmdAuthorsService.h; sourceTree = "<group>"; };
 		C1828EF72C5DF060006C4F89 /* RcmdAuthorsService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RcmdAuthorsService.m; sourceTree = "<group>"; };
 		C18D2EA02C37A08D003F4073 /* GKPageDefine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GKPageDefine.m; sourceTree = "<group>"; };
@@ -804,14 +811,16 @@
 		C1D0A0512B8A1878000BEBDE /* AuthorFollowService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorFollowService.h; sourceTree = "<group>"; };
 		C1D0A0522B8A1878000BEBDE /* AuthorFollowService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthorFollowService.m; sourceTree = "<group>"; };
 		C1D0A0552B8A2B25000BEBDE /* ContentActionEventType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentActionEventType.h; sourceTree = "<group>"; };
-		C1D0A0612B8A4237000BEBDE /* AuthorSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorSection.h; sourceTree = "<group>"; };
-		C1D0A0622B8A4237000BEBDE /* AuthorSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthorSection.m; sourceTree = "<group>"; };
+		C1D0A0612B8A4237000BEBDE /* AuthorInList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorInList.h; sourceTree = "<group>"; };
+		C1D0A0622B8A4237000BEBDE /* AuthorInList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthorInList.m; sourceTree = "<group>"; };
 		C1D0A0642B8A4F69000BEBDE /* AuthorAvatarWithWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorAvatarWithWrapper.h; sourceTree = "<group>"; };
 		C1D0A0652B8A4F69000BEBDE /* AuthorAvatarWithWrapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthorAvatarWithWrapper.m; sourceTree = "<group>"; };
 		C1D17F1D2B8901E300026EF7 /* PlayerDetailsBottomProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerDetailsBottomProgressView.h; sourceTree = "<group>"; };
 		C1D17F1E2B8901E300026EF7 /* PlayerDetailsBottomProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailsBottomProgressView.m; sourceTree = "<group>"; };
 		C1D17F202B890B0700026EF7 /* AlivcCacheGlobalSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlivcCacheGlobalSetting.m; sourceTree = "<group>"; };
 		C1D17F212B890B0700026EF7 /* AlivcCacheGlobalSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlivcCacheGlobalSetting.h; sourceTree = "<group>"; };
+		C1D4F9192C63047C00FB338E /* AuthorSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorSection.h; sourceTree = "<group>"; };
+		C1D4F91A2C63047C00FB338E /* AuthorSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthorSection.m; sourceTree = "<group>"; };
 		C1E0186D2B95663900FF9CB5 /* CommentReplyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentReplyViewController.h; sourceTree = "<group>"; };
 		C1E0186E2B95663900FF9CB5 /* CommentReplyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentReplyViewController.m; sourceTree = "<group>"; };
 		C1E018702B95F2AB00FF9CB5 /* CommentRepliesService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentRepliesService.h; sourceTree = "<group>"; };
@@ -2142,9 +2151,10 @@
 		C1D0A05C2B8A4198000BEBDE /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				C1D4F91C2C631C0900FB338E /* AuthorSection */,
+				C1D0A0612B8A4237000BEBDE /* AuthorInList.h */,
+				C1D0A0622B8A4237000BEBDE /* AuthorInList.m */,
 				C1D0A0502B8A152F000BEBDE /* AuthorFollowButton */,
-				C1D0A0612B8A4237000BEBDE /* AuthorSection.h */,
-				C1D0A0622B8A4237000BEBDE /* AuthorSection.m */,
 				C1D0A0642B8A4F69000BEBDE /* AuthorAvatarWithWrapper.h */,
 				C1D0A0652B8A4F69000BEBDE /* AuthorAvatarWithWrapper.m */,
 			);
@@ -2191,6 +2201,19 @@
 				C1B0CEEE2B08DE0100A1173E /* TagModel.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C1D4F91C2C631C0900FB338E /* AuthorSection */ = {
+			isa = PBXGroup;
+			children = (
+				C1D4F9192C63047C00FB338E /* AuthorSection.h */,
+				C1D4F91A2C63047C00FB338E /* AuthorSection.m */,
+				C1803FB82C63B55F0089AECC /* AuthorSectionAuthorsViewController.h */,
+				C1803FB92C63B55F0089AECC /* AuthorSectionAuthorsViewController.m */,
+				C1803FBB2C63BE800089AECC /* AuthorSectionAuthorsPanModalView.h */,
+				C1803FBC2C63BE800089AECC /* AuthorSectionAuthorsPanModalView.m */,
+			);
+			path = AuthorSection;
 			sourceTree = "<group>";
 		};
 		C1E018732B96C30D00FF9CB5 /* ViewController */ = {
@@ -2645,6 +2668,7 @@
 				C1591A562AFDCF0400351431 /* NSData+YYAdd.m in Sources */,
 				C1E0F8D32C30117200D88102 /* ImageTextHButton.m in Sources */,
 				C1591A4C2AFDCF0400351431 /* UIView+YYAdd.m in Sources */,
+				C1D4F91B2C63047C00FB338E /* AuthorSection.m in Sources */,
 				C1591B782B05FCAE00351431 /* RcmdItemsService.m in Sources */,
 				C10BDAE42B4D979100C40BEC /* PlayerDetailsThumbnailView.m in Sources */,
 				C1B0CEEF2B08DE0100A1173E /* TagModel.m in Sources */,
@@ -2664,11 +2688,12 @@
 				C16782722B872E780092326F /* PlayerDetailsWatchTimeTips.m in Sources */,
 				C1591A462AFDCF0400351431 /* UIColor+YYAdd.m in Sources */,
 				C1E882862B8B8BCE0017521C /* CommentView.m in Sources */,
+				C1803FBA2C63B55F0089AECC /* AuthorSectionAuthorsViewController.m in Sources */,
 				C18D2EAB2C37A08E003F4073 /* GKPageListContainerView.m in Sources */,
 				C1591A342AFDCF0400351431 /* YYTextInput.m in Sources */,
 				C1CEB7DB2B22B77400AA8490 /* SharePanel.m in Sources */,
 				C10BDAEC2B4E2C1400C40BEC /* PlayerDetailsPreviewView.m in Sources */,
-				C1D0A0632B8A4237000BEBDE /* AuthorSection.m in Sources */,
+				C1D0A0632B8A4237000BEBDE /* AuthorInList.m in Sources */,
 				C159196A2AFDCE5600351431 /* NSBundle+Additions.m in Sources */,
 				C18D2EA82C37A08E003F4073 /* GKPageDefine.m in Sources */,
 				C1591A452AFDCF0400351431 /* UIBezierPath+YYAdd.m in Sources */,
@@ -2784,6 +2809,7 @@
 				C1591A6A2AFDCF0400351431 /* YYFileHash.m in Sources */,
 				C12B09982B10853100108664 /* WebContentFileManager.m in Sources */,
 				C1591A3B2AFDCF0400351431 /* YYTextRunDelegate.m in Sources */,
+				C1803FBD2C63BE800089AECC /* AuthorSectionAuthorsPanModalView.m in Sources */,
 				C1591A482AFDCF0400351431 /* UIApplication+YYAdd.m in Sources */,
 				C13C3F472C33C1B500FD25E2 /* AuthorDetailsHomeViewController.m in Sources */,
 				C1591A512AFDCF0400351431 /* UIFont+YYAdd.m in Sources */,

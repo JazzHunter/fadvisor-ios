@@ -136,8 +136,11 @@
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // 这里因为有作者 Cell
+    NSInteger index = indexPath.row > 3 ? indexPath.row - 1 : indexPath.row;
 
-    ItemModel *model = self.rcmdItemsService.rcmdItems[indexPath.row];
+    ItemModel *model = self.rcmdItemsService.rcmdItems[index];
     switch (model.itemType) {
         case ItemTypeArticle:{
             ArticleDetailsViewController *vc = [[ArticleDetailsViewController alloc] initWithItem:model];

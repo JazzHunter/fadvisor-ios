@@ -135,7 +135,7 @@
     return snapshotView;
 }
 
-#pragma mark -- Layout Construction e
+#pragma mark -- Layout Construction
 
 //用线性布局来实现UI界面
 - (void)createLayout

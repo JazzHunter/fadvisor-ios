@@ -44,11 +44,12 @@
     return self;
 }
 
-#pragma mark -- Layout Construction e
+#pragma mark -- Layout Construction
 
 //用线性布局来实现UI界面
 - (void)createLayout
 {
+    self.contentView.backgroundColor = [UIColor backgroundColorGray];
     _rootLayout = [MyRelativeLayout new];
     _rootLayout.padding = UIEdgeInsetsMake(10, 16, 10, 16);
 
@@ -161,7 +162,6 @@
         [self.rootLayout.layer addSublayer:self.rightBezier];
     }
 
-    NSLog(@"%f", _distanceX);
     self.rightBezier.path = [self getPathWithMoveDistance:_distanceX];
     if (_distanceX > 80) {
         [_rootLayout addSubview:_tipLabel];
