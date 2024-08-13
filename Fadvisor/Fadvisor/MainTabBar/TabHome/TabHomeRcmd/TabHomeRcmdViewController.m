@@ -136,7 +136,7 @@
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+
     // 这里因为有作者 Cell
     NSInteger index = indexPath.row > 3 ? indexPath.row - 1 : indexPath.row;
 
@@ -188,7 +188,7 @@
                 [cell hideLoading];
             }];
         }
-        
+
         return cell;
     }
 

@@ -256,7 +256,7 @@
     return nil;
 }
 
-+ (NSString *)timeformatFromSeconds:(NSInteger)seconds {
++ (NSString *)timeFormatFromSeconds:(NSInteger)seconds {
     //format of hour
     seconds = seconds / 1000;
     NSString *str_hour = [NSString stringWithFormat:@"%02ld", (long)seconds / 3600];
@@ -266,6 +266,20 @@
     NSString *str_second = [NSString stringWithFormat:@"%02ld", (long)seconds % 60];
 
     return seconds / 3600 <= 0 ? [NSString stringWithFormat:@"%@:%@", str_minute, str_second] : [NSString stringWithFormat:@"%@:%@:%@", str_hour, str_minute, str_second];
+}
+
++ (NSString *)durationFormatFromSeconds:(NSInteger)seconds {
+    if (seconds < 60) {
+        return [NSString stringWithFormat:@"%ld秒", seconds];
+    }
+    NSInteger minTotal = seconds / 60;
+    NSInteger sec = seconds % 60;
+    if (minTotal < 60) {
+        return [NSString stringWithFormat:@"%ld分钟%ld秒", minTotal, sec];
+    }
+    NSInteger hourTotal = minTotal / 60;
+    NSInteger min = minTotal % 60;
+    return [NSString stringWithFormat:@"%ld小时%ld分", hourTotal, min];
 }
 
 + (NSString *)formatFromBytes:(int64_t)speed {

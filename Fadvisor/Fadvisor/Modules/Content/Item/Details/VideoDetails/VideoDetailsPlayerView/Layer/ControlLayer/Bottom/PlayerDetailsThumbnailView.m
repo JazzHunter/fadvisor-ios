@@ -56,7 +56,7 @@
 
 - (void)updateThumbnail:(UIImage *)thumbnailImage time:(NSTimeInterval)time durationTime:(float)durationTime {
     self.thumbnailImageView.image = thumbnailImage;
-    NSString *curTimeStr = [Utils timeformatFromSeconds:roundf(time)];
+    NSString *curTimeStr = [Utils timeFormatFromSeconds:roundf(time)];
     self.timeLabel.text = curTimeStr;
     [self.timeLabel sizeToFit];
 }

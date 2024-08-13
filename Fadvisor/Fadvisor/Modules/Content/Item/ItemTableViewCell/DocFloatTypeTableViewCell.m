@@ -5,14 +5,14 @@
 //  Created by 韩建伟 on 2024/6/25.
 //
 
-#define CoverImgHeight       48     //封面图片的高度
-#define SnapshotImgHeight       64     //封面图片的高度
+#define CoverImgHeight    48        //封面图片的高度
+#define SnapshotImgHeight 64           //封面图片的高度
 
 #import "DocFloatTypeTableViewCell.h"
 #import "AuthorUtils.h"
 #import "Utils.h"
 
-@interface DocFloatTypeTableViewCell()
+@interface DocFloatTypeTableViewCell ()
 
 @property (nonatomic, strong) UIImageView *typeImage;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -35,7 +35,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self != nil) {
         self.backgroundColor = [UIColor backgroundColor];
-        
+
         [self createLayout];
         //如果是代码实现autolayout的话必须要将translatesAutoresizingMaskIntoConstraints 设置为NO。
         _rootLayout.translatesAutoresizingMaskIntoConstraints = NO;
@@ -54,83 +54,81 @@
 }
 
 - (void)setModel:(ItemModel *)model {
-    _typeImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"doc_%@", model.fmt]];
-    
+    _typeImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"doc_file_%@", model.fmt]];
+
     _titleLabel.text = model.title;
 
     // TODO
     _sizeLabel.text = [NSString stringWithFormat:@"%@", [Utils formatFromBytes:model.size]];
     [_sizeLabel sizeToFit];
-    
+
     _pageLabel.text = [NSString stringWithFormat:@"%ld", model.pageSize];
     [_pageLabel sizeToFit];
-    
+
     _downloadLabel.text = [NSString stringWithFormat:@"%@", [Utils shortedNumberDesc:model.downloadCount]];
     [_downloadLabel sizeToFit];
-    
+
     _authorNamesLabel.text = [AuthorUtils authorNamesByArray:model.authors];
-    
+
     if ([model.introduction isNotEmpty]) {
         _introLabel.visibility = MyVisibility_Invisible;
     } else {
         _introLabel.visibility = MyVisibility_Visible;
         _introLabel.text = model.introduction;
     }
-    
+
     [_snapshotLayout removeAllSubviews];
     if ([model.snapshots isNotEmpty]) {
         _snapshotScrollView.visibility = MyVisibility_Invisible;
     } else {
         _snapshotScrollView.visibility = MyVisibility_Visible;
         NSArray<NSString *> *snapshotArr = [model.snapshots componentsSeparatedByString:@","];
-        
-        [snapshotArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+
+        [snapshotArr enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
             if (idx == snapshotArr.count - 1 && snapshotArr.count < model.pageSize) {
                 UIView *snapshotWithMaskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SnapshotImgHeight, SnapshotImgHeight)];
                 snapshotWithMaskView.clipsToBounds = YES;
                 [snapshotWithMaskView setCornerRadius:4];
 
                 [snapshotWithMaskView addSubview:[self createSnapshotImageView:obj]];
-                
+
                 MyRelativeLayout *maskLayout = [[MyRelativeLayout alloc] initWithFrame:CGRectMake(0, 0, SnapshotImgHeight, SnapshotImgHeight)];
                 [snapshotWithMaskView addSubview:maskLayout];
-                
+
                 UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
                 blurView.alpha = 0.7; // 控制模糊程度
                 blurView.myMargin = 0;
                 blurView.leftPos.equalTo(maskLayout.leftPos);
                 blurView.topPos.equalTo(maskLayout.topPos);
                 [maskLayout addSubview:blurView];
-                
+
                 UILabel *leftPagesLabel = [UILabel new];
                 leftPagesLabel.textColor = [UIColor whiteColor];
                 leftPagesLabel.font = [UIFont systemFontOfSize:18 weight:UIFontWeightSemibold];
                 leftPagesLabel.centerXPos.equalTo(maskLayout.centerXPos);
                 leftPagesLabel.centerYPos.equalTo(maskLayout.centerYPos);
-                
+
                 [maskLayout addSubview:leftPagesLabel];
-                
-                leftPagesLabel.text = [NSString stringWithFormat:@"+%ld", model.pageSize - snapshotArr.count] ;
+
+                leftPagesLabel.text = [NSString stringWithFormat:@"+%ld", model.pageSize - snapshotArr.count];
                 [leftPagesLabel sizeToFit];
-                
+
                 [_snapshotLayout addSubview:snapshotWithMaskView];
-                
             } else {
                 [_snapshotLayout addSubview:[self createSnapshotImageView:obj]];
             }
-              
         }];
     }
 }
 
-- (UIImageView *) createSnapshotImageView:(NSString *)url {
+- (UIImageView *)createSnapshotImageView:(NSString *)url {
     UIImageView *snapshotView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SnapshotImgHeight, SnapshotImgHeight)];
     snapshotView.contentMode = UIViewContentModeScaleAspectFill;
     snapshotView.clipsToBounds = YES;
     [snapshotView xy_setLayerBorderColor:[UIColor borderColor]];
     snapshotView.layer.borderWidth = 1;
     [snapshotView setCornerRadius:4];
-    
+
     [snapshotView setImageWithURL:[NSURL URLWithString:url]];
     return snapshotView;
 }
@@ -165,14 +163,14 @@
     _typeImage.leftPos.equalTo(_titleLabel.leftPos);
     _typeImage.topPos.equalTo(_titleLabel.bottomPos).offset(5);
     [_rootLayout addSubview:_typeImage];
-    
+
     MyRelativeLayout *contentLayout = [MyRelativeLayout new];
     contentLayout.myHorzMargin = 0;
     contentLayout.heightSize.equalTo(@(MyLayoutSize.wrap));
     contentLayout.leftPos.equalTo(_typeImage.rightPos).offset(8);
     contentLayout.centerYPos.equalTo(_typeImage.centerYPos);
     [_rootLayout addSubview:contentLayout];
-    
+
     _authorNamesLabel = [UILabel new];
     _authorNamesLabel.font = [UIFont systemFontOfSize:ListMetaFontSize];
     _authorNamesLabel.myLeading = _titleLabel.myTrailing = 0; //垂直线性布局里面如果同时设置了左右边距则能确定子视图的宽度，这里表示宽度和父视图相等。
@@ -181,43 +179,43 @@
     _authorNamesLabel.leftPos.equalTo(contentLayout.leftPos);
     _authorNamesLabel.topPos.equalTo(contentLayout.topPos);
     [contentLayout addSubview:_authorNamesLabel];
-    
+
     UIImageView *sizeIcon = [self createIconImage:@"ic_data"];
     sizeIcon.leftPos.equalTo(_authorNamesLabel.leftPos);
     sizeIcon.topPos.equalTo(_authorNamesLabel.bottomPos).offset(5);
     [contentLayout addSubview:sizeIcon];
-    
+
     _sizeLabel = [UILabel new];
     _sizeLabel.font = [UIFont systemFontOfSize:ListMetaFontSize];
     _sizeLabel.textColor = [UIColor metaTextColor];
     _sizeLabel.leftPos.equalTo(sizeIcon.rightPos).offset(4);
     _sizeLabel.centerYPos.equalTo(sizeIcon.centerYPos);
     [contentLayout addSubview:_sizeLabel];
-    
+
     UIImageView *pageIcon = [self createIconImage:@"ic_page"];
     pageIcon.leftPos.equalTo(_sizeLabel.rightPos).offset(8);
     pageIcon.centerYPos.equalTo(_sizeLabel.centerYPos);
     [contentLayout addSubview:pageIcon];
-    
+
     _pageLabel = [UILabel new];
     _pageLabel.font = [UIFont systemFontOfSize:ListMetaFontSize];
     _pageLabel.textColor = [UIColor metaTextColor];
     _pageLabel.leftPos.equalTo(pageIcon.rightPos).offset(4);
     _pageLabel.centerYPos.equalTo(pageIcon.centerYPos);
     [contentLayout addSubview:_pageLabel];
-    
+
     UIImageView *downloadIcon = [self createIconImage:@"ic_download"];
     downloadIcon.leftPos.equalTo(_pageLabel.rightPos).offset(8);
     downloadIcon.centerYPos.equalTo(_pageLabel.centerYPos);
     [contentLayout addSubview:downloadIcon];
-    
+
     _downloadLabel = [UILabel new];
     _downloadLabel.font = [UIFont systemFontOfSize:ListMetaFontSize];
     _downloadLabel.textColor = [UIColor metaTextColor];
     _downloadLabel.leftPos.equalTo(downloadIcon.rightPos).offset(4);
     _downloadLabel.centerYPos.equalTo(downloadIcon.centerYPos);
     [contentLayout addSubview:_downloadLabel];
-    
+
     _introLabel = [UILabel new];
     _introLabel.textColor = [UIColor descriptionTextColor];
     _introLabel.font = [UIFont systemFontOfSize:ListIntroductionFontSize];
@@ -230,7 +228,7 @@
     _introLabel.leftPos.equalTo(_typeImage.leftPos);
 
     [_rootLayout addSubview:_introLabel];
-    
+
     _snapshotScrollView = [[UIScrollView alloc] init];
     _snapshotScrollView.myHorzMargin = 0;
     _snapshotScrollView.showsHorizontalScrollIndicator = NO;
@@ -238,17 +236,16 @@
     _snapshotScrollView.topPos.equalTo(_introLabel.bottomPos).offset(5);
     _snapshotScrollView.leftPos.equalTo(_introLabel.leftPos);
     [_rootLayout addSubview:_snapshotScrollView];
-    
+
     _snapshotLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Horz];
     _snapshotLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0); //设置布局内的子视图离自己的边距.
     _snapshotLayout.myVertMargin = 0;                          //同时指定左右边距为0表示宽度和父视图一样宽
     _snapshotLayout.subviewHSpace = 4;
     _snapshotLayout.widthSize.lBound(_snapshotScrollView.widthSize, 0, 1);
     [_snapshotScrollView addSubview:_snapshotLayout];
-    
 }
 
-- (UIImageView *) createIconImage:(NSString *)iconName {
+- (UIImageView *)createIconImage:(NSString *)iconName {
     UIImageView *iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, IconImgHeight, IconImgHeight)];
     iconImage.contentMode = UIViewContentModeScaleAspectFit;
     iconImage.image = [UIImage imageNamed:iconName];

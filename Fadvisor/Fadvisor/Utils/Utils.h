@@ -50,7 +50,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIViewController *)findSuperViewController:(UIView *)view;
 
 //根据s-》hh:mm:ss
-+ (NSString *)timeformatFromSeconds:(NSInteger)seconds;
++ (NSString *)timeFormatFromSeconds:(NSInteger)seconds;
+
+//根据s-》多少小时多少分钟
++ (NSString *)durationFormatFromSeconds:(NSInteger)seconds;
 
 //根据byte-》速度
 + (NSString *)formatFromBytes:(int64_t)seconds;

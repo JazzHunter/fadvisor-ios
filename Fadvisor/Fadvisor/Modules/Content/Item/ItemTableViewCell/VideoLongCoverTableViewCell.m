@@ -57,7 +57,7 @@
 
     _introLabel.text = model.introduction;
 
-    _durationLabel.text = [Utils timeformatFromSeconds:roundf(model.duration)];
+    _durationLabel.text = [Utils timeFormatFromSeconds:roundf(model.duration)];
     [_durationLabel sizeToFit];
 }
 

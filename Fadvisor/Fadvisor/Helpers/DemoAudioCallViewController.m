@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor pwcPinkColor];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     [btn setTitle:[@"点击我" localString] forState:UIControlStateNormal];
@@ -40,7 +40,7 @@
     UIWindow *window = [LJKAudioCallAssistiveTouchView getCurrentWindow];
 
     self.voiceView = [[UIView alloc] initWithFrame:window.bounds];
-    self.voiceView.backgroundColor = [UIColor blackColor];
+    self.voiceView.backgroundColor = [UIColor blueColor];
 
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     [btn setTitle:@"最小化" forState:UIControlStateNormal];

@@ -108,7 +108,7 @@
 }
 
 - (void)setModel:(ItemModel *)model {
-    _typeImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"doc_%@", model.fmt]];
+    _typeImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"doc_file_%@", model.fmt]];
 
 //    _titleLabel.text = model.title;
     _titleLabel.text = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\

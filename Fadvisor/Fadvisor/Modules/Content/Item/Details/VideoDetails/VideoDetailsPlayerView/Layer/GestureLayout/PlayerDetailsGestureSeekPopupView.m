@@ -73,7 +73,7 @@ static const CGFloat SeekPopupViewLabelMargin = 18;      //显示时间，与图
     } else if (self.direction == UISwipeGestureRecognizerDirectionLeft) {
         [_backwardImg drawInRect:CGRectMake(imgX, imgY, imgWidth, imgHeight)];
     }
-    NSString *time = [Utils timeformatFromSeconds:self.time];
+    NSString *time = [Utils timeFormatFromSeconds:self.time];
     if (time && _textStyle) {
         [time drawInRect:CGRectMake(0, imgY + imgHeight + SeekPopupViewLabelMargin, rect.size.width, SeekPopupViewTextSize) withAttributes:@{ NSFontAttributeName: _textFont, NSForegroundColorAttributeName: [UIColor colorFromHexString:@"373737"], NSParagraphStyleAttributeName: _textStyle }];
     }

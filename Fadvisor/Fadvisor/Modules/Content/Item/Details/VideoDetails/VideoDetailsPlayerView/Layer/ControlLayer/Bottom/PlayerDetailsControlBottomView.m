@@ -232,8 +232,8 @@
  durationTime 播放总时长
  */
 - (void)updateProgressWithCurrentTime:(float)currentTime durationTime:(float)durationTime {
-    NSString *curTimeStr = [Utils timeformatFromSeconds:roundf(currentTime)];
-    NSString *totalTimeStr = [Utils timeformatFromSeconds:roundf(durationTime)];
+    NSString *curTimeStr = [Utils timeFormatFromSeconds:roundf(currentTime)];
+    NSString *totalTimeStr = [Utils timeFormatFromSeconds:roundf(durationTime)];
     self.timeLabel.text = [NSString stringWithFormat:@"%@/%@", curTimeStr, totalTimeStr];
     [self.timeLabel sizeToFit];
     //进度条

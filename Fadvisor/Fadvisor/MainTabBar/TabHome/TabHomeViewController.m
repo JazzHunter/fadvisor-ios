@@ -40,6 +40,7 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSArray <NSString *> *titles = @[@"推荐", @"专题", @"栏目", @"团队"];
+    
     _categoryView = [[JXCategoryTitleView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, pinSectionHeaderHeight)];
     self.categoryView.titles = titles;
     self.categoryView.backgroundColor = [UIColor backgroundColor];

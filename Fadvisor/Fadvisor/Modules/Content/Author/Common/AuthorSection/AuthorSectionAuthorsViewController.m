@@ -27,15 +27,37 @@
     return self;
 }
 
+- (void)loadView {
+    MyLinearLayout *rootLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
+    rootLayout.backgroundColor = [UIColor backgroundColor];
+    rootLayout.insetsPaddingFromSafeArea = UIRectEdgeNone;
+    self.view = rootLayout;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UILabel *descLabel = [UILabel new];
+    descLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold];
+    descLabel.text = @"作者列表";
+    [descLabel sizeToFit];
+    descLabel.textColor = [UIColor titleTextColor];
+    descLabel.myLeading = descLabel.myTrailing = ViewHorizonlMargin;
+    descLabel.myTop = descLabel.myBottom = ViewVerticalMargin;
+    [self.view addSubview:descLabel];
+    
+    UIView *topBorderLineView = [UIView new];
+    topBorderLineView.backgroundColor = [UIColor backgroundColorGray];
+    topBorderLineView.myHorzMargin = 0;
+    topBorderLineView.myHeight = 6;
+    [self.view addSubview:topBorderLineView];
+    
     [self setupBaseScrollViewUI];
 }
 
 - (void)setupBaseScrollViewUI {
+    self.scrollView.myHorzMargin = 0;
+    self.scrollView.weight = 1;
     [self.view addSubview:self.scrollView];
-
-    self.scrollView.backgroundColor = [UIColor backgroundColor];
 
     MyLinearLayout *contentLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
     contentLayout.padding = UIEdgeInsetsMake(0, 0, 0, 0); //设置布局内的子视图离自己的边距.
@@ -44,21 +66,16 @@
     [_scrollView addSubview:contentLayout];
     self.contentLayout = contentLayout;
     
-    UILabel *descLabel = [UILabel new];
-    descLabel.font = [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold];
-    descLabel.text = @"作者列表";
-    [descLabel sizeToFit];
-    descLabel.textColor = [UIColor titleTextColor];
-    descLabel.myLeading = descLabel.myTrailing = ViewHorizonlMargin;
-    descLabel.myTop = descLabel.myBottom = ViewVerticalMargin;
-    [self.contentLayout addSubview:descLabel];
+    
 
-    for (AuthorModel *model in self.models) {
+    for (int i = 0; i < self.models.count; i++) {
         AuthorInList *authorInList = [AuthorInList new];
-        [authorInList setModel:model];
+        [authorInList setModel:self.models[i]];
         authorInList.padding = UIEdgeInsetsMake(ViewVerticalMargin, ViewHorizonlMargin, ViewHorizonlMargin, ViewHorizonlMargin);
         authorInList.backgroundColor = [UIColor backgroundColor];
-        authorInList.topBorderline = [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:6];
+        if (i!= 0) {
+            authorInList.topBorderline = [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:6];
+        }
         [self.contentLayout addSubview:authorInList];
     }
     
@@ -114,7 +131,7 @@
 
 - (UIScrollView *)scrollView {
     if (_scrollView == nil) {
-        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+        UIScrollView *scrollView = [[UIScrollView alloc] init];
         scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _scrollView = scrollView;
     }

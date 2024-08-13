@@ -21,7 +21,7 @@
 {
     [self cancelHideWatchTimeTips];
 
-    NSString *text = [NSString stringWithFormat:@"已为您定位到%@  ", [Utils timeformatFromSeconds:watchTime]];
+    NSString *text = [NSString stringWithFormat:@"已为您定位到%@  ", [Utils timeFormatFromSeconds:watchTime]];
     NSString *suffText = @"取消";
 
     NSMutableAttributedString *richText = [[NSMutableAttributedString alloc] init];

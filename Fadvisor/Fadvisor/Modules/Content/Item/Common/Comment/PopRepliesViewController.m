@@ -43,7 +43,6 @@
         _navView.backButtonTitle = @"Back";
         _navView.rightButtonTitle = @"Done";
         _navView.delegate = self;
-
     }
     return _navView;
 }
@@ -51,7 +50,6 @@
 #pragma mark - PopNavViewDelegate
 - (void)didTapRightButton {
     [self dismissViewControllerAnimated:YES completion:^{
-
     }];
 }
 

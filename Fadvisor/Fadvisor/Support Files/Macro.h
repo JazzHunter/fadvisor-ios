@@ -33,6 +33,18 @@
         height; \
     })
 
+#define kBottomSafeAreaHeight \
+    ({ \
+        CGFloat height = 0.0; \
+        if (@available(iOS 11.0, *)) { \
+            UIEdgeInsets insets = [UIApplication sharedApplication].delegate.window.safeAreaInsets; \
+            height = insets.bottom; \
+        } else { \
+            height = 0.0; \
+        } \
+        height; \
+    })
+
 #define kBottomBarHeight         49
 #define kAPPDelegate             ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
