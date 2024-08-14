@@ -41,6 +41,10 @@
 
     self.voiceView = [[UIView alloc] initWithFrame:window.bounds];
     self.voiceView.backgroundColor = [UIColor blueColor];
+    
+    UIView *fakeView = [[UIView alloc] initWithFrame:CGRectMake(100, 200, 300, 400)];
+    fakeView.backgroundColor = [UIColor lightGrayColor];
+    [self.voiceView addSubview:fakeView];
 
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     [btn setTitle:@"最小化" forState:UIControlStateNormal];

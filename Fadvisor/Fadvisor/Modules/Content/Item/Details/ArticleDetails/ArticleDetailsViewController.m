@@ -5,17 +5,22 @@
 //  Created by 韩建伟 on 2023/11/24.
 //
 
+#define ToolbarHeight 44
+
 #import "ArticleDetailsViewController.h"
 #import "ItemDetailsService.h"
 #import "ContentDefine.h"
 #import "ContentExcepitonView.h"
 #import "ArticleContent.h"
 #import "AuthorSection.h"
-#import "SharePanel.h"
 #import "SkeletonPageView.h"
 #import <MJExtension.h>
 #import "Collections.h"
 #import "LEECoolButton.h"
+#import "ArticleDetailsModel.h"
+#import "ArticleDetailsToolbarView.h"
+#import "ArticleDetailsTransparentNavbar.h"
+#import "MoreItemsView.h"
 
 @interface ArticleDetailsViewController ()<NavigationBarDataSource, NavigationBarDelegate, UIScrollViewDelegate>
 
@@ -28,7 +33,13 @@
 @property (nonatomic, strong) ArticleContent *articleContent;
 @property (nonatomic, strong) Collections *collections;
 
-@property (nonatomic, strong) MyLinearLayout *shareBtn;
+@property (nonatomic, strong) MyLinearLayout *toolbarPlaceholderViewInContent;
+@property (nonatomic, strong) ArticleDetailsToolbarView *toolbarView;
+@property (nonatomic, strong) MyLinearLayout *toolbarPlaceholderViewInBottom;
+@property (assign, assign) BOOL toolbarInBottom;
+
+@property (nonatomic, strong) ArticleDetailsTransparentNavbar *transparentNavbar;
+@property (nonatomic, strong) MoreItemsView *moreItemsView;
 
 @end
 
@@ -56,7 +67,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initNavigationBar];
-    
+
     [self.scrollView setSafeBottomInset];
     self.contentLayout.padding = UIEdgeInsetsMake(ViewVerticalMargin, 0, ViewVerticalMargin, 0);
 
@@ -75,20 +86,22 @@
     Weak(self);
     [self.itemDetailsService getDetails:ItemTypeArticle itemId:self.itemId completion:^(NSString *errorMsg, NSDictionary *detailsDic) {
         weakself.detailsModel = [ArticleDetailsModel mj_objectWithKeyValues:detailsDic];
-        
+
         weakself.itemModel = weakself.itemDetailsService.result.itemModel;
-        
+
         weakself.titleLabel.text = weakself.itemModel.title;
         [weakself.titleLabel sizeToFit];
-        
+
         [weakself.articleContent setModel:weakself.itemModel details:weakself.detailsModel authors:weakself.itemDetailsService.result.authors tags:weakself.itemDetailsService.result.tags attachments:weakself.itemDetailsService.result.attachments relatedItems:weakself.itemDetailsService.result.relatedItems ];
-        
+
         if (weakself.itemDetailsService.result.collections && weakself.itemDetailsService.result.collections.count > 0) {
-            [self.collections setModels:weakself.itemDetailsService.result.collections];
-            [self.contentLayout addSubview:self.collections];
+            [weakself.collections setModels:weakself.itemDetailsService.result.collections];
+            weakself.collections.hidden = NO;
         } else {
-            [self.collections removeFromSuperview];
+            weakself.collections.hidden = YES;
         }
+        
+        [weakself.toolbarView setModel:weakself.itemModel];
     }];
 }
 
@@ -97,9 +110,9 @@
 
     self.titleLabel.myLeading = self.titleLabel.myTrailing = ViewHorizonlMargin;
     self.titleLabel.myBottom = 12;
-    
+
     [self.contentLayout addSubview:self.titleLabel];
-    
+
     Weak(self);
     self.articleContent.richTextView.loadedFinishBlock = ^(CGFloat height) {
         if (height > 0) {
@@ -116,44 +129,74 @@
     };
     self.articleContent.backgroundColor = [UIColor backgroundColor];
     [self.contentLayout addSubview:self.articleContent];
-    
+
+    self.toolbarPlaceholderViewInContent.myHorzMargin = 0;
+    self.toolbarPlaceholderViewInContent.myHeight = ToolbarHeight;
+    self.toolbarPlaceholderViewInContent.padding = UIEdgeInsetsMake(0, ViewHorizonlMargin, 0, ViewHorizonlMargin);
+    self.toolbarPlaceholderViewInContent.backgroundColor = [UIColor backgroundColor];
+    [self.contentLayout addSubview:self.toolbarPlaceholderViewInContent];
+
+    self.toolbarView.myHorzMargin = 0;
+    self.toolbarView.myHeight = ToolbarHeight;
+    self.toolbarView.padding = UIEdgeInsetsMake(10, 0, 10, 0);
+
+    self.toolbarPlaceholderViewInBottom.myHorzMargin = 0;
+    self.toolbarPlaceholderViewInBottom.myHeight = MyLayoutSize.wrap;
+    self.toolbarPlaceholderViewInBottom.padding = UIEdgeInsetsMake(0, ViewHorizonlMargin, kBottomSafeAreaHeight, ViewHorizonlMargin);
+    self.toolbarPlaceholderViewInBottom.bottomPos.equalTo(self.view.bottomPos);
+    self.toolbarPlaceholderViewInBottom.backgroundColor = [UIColor backgroundColor];
+    self.toolbarPlaceholderViewInBottom.topBorderline = [[MyBorderline alloc] initWithColor:[UIColor borderColor] thick:2];
+    self.toolbarPlaceholderViewInBottom.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.toolbarPlaceholderViewInBottom.layer.shadowOffset = CGSizeMake(0, 2);
+    self.toolbarPlaceholderViewInBottom.layer.shadowOpacity = 0.5;
+    self.toolbarPlaceholderViewInBottom.layer.shadowRadius = 5;
+    [self.view addSubview:self.toolbarPlaceholderViewInBottom];
+
+    self.toolbarInBottom = YES;
+
     self.collections.myHorzMargin = 0;
     self.collections.padding = UIEdgeInsetsMake(ViewVerticalMargin, ViewHorizonlMargin, ViewVerticalMargin, ViewHorizonlMargin);
     self.collections.backgroundColor = [UIColor backgroundColor];
     self.collections.myTop = 12;
+    [self.contentLayout addSubview:self.collections];
     
-    MyLinearLayout *shareBtn = [[MyLinearLayout alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
-    [shareBtn setHighlightedOpacity:0.5];
-    [shareBtn setBackgroundImage:[UIImage imageNamed:@"ic_share"]];
-    [shareBtn setTarget:self action:@selector(handleSharePanelOpen:)];
-    self.shareBtn = shareBtn;
-    [self.contentLayout addSubview:self.shareBtn];
+    self.moreItemsView.backgroundColor = [UIColor backgroundColor];
+    self.moreItemsView.padding = UIEdgeInsetsMake(ViewVerticalMargin, 0, ViewVerticalMargin, 0);
+    self.moreItemsView.myTop = 12;
+    [self.contentLayout addSubview:self.moreItemsView];
     
-    //星星按钮
+    self.transparentNavbar.alpha = 0;
+    [self.view addSubview:self.transparentNavbar];
     
-    LEECoolButton *starButton = [LEECoolButton coolButtonWithImage:[UIImage imageNamed:@"ic_star"] ImageFrame:CGRectMake(44, 44, 12, 12)];
-    
-    starButton.frame = CGRectMake(0, 0, 100, 100);
-    
-    [starButton addTarget:self action:@selector(starButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.contentLayout addSubview:starButton];
 }
 
-- (void)starButtonAction:(LEECoolButton *)sender{
-    
-    if (sender.selected) {
-        //未选中状态
-        [sender deselect];
-    } else {
-        //选中状态
-        [sender select];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self handleToolbarViewPosition:YES];
+}
+
+- (void)handleToolbarViewPosition:(BOOL)forceCheck {
+    CGRect targetViewFrameInScrollView = [self.scrollView convertRect:self.toolbarPlaceholderViewInContent.bounds fromView:self.toolbarPlaceholderViewInContent];
+    // 检查scrollView的contentOffset是否大于等于targetView的位置
+    // 需要添加到内容中
+    if ((self.scrollView.contentOffset.y + self.view.height - (ToolbarHeight + kBottomSafeAreaHeight) >= targetViewFrameInScrollView.origin.y) && (self.toolbarInBottom || forceCheck) ) {
+        self.toolbarInBottom = NO;
+        [self.toolbarPlaceholderViewInContent addSubview:self.toolbarView];
+        self.toolbarPlaceholderViewInBottom.hidden = YES;
+    } else if ((self.scrollView.contentOffset.y + self.view.height - (ToolbarHeight + kBottomSafeAreaHeight) < targetViewFrameInScrollView.origin.y) && (!self.toolbarInBottom || forceCheck)) {
+        self.toolbarInBottom = YES;
+        [self.toolbarPlaceholderViewInBottom addSubview:self.toolbarView];
+        self.toolbarPlaceholderViewInBottom.hidden = NO;
     }
-    
 }
 
-- (void)handleSharePanelOpen:(MyBaseLayout *)sender {
-    [[SharePanel manager] showPanelWithItem:self.itemModel];
+- (void)handleMoreItemsLoad {
+    CGRect targetViewFrameInScrollView = [self.scrollView convertRect:self.moreItemsView.bounds fromView:self.moreItemsView];
+    // 检查scrollView的contentOffset是否大于等于targetView的位置
+    // 需要添加到内容中
+    if (self.scrollView.contentOffset.y + self.view.height  >= targetViewFrameInScrollView.origin.y) {
+        [self.moreItemsView loadMoreItemsWithModel:self.itemModel] ;
+    }
 }
 
 #pragma mark - BaseViewControllerDatasource
@@ -165,6 +208,28 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // 传递滑动
     [self.articleContent.richTextView offsetY:(self.articleContent.richTextView.frame.origin.y - scrollView.contentOffset.y)];
+
+    // 处理Toolbar的位置
+    [self handleToolbarViewPosition:NO];
+
+    // 处理上下滑动导致的状态栏变化
+    UIPanGestureRecognizer *pan = scrollView.panGestureRecognizer;
+    CGFloat velocity = [pan velocityInView:scrollView].y;
+
+    if (velocity < -50) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.navigationBar.alpha = 0;
+            self.transparentNavbar.alpha = 1;
+        }];
+    } else if (velocity > 50) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.navigationBar.alpha = 1;
+            self.transparentNavbar.alpha = 0;
+        }];
+    }
+    
+    // 处理更多推荐
+    [self handleMoreItemsLoad];
 }
 
 #pragma mark - getters and setters
@@ -198,6 +263,40 @@
     return _collections;
 }
 
+- (MyLinearLayout *)toolbarPlaceholderViewInContent {
+    if (_toolbarPlaceholderViewInContent == nil) {
+        _toolbarPlaceholderViewInContent = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
+    }
+    return _toolbarPlaceholderViewInContent;
+}
+
+- (ArticleDetailsToolbarView *)toolbarView {
+    if (_toolbarView == nil) {
+        _toolbarView = [[ArticleDetailsToolbarView alloc] init];
+    }
+    return _toolbarView;
+}
+
+- (MyLinearLayout *)toolbarPlaceholderViewInBottom {
+    if (_toolbarPlaceholderViewInBottom == nil) {
+        _toolbarPlaceholderViewInBottom = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];
+    }
+    return _toolbarPlaceholderViewInBottom;
+}
+
+- (ArticleDetailsTransparentNavbar *)transparentNavbar {
+    if (_transparentNavbar == nil) {
+        _transparentNavbar = [ArticleDetailsTransparentNavbar new];
+    }
+    return _transparentNavbar;
+}
+
+- (MoreItemsView *)moreItemsView {
+    if (_moreItemsView == nil) {
+        _moreItemsView = [MoreItemsView new];
+    }
+    return _moreItemsView;
+}
 
 //- (SharePanel *)sharePanel {
 //    if (_sharePanel == nil) {

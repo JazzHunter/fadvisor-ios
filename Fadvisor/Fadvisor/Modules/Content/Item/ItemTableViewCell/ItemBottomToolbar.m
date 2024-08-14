@@ -25,14 +25,13 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.myHeight = MyLayoutSize.wrap;
         [self initUI];
     }
     return self;
 }
 
 - (void)initUI {
-    self.padding = UIEdgeInsetsMake(10, 0, 10, 0);
-
     _infoLabel = [UILabel new];
     _infoLabel.textColor = [UIColor metaTextColor];
     _infoLabel.font =  [UIFont systemFontOfSize:ListMetaFontSize];

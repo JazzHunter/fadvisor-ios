@@ -118,7 +118,6 @@
     
     _bottomToolbar = [ItemBottomToolbar new];
     _bottomToolbar.myHorzMargin = 0;
-    _bottomToolbar.myHeight = MyLayoutSize.wrap;
     _bottomToolbar.leftPos.equalTo(_rootLayout.leftPos);
     _bottomToolbar.topPos.equalTo(contentLayout.bottomPos).offset(5);
     [_rootLayout addSubview:_bottomToolbar];
