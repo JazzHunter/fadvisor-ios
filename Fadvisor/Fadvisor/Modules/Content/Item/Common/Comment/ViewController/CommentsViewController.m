@@ -7,8 +7,8 @@
 
 #import "CommentsViewController.h"
 #import "CommentsService.h"
-#import "CommentCell.h"
-#import "CommentSetCell.h"
+#import "CommentTableViewCell.h"
+#import "CommentSetTableViewCell.h"
 #import "AutoRefreshFooter.h"
 #import "RefreshHeader.h"
 #import "NotificationView.h"
@@ -29,20 +29,18 @@
 
 @implementation CommentsViewController
 
-- (instancetype)initWithItem:(ItemModel *)itemModel {
-    self = [super init];
-    if (self) {
-        self.itemModel = itemModel;
-    }
-    return self;
+- (void)resetWithItem:(ItemModel *)model {
+    self.itemModel = model;
+    [self.commentsService resetWithItemType:self.itemModel.itemType itemId:self.itemModel.itemId commentMode:self.itemModel.commentMode];
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.tableView setSafeBottomInset];
 
-    [self.tableView registerClass:[CommentCell class] forCellReuseIdentifier:NSStringFromClass([CommentCell class])];
-    [self.tableView registerClass:[CommentSetCell class] forCellReuseIdentifier:NSStringFromClass([CommentSetCell class])];
+    [self.tableView registerClass:[CommentTableViewCell class] forCellReuseIdentifier:NSStringFromClass([CommentTableViewCell class])];
+    [self.tableView registerClass:[CommentSetTableViewCell class] forCellReuseIdentifier:NSStringFromClass([CommentSetTableViewCell class])];
 
     // init data
     self.inited = NO;
@@ -149,7 +147,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.commentsService.orderType isEqualToString:COMMENTS_ORDER_TYPE_SET]) {
-        CommentSetCell *cell = (CommentSetCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CommentSetCell class]) forIndexPath:indexPath];
+        CommentSetTableViewCell *cell = (CommentSetTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CommentSetTableViewCell class]) forIndexPath:indexPath];
         cell.delegate = self;
         [cell setModel:self.commentsService.comments[indexPath.item]];
         //这里设置其他位置有间隔线而最后一行没有下划线。我们可以借助布局视图本身所提供的边界线来代替掉系统默认的cell之间的间隔线，因为布局视图的边界线所提供的能力要大于默认的间隔线。
@@ -162,7 +160,7 @@
         return cell;
     }
 
-    CommentCell *cell = (CommentCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CommentCell class]) forIndexPath:indexPath];
+    CommentTableViewCell *cell = (CommentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CommentTableViewCell class]) forIndexPath:indexPath];
     [cell setModel:self.commentsService.comments[indexPath.item]];
     //这里设置其他位置有间隔线而最后一行没有下划线。我们可以借助布局视图本身所提供的边界线来代替掉系统默认的cell之间的间隔线，因为布局视图的边界线所提供的能力要大于默认的间隔线。
     if (indexPath.row  == self.commentsService.comments.count - 1) {
@@ -188,9 +186,7 @@
 #pragma mark - getters and setters
 - (CommentsService *)commentsService {
     if (_commentsService == nil) {
-        _commentsService = [[CommentsService alloc] initWithItemType:self.itemModel.itemType itemId:self.itemModel.itemId commentMode:self.itemModel.commentMode];
-
-//        _commentsService.orderType = COMMENTS_ORDER_TYPE_TIME;
+        _commentsService = [[CommentsService alloc] init];
     }
     return _commentsService;
 }

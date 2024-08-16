@@ -28,7 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationBarHidden = YES;
-    PopRepliesViewController *repliesVC = [[PopRepliesViewController alloc] initWithMasterComment:self.masterCommentModel];
+    PopRepliesViewController *repliesVC = [[PopRepliesViewController alloc] init];
+    [repliesVC resetWithMasterComment:self.masterCommentModel];
     self.viewControllers = @[repliesVC];
 }
 

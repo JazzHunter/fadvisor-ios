@@ -296,7 +296,8 @@ static const CGFloat pinSectionHeaderHeight = 64.f;
 
 - (CommentsPagerView *)commentsPagerView {
     if (!_commentsPagerView) {
-        _commentsPagerView = [[CommentsPagerView alloc] initWithItem:self.itemModel];
+        _commentsPagerView = [[CommentsPagerView alloc] init];
+        [_commentsPagerView resetWithItem:self.itemModel];
     }
     return _commentsPagerView;
 }

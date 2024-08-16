@@ -21,6 +21,7 @@
 #import "ArticleDetailsToolbarView.h"
 #import "ArticleDetailsTransparentNavbar.h"
 #import "MoreItemsView.h"
+#import "ArticleDetailsCollItemsSection.h"
 
 @interface ArticleDetailsViewController ()<NavigationBarDataSource, NavigationBarDelegate, UIScrollViewDelegate>
 
@@ -31,6 +32,8 @@
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) ArticleContent *articleContent;
+@property (nonatomic, strong) ArticleDetailsCollItemsSection *collItemsSection;
+
 @property (nonatomic, strong) Collections *collections;
 
 @property (nonatomic, strong) MyLinearLayout *toolbarPlaceholderViewInContent;
@@ -102,6 +105,8 @@
         }
         
         [weakself.toolbarView setModel:weakself.itemModel];
+        
+        [weakself.collItemsSection setModel:weakself.itemModel withCollection:self.fromCollection];
     }];
 }
 
@@ -123,13 +128,16 @@
             [UIView animateWithDuration:0.3f animations:^{
                 weakself.articleContent.richTextView.alpha = 1.0f;
             }];
+            
+            [weakself.view layoutIfNeeded];
+            [weakself handleToolbarViewPosition:YES];
         } else {
             // 加载失败 提示用户
         }
     };
     self.articleContent.backgroundColor = [UIColor backgroundColor];
     [self.contentLayout addSubview:self.articleContent];
-
+    
     self.toolbarPlaceholderViewInContent.myHorzMargin = 0;
     self.toolbarPlaceholderViewInContent.myHeight = ToolbarHeight;
     self.toolbarPlaceholderViewInContent.padding = UIEdgeInsetsMake(0, ViewHorizonlMargin, 0, ViewHorizonlMargin);
@@ -153,6 +161,9 @@
     [self.view addSubview:self.toolbarPlaceholderViewInBottom];
 
     self.toolbarInBottom = YES;
+    
+    self.collItemsSection.myHorzMargin = ViewHorizonlMargin;
+    [self.contentLayout addSubview:self.collItemsSection];
 
     self.collections.myHorzMargin = 0;
     self.collections.padding = UIEdgeInsetsMake(ViewVerticalMargin, ViewHorizonlMargin, ViewVerticalMargin, ViewHorizonlMargin);
@@ -170,11 +181,6 @@
     
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self handleToolbarViewPosition:YES];
-}
-
 - (void)handleToolbarViewPosition:(BOOL)forceCheck {
     CGRect targetViewFrameInScrollView = [self.scrollView convertRect:self.toolbarPlaceholderViewInContent.bounds fromView:self.toolbarPlaceholderViewInContent];
     // 检查scrollView的contentOffset是否大于等于targetView的位置
@@ -183,6 +189,7 @@
         self.toolbarInBottom = NO;
         [self.toolbarPlaceholderViewInContent addSubview:self.toolbarView];
         self.toolbarPlaceholderViewInBottom.hidden = YES;
+    // 放到底部栏中
     } else if ((self.scrollView.contentOffset.y + self.view.height - (ToolbarHeight + kBottomSafeAreaHeight) < targetViewFrameInScrollView.origin.y) && (!self.toolbarInBottom || forceCheck)) {
         self.toolbarInBottom = YES;
         [self.toolbarPlaceholderViewInBottom addSubview:self.toolbarView];
@@ -256,6 +263,13 @@
     return _articleContent;
 }
 
+- (ArticleDetailsCollItemsSection *) collItemsSection {
+    if (_collItemsSection == nil) {
+        _collItemsSection = [ArticleDetailsCollItemsSection new];
+    }
+    return _collItemsSection;
+}
+
 - (Collections *)collections {
     if (_collections == nil) {
         _collections = [[Collections alloc] init];
@@ -297,12 +311,5 @@
     }
     return _moreItemsView;
 }
-
-//- (SharePanel *)sharePanel {
-//    if (_sharePanel == nil) {
-//        _sharePanel = [[SharePanel alloc] initWithFrame:CGRectMake(0, 0, 120, 240)];
-//    }
-//    return _sharePanel;
-//}
 
 @end

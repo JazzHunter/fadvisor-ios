@@ -1,42 +1,42 @@
 //
-//  CommentRepliesServices.m
+//  CollItemsService.m
 //  Fadvisor
 //
-//  Created by 韩建伟 on 2024/3/4.
+//  Created by 韩建伟 on 2024/8/15.
 //
 
-#import "CommentRepliesService.h"
+#import "CollItemsService.h"
 #import "AccountManager.h"
 #import <MJExtension.h>
 
-@interface CommentRepliesService ()
+@interface CollItemsService ()
 
 @property (assign, nonatomic) NSUInteger current;
 @property (assign, nonatomic) NSUInteger size;
 
-@property (nonatomic, strong) CommentModel *masterCommentModel;
+@property (nonatomic, strong) ItemModel *collectionModel;
 
 @property (nonatomic, strong) NSDictionary *latestParams;
 
 @end
 
-@implementation CommentRepliesService
+@implementation CollItemsService
 
-- (void)getReplies:(BOOL)isFromBottom completion:(void (^)(NSString *errorMsg, BOOL isHaveNewData))completion {
+- (void)getItems:(void (^)(NSString *errorMsg, BOOL isHaveNewData))completion {
     if (self.noMore) {
         return;
     }
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"collType"] = [NSString stringWithFormat:@"%lu", (unsigned long)self.collectionModel.itemType];
+    params[@"collId"] = self.collectionModel.itemId;
     params[@"current"] = [NSString stringWithFormat:@"%lu", (unsigned long)self.current];
     params[@"size"] = [NSString stringWithFormat:@"%lu", (unsigned long)self.size];
 
-    params[@"descs"] = @[@"create_time"];
-
     self.latestParams = params;
 
-    NSString *fetchReplyPageAPI = [NSString stringWithFormat:@"/knwlact/comment%@/reply/page/%@", ACCOUNT_MANAGER.isLogin ? @"" : @"/anonymous", self.masterCommentModel.commentId];
+    NSString *fetchCollItemsAPI = [NSString stringWithFormat:@"/knwlcnt/coll%@/item/page/valid", ACCOUNT_MANAGER.isLogin ? @"" : @"/anonymous"];
 
-    [self GET:fetchReplyPageAPI parameters:params completion:^(BaseResponse *response) {
+    [self GET:fetchCollItemsAPI parameters:params completion:^(BaseResponse *response) {
         // 用户上拉后有快速下拉, 下拉的数据先回来, 上拉的数据后回来
         if (self.latestParams != params) {
             return;
@@ -57,29 +57,23 @@
             self.current++;
         }
 
-        NSMutableArray<CommentModel *> *records = [CommentModel mj_objectArrayWithKeyValuesArray:response.responseObject[@"records"]];
-        // 读取更多是插入到最后，否则是插入到最前面
-        if (isFromBottom) {
-            [self.replies addObjectsFromArray:records];
-        } else {
-            NSRange range = NSMakeRange(0, records.count);
-            NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:range];
-            [self.replies insertObjects:records atIndexes:set];
-        }
+        NSMutableArray<ItemModel *> *records = [ItemModel mj_objectArrayWithKeyValuesArray:response.responseObject[@"records"]];
+        [self.items addObjectsFromArray:records];
         completion(nil, records.count > 0);
     }];
 }
 
 - (void)reset {
-    self.replies = [NSMutableArray array];
+    self.items = [NSMutableArray array];
     self.noMore = NO;
     self.total = 0;
     self.current = DEFAULT_PAGE_NO;
     self.size = DEFAULT_PAGE_SIZE;
 }
 
-- (void)resetWithMasterComment:(CommentModel *)masterComment {
-    self.masterCommentModel = masterComment;
+/** 初始化*/
+- (void)resetWithCollection:(ItemModel *)collection {
+    self.collectionModel = collection;
     [self reset];
 }
 

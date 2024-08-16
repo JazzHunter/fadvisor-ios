@@ -6,14 +6,13 @@
 //
 
 #import "CommentReplyViewController.h"
-#import "CommentCell.h"
+#import "CommentTableViewCell.h"
 #import "CommentRepliesService.h"
 #import "AutoRefreshFooter.h"
 #import "RefreshHeader.h"
 #import "NotificationView.h"
 #import "SkeletonPageView.h"
 #import "ContentExcepitonView.h"
-#import "CommentCell.h"
 #import "CommentView.h"
 
 @interface CommentReplyViewController ()
@@ -28,23 +27,18 @@
 
 @implementation CommentReplyViewController
 
-- (instancetype)initWithMasterComment:(CommentModel *)model {
-    self = [super init];
-    if (self) {
-        self.masterCommentModel = model;
-    }
-    return self;
+- (void)resetWithMasterComment:(CommentModel *)model {
+    self.masterCommentModel = model;
+    [self.repliesService resetWithMasterComment:model];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.repliesService = [[CommentRepliesService alloc] initWithMasterComment:self.masterCommentModel];
-    
+
     [self.tableView setSafeBottomInset];
-//
-    [self.tableView registerClass:[CommentCell class] forCellReuseIdentifier:NSStringFromClass([CommentCell class])];
-//    
+
+    [self.tableView registerClass:[CommentTableViewCell class] forCellReuseIdentifier:NSStringFromClass([CommentTableViewCell class])];
+
     CommentView *masterCommentView = [[CommentView alloc] init];
     masterCommentView.padding = UIEdgeInsetsMake(10, 16, 10, 16);
     [masterCommentView setModel:self.masterCommentModel];
@@ -52,10 +46,9 @@
     MyBorderline *bld = [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:12];
     masterCommentView.bottomBorderline = bld;
     [masterCommentView layoutIfNeeded];
-    
+
     self.tableView.tableHeaderView = masterCommentView;
-    
-   
+
     //添加 Header & Footer
     Weak(self);
     self.tableView.mj_header = [RefreshHeader headerWithRefreshingBlock:^{
@@ -138,7 +131,6 @@
 
     self.tableView.mj_footer.hidden = YES;
     [self.tableView.mj_header beginRefreshing];
-
 }
 
 #pragma mark - UITableViewDelegate
@@ -157,7 +149,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CommentCell *cell = (CommentCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CommentCell class]) forIndexPath:indexPath];
+    CommentTableViewCell *cell = (CommentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([CommentTableViewCell class]) forIndexPath:indexPath];
     [cell setModel:self.repliesService.replies[indexPath.item]];
     //这里设置其他位置有间隔线而最后一行没有下划线。我们可以借助布局视图本身所提供的边界线来代替掉系统默认的cell之间的间隔线，因为布局视图的边界线所提供的能力要大于默认的间隔线。
     if (indexPath.row  == self.repliesService.replies.count - 1) {

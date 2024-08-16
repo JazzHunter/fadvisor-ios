@@ -36,10 +36,16 @@
     self.backButton.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
     self.backButton.layer.masksToBounds = YES;
     self.backButton.layer.cornerRadius = kButtonStandardSize / 2;
-
+    
     self.backButton.leftPos.equalTo(self.leftPos);
     self.backButton.centerYPos.equalTo(self.centerYPos);
     [self addSubview:self.backButton];
+    
+    [self.backButton addTarget:self action:@selector(backButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)backButtonTapped:(UIView *)sender {
+    [self.viewController.navigationController popViewControllerAnimated:YES];
 }
 
 @end

@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CommentsService : BaseRequest
 
 /** 初始化*/
-- (instancetype)initWithItemType:(NSUInteger)itemType itemId:(NSString *)itemId commentMode:(NSString *)commentMode;
+- (void)resetWithItemType:(NSUInteger)itemType itemId:(NSString *)itemId commentMode:(NSString *)commentMode;
 
 /** comment 数组*/
 @property (nonatomic, strong) NSMutableArray<CommentModel *> *comments;

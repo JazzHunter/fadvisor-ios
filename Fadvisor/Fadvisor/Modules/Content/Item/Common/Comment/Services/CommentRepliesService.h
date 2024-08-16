@@ -12,9 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CommentRepliesService : BaseRequest
 
-/** 初始化*/
-- (instancetype)initWithMasterComment:(CommentModel *)masterComment;
-
 /** comment 数组*/
 @property (nonatomic, strong) NSMutableArray<CommentModel *> *replies;
 

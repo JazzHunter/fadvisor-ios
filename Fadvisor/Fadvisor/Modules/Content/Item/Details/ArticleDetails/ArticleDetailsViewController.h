@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithId:(NSString *)itemId;
 
+@property (nonatomic, strong) ItemModel *fromCollection;
+
 @end
 
 NS_ASSUME_NONNULL_END

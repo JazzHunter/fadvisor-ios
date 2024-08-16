@@ -6,10 +6,13 @@
 //
 
 #import <MyLayout/MyLayout.h>
+#import "ItemModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ArticleDetailsCollItemsSection : MyRelativeLayout
+
+- (void)setModel:(ItemModel *)model withCollection:(ItemModel *)collection;
 
 @end
 

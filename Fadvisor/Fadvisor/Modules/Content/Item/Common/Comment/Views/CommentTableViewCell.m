@@ -5,16 +5,16 @@
 //  Created by 韩建伟 on 2024/2/25.
 //
 
-#import "CommentCell.h"
+#import "CommentTableViewCell.h"
 #import "CommentView.h"
 
-@interface CommentCell ()
+@interface CommentTableViewCell ()
 
 @property (nonatomic, strong) CommentView *commentView;
 
 @end
 
-@implementation CommentCell
+@implementation CommentTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

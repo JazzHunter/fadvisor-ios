@@ -5,10 +5,10 @@
 //  Created by 韩建伟 on 2024/3/2.
 //
 
-#import "CommentSetCell.h"
+#import "CommentSetTableViewCell.h"
 #import "CommentView.h"
 
-@interface CommentSetCell ()
+@interface CommentSetTableViewCell ()
 
 @property (nonatomic, strong) CommentView *parmentCommentView;
 @property (nonatomic, strong) CommentView *childCommentView1;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation CommentSetCell
+@implementation CommentSetTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

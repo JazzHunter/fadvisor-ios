@@ -9,7 +9,7 @@
 #import "UITextView+WZB.h"
 #import "ImageButton.h"
 
-#define DefaultTextViewHeight   34.f
+#define DefaultTextViewHeight       34.f
 #define TextViewMaxHeightHalfscreen 204.f
 
 @interface PopCommentInputManager ()
@@ -57,9 +57,9 @@ static dispatch_once_t onceToken;
         self.keyboardHeight = 0;
 
         self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resign:)];
-        
+
         [self addGestureRecognizer:self.tapGestureRecognizer];
-        
+
 //        [self setTarget:self action:@selector(resign)];
     }
     return self;
@@ -127,7 +127,6 @@ static dispatch_once_t onceToken;
 }
 
 - (void)resign:(UITapGestureRecognizer *)gestureRecognizer {
-    
     //如果手势点自于contentLayout则不做相应
     CGPoint point = [gestureRecognizer locationInView:self];
     if (CGRectContainsPoint(self.contentLayout.frame, point)) {
@@ -166,7 +165,7 @@ static dispatch_once_t onceToken;
                 [self.textView wzb_autoHeightWithMaxHeight:self.textView.height];
             }
         }
-        
+
         [UIView animateWithDuration:duration animations:^{
             [self layoutIfNeeded];
         } completion:^(BOOL finished) {

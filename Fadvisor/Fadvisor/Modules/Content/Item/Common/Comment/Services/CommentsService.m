@@ -24,18 +24,6 @@
 
 @implementation CommentsService
 
-- (instancetype)initWithItemType:(NSUInteger)itemType itemId:(NSString *)itemId commentMode:(NSString *)commentMode {
-    self = [super init];
-    if (self) {
-        self.itemType = itemType;
-        self.itemId = itemId;
-        self.commentMode = commentMode;
-        self.orderType = COMMENTS_ORDER_TYPE_SET;
-        [self reset];
-    }
-    return self;
-}
-
 - (void)getComments:(BOOL)isFromBottom completion:(void (^)(NSString *errorMsg, BOOL isHaveNewData))completion {
     if (self.noMore) {
         return;
@@ -91,6 +79,14 @@
         }
         completion(nil, records.count > 0);
     }];
+}
+
+- (void)resetWithItemType:(NSUInteger)itemType itemId:(NSString *)itemId commentMode:(NSString *)commentMode {
+    self.itemType = itemType;
+    self.itemId = itemId;
+    self.commentMode = commentMode;
+    self.orderType = COMMENTS_ORDER_TYPE_SET;
+    [self reset];
 }
 
 - (void)reset {

@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CommentsViewController : BaseTableViewController
 
-- (instancetype)initWithItem:(ItemModel *)itemModel;
+- (void)resetWithItem:(ItemModel *)model;
 
 @end
 

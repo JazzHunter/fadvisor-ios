@@ -5,7 +5,7 @@
 //  Created by 韩建伟 on 2024/8/14.
 //
 
-#define ButtonWidth       48
+#define ButtonWidth       42
 #define AuthorAvatarWidth 32
 
 #import "ArticleDetailsToolbarView.h"

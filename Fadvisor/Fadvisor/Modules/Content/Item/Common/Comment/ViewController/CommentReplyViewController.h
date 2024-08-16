@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CommentReplyViewController : BaseTableViewController
 
-- (instancetype)initWithMasterComment:(CommentModel *)model;
+- (void)resetWithMasterComment:(CommentModel *)model;
 
 @end
 

@@ -51,7 +51,7 @@
     _textLabelButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [_textLabelButton setTitleColor:[UIColor metaTextColor] forState:UIControlStateNormal];
     [_textLabelButton setTitle:@"点赞" forState:UIControlStateNormal];
-    [_textLabelButton setTitle:@"感谢支持" forState:UIControlStateSelected];
+    [_textLabelButton setTitle:@"感谢" forState:UIControlStateSelected];
     [_textLabelButton addTarget:self action:@selector(toggle:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_textLabelButton];
 }
