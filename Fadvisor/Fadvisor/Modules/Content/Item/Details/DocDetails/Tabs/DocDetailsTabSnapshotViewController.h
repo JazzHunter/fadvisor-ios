@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DocDetailsContentViewController : BaseScrollViewController<JXPagerViewListViewDelegate>
+@interface DocDetailsTabSnapshotViewController : BaseScrollViewController<JXPagerViewListViewDelegate>
 
 - (void)setModel:(ItemModel *)itemModel details:(DocDetailsModel *)detailsModel;
 

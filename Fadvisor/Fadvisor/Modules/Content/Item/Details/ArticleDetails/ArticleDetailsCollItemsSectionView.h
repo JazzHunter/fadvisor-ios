@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ArticleDetailsCollItemsSection : MyRelativeLayout
+@interface ArticleDetailsCollItemsSectionView : MyRelativeLayout
 
 - (void)setModel:(ItemModel *)model withCollection:(ItemModel *)collection;
 

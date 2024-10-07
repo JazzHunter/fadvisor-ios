@@ -72,7 +72,7 @@
 #pragma mark
 - (void)startDevelopTools {
     // ⚠️ InjectionIII
-//    [[NSBundle bundleWithPath:@"/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle"] load];
+    [[NSBundle bundleWithPath:@"/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle"] load];
     // ⚠️ Doraemon
 //    [[DoraemonManager shareInstance] install];
 }

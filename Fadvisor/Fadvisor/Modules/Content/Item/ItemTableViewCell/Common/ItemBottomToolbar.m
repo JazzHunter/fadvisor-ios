@@ -9,12 +9,14 @@
 #import "Utils.h"
 #import "ImageButton.h"
 #import "VoteHButton.h"
+#import "FavHButton.h"
 
 @interface ItemBottomToolbar ()
 
-@property (nonatomic, strong) UILabel *infoLabel;
 
 @property (nonatomic, strong) VoteHButton *voteButton;
+
+@property (nonatomic, strong) FavHButton *favButton;
 
 @property (nonatomic, strong) ImageButton *moreButton;
 
@@ -45,6 +47,12 @@
     _voteButton.centerYPos.equalTo(_infoLabel.centerYPos);
 
     [self addSubview:_voteButton];
+    
+    _favButton = [FavHButton new];
+    _favButton.leftPos.equalTo(_voteButton.rightPos).offset(8);
+    _favButton.centerYPos.equalTo(_infoLabel.centerYPos);
+
+    [self addSubview:_favButton];
 
 
     _moreButton = [[ImageButton alloc]initWithFrame:CGRectMake(0, 0, IconImgHeight, IconImgHeight) imageName:@"ic_more"];
@@ -54,10 +62,10 @@
 }
 
 - (void)setModel:(ItemModel *)model {
-    _infoLabel.text = [NSString stringWithFormat:@"%@ · %@阅读 · ", [Utils formatBackendTimeString:model.pubTime], [Utils shortedNumberDesc:model.viewCount]];
-    [_infoLabel sizeToFit];
 
     [self.voteButton setModel:model];
+    
+    [self.favButton setModel:model];
 }
 
 #pragma mark Action

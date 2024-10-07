@@ -17,7 +17,6 @@
 
 @property (nonatomic, strong) UIImageView *typeImage;
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UILabel *introLabel;
 @property (nonatomic, strong) UILabel *sizeLabel;
 @property (nonatomic, strong) UILabel *pageLabel;
 @property (nonatomic, strong) UILabel *downloadLabel;

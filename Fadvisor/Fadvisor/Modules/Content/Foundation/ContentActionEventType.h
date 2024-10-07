@@ -10,4 +10,6 @@
 
 #define EVENT_AUTHOR_FOLLOW_TOGGLE @"eventAuthorFollow" // 关注作者
 
+#define EVENT_ITEM_SUBSCRIBE_TOGGLE @"eventItemSubscribe" // 关注合集
+
 #endif /* ContentActionEventType_h */

@@ -5,11 +5,11 @@
 //  Created by 韩建伟 on 2024/6/29.
 //
 
-#import "DocDetailsContentViewController.h"
+#import "DocDetailsTabSnapshotViewController.h"
 #import <GKPhotoBrowser/GKPhotoBrowser.h>
 #import "SkeletonPageView.h"
 
-@interface DocDetailsContentViewController ()<UIScrollViewDelegate, GKPhotoBrowserDelegate>
+@interface DocDetailsTabSnapshotViewController ()<UIScrollViewDelegate, GKPhotoBrowserDelegate>
 
 @property (nonatomic, copy) void (^ scrollCallback)(UIScrollView *scrollView);
 @property (nonatomic, strong) ItemModel *itemModel;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation DocDetailsContentViewController
+@implementation DocDetailsTabSnapshotViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

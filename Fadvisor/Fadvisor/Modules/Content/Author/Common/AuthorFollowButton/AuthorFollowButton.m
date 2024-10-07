@@ -58,14 +58,14 @@
         return;
     }
 
-    [self.authorFollowService toggleAuthorFollow:!self.isSubscribed authorId:self.authorId completion:^(NSString *errorMsg) {
+    [self.authorFollowService toggleAuthorFollow:!self.isFollowed authorId:self.authorId completion:^(NSString *errorMsg) {
         if (errorMsg) {
             //有错误处理一下
             return;
         }
 
         // 发送通知
-        NSDictionary *userInfo = @{ @"authorId": self.authorId, @"isSubscribed": @(!self.isSubscribed) };
+        NSDictionary *userInfo = @{ @"authorId": self.authorId, @"isFollowed": @(!self.isFollowed) };
         [[NSNotificationCenter defaultCenter] postNotificationName:EVENT_AUTHOR_FOLLOW_TOGGLE object:userInfo];
     }];
 }
@@ -80,8 +80,8 @@
         return;
     }
 
-    self.subscribed = [[info objectForKey:@"isSubscribed"] boolValue];
-    self.selected = self.isSubscribed;
+    self.followed = [[info objectForKey:@"isFollowed"] boolValue];
+    self.selected = self.isFollowed;
 }
 
 #pragma mark - set & get

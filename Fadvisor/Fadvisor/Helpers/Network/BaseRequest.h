@@ -14,6 +14,10 @@
 
 - (void)GET:(NSString *)URLString parameters:(id)parameters completion:(void (^)(BaseResponse *response))completion;
 
+- (void)PUT:(NSString *)URLString parameters:(id)parameters completion:(void (^)(BaseResponse *response))completion;
+
+- (void)DELETE:(NSString *)URLString parameters:(id)parameters completion:(void (^)(BaseResponse *response))completion;
+
 - (void)request:(NSString *)method URL:(NSString *)urlString parameters:(id)parameters isToken:(BOOL)isToken completion:(void (^)(BaseResponse *response))completion;
 
 @end

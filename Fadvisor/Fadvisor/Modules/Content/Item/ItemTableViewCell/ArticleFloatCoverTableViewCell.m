@@ -11,6 +11,7 @@
 
 #import "ArticleFloatCoverTableViewCell.h"
 #import "ItemBottomToolbar.h"
+#import "Utils.h"
 
 @interface ArticleFloatCoverTableViewCell ()
 
@@ -56,6 +57,9 @@
     _titleLabel.text = model.title;
 
     _introLabel.text = model.introduction;
+    
+    _bottomToolbar.infoLabel.text = [NSString stringWithFormat:@"%@ · %@阅读 · ", [Utils formatBackendTimeString:model.pubTime], [Utils shortedNumberDesc:model.viewCount]];
+    [_bottomToolbar.infoLabel sizeToFit];
     
     [_bottomToolbar setModel:model];
 }

@@ -37,22 +37,6 @@
 }
 
 - (void)initUI {
-
-    self.topBgImageView = [UIImageView new];
-    self.topBgImageView.myHorzMargin = 0;
-    self.topBgImageView.myHeight = 160;
-    self.topBgImageView.topPos.equalTo(self.topPos);
-    self.topBgImageView.leftPos.equalTo(self.leftPos);
-    [self addSubview:self.topBgImageView];
-
-    UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
-    blurView.alpha = 0.7; // 控制模糊程度
-    blurView.widthSize.equalTo(self.topBgImageView.widthSize);
-    blurView.heightSize.equalTo(self.topBgImageView.heightSize);
-    blurView.centerXPos.equalTo(self.topBgImageView.centerXPos);
-    blurView.centerYPos.equalTo(self.topBgImageView.centerYPos);
-    [self addSubview:blurView];
-
     MyRelativeLayout *contentLayout = [MyRelativeLayout new];
     contentLayout.myHorzMargin = 0;
     contentLayout.myHeight = MyLayoutSize.wrap;

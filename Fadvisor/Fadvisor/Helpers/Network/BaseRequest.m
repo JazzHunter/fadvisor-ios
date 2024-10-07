@@ -31,6 +31,26 @@
     }];
 }
 
+- (void)PUT:(NSString *)URLString parameters:(id)parameters completion:(void (^)(BaseResponse *response))completion {
+    Weak(self);
+    [[RequestManager sharedManager] PUT:URLString parameters:parameters completion:^(BaseResponse *response) {
+        if (!weakself) {
+            return;
+        }
+        !completion ? : completion(response);
+    }];
+}
+
+- (void)DELETE:(NSString *)URLString parameters:(id)parameters completion:(void (^)(BaseResponse *response))completion {
+    Weak(self);
+    [[RequestManager sharedManager] DELETE:URLString parameters:parameters completion:^(BaseResponse *response) {
+        if (!weakself) {
+            return;
+        }
+        !completion ? : completion(response);
+    }];
+}
+
 - (void)request:(NSString *)method URL:(NSString *)urlString parameters:(id)parameters isToken:(BOOL)isToken completion:(void (^)(BaseResponse *response))completion {
     Weak(self);
     [[RequestManager sharedManager] request:method URL:urlString parameters:parameters isToken:isToken completion:^(BaseResponse *response) {

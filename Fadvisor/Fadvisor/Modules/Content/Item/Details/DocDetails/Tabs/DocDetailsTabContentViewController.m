@@ -5,7 +5,7 @@
 //  Created by 韩建伟 on 2024/3/23.
 //
 
-#import "DocDetailsExtendViewController.h"
+#import "DocDetailsTabContentViewController.h"
 #import "RichTextView.h"
 #import "SharePanel.h"
 #import "AuthorSection.h"
@@ -13,7 +13,7 @@
 #import "AuthorDetailsViewController.h"
 #import "GKDBViewController.h"
 
-@interface DocDetailsExtendViewController ()<UIScrollViewDelegate>
+@interface DocDetailsTabContentViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, copy) void (^ scrollCallback)(UIScrollView *scrollView);
 
@@ -27,7 +27,7 @@
 
 @end
 
-@implementation DocDetailsExtendViewController
+@implementation DocDetailsTabContentViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

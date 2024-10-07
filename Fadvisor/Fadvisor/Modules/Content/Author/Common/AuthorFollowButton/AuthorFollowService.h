@@ -11,11 +11,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AuthorFollowService : BaseRequest
 
-@property (nonatomic, assign, getter = isSubscribed) BOOL subscribed;
+@property (nonatomic, assign, getter = isFollowed) BOOL followed;
 
 @property (nonatomic, assign, getter = isLoading) BOOL loading;
 
-- (void)toggleAuthorFollow:(BOOL)isSubscribed authorId:(NSString *)authorId completion:(void (^)(NSString *errorMsg))completion;
+- (void)toggleAuthorFollow:(BOOL)isFollowed authorId:(NSString *)authorId completion:(void (^)(NSString *errorMsg))completion;
 
 @end
 

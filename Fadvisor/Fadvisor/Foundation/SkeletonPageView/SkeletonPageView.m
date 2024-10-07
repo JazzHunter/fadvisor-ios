@@ -64,10 +64,10 @@
     [self.rootLayout addSubview:label2];
 
     [self.rootLayout layoutIfNeeded];
-    
+
     self.tabAnimated = TABViewAnimated.new;
     self.tabAnimated.superAnimationType = TABViewSuperAnimationTypeShimmer;
-    
+
     self.tabAnimated.adjustBlock = ^(TABComponentManager *_Nonnull manager) {
         manager.animation(0).dropStayTime(0.6).height(16);
         manager.animation(1).height(16);

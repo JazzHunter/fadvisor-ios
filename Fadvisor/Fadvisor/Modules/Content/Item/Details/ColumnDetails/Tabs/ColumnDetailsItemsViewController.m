@@ -1,138 +1,105 @@
 //
-//  TabHomeRcmdViewController.m
+//  ColumnDetailsItemsViewController.m
 //  Fadvisor
 //
-//  Created by 韩建伟 on 2023/11/10.
+//  Created by 韩建伟 on 2024/9/29.
 //
 
-#import "TabHomeRcmdViewController.h"
-#import "RcmdItemsService.h"
-#import "RcmdAuthorsService.h"
-#import "AutoRefreshFooter.h"
-#import "RefreshHeader.h"
-#import "NotificationView.h"
-
-#import "ArticleDetailsViewController.h"
-#import "VideoDetailsViewController.h"
-#import "DocDetailsViewController.h"
-
-#import "ContentExcepitonView.h"
-#import "SkeletonPageView.h"
+#import "ColumnDetailsItemsViewController.h"
+#import "CollItemsService.h"
 
 #import "ItemFloatCoverTableViewCell.h"
 #import "ArticleFloatCoverTableViewCell.h"
 #import "VideoLongCoverTableViewCell.h"
 #import "DocFloatTypeTableViewCell.h"
+#import "ContentExcepitonView.h"
 
-#import "TabHomeRcmdAuthorsTableViewCell.h"
+#import "ArticleDetailsViewController.h"
+#import "VideoDetailsViewController.h"
+#import "DocDetailsViewController.h"
 
-@interface TabHomeRcmdViewController ()
+#import "AutoRefreshFooter.h"
+#import "RefreshHeader.h"
+
+@interface ColumnDetailsItemsViewController ()
 
 @property (nonatomic, copy) void (^ scrollCallback)(UIScrollView *scrollView);
 
-@property (nonatomic, strong) RcmdItemsService *rcmdItemsService;
-@property (nonatomic, strong) RcmdAuthorsService *rcmdAuthorsService;
+@property (nonatomic, strong) CollItemsService *itemsService;
 
-@property (nonatomic, assign) BOOL inited;
+@property (nonatomic, strong) ItemModel *collectionModel;
 
 @end
 
-@implementation TabHomeRcmdViewController
+@implementation ColumnDetailsItemsViewController
+
+- (instancetype)initWithCollection:(ItemModel *)collectionModel {
+    self = [super init];
+    if (self) {
+        self.collectionModel = collectionModel;
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [self.tableView setSafeBottomInset];
+    
     [self.tableView registerClass:[ItemFloatCoverTableViewCell class] forCellReuseIdentifier:NSStringFromClass([ItemFloatCoverTableViewCell class])];
     [self.tableView registerClass:[ArticleFloatCoverTableViewCell class] forCellReuseIdentifier:NSStringFromClass([ArticleFloatCoverTableViewCell class])];
     [self.tableView registerClass:[VideoLongCoverTableViewCell class] forCellReuseIdentifier:NSStringFromClass([VideoLongCoverTableViewCell class])];
     [self.tableView registerClass:[DocFloatTypeTableViewCell class] forCellReuseIdentifier:NSStringFromClass([DocFloatTypeTableViewCell class])];
-    [self.tableView registerClass:[TabHomeRcmdAuthorsTableViewCell class] forCellReuseIdentifier:NSStringFromClass([TabHomeRcmdAuthorsTableViewCell class])];
 
     // init data
     self.inited = NO;
 
     //添加 Header & Footer
     Weak(self);
-    self.tableView.mj_header = [RefreshHeader headerWithRefreshingBlock:^{
-        if ([weakself.tableView.mj_footer isRefreshing]) {
-            [weakself.tableView.mj_header endRefreshing];
-        }
-        if (self.rcmdItemsService.noMore) {
-            [weakself.tableView.mj_header endRefreshing];
-            [NotificationView showNotificaiton:@"没有新数据了" type:NotificationInfo];
-            return;
-        }
-        if (!weakself.inited) {
-            [weakself.view showSkeletonPage:SkeletonPageViewTypeCell isNavbarPadding:NO];
-        }
-        [self.rcmdItemsService getHomeRcmdItems:NO completion:^(NSString *errorMsg, BOOL isHaveNewData) {
-            [weakself.view hideSkeletonPage];
-            // 结束刷新状态
-            ![weakself.tableView.mj_header isRefreshing] ? : [weakself.tableView.mj_header endRefreshing];
-            ![weakself.tableView.mj_footer isRefreshing] ? : [weakself.tableView.mj_footer endRefreshing];
-            // 错误处理
-            if (errorMsg) {
-                if (weakself.inited) {
-                    [NotificationView showNotificaiton:errorMsg type:NotificationDanger];
-                } else {
-                    [weakself.view showNetworkError:errorMsg reloadButtonBlock:^(id sender) {
-                        [weakself.view hideBlankPage];
-                        [weakself.tableView.mj_header beginRefreshing];
-                    }];
-                }
-                return;
-            }
-
-            if (!weakself.inited) {
-                weakself.inited = YES;
-            } else {
-                [NotificationView showNotificaiton:isHaveNewData ? @"已为您加载了新数据" : @"没有新数据了"];
-            }
-
-            if (isHaveNewData) {
-                [weakself.tableView reloadData];
-            }
-
-            if (weakself.rcmdItemsService.total == 0) {
-                [weakself.tableView showEmptyList];
-                return;
-            } else if (weakself.tableView.mj_footer.hidden == YES) {
-                weakself.tableView.mj_footer.hidden = NO;
-                [weakself.tableView.mj_footer setState:weakself.rcmdItemsService.noMore ? MJRefreshStateNoMoreData : MJRefreshStateIdle];
-            }
-        }];
-    }];
     self.tableView.mj_footer = [AutoRefreshFooter footerWithRefreshingBlock:^{
-        if (weakself.rcmdItemsService.noMore) {
+        
+        if (weakself.itemsService.noMore) {
             [weakself.tableView.mj_footer endRefreshing];
             [weakself.tableView.mj_footer setState:MJRefreshStateNoMoreData];
             return;
         }
 
-        if ([weakself.tableView.mj_header isRefreshing]) {
-            [weakself.tableView.mj_footer endRefreshing];
-            return;
-        }
-        [self.rcmdItemsService getHomeRcmdItems:YES completion:^(NSString *errorMsg, BOOL isHaveNewData) {
+        [self.itemsService getItems:^(NSString *errorMsg, BOOL isHaveNewData) {
             // 结束刷新状态
-            ![weakself.tableView.mj_header isRefreshing] ? : [weakself.tableView.mj_header endRefreshing];
             ![weakself.tableView.mj_footer isRefreshing] ? : [weakself.tableView.mj_footer endRefreshing];
 
             if (errorMsg) {
-                [NotificationView showNotificaiton:errorMsg type:NotificationDanger];
-                [weakself.tableView.mj_footer setState:MJRefreshStateIdle];
+//                [NotificationView showNotificaiton:errorMsg type:NotificationDanger];
+//                [weakself.tableView.mj_footer setState:MJRefreshStateIdle];
                 return;
             }
 
             if (isHaveNewData) {
                 [weakself.tableView reloadData];
             }
-            [weakself.tableView.mj_footer setState:weakself.rcmdItemsService.noMore ? MJRefreshStateNoMoreData : MJRefreshStateIdle];
+            
+            [weakself.tableView.mj_footer setState:weakself.itemsService.noMore ? MJRefreshStateNoMoreData : MJRefreshStateIdle];
         }];
     }];
+    
+    // 第一次加载
+    [self.itemsService getItems:^(NSString *errorMsg, BOOL isHaveNewData) {
+        
+        if (errorMsg) {
+            // 处理错误
+            return;
+        }
 
-    self.tableView.mj_footer.hidden = YES;
-    [self.tableView.mj_header beginRefreshing];
+        if (isHaveNewData) {
+            [weakself.tableView reloadData];
+        }
+        
+        if (!self.inited) {
+            self.inited = YES;
+        }
+        
+        [weakself.tableView.mj_footer setState:weakself.itemsService.noMore ? MJRefreshStateNoMoreData : MJRefreshStateIdle];
+    }];
 }
 
 #pragma mark - UITableViewDelegate
@@ -142,7 +109,7 @@
     // 这里因为有作者 Cell
     NSInteger index = indexPath.row > 3 ? indexPath.row - 1 : indexPath.row;
 
-    ItemModel *model = self.rcmdItemsService.rcmdItems[index];
+    ItemModel *model = self.itemsService.items[index];
     switch (model.itemType) {
         case ItemTypeArticle:{
             ArticleDetailsViewController *vc = [[ArticleDetailsViewController alloc] initWithItem:model];
@@ -171,34 +138,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.rcmdItemsService.rcmdItems.count;
+    return self.itemsService.items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger index = indexPath.item;
-    if (index == 3) {
-        TabHomeRcmdAuthorsTableViewCell *cell = (TabHomeRcmdAuthorsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([TabHomeRcmdAuthorsTableViewCell class]) forIndexPath:indexPath];
-        Weak(self);
-        if (!self.rcmdAuthorsService.inited) {
-            [cell showLoading];
-            [self.rcmdAuthorsService getRcmdAuthors:^(NSString *errorMsg) {
-                // 错误处理
-                if (errorMsg) {
-                    return;
-                }
-                [cell setAuthorModels:weakself.rcmdAuthorsService.rcmdAuthors];
-                [cell hideLoading];
-            }];
-        }
 
-        return cell;
-    }
+    ItemModel *item = self.itemsService.items[index];
 
-    index = index > 3 ? index - 1 : index;
-
-    ItemModel *item = self.rcmdItemsService.rcmdItems[index];
-
-    MyBorderline *bottomBorderLine = (index  == self.rcmdItemsService.rcmdItems.count - 1) ? nil : [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:6];
+    MyBorderline *bottomBorderLine = (index  == self.itemsService.items.count - 1) ? nil : [[MyBorderline alloc] initWithColor:[UIColor backgroundColorGray] thick:6];
     switch (item.itemType) {
         case ItemTypeArticle:{
             ArticleFloatCoverTableViewCell *cell = (ArticleFloatCoverTableViewCell *)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ArticleFloatCoverTableViewCell class]) forIndexPath:indexPath];
@@ -266,18 +214,13 @@
 }
 
 #pragma mark - getters and setters
-- (RcmdItemsService *)rcmdItemsService {
-    if (_rcmdItemsService == nil) {
-        _rcmdItemsService = [[RcmdItemsService alloc] init];
+- (CollItemsService *)itemsService {
+    if (_itemsService == nil) {
+        _itemsService = [[CollItemsService alloc] init];
+        [_itemsService resetWithCollection: self.collectionModel];
     }
-    return _rcmdItemsService;
+    return _itemsService;
 }
 
-- (RcmdAuthorsService *)rcmdAuthorsService {
-    if (_rcmdAuthorsService == nil) {
-        _rcmdAuthorsService = [[RcmdAuthorsService alloc] init];
-    }
-    return _rcmdAuthorsService;
-}
 
 @end

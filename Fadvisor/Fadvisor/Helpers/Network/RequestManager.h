@@ -33,6 +33,10 @@ typedef BaseResponse * (^ResponseFormat)(BaseResponse *response);
 
 - (void)GET:(NSString *)urlString parameters:(id)parameters completion:(void (^)(BaseResponse *response))completion;
 
+- (void)PUT:(NSString *)urlString parameters:(id)parameters completion:(void (^)(BaseResponse *response))completion;
+
+- (void)DELETE:(NSString *)urlString parameters:(id)parameters completion:(void (^)(BaseResponse *response))completion;
+
 - (void)request:(NSString *)method URL:(NSString *)urlString parameters:(id)parameters isToken:(BOOL)isToken completion:(void (^)(BaseResponse *response))completion;
 
 /*

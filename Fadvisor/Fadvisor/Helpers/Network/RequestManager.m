@@ -61,12 +61,15 @@
         [self wrapperTask:task responseObject:nil error:error completion:completion];
     };
 
+    
     if ([method isEqualToString:@"POST"]) {
         [self POST:urlString parameters:parameters progress:nil success:success failure:failure];
-    }
-
-    if ([method isEqualToString:@"GET"]) {
+    } else if ([method isEqualToString:@"PUT"]) {
+        [self PUT:urlString parameters:parameters success:success failure:failure];
+    } else if ([method isEqualToString:@"GET"]) {
         [self GET:urlString parameters:parameters progress:nil success:success failure:failure];
+    } else if ([method isEqualToString:@"DELETE"]) {
+        [self DELETE:urlString parameters:parameters success:success failure:failure];
     }
 }
 

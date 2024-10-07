@@ -5,11 +5,13 @@
 //  Created by 韩建伟 on 2024/8/12.
 //
 
-#import "ArticleDetailsCollItemsSection.h"
+#import "ArticleDetailsCollItemsSectionView.h"
 #import "PopCollItemsViewController.h"
+#import "ColumnDetailsViewController.h"
 #import <HWPanModal/HWPanModal.h>
+#import "ContentDefine.h"
 
-@interface ArticleDetailsCollItemsSection ()
+@interface ArticleDetailsCollItemsSectionView ()
 
 @property (nonatomic, strong) ItemModel *collectionModel;
 @property (nonatomic, strong) ItemModel *itemModel;
@@ -26,7 +28,7 @@
 
 @end
 
-@implementation ArticleDetailsCollItemsSection
+@implementation ArticleDetailsCollItemsSectionView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -68,6 +70,7 @@
     detailsButtonLayout.gravity = MyGravity_Vert_Center;
     detailsButtonLayout.rightPos.equalTo(self.rightPos);
     detailsButtonLayout.centerYPos.equalTo(topLeftDescLabel.centerYPos);
+    [detailsButtonLayout setTarget:self action:@selector(handleDetailsButtonTapped:)];
     [self addSubview:detailsButtonLayout];
 
     UILabel *detailsTextLabel = [UILabel new];
@@ -170,9 +173,9 @@
 
 - (void)setModel:(ItemModel *)model withCollection:(ItemModel *)collection {
     self.itemModel = model;
-    
+
     self.collectionModel = collection ? collection : model.primaryColl;
-    
+
     [_collectionTitleButton setTitle:self.collectionModel.title forState:UIControlStateNormal];
     [_collectionTitleButton sizeToFit];
 
@@ -180,10 +183,24 @@
     _nextItemTitleLabel.text = @"gjweogjweogjwoegwejgow";
 }
 
+#pragma mark - actions
+
 - (void)handleTitleButtonTapped:(UIButton *)sender {
     [self.viewController presentPanModal:self.popCollItemsVC completion:^{
         [self.popCollItemsVC setCollection:self.collectionModel];
     }];
+}
+
+- (void)handleDetailsButtonTapped:(MyBaseLayout *)sender {
+    switch (self.collectionModel.itemType) {
+        case ItemTypeColumn: {
+            ColumnDetailsViewController *vc = [[ColumnDetailsViewController alloc] initWithItem:self.collectionModel];
+            [self.viewController.navigationController pushViewController:vc animated:YES];
+        } break;
+
+        default:
+            break;
+    }
 }
 
 #pragma mark - getters and setters

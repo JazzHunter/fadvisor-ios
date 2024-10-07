@@ -14,6 +14,6 @@
 
 @property (nonatomic, strong) NSString *authorId;
 
-@property (nonatomic, assign, getter = isSubscribed) BOOL subscribed;
+@property (nonatomic, assign, getter = isFollowed) BOOL followed;
 
 @end
