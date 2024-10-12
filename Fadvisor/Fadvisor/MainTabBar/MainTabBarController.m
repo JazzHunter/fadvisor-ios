@@ -113,10 +113,6 @@
     [self.lottieView play];
 }
 
-- (UINavigationController *)currentNavigationController {
-    return self.selectedViewController;
-}
-
 #pragma mark - UITabBarControllerDelegate
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {

@@ -15,8 +15,6 @@ static const CGFloat SeekPopupViewImageTop = 25;         //imageView origin.y
 static const CGFloat SeekPopupViewTextSize = 29;         //文字font
 static const CGFloat SeekPopupViewLabelMargin = 18;      //显示时间，与图片的间隙
 
-#define kSeekPopupViewBackGroundColor [UIColor colorWithRed:1 green:1 blue:1 alpha:0.4]
-
 @interface PlayerDetailsGestureSeekPopupView ()
 
 @property (nonatomic, strong) UIImage *forwardImg;      //快进图片
@@ -62,7 +60,7 @@ static const CGFloat SeekPopupViewLabelMargin = 18;      //显示时间，与图
     [super drawRect:rect];
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
-    [Utils drawFillRoundRect:rect radius:SeekPopupViewRadius color:kSeekPopupViewBackGroundColor context:context];
+    [Utils drawFillRoundRect:rect radius:SeekPopupViewRadius color:[UIColor maskBgColor] context:context];
     float imgWidth = SeekPopupViewImageWidth;
     float imgHeight = SeekPopupViewImageHeight;
     float imgX = (rect.size.width - imgWidth) / 2;

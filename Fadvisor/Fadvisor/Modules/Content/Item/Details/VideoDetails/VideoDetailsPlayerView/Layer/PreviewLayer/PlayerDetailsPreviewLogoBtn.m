@@ -12,7 +12,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+        self.backgroundColor = [UIColor maskBgColor];
         [self setImage:[UIImage imageNamed:@"ic_vip"] forState:UIControlStateNormal];
         [self setBackgroundImage:[UIImage imageNamed:@"bg_vip"] forState:UIControlStateNormal];
         [self setTitle:[@"试看前5分钟" localString] forState:UIControlStateNormal];

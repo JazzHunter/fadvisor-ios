@@ -13,13 +13,21 @@
 @implementation ImageButton
 
 - (instancetype)initWithFrame:(CGRect)frame imageName:(NSString *)imageName {
-    return [self initWithFrame:frame imageName:imageName color:nil];
+    return [self initWithFrame:frame imageName:imageName color:nil imageSize:CGSizeZero];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame imageName:(NSString *)imageName imageSize:(CGSize)imageSize {
+    return [self initWithFrame:frame imageName:imageName color:nil imageSize:imageSize];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame imageName:(NSString *)imageName color:(UIColor *)color {
+    return [self initWithFrame:frame imageName:imageName color:color imageSize:CGSizeZero];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame imageName:(NSString *)imageName color:(UIColor *)color imageSize:(CGSize)imageSize {
     self = [super initWithFrame:frame];
     if (self) {
-        self.imageSize = frame.size;
+        self.imageSize = CGSizeEqualToSize(imageSize, CGSizeZero) ? frame.size : imageSize;
         if (color) {
             [self setImage:[[UIImage imageNamed:imageName] imageWithRenderingMode:(UIImageRenderingModeAlwaysTemplate)] forState:UIControlStateNormal];
             self.tintColor = color;
@@ -41,7 +49,7 @@
 
     CGFloat x = (contentRect.size.width - size.width) / 2;
     CGFloat y = (contentRect.size.height - size.height) / 2;
-    
+
     return CGRectMake(x, y, size.width, size.height);
 }
 

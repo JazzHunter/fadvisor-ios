@@ -7,7 +7,7 @@
 
 #import "DocDetailsTabContentViewController.h"
 #import "RichTextView.h"
-#import "SharePanel.h"
+#import "ContentSharePanel.h"
 #import "AuthorSection.h"
 #import "SkeletonPageView.h"
 #import "AuthorDetailsViewController.h"
@@ -81,7 +81,7 @@
 }
 
 - (void)handleSharePanelOpen:(MyBaseLayout *)sender {
-    [[SharePanel manager] showPanelWithItem:self.itemModel];
+    [[ContentSharePanel manager] showPanelWithItem:self.itemModel];
 }
 
 - (void)handleAuthorTap:(MyBaseLayout*)sender {

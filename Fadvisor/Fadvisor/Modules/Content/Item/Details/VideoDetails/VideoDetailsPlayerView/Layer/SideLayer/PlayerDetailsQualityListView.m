@@ -25,7 +25,7 @@ static const CGFloat PlayerDetailsQualityListViewQualityButtonHeight = 32;
     if (self) {
         _playMethod = AlivcPlayMethodPlayAuth;
         self.clipsToBounds = NO;
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
     }
     return self;
 }

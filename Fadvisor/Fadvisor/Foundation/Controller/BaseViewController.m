@@ -7,6 +7,7 @@
 
 #import "BaseViewController.h"
 #import "NavigationBar.h"
+#import <UMVerify/UMVerify.h>
 
 @interface BaseViewController ()
 
@@ -24,7 +25,6 @@
             [[UIScrollView appearanceWhenContainedInInstancesOfClasses:@[[BaseViewController class]]] setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
         }
     });
-
 }
 
 - (void)setNavigationBarTitle:(NSString *)navigationBarTitle {
@@ -39,7 +39,12 @@
     [self.view bringSubviewToFront:self.navigationBar];
 }
 
-
+- (void)accelerateLogin {
+    //开始状态置为YES，默认当前环境可以使用一键登录
+    [UMCommonHandler accelerateLoginPageWithTimeout:3.0 complete:^(NSDictionary *_Nonnull resultDic) {
+//        NSLog(@"为后面授权页拉起加个速，加速结果：%@", resultDic);
+    }];
+}
 
 #pragma mark - Life Cycle
 - (void)viewWillAppear:(BOOL)animated {
@@ -94,16 +99,15 @@
 #endif
 
 #pragma mark - 默认竖屏
-- (BOOL)shouldAutorotate{
+- (BOOL)shouldAutorotate {
     return NO;
 }
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait;
 }
 
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
     return UIInterfaceOrientationPortrait;
 }
 

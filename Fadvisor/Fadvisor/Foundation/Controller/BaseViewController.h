@@ -24,4 +24,6 @@
 
 @property (copy, nonatomic) NSString *navigationBarTitle;
 
+- (void)accelerateLogin;
+
 @end

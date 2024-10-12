@@ -9,6 +9,8 @@
 #import "UMengHelper.h"
 #import <UMCommon/UMCommon.h>
 #import <UMCommonLog/UMCommonLogHeaders.h>
+#import <UMVerify/UMVerify.h>
+#import <UMPush/UMessage.h>
 #import <UMPush/UMessage.h>
 #import <UMCommon/MobClick.h>
 #import "NotificationView.h"
@@ -27,6 +29,14 @@
     @param appKey 开发者在友盟官网申请的appkey.
     @param channel 渠道标识，可设置nil表示"App Store". */
     [UMConfigure initWithAppkey:appKey channel:channel];
+}
+
+#pragma mark - 友盟认证
+// https://developer.umeng.com/docs/143070/detail/144768
++ (void)UMVerifyStart {
+    [UMCommonHandler setVerifySDKInfo:ThirdSDKUMVerifySecret complete:^(NSDictionary * _Nonnull resultDic) {
+        NSLog(@"设置秘钥结果：%@", resultDic);
+    }];
 }
 
 #pragma mark - 友盟推送
@@ -84,8 +94,8 @@
 }
 
 #pragma mark - 友盟分享
+// https://developer.umeng.com/docs/143070/detail/171114
 + (void)UMSocialStart:(NSString *)qqAppKey wechatAppKey:(NSString *)wechatAppKey wechatAppSecret:(NSString *)wechatAppSecret weiboAppKey:(NSString *)weiboAppKey weiboAppSecret:(NSString *)weiboAppSecret weiboCallback:(NSString *)weiboCallback{
-    // 友盟分享
     /*
      * 打开图片水印
      */
@@ -117,7 +127,35 @@
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:weiboAppKey appSecret:weiboAppSecret redirectURL:weiboCallback];
 }
 
-//分享链接
+#pragma mark - 第三方登录
++ (void)getUserInfoForPlatform:(UMSocialPlatformType)platformType completion:(void (^)(UMSocialUserInfoResponse *result, NSError *error))completion {
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:nil completion:^(id result, NSError *error) {
+        UMSocialUserInfoResponse *resp = result;
+
+        // 第三方登录数据(为空表示平台未提供)
+        // 授权数据
+        NSLog(@" uid: %@", resp.uid);
+        NSLog(@" openid: %@", resp.openid);
+        NSLog(@" accessToken: %@", resp.accessToken);
+        NSLog(@" refreshToken: %@", resp.refreshToken);
+        NSLog(@" expiration: %@", resp.expiration);
+
+        // 用户数据
+        NSLog(@" name: %@", resp.name);
+        NSLog(@" iconurl: %@", resp.iconurl);
+        NSLog(@" gender: %@", resp.gender);
+
+        // 第三方平台SDK原始数据
+        NSLog(@" originalResponse: %@", resp.originalResponse);
+        if (error) {
+            [NotificationView showNotificaiton:@"登录失败" type:NotificationDanger];
+        }
+
+        completion(resp, error);
+    }];
+}
+
+#pragma mark - 分享链接
 + (void)shareLinkToPlatform:(UMSocialPlatformType)platformType title:(NSString *)title introduction:(NSString *)introduction thumbURL:(NSString *)thumbURL shareURL:(NSString *)shareURL {
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
@@ -234,32 +272,6 @@
     }];
 }
 
-#pragma mark - 第三方登录
-+ (void)getUserInfoForPlatform:(UMSocialPlatformType)platformType completion:(void (^)(UMSocialUserInfoResponse *result, NSError *error))completion {
-    [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:nil completion:^(id result, NSError *error) {
-        UMSocialUserInfoResponse *resp = result;
 
-        // 第三方登录数据(为空表示平台未提供)
-        // 授权数据
-        NSLog(@" uid: %@", resp.uid);
-        NSLog(@" openid: %@", resp.openid);
-        NSLog(@" accessToken: %@", resp.accessToken);
-        NSLog(@" refreshToken: %@", resp.refreshToken);
-        NSLog(@" expiration: %@", resp.expiration);
-
-        // 用户数据
-        NSLog(@" name: %@", resp.name);
-        NSLog(@" iconurl: %@", resp.iconurl);
-        NSLog(@" gender: %@", resp.gender);
-
-        // 第三方平台SDK原始数据
-        NSLog(@" originalResponse: %@", resp.originalResponse);
-        if (error) {
-            [NotificationView showNotificaiton:@"登录失败" type:NotificationDanger];
-        }
-
-        completion(resp, error);
-    }];
-}
 
 @end

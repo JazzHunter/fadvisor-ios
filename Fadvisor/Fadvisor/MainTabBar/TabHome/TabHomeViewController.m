@@ -6,7 +6,6 @@
 //
 
 #import "TabHomeViewController.h"
-//#import "JXCategoryView.h"
 #import <JXCategoryViewExt/JXCategoryView.h>
 
 #import "JXPagerListRefreshView.h"
@@ -70,6 +69,7 @@ static const CGFloat pinSectionHeaderHeight = 44.f;
     //导航栏隐藏的情况，处理扣边返回，下面的代码要加上
     [self.pagerView.listContainerView.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
     [self.pagerView.mainTableView.panGestureRecognizer requireGestureRecognizerToFail:self.navigationController.interactivePopGestureRecognizer];
+    
 }
 
 - (void)viewDidLayoutSubviews {

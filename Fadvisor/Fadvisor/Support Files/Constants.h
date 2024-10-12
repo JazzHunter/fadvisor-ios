@@ -21,8 +21,11 @@
 #define BaseURL                           @"https://32z146z881.goho.co/"
 
 // 友盟
-#define ThirdSDKUMConfigInstanceAppKey    @"5ea912a0167eddb71800005a"
+#define ThirdSDKUMConfigInstanceAppKey    @"5e874041978eea071c37c057"
 #define ThirdSDKUMConfigInstanceChannelId @"App Store"
+
+#define ThirdSDKUMVerifySecret @"WbKxKSMmRFDh9/No2i2waybxZO3QrA/G+x/whs4xARFS8juazzZZuy6gOiVDRWowCAVlSQxwigExQBZEmOd12kUlLbLsL1NYJtnk5doomJCTJ2Ku3cAgWls2Vk05zF7aJyMH+foWy6ZUlO7tK3lZmnajEwn0G+DsMC6fBm8M3vM0WBUSo2AhLi6aaCsnfeiGb/qb7Rn8PUVskmMaNShERJzv0TeYGBFimWcJPZFcHNobhjjKRBvcC5h+BETPLEtY"
+
 #define ThirdSDKWeChatAppKey              @"wx82be436160f16043"
 #define ThirdSDKWeChatAppSecret           @"29738297854bcf6aa8578bd339c15c82"
 #define ThirdSDKQQAppKey                  @"101826811"

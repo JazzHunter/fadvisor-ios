@@ -36,7 +36,7 @@
     self.layer.cornerRadius = 4;
     [self setAttributedText:richText];
     self.textAlignment = NSTextAlignmentCenter;
-    self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+    self.backgroundColor = [UIColor maskBgColor];
     self.font = [UIFont systemFontOfSize:12];
 
     [self sizeToFit];

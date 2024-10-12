@@ -22,7 +22,7 @@
         self.orientation = MyOrientation_Horz;
         self.paddingLeft = self.paddingRight = 12;
         self.heightSize.equalTo(@36);
-        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+        self.backgroundColor = [UIColor maskBgColor];
         self.gravity = MyGravity_Vert_Center;
         self.myWidth = MyLayoutSize.wrap;
         

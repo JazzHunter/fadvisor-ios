@@ -7,7 +7,7 @@
 
 #import "VideoDetailsContentViewController.h"
 #import "RichTextView.h"
-#import "SharePanel.h"
+#import "ContentSharePanel.h"
 #import "AuthorSection.h"
 
 @interface VideoDetailsContentViewController ()<UIScrollViewDelegate>
@@ -75,7 +75,7 @@
 }
 
 - (void)handleSharePanelOpen:(MyBaseLayout *)sender {
-    [[SharePanel manager] showPanelWithItem:self.itemModel];
+    [[ContentSharePanel manager] showPanelWithItem:self.itemModel];
 }
 
 #pragma mark - JXPagingViewListViewDelegate

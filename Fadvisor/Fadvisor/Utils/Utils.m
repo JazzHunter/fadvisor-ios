@@ -244,6 +244,10 @@
     return vc;
 }
 
++ (UINavigationController *)currentNavigationController {
+    return ((UITabBarController *)[UIApplication sharedApplication].delegate.window.rootViewController).selectedViewController;
+}
+
 + (UIViewController *)findSuperViewController:(UIView *)view
 {
     UIResponder *responder = view;

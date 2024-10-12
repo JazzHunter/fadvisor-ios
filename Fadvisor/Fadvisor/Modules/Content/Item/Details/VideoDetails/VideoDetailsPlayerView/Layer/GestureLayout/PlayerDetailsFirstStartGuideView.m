@@ -108,7 +108,7 @@ static const CGFloat FirstStartGuideViewLeftIVHeight = 58;   //leftImageView 高
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+        self.backgroundColor = [UIColor maskBgColor];
         [self initUI];
         [self initText];
     }

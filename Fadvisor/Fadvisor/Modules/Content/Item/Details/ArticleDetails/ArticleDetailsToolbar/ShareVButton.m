@@ -7,7 +7,7 @@
 
 #import "ShareVButton.h"
 #import "ImageButton.h"
-#import "SharePanel.h"
+#import "ContentSharePanel.h"
 
 @interface ShareVButton()
 
@@ -60,7 +60,7 @@
 - (void)tapped:(UIView *)sender {
     UIImpactFeedbackGenerator *impactLight = [[UIImpactFeedbackGenerator alloc]initWithStyle:UIImpactFeedbackStyleLight];
     [impactLight impactOccurred];
-    [[SharePanel manager] showPanelWithItem:self.itemModel];
+    [[ContentSharePanel manager] showPanelWithItem:self.itemModel];
 
 }
 

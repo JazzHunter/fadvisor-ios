@@ -881,7 +881,7 @@
         _screenLockButtonRight = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, kButtonStandardSize, kButtonStandardSize) imageName:@"player_unlock"];
         [_screenLockButtonRight setImage:[UIImage imageNamed:@"player_lock"] forState:UIControlStateSelected];
         [_screenLockButtonRight setImageSize:CGSizeMake(24, 24)];
-        _screenLockButtonRight.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+        _screenLockButtonRight.backgroundColor = [UIColor maskBgColor];
         _screenLockButtonRight.layer.cornerRadius = 6;
         _screenLockButtonRight.layer.masksToBounds = YES;
         [_screenLockButtonRight addTarget:self action:@selector(onScreenLockButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -894,7 +894,7 @@
         _screenLockButtonLeft = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, kButtonStandardSize, kButtonStandardSize) imageName:@"player_unlock"];
         [_screenLockButtonLeft setImage:[UIImage imageNamed:@"player_lock"] forState:UIControlStateSelected];
         [_screenLockButtonLeft setImageSize:CGSizeMake(24, 24)];
-        _screenLockButtonLeft.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+        _screenLockButtonLeft.backgroundColor = [UIColor maskBgColor];
         _screenLockButtonLeft.layer.cornerRadius = 6;
         _screenLockButtonLeft.layer.masksToBounds = YES;
         [_screenLockButtonLeft addTarget:self action:@selector(onScreenLockButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -906,7 +906,7 @@
     if (!_snapshotButton) {
         _snapshotButton = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, kButtonStandardSize, kButtonStandardSize) imageName:@"player_snapshot"];
         [_snapshotButton setImageSize:CGSizeMake(24, 24)];
-        _snapshotButton.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+        _snapshotButton.backgroundColor = [UIColor maskBgColor];
         _snapshotButton.layer.cornerRadius = 6;
         _snapshotButton.layer.masksToBounds = YES;
         [_snapshotButton addTarget:self action:@selector(onSnapshotButtonClicked:) forControlEvents:UIControlEventTouchUpInside];

@@ -12,7 +12,7 @@
 #import "VoteVButton.h"
 #import "FavVButton.h"
 #import "ShareVButton.h"
-#import "SharePanel.h"
+#import "ContentSharePanel.h"
 
 @interface ArticleDetailsToolbarView ()
 

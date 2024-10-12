@@ -9,7 +9,7 @@
 #import "AccountManager.h"
 #import "TabAccountHeaderNotLoginView.h"
 #import "ImageButton.h"
-#import "UserLoginViewController.h"
+#import "LoginVideoViewController.h"
 #import "TabAccountNavigationView.h"
 #import "TabAccountInternalBanner.h"
 #import "TabAccountGeneralFuncsView.h"

@@ -47,6 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UIViewController *)currentViewController;
 
++ (UINavigationController *)currentNavigationController;
+
 + (UIViewController *)findSuperViewController:(UIView *)view;
 
 //根据s-》hh:mm:ss

@@ -39,13 +39,10 @@
         .LeeAction(@"好的", ^{})
         .LeeShow();
     }
-
+    
     // ⚠️ 友盟初始化
-//    [UMengHelper UMStart:ThirdSDKUMConfigInstanceAppKey channel:ThirdSDKUMConfigInstanceChannelId];
-//    [UMengHelper UMAnalyticStart];
-//    [UMengHelper UMSocialStart:ThirdSDKQQAppKey wechatAppKey:ThirdSDKWeChatAppKey wechatAppSecret:ThirdSDKWeChatAppSecret weiboAppKey:ThirdSDKWeiboAppKey weiboAppSecret:ThirdSDKWeiboAppSecret weiboCallback:ThirdSDKWeiboCallback];
-//    [UMengHelper UMPushStart:launchOptions delegate:self];
-
+    [self initUM];
+    
     
 //    [PopCommentInputManager manager];
     #if DEBUG
@@ -54,6 +51,7 @@
 
     return YES;
 }
+
 
 #pragma mark - NSUserDefaults 默认值
 //注册NSUserDefaults设置的默认值
@@ -69,13 +67,27 @@
     }
 }
 
-#pragma mark
+#pragma mark - 初始化开发工具
 - (void)startDevelopTools {
     // ⚠️ InjectionIII
-    [[NSBundle bundleWithPath:@"/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle"] load];
+//    [[NSBundle bundleWithPath:@"/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle"] load];
     // ⚠️ Doraemon
 //    [[DoraemonManager shareInstance] install];
 }
+
+- (void) initUM {
+    // 根据App相关监管规定，未进行合规配置的App或将面临通报处罚或下架风险。
+    // 为了确保您的App合规，您所运营App的SDK必须在《隐私政策》中明确告知用户，并做好延迟初始化配置，确保用户同意《隐私政策》后，再进行初始化SDK数据采集。
+    // 为了避免您的App被下架，请您务必参考以下文档完成进行合规配置： https://developer.umeng.com/docs/147377/detail/213789
+    
+    [UMengHelper UMStart:ThirdSDKUMConfigInstanceAppKey channel:ThirdSDKUMConfigInstanceChannelId];
+    [UMengHelper UMVerifyStart];
+    [UMengHelper UMSocialStart:ThirdSDKQQAppKey wechatAppKey:ThirdSDKWeChatAppKey wechatAppSecret:ThirdSDKWeChatAppSecret weiboAppKey:ThirdSDKWeiboAppKey weiboAppSecret:ThirdSDKWeiboAppSecret weiboCallback:ThirdSDKWeiboCallback];
+    //    [UMengHelper UMAnalyticStart];
+    
+    //    [UMengHelper UMPushStart:launchOptions delegate:self];
+}
+
 
 //设置UM系统回调
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {

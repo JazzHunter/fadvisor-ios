@@ -66,16 +66,13 @@
 		C1504E8D2C6C650700469DBD /* FavVButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C1504E8C2C6C650700469DBD /* FavVButton.m */; };
 		C15105352B5EB797006FA262 /* VideoDetailsContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C15105342B5EB797006FA262 /* VideoDetailsContentViewController.m */; };
 		C1518C892CB29A81002A37E7 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518C882CB29A81002A37E7 /* ListViewController.m */; };
-		C151FF3A2B9C13FE009EEC02 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C151FF212B9C13FE009EEC02 /* MASCompositeConstraint.m */; };
-		C151FF3B2B9C13FE009EEC02 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C151FF232B9C13FE009EEC02 /* MASConstraint.m */; };
-		C151FF3C2B9C13FE009EEC02 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = C151FF262B9C13FE009EEC02 /* MASConstraintMaker.m */; };
-		C151FF3D2B9C13FE009EEC02 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C151FF282B9C13FE009EEC02 /* MASLayoutConstraint.m */; };
-		C151FF3E2B9C13FE009EEC02 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = C151FF2C2B9C13FE009EEC02 /* MASViewAttribute.m */; };
-		C151FF3F2B9C13FE009EEC02 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C151FF2E2B9C13FE009EEC02 /* MASViewConstraint.m */; };
-		C151FF402B9C13FE009EEC02 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C151FF302B9C13FE009EEC02 /* NSArray+MASAdditions.m */; };
-		C151FF412B9C13FE009EEC02 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C151FF332B9C13FE009EEC02 /* NSLayoutConstraint+MASDebugAdditions.m */; };
-		C151FF422B9C13FE009EEC02 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C151FF352B9C13FE009EEC02 /* View+MASAdditions.m */; };
-		C151FF432B9C13FE009EEC02 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = C151FF382B9C13FE009EEC02 /* ViewController+MASAdditions.m */; };
+		C1518CDA2CB7537B002A37E7 /* UMengVerifyHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518CD92CB7537B002A37E7 /* UMengVerifyHelper.m */; };
+		C1518CDD2CB82787002A37E7 /* BaseRelativeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518CDC2CB82787002A37E7 /* BaseRelativeViewController.m */; };
+		C1518CE02CB82BD4002A37E7 /* LoginSmsSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518CDF2CB82BD4002A37E7 /* LoginSmsSendViewController.m */; };
+		C1518CE32CBA1418002A37E7 /* UITextField+Format.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518CE22CBA1418002A37E7 /* UITextField+Format.m */; };
+		C1518CE62CBA5209002A37E7 /* LoginAgreementsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518CE52CBA5209002A37E7 /* LoginAgreementsLabel.m */; };
+		C1518CEA2CBA637F002A37E7 /* LoginSocialButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518CE92CBA637F002A37E7 /* LoginSocialButtonsView.m */; };
+		C1518CEE2CBACA7D002A37E7 /* LoginPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518CED2CBACA7D002A37E7 /* LoginPanel.m */; };
 		C151FF462B9CCFFA009EEC02 /* UITextView+WZB.m in Sources */ = {isa = PBXBuildFile; fileRef = C151FF442B9CCFFA009EEC02 /* UITextView+WZB.m */; };
 		C151FF492B9D5060009EEC02 /* PopCommentInputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C151FF482B9D5060009EEC02 /* PopCommentInputManager.m */; };
 		C155CFFB2B354075004A3AFC /* UIImageView+FitNet.m in Sources */ = {isa = PBXBuildFile; fileRef = C155CFFA2B354075004A3AFC /* UIImageView+FitNet.m */; };
@@ -256,11 +253,11 @@
 		C1BA9C7E2B1B8EEC00D82BC1 /* RichTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BA9C7D2B1B8EEC00D82BC1 /* RichTextView.m */; };
 		C1BDC1362B3127BB003D67FC /* UserProfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BDC1352B3127BB003D67FC /* UserProfileModel.m */; };
 		C1BDC13B2B313B9C003D67FC /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BDC13A2B313B9C003D67FC /* LoginService.m */; };
-		C1BDC13F2B31A9AF003D67FC /* UserLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BDC13E2B31A9AF003D67FC /* UserLoginViewController.m */; };
+		C1BDC13F2B31A9AF003D67FC /* LoginVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BDC13E2B31A9AF003D67FC /* LoginVideoViewController.m */; };
 		C1BDC1422B31AADB003D67FC /* TabAccountHeaderNotLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BDC1412B31AADB003D67FC /* TabAccountHeaderNotLoginView.m */; };
 		C1CEB7C32B1E1C2900AA8490 /* BaseScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7C22B1E1C2900AA8490 /* BaseScrollViewController.m */; };
 		C1CEB7CB2B20B1D400AA8490 /* LEECoolButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7CA2B20B1D400AA8490 /* LEECoolButton.m */; };
-		C1CEB7DB2B22B77400AA8490 /* SharePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7DA2B22B77400AA8490 /* SharePanel.m */; };
+		C1CEB7DB2B22B77400AA8490 /* ContentSharePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7DA2B22B77400AA8490 /* ContentSharePanel.m */; };
 		C1CEB7DF2B23757C00AA8490 /* SkeletonPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7DD2B23757C00AA8490 /* SkeletonPageView.m */; };
 		C1CEB7E12B245E5700AA8490 /* AlivcLicense.crt in Resources */ = {isa = PBXBuildFile; fileRef = C1CEB7E02B245E5700AA8490 /* AlivcLicense.crt */; };
 		C1CEB7E52B24629400AA8490 /* VideoDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7E42B24629400AA8490 /* VideoDetailsViewController.m */; };
@@ -302,7 +299,6 @@
 		C1FB990A2B1839D3002DA461 /* ContentExcepitonView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */; };
 		C1FE82932B387D3B00F607F8 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE82922B387D3B00F607F8 /* Theme.m */; };
 		C1FE829B2B38948900F607F8 /* UIImage+FitNet.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE829A2B38948900F607F8 /* UIImage+FitNet.m */; };
-		C1FE82A12B38B74200F607F8 /* ToastView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE829F2B38B74200F607F8 /* ToastView.m */; };
 		C1FE82A42B38BBE500F607F8 /* NetworkReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FE82A32B38BBE500F607F8 /* NetworkReachability.m */; };
 /* End PBXBuildFile section */
 
@@ -456,31 +452,20 @@
 		C15105342B5EB797006FA262 /* VideoDetailsContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoDetailsContentViewController.m; sourceTree = "<group>"; };
 		C1518C872CB29A81002A37E7 /* ListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		C1518C882CB29A81002A37E7 /* ListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
-		C151FF202B9C13FE009EEC02 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
-		C151FF212B9C13FE009EEC02 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
-		C151FF222B9C13FE009EEC02 /* MASConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraint.h; sourceTree = "<group>"; };
-		C151FF232B9C13FE009EEC02 /* MASConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraint.m; sourceTree = "<group>"; };
-		C151FF242B9C13FE009EEC02 /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
-		C151FF252B9C13FE009EEC02 /* MASConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraintMaker.h; sourceTree = "<group>"; };
-		C151FF262B9C13FE009EEC02 /* MASConstraintMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraintMaker.m; sourceTree = "<group>"; };
-		C151FF272B9C13FE009EEC02 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASLayoutConstraint.h; sourceTree = "<group>"; };
-		C151FF282B9C13FE009EEC02 /* MASLayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASLayoutConstraint.m; sourceTree = "<group>"; };
-		C151FF292B9C13FE009EEC02 /* Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Masonry.h; sourceTree = "<group>"; };
-		C151FF2A2B9C13FE009EEC02 /* MASUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASUtilities.h; sourceTree = "<group>"; };
-		C151FF2B2B9C13FE009EEC02 /* MASViewAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewAttribute.h; sourceTree = "<group>"; };
-		C151FF2C2B9C13FE009EEC02 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
-		C151FF2D2B9C13FE009EEC02 /* MASViewConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewConstraint.h; sourceTree = "<group>"; };
-		C151FF2E2B9C13FE009EEC02 /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
-		C151FF2F2B9C13FE009EEC02 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASAdditions.h"; sourceTree = "<group>"; };
-		C151FF302B9C13FE009EEC02 /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MASAdditions.m"; sourceTree = "<group>"; };
-		C151FF312B9C13FE009EEC02 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		C151FF322B9C13FE009EEC02 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
-		C151FF332B9C13FE009EEC02 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
-		C151FF342B9C13FE009EEC02 /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASAdditions.h"; sourceTree = "<group>"; };
-		C151FF352B9C13FE009EEC02 /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
-		C151FF362B9C13FE009EEC02 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		C151FF372B9C13FE009EEC02 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
-		C151FF382B9C13FE009EEC02 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+MASAdditions.m"; sourceTree = "<group>"; };
+		C1518CD82CB7537B002A37E7 /* UMengVerifyHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMengVerifyHelper.h; sourceTree = "<group>"; };
+		C1518CD92CB7537B002A37E7 /* UMengVerifyHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMengVerifyHelper.m; sourceTree = "<group>"; };
+		C1518CDB2CB82787002A37E7 /* BaseRelativeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseRelativeViewController.h; sourceTree = "<group>"; };
+		C1518CDC2CB82787002A37E7 /* BaseRelativeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseRelativeViewController.m; sourceTree = "<group>"; };
+		C1518CDE2CB82BD4002A37E7 /* LoginSmsSendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginSmsSendViewController.h; sourceTree = "<group>"; };
+		C1518CDF2CB82BD4002A37E7 /* LoginSmsSendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginSmsSendViewController.m; sourceTree = "<group>"; };
+		C1518CE12CBA1418002A37E7 /* UITextField+Format.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+Format.h"; sourceTree = "<group>"; };
+		C1518CE22CBA1418002A37E7 /* UITextField+Format.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Format.m"; sourceTree = "<group>"; };
+		C1518CE42CBA5209002A37E7 /* LoginAgreementsLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginAgreementsLabel.h; sourceTree = "<group>"; };
+		C1518CE52CBA5209002A37E7 /* LoginAgreementsLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginAgreementsLabel.m; sourceTree = "<group>"; };
+		C1518CE82CBA637F002A37E7 /* LoginSocialButtonsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginSocialButtonsView.h; sourceTree = "<group>"; };
+		C1518CE92CBA637F002A37E7 /* LoginSocialButtonsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginSocialButtonsView.m; sourceTree = "<group>"; };
+		C1518CEC2CBACA7D002A37E7 /* LoginPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginPanel.h; sourceTree = "<group>"; };
+		C1518CED2CBACA7D002A37E7 /* LoginPanel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginPanel.m; sourceTree = "<group>"; };
 		C151FF442B9CCFFA009EEC02 /* UITextView+WZB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+WZB.m"; sourceTree = "<group>"; };
 		C151FF452B9CCFFA009EEC02 /* UITextView+WZB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+WZB.h"; sourceTree = "<group>"; };
 		C151FF472B9D5060009EEC02 /* PopCommentInputManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopCommentInputManager.h; sourceTree = "<group>"; };
@@ -841,7 +826,6 @@
 		C1B0CEEE2B08DE0100A1173E /* TagModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TagModel.m; sourceTree = "<group>"; };
 		C1B0CEF12B090A6600A1173E /* AccountManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
 		C1B0CEF22B090A6600A1173E /* AccountManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
-		C1B0CEF52B09AF2F00A1173E /* BaseEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseEnum.h; sourceTree = "<group>"; };
 		C1BA9C752B1B489200D82BC1 /* BaseCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCollectionViewController.h; sourceTree = "<group>"; };
 		C1BA9C762B1B489200D82BC1 /* BaseCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCollectionViewController.m; sourceTree = "<group>"; };
 		C1BA9C792B1B48A100D82BC1 /* VerticalFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerticalFlowLayout.m; sourceTree = "<group>"; };
@@ -853,16 +837,16 @@
 		C1BDC1382B312F91003D67FC /* UserEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserEnum.h; sourceTree = "<group>"; };
 		C1BDC1392B313B9C003D67FC /* LoginService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
 		C1BDC13A2B313B9C003D67FC /* LoginService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
-		C1BDC13D2B31A9AF003D67FC /* UserLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserLoginViewController.h; sourceTree = "<group>"; };
-		C1BDC13E2B31A9AF003D67FC /* UserLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserLoginViewController.m; sourceTree = "<group>"; };
+		C1BDC13D2B31A9AF003D67FC /* LoginVideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginVideoViewController.h; sourceTree = "<group>"; };
+		C1BDC13E2B31A9AF003D67FC /* LoginVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginVideoViewController.m; sourceTree = "<group>"; };
 		C1BDC1402B31AADB003D67FC /* TabAccountHeaderNotLoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabAccountHeaderNotLoginView.h; sourceTree = "<group>"; };
 		C1BDC1412B31AADB003D67FC /* TabAccountHeaderNotLoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabAccountHeaderNotLoginView.m; sourceTree = "<group>"; };
 		C1CEB7C12B1E1C2900AA8490 /* BaseScrollViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseScrollViewController.h; sourceTree = "<group>"; };
 		C1CEB7C22B1E1C2900AA8490 /* BaseScrollViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseScrollViewController.m; sourceTree = "<group>"; };
 		C1CEB7C92B20B1D400AA8490 /* LEECoolButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LEECoolButton.h; sourceTree = "<group>"; };
 		C1CEB7CA2B20B1D400AA8490 /* LEECoolButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LEECoolButton.m; sourceTree = "<group>"; };
-		C1CEB7D92B22B77400AA8490 /* SharePanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharePanel.h; sourceTree = "<group>"; };
-		C1CEB7DA2B22B77400AA8490 /* SharePanel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharePanel.m; sourceTree = "<group>"; };
+		C1CEB7D92B22B77400AA8490 /* ContentSharePanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentSharePanel.h; sourceTree = "<group>"; };
+		C1CEB7DA2B22B77400AA8490 /* ContentSharePanel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContentSharePanel.m; sourceTree = "<group>"; };
 		C1CEB7DD2B23757C00AA8490 /* SkeletonPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkeletonPageView.m; sourceTree = "<group>"; };
 		C1CEB7DE2B23757C00AA8490 /* SkeletonPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkeletonPageView.h; sourceTree = "<group>"; };
 		C1CEB7E02B245E5700AA8490 /* AlivcLicense.crt */ = {isa = PBXFileReference; lastKnownFileType = text; path = AlivcLicense.crt; sourceTree = "<group>"; };
@@ -945,8 +929,6 @@
 		C1FE82922B387D3B00F607F8 /* Theme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Theme.m; sourceTree = "<group>"; };
 		C1FE82992B38948900F607F8 /* UIImage+FitNet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+FitNet.h"; sourceTree = "<group>"; };
 		C1FE829A2B38948900F607F8 /* UIImage+FitNet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FitNet.m"; sourceTree = "<group>"; };
-		C1FE829F2B38B74200F607F8 /* ToastView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToastView.m; sourceTree = "<group>"; };
-		C1FE82A02B38B74200F607F8 /* ToastView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToastView.h; sourceTree = "<group>"; };
 		C1FE82A22B38BBE500F607F8 /* NetworkReachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkReachability.h; sourceTree = "<group>"; };
 		C1FE82A32B38BBE500F607F8 /* NetworkReachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkReachability.m; sourceTree = "<group>"; };
 		C8126B4E9064B917D59445AB /* Pods-FadvisorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FadvisorTests.debug.xcconfig"; path = "Target Support Files/Pods-FadvisorTests/Pods-FadvisorTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1269,52 +1251,45 @@
 			path = VideoDetailsContent;
 			sourceTree = "<group>";
 		};
-		C15105372B60C5B1006FA262 /* Toast */ = {
+		C1518C8A2CB56CB2002A37E7 /* LoginVideoViewController */ = {
 			isa = PBXGroup;
 			children = (
-				C1FE82A02B38B74200F607F8 /* ToastView.h */,
-				C1FE829F2B38B74200F607F8 /* ToastView.m */,
+				C15018442B85BF4700847E16 /* RSMaskedLabel.h */,
+				C15018432B85BF4700847E16 /* RSMaskedLabel.m */,
+				C1BDC13D2B31A9AF003D67FC /* LoginVideoViewController.h */,
+				C1BDC13E2B31A9AF003D67FC /* LoginVideoViewController.m */,
+				C12ABE172B84F1BA0065F84B /* MaskedLoginButton.h */,
+				C12ABE182B84F1BA0065F84B /* MaskedLoginButton.m */,
 			);
-			path = Toast;
+			path = LoginVideoViewController;
 			sourceTree = "<group>";
 		};
-		C151FF392B9C13FE009EEC02 /* Masonry */ = {
+		C1518CD72CB750A1002A37E7 /* UMengVerifyHelper */ = {
 			isa = PBXGroup;
 			children = (
-				C151FF202B9C13FE009EEC02 /* MASCompositeConstraint.h */,
-				C151FF212B9C13FE009EEC02 /* MASCompositeConstraint.m */,
-				C151FF222B9C13FE009EEC02 /* MASConstraint.h */,
-				C151FF232B9C13FE009EEC02 /* MASConstraint.m */,
-				C151FF242B9C13FE009EEC02 /* MASConstraint+Private.h */,
-				C151FF252B9C13FE009EEC02 /* MASConstraintMaker.h */,
-				C151FF262B9C13FE009EEC02 /* MASConstraintMaker.m */,
-				C151FF272B9C13FE009EEC02 /* MASLayoutConstraint.h */,
-				C151FF282B9C13FE009EEC02 /* MASLayoutConstraint.m */,
-				C151FF292B9C13FE009EEC02 /* Masonry.h */,
-				C151FF2A2B9C13FE009EEC02 /* MASUtilities.h */,
-				C151FF2B2B9C13FE009EEC02 /* MASViewAttribute.h */,
-				C151FF2C2B9C13FE009EEC02 /* MASViewAttribute.m */,
-				C151FF2D2B9C13FE009EEC02 /* MASViewConstraint.h */,
-				C151FF2E2B9C13FE009EEC02 /* MASViewConstraint.m */,
-				C151FF2F2B9C13FE009EEC02 /* NSArray+MASAdditions.h */,
-				C151FF302B9C13FE009EEC02 /* NSArray+MASAdditions.m */,
-				C151FF312B9C13FE009EEC02 /* NSArray+MASShorthandAdditions.h */,
-				C151FF322B9C13FE009EEC02 /* NSLayoutConstraint+MASDebugAdditions.h */,
-				C151FF332B9C13FE009EEC02 /* NSLayoutConstraint+MASDebugAdditions.m */,
-				C151FF342B9C13FE009EEC02 /* View+MASAdditions.h */,
-				C151FF352B9C13FE009EEC02 /* View+MASAdditions.m */,
-				C151FF362B9C13FE009EEC02 /* View+MASShorthandAdditions.h */,
-				C151FF372B9C13FE009EEC02 /* ViewController+MASAdditions.h */,
-				C151FF382B9C13FE009EEC02 /* ViewController+MASAdditions.m */,
+				C1518CD82CB7537B002A37E7 /* UMengVerifyHelper.h */,
+				C1518CD92CB7537B002A37E7 /* UMengVerifyHelper.m */,
 			);
-			path = Masonry;
+			path = UMengVerifyHelper;
+			sourceTree = "<group>";
+		};
+		C1518CEB2CBA6386002A37E7 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C1518CE12CBA1418002A37E7 /* UITextField+Format.h */,
+				C1518CE22CBA1418002A37E7 /* UITextField+Format.m */,
+				C1518CE42CBA5209002A37E7 /* LoginAgreementsLabel.h */,
+				C1518CE52CBA5209002A37E7 /* LoginAgreementsLabel.m */,
+				C1518CE82CBA637F002A37E7 /* LoginSocialButtonsView.h */,
+				C1518CE92CBA637F002A37E7 /* LoginSocialButtonsView.m */,
+			);
+			path = "Support Files";
 			sourceTree = "<group>";
 		};
 		C155CFFD2B35D125004A3AFC /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
 				C13C3F3B2C32A2FA00FD25E2 /* GKPageScrollView */,
-				C151FF392B9C13FE009EEC02 /* Masonry */,
 				C1591ADE2AFE771100351431 /* XYColorOC */,
 				C1CEB7C82B20B1D400AA8490 /* LEECoolButton */,
 				C1591AA22AFE2EBD00351431 /* FTPopOverMenu */,
@@ -1358,7 +1333,6 @@
 				C1591AB42AFE316F00351431 /* MainTabBar */,
 				C1591A982AFE2EBD00351431 /* Modules */,
 				C159196B2AFDCEEF00351431 /* Helpers */,
-				C15919502AFDCE4900351431 /* Categories */,
 				C1591A6F2AFDCF9700351431 /* Support Files */,
 			);
 			path = Fadvisor;
@@ -1438,6 +1412,7 @@
 				C12DC15C2B9DE10B0099AFE2 /* LJKAudioCallAssistiveTouchView.m */,
 				C12DC15E2B9DE3CA0099AFE2 /* DemoAudioCallViewController.h */,
 				C12DC15F2B9DE3CA0099AFE2 /* DemoAudioCallViewController.m */,
+				C15919502AFDCE4900351431 /* Categories */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1722,7 +1697,6 @@
 				C1591A722AFDD0E200351431 /* Macro.h */,
 				C1591A712AFDCFAC00351431 /* CacheKey.h */,
 				C1591A702AFDCFAC00351431 /* Constants.h */,
-				C1B0CEF52B09AF2F00A1173E /* BaseEnum.h */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -1732,14 +1706,12 @@
 			children = (
 				C13C3F262C30E76700FD25E2 /* FullScreenGestureScrollView.h */,
 				C13C3F252C30E76700FD25E2 /* FullScreenGestureScrollView.m */,
-				C15105372B60C5B1006FA262 /* Toast */,
 				C155CFFF2B35D7E6004A3AFC /* PresentAnimator.h */,
 				C155D0002B35D7E6004A3AFC /* PresentAnimator.m */,
 				C10C4C6F2B33C81A00099CF2 /* CustomImageButton */,
 				C1591AD52AFE422D00351431 /* RefreshFooter */,
 				C1591AD82AFE422E00351431 /* RefreshHeader */,
 				C1591AD22AFE422D00351431 /* NavigationBar */,
-				C1CEB7D82B22B57200AA8490 /* SharePanel */,
 				C1BA9C802B1CC01400D82BC1 /* RichTextView */,
 				C1591A9F2AFE2EBD00351431 /* SkeletonPageView */,
 				C1591A992AFE2EBD00351431 /* NotificationView */,
@@ -2232,12 +2204,15 @@
 		C1BDC13C2B31A98D003D67FC /* UserLogin */ = {
 			isa = PBXGroup;
 			children = (
-				C15018442B85BF4700847E16 /* RSMaskedLabel.h */,
-				C15018432B85BF4700847E16 /* RSMaskedLabel.m */,
-				C1BDC13D2B31A9AF003D67FC /* UserLoginViewController.h */,
-				C1BDC13E2B31A9AF003D67FC /* UserLoginViewController.m */,
-				C12ABE172B84F1BA0065F84B /* MaskedLoginButton.h */,
-				C12ABE182B84F1BA0065F84B /* MaskedLoginButton.m */,
+				C1518CEB2CBA6386002A37E7 /* Support Files */,
+				C1518CDB2CB82787002A37E7 /* BaseRelativeViewController.h */,
+				C1518CDC2CB82787002A37E7 /* BaseRelativeViewController.m */,
+				C1518C8A2CB56CB2002A37E7 /* LoginVideoViewController */,
+				C1518CD72CB750A1002A37E7 /* UMengVerifyHelper */,
+				C1518CDE2CB82BD4002A37E7 /* LoginSmsSendViewController.h */,
+				C1518CDF2CB82BD4002A37E7 /* LoginSmsSendViewController.m */,
+				C1518CEC2CBACA7D002A37E7 /* LoginPanel.h */,
+				C1518CED2CBACA7D002A37E7 /* LoginPanel.m */,
 			);
 			path = UserLogin;
 			sourceTree = "<group>";
@@ -2245,6 +2220,8 @@
 		C1BDC14A2B31ED78003D67FC /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				C1CEB7D92B22B77400AA8490 /* ContentSharePanel.h */,
+				C1CEB7DA2B22B77400AA8490 /* ContentSharePanel.m */,
 				C1D0A0552B8A2B25000BEBDE /* ContentActionEventType.h */,
 				C1FB99082B1839D3002DA461 /* ContentExcepitonView.h */,
 				C1FB99092B1839D3002DA461 /* ContentExcepitonView.m */,
@@ -2274,15 +2251,6 @@
 				C1CEB7CA2B20B1D400AA8490 /* LEECoolButton.m */,
 			);
 			path = LEECoolButton;
-			sourceTree = "<group>";
-		};
-		C1CEB7D82B22B57200AA8490 /* SharePanel */ = {
-			isa = PBXGroup;
-			children = (
-				C1CEB7D92B22B77400AA8490 /* SharePanel.h */,
-				C1CEB7DA2B22B77400AA8490 /* SharePanel.m */,
-			);
-			path = SharePanel;
 			sourceTree = "<group>";
 		};
 		C1CEB7E22B24625C00AA8490 /* VideoDetails */ = {
@@ -2828,9 +2796,7 @@
 				C15919672AFDCE4900351431 /* UIButton+Additions.m in Sources */,
 				C1591A4F2AFDCF0400351431 /* UIImage+YYAdd.m in Sources */,
 				C1591A602AFDCF0400351431 /* YYCGUtilities.m in Sources */,
-				C151FF432B9C13FE009EEC02 /* ViewController+MASAdditions.m in Sources */,
 				C1591A312AFDCF0400351431 /* YYTextMagnifier.m in Sources */,
-				C151FF3A2B9C13FE009EEC02 /* MASCompositeConstraint.m in Sources */,
 				C1591A632AFDCF0400351431 /* YYAsyncLayer.m in Sources */,
 				C1591A572AFDCF0400351431 /* NSThread+YYAdd.m in Sources */,
 				C1CEB7CB2B20B1D400AA8490 /* LEECoolButton.m in Sources */,
@@ -2844,6 +2810,7 @@
 				C19B2BB42B7D27C000BC6384 /* UIImage+Additions.m in Sources */,
 				C1ABA46F2B0C572E00CA6E7B /* NotificationView.m in Sources */,
 				C151FF462B9CCFFA009EEC02 /* UITextView+WZB.m in Sources */,
+				C1518CDA2CB7537B002A37E7 /* UMengVerifyHelper.m in Sources */,
 				C15919622AFDCE4900351431 /* UIScrollView+Additions.m in Sources */,
 				C18D2EAE2C37A094003F4073 /* GKPageSmoothView.m in Sources */,
 				C1591A532AFDCF0400351431 /* NSNumber+YYAdd.m in Sources */,
@@ -2895,8 +2862,9 @@
 				C18D2EAB2C37A08E003F4073 /* GKPageListContainerView.m in Sources */,
 				C1591A342AFDCF0400351431 /* YYTextInput.m in Sources */,
 				C1E930ED2C68C9A300D8D0A1 /* Attachments.m in Sources */,
-				C1CEB7DB2B22B77400AA8490 /* SharePanel.m in Sources */,
+				C1CEB7DB2B22B77400AA8490 /* ContentSharePanel.m in Sources */,
 				C10BDAEC2B4E2C1400C40BEC /* PlayerDetailsPreviewView.m in Sources */,
+				C1518CDD2CB82787002A37E7 /* BaseRelativeViewController.m in Sources */,
 				C1D0A0632B8A4237000BEBDE /* AuthorInList.m in Sources */,
 				C159196A2AFDCE5600351431 /* NSBundle+Additions.m in Sources */,
 				C18D2EA82C37A08E003F4073 /* GKPageDefine.m in Sources */,
@@ -2906,10 +2874,8 @@
 				C1591A502AFDCF0400351431 /* UIControl+YYAdd.m in Sources */,
 				C17BC70C2C6DD65B008C0E14 /* CollItemsService.m in Sources */,
 				C1F624D02BA3E29600CF1EBC /* TabAccountGeneralFuncsView.m in Sources */,
-				C151FF3F2B9C13FE009EEC02 /* MASViewConstraint.m in Sources */,
 				C1BA9C7B2B1B48A100D82BC1 /* VerticalFlowLayout.m in Sources */,
 				C16395F02B57FCE300B2C71D /* VideoDetailsModel.m in Sources */,
-				C1FE82A12B38B74200F607F8 /* ToastView.m in Sources */,
 				C1F624C52B9FFAB000CF1EBC /* TabAccountInternalBanner.m in Sources */,
 				C13F577A2B86196A003ADE05 /* UIInterface+HXRotation.m in Sources */,
 				C19E77E62BAEC040005F1776 /* DocDetailsHeaderView.m in Sources */,
@@ -2932,7 +2898,6 @@
 				C1D17F222B890B0700026EF7 /* AlivcCacheGlobalSetting.m in Sources */,
 				C1E930E72C68447000D8D0A1 /* RelatedItems.m in Sources */,
 				C1E930E42C67D9FC00D8D0A1 /* ContentTags.m in Sources */,
-				C151FF3C2B9C13FE009EEC02 /* MASConstraintMaker.m in Sources */,
 				C1E930F12C690FB600D8D0A1 /* Collections.m in Sources */,
 				C10BDADB2B4D908900C40BEC /* PlayerDetailsControlBottomView.m in Sources */,
 				C1E8829B2B92C7EC0017521C /* CommentSetTableViewCell.m in Sources */,
@@ -2942,12 +2907,12 @@
 				C1591A252AFDCF0400351431 /* YYImageCoder.m in Sources */,
 				C1591A2A2AFDCF0400351431 /* MKAnnotationView+YYWebImage.m in Sources */,
 				C12B09A82B13973600108664 /* MediaModel.m in Sources */,
-				C151FF402B9C13FE009EEC02 /* NSArray+MASAdditions.m in Sources */,
 				C1504E892C6C449300469DBD /* VoteVButton.m in Sources */,
 				C1E930F72C6A525700D8D0A1 /* ArticleDetailsCollItemsSectionView.m in Sources */,
 				C1E0F8D72C303A8100D88102 /* DocDetailsTabSnapshotViewController.m in Sources */,
 				C12B09A12B1389B500108664 /* ItemDetailsService.m in Sources */,
 				C13C3F2E2C315C3900FD25E2 /* AuthorDetailsViewController.m in Sources */,
+				C1518CEA2CBA637F002A37E7 /* LoginSocialButtonsView.m in Sources */,
 				C142C4DD2CA7AFC00029AFF2 /* ColumnDetailsHeaderView.m in Sources */,
 				C1591AEE2AFE771100351431 /* UIColor+XYColorOC.m in Sources */,
 				C12ABE192B84F1BA0065F84B /* MaskedLoginButton.m in Sources */,
@@ -2977,12 +2942,11 @@
 				C19B2BC32B7E27E900BC6384 /* PlayerZFVolumeBrightnessView.m in Sources */,
 				C1591A3D2AFDCF0400351431 /* NSParagraphStyle+YYText.m in Sources */,
 				C1591ADC2AFE422E00351431 /* AutoRefreshFooter.m in Sources */,
-				C151FF412B9C13FE009EEC02 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				C1518C892CB29A81002A37E7 /* ListViewController.m in Sources */,
 				C1591A6D2AFDCF0400351431 /* YYReachability.m in Sources */,
 				C1591AF32AFE776D00351431 /* TabHomeRcmdViewController.m in Sources */,
 				C16782752B875E310092326F /* PlayerDetailsPopErrorView.m in Sources */,
-				C1BDC13F2B31A9AF003D67FC /* UserLoginViewController.m in Sources */,
+				C1BDC13F2B31A9AF003D67FC /* LoginVideoViewController.m in Sources */,
 				C11AF0402C62619C0006E49D /* TabHomeRcmdAuthorCard.m in Sources */,
 				C1591AFD2AFE781F00351431 /* TabDiscoveryViewController.m in Sources */,
 				C1591A282AFDCF0400351431 /* UIButton+YYWebImage.m in Sources */,
@@ -3046,12 +3010,12 @@
 				C1D17F1F2B8901E300026EF7 /* PlayerDetailsBottomProgressView.m in Sources */,
 				C10BDAD52B4D908900C40BEC /* PlayerDetailsControlTopView.m in Sources */,
 				C12ABE1C2B8586700065F84B /* PlayerDetailsSpeedTips.m in Sources */,
+				C1518CEE2CBACA7D002A37E7 /* LoginPanel.m in Sources */,
 				C17BC70F2C6E286B008C0E14 /* ItemInListTableViewCell.m in Sources */,
 				C1E018762B96C46C00FF9CB5 /* PopRepliesNavViewController.m in Sources */,
 				C1591A552AFDCF0400351431 /* NSObject+YYAdd.m in Sources */,
 				C1591AED2AFE771100351431 /* CALayer+XYColorOC.m in Sources */,
 				C19E77E32BAEB4DD005F1776 /* DocDetailsModel.m in Sources */,
-				C151FF3D2B9C13FE009EEC02 /* MASLayoutConstraint.m in Sources */,
 				C1591A672AFDCF0400351431 /* YYDispatchQueuePool.m in Sources */,
 				C1EB069D2B9708AA005A87AA /* PopRepliesViewController.m in Sources */,
 				C14D7FF92CA9A4B400D7D523 /* ColumnDetailsItemsViewController.m in Sources */,
@@ -3061,6 +3025,7 @@
 				C1591ACF2AFE419300351431 /* BaseViewController.m in Sources */,
 				C1591A622AFDCF0400351431 /* YYWeakProxy.m in Sources */,
 				C12B09932B107C7400108664 /* ArticleDetailsViewController.m in Sources */,
+				C1518CE02CB82BD4002A37E7 /* LoginSmsSendViewController.m in Sources */,
 				C1591A3F2AFDCF0400351431 /* NSAttributedString+YYText.m in Sources */,
 				C1591ADB2AFE422E00351431 /* NavigationBar.m in Sources */,
 				C1591A302AFDCF0400351431 /* YYTextView.m in Sources */,
@@ -3073,10 +3038,10 @@
 				C1FB990A2B1839D3002DA461 /* ContentExcepitonView.m in Sources */,
 				C17BC7032C6CDB3F008C0E14 /* MoreItemsView.m in Sources */,
 				C1591A322AFDCF0400351431 /* YYTextContainerView.m in Sources */,
-				C151FF422B9C13FE009EEC02 /* View+MASAdditions.m in Sources */,
 				C148E3CA2B0EFC7A00DAA612 /* ItemFloatCoverTableViewCell.m in Sources */,
 				C1591A472AFDCF0400351431 /* UIDevice+YYAdd.m in Sources */,
 				C13C401B2C343A3200FD25E2 /* AuthorDetailsResultModel.m in Sources */,
+				C1518CE32CBA1418002A37E7 /* UITextField+Format.m in Sources */,
 				C15018452B85BF4700847E16 /* RSMaskedLabel.m in Sources */,
 				C1591A392AFDCF0400351431 /* YYTextDebugOption.m in Sources */,
 				C1591AEC2AFE771100351431 /* UIView+PrivateView.m in Sources */,
@@ -3085,11 +3050,9 @@
 				C19E77D72BADA1D1005F1776 /* VideoLongCoverTableViewCell.m in Sources */,
 				C15919662AFDCE4900351431 /* UIView+Additions.m in Sources */,
 				C1BDC1362B3127BB003D67FC /* UserProfileModel.m in Sources */,
-				C151FF3E2B9C13FE009EEC02 /* MASViewAttribute.m in Sources */,
 				C1CEB7E52B24629400AA8490 /* VideoDetailsViewController.m in Sources */,
 				C19B2BB72B7DAC8100BC6384 /* DBSlider.m in Sources */,
 				C1828EF82C5DF060006C4F89 /* RcmdAuthorsService.m in Sources */,
-				C151FF3B2B9C13FE009EEC02 /* MASConstraint.m in Sources */,
 				C1CEB7DF2B23757C00AA8490 /* SkeletonPageView.m in Sources */,
 				C19E77DB2BAEB16C005F1776 /* DocDetailsViewController.m in Sources */,
 				C1591A5A2AFDCF0400351431 /* NSObject+YYAddForARC.m in Sources */,
@@ -3102,6 +3065,7 @@
 				C1591AFE2AFE781F00351431 /* TabColumnViewController.m in Sources */,
 				C1F624D32BA4411000CF1EBC /* TabAccountBottomCardsView.m in Sources */,
 				C1591A262AFDCF0400351431 /* YYFrameImage.m in Sources */,
+				C1518CE62CBA5209002A37E7 /* LoginAgreementsLabel.m in Sources */,
 				C1591B662AFFC41500351431 /* BaseResponse.m in Sources */,
 				C15919612AFDCE4900351431 /* UIButton+ViolenceBtn.m in Sources */,
 				C1591A1D2AFDCF0400351431 /* YYDiskCache.m in Sources */,

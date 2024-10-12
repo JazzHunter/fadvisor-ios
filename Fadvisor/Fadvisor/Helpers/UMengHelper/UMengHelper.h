@@ -18,6 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)UMStart:(NSString *)appKey channel:(NSString *)channel;
 /**
+ 初始化一键登录
+ */
++ (void)UMVerifyStart;
+/**
  初始化推送
  */
 + (void)UMPushStart:(NSDictionary *)launchOptions delegate:(id<UNUserNotificationCenterDelegate>)delegate;

@@ -23,7 +23,7 @@
 //        UIEdgeInsets contentInset = self.contentInset;
 //        contentInset.right += kDefaultNavBarHeight;
 //        self.contentInset = contentInset;
-        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+        self.backgroundColor = [UIColor maskBgColor];
 //        self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         MyLinearLayout *contentLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Vert];

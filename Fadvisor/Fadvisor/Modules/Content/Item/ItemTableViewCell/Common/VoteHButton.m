@@ -10,6 +10,9 @@
 #import "VoteHButton.h"
 #import "LEECoolButton.h"
 
+#import "AccountManager.h"
+#import "UMengVerifyHelper.h"
+
 @interface VoteHButton ()
 
 @property (nonatomic, strong) LEECoolButton *iconButton;
@@ -66,6 +69,11 @@
 }
 
 - (void)toggle:(UIView *)sender {
+    if (!ACCOUNT_MANAGER.isLogin) {
+        [UMengVerifyHelper popLoginAlert:sender];
+        return;
+    }
+    
     self.voted = !self.voted;
     [self handleIconToggled:self.voted];
     [self handleTextButtonToggled:self.voted];

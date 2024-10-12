@@ -15,27 +15,42 @@ def base_ui_pods
   pod 'MyLayout'
   # 蒙版
   pod 'MBProgressHUD'
+  
   # 弹出框，非常好用
   pod 'HWPanModal'
   
-  # 友盟 - 推送、统计、分享模块
-  pod 'UMCommon'    # 必须集成
-  pod 'UMDevice'    # 必须集成
-  pod 'UMCCommonLog'  # 可选，日志插件
-  pod 'UMAPM'   # 必选，APM组件，原错误分析升级为独立产品U-APM
-  pod 'UMPush'  # 必选，推送组件，由原来的UMCPush变为UMPush
-  #  分享SDK 在线依赖其它平台仅支持手动集成[友盟+官网-开发者中心-sdk下载页-sdk下载]
-  pod 'UMShare/Social/WeChat'
-  pod 'UMShare/Social/Sina'
-  pod 'UMShare/Social/QQ'
-  pod 'UMShare/Social/Email' # 集成邮件
-  pod 'UMShare/Social/SMS' # 集成短信
+  # Page页切换
+  pod 'JXPagingView/Pager'
+  
+  # 警告框
+  pod 'LEEAlert'
+  
+  # GK 图片浏览器
+#  pod 'GKPhotoBrowser'
+  pod 'GKPhotoBrowser/YY'
   
   # 骨架屏
   pod 'TABAnimated'
   
   # 下拉刷新
   pod 'MJRefresh'
+  
+  # 横向的列表切换
+#  pod 'JXCategoryView'
+  pod 'JXCategoryViewExt/Title'
+  pod 'JXCategoryViewExt/Indicator/Line'
+  pod 'JXCategoryViewExt/SubTitleImage'
+  pod 'JXCategoryViewExt/Indicator/AlignmentLine'
+  
+  pod 'GKNavigationBar'
+  
+  # 全局滑动
+  pod 'FDFullscreenPopGesture'
+  
+  # 动画
+  pod 'lottie-ios', '2.5.3'
+
+  
 end
 
 # 网络
@@ -58,6 +73,29 @@ def utils_pods
   # 数据库第三方框架
   pod 'FMDB'
   
+  # 友盟 - 推送、统计、分享模块
+  pod 'UMCommon'    # 必须集成
+  pod 'UMDevice'    # 必须集成
+  pod 'UMCCommonLog'  # 可选，日志插件
+  
+  pod 'UMVerify'    #必选，智能认证组件
+  
+  pod 'UMLink'      # 必须集成，对应了智能超链产品U-Link
+  
+  pod 'UMAPM'   # 必选，APM组件，原错误分析升级为独立产品U-APM
+  pod 'UMPush'  # 必选，推送组件，由原来的UMCPush变为UMPush
+  
+  #  分享SDK 在线依赖其它平台仅支持手动集成[友盟+官网-开发者中心-sdk下载页-sdk下载]
+  pod 'UMShare/Social/WeChat'
+  pod 'UMShare/Social/Sina'
+  pod 'UMShare/Social/QQ'
+  pod 'UMShare/Social/Email' # 集成邮件
+  pod 'UMShare/Social/SMS' # 集成短信
+  
+  # DoraemonKit
+#  pod 'DoraemonKit/Core'
+#  pod 'DoraemonKit/WithGPS'
+#  pod 'DoraemonKit/WithLoad'
 end
 
 # 阿里播放器
@@ -75,6 +113,9 @@ def base_pods
   # 日志
   pod 'CocoaLumberjack'
   
+  # 将字典(NSDictionary)和数组(NSArray)打印的Log显示为Json格式,可以解决Xcode打印字典和数组时中文显示乱码问题
+  pod 'PrintBeautifulLog'
+  
 end
 
 ################# 主工程
@@ -85,43 +126,7 @@ target 'Fadvisor' do
   utils_pods
   alivc_player
   
-  # DoraemonKit
-#  pod 'DoraemonKit/Core'
-#  pod 'DoraemonKit/WithGPS'
-#  pod 'DoraemonKit/WithLoad'
-  
-  # 将字典(NSDictionary)和数组(NSArray)打印的Log显示为Json格式,可以解决Xcode打印字典和数组时中文显示乱码问题
-  pod 'PrintBeautifulLog'
-  
-  # 全局滑动
-  pod 'FDFullscreenPopGesture'
-  
-  # 动画
-  pod 'lottie-ios', '2.5.3'
-  
-  # 横向的列表切换
-#  pod 'JXCategoryView'
-  pod 'JXCategoryViewExt/Title'
-  pod 'JXCategoryViewExt/Indicator/Line'
-  pod 'JXCategoryViewExt/SubTitleImage'
-  pod 'JXCategoryViewExt/Indicator/AlignmentLine'
-  
-  pod 'GKNavigationBar'
   pod 'Masonry'
-  
-  # Page页切换
-  pod 'JXPagingView/Pager'
-  
-  # 警告框
-  pod 'LEEAlert'
-  
-  # GK 图片浏览器
-#  pod 'GKPhotoBrowser'
-  pod 'GKPhotoBrowser/YY'
-  
-  # 先跑起来再说
-#  pod 'SDWebImage'
-#  pod 'Masonry'
   
   target 'FadvisorTests' do
     inherit! :search_paths

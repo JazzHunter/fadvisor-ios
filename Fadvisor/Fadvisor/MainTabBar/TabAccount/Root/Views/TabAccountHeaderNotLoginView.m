@@ -7,7 +7,7 @@
 
 #import "TabAccountHeaderNotLoginView.h"
 #import "ImageButton.h"
-#import "UserLoginViewController.h"
+#import "LoginVideoViewController.h"
 
 #define btnSize 32.f
 
@@ -71,7 +71,7 @@
 }
 
 - (void)mainBtnClicked:(UIButton *)mainBtnClicked {
-    UserLoginViewController *userLoginVC = [UserLoginViewController new];
+    LoginVideoViewController *userLoginVC = [LoginVideoViewController new];
     [self.viewController presentViewController:userLoginVC animated:YES completion:nil];
 }
 
