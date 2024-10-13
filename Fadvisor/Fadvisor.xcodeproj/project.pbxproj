@@ -73,6 +73,11 @@
 		C1518CE62CBA5209002A37E7 /* LoginAgreementsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518CE52CBA5209002A37E7 /* LoginAgreementsLabel.m */; };
 		C1518CEA2CBA637F002A37E7 /* LoginSocialButtonsView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518CE92CBA637F002A37E7 /* LoginSocialButtonsView.m */; };
 		C1518CEE2CBACA7D002A37E7 /* LoginPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518CED2CBACA7D002A37E7 /* LoginPanel.m */; };
+		C1518CF12CBB9128002A37E7 /* LoginAgreementsConfirmationPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518CF02CBB9128002A37E7 /* LoginAgreementsConfirmationPanel.m */; };
+		C1518CF42CBBB53C002A37E7 /* LoginSmsFillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518CF32CBBB53C002A37E7 /* LoginSmsFillViewController.m */; };
+		C1518CF82CBBDFC4002A37E7 /* OtherLoginPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518CF72CBBDFC4002A37E7 /* OtherLoginPanel.m */; };
+		C1518D012CBBE910002A37E7 /* YTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518D002CBBE910002A37E7 /* YTextField.m */; };
+		C1518D022CBBE910002A37E7 /* SecurityCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518CFE2CBBE910002A37E7 /* SecurityCodeView.m */; };
 		C151FF462B9CCFFA009EEC02 /* UITextView+WZB.m in Sources */ = {isa = PBXBuildFile; fileRef = C151FF442B9CCFFA009EEC02 /* UITextView+WZB.m */; };
 		C151FF492B9D5060009EEC02 /* PopCommentInputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C151FF482B9D5060009EEC02 /* PopCommentInputManager.m */; };
 		C155CFFB2B354075004A3AFC /* UIImageView+FitNet.m in Sources */ = {isa = PBXBuildFile; fileRef = C155CFFA2B354075004A3AFC /* UIImageView+FitNet.m */; };
@@ -466,6 +471,16 @@
 		C1518CE92CBA637F002A37E7 /* LoginSocialButtonsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginSocialButtonsView.m; sourceTree = "<group>"; };
 		C1518CEC2CBACA7D002A37E7 /* LoginPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginPanel.h; sourceTree = "<group>"; };
 		C1518CED2CBACA7D002A37E7 /* LoginPanel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginPanel.m; sourceTree = "<group>"; };
+		C1518CEF2CBB9128002A37E7 /* LoginAgreementsConfirmationPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginAgreementsConfirmationPanel.h; sourceTree = "<group>"; };
+		C1518CF02CBB9128002A37E7 /* LoginAgreementsConfirmationPanel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginAgreementsConfirmationPanel.m; sourceTree = "<group>"; };
+		C1518CF22CBBB53C002A37E7 /* LoginSmsFillViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginSmsFillViewController.h; sourceTree = "<group>"; };
+		C1518CF32CBBB53C002A37E7 /* LoginSmsFillViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginSmsFillViewController.m; sourceTree = "<group>"; };
+		C1518CF62CBBDFC4002A37E7 /* OtherLoginPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherLoginPanel.h; sourceTree = "<group>"; };
+		C1518CF72CBBDFC4002A37E7 /* OtherLoginPanel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OtherLoginPanel.m; sourceTree = "<group>"; };
+		C1518CFD2CBBE910002A37E7 /* SecurityCodeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecurityCodeView.h; sourceTree = "<group>"; };
+		C1518CFE2CBBE910002A37E7 /* SecurityCodeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecurityCodeView.m; sourceTree = "<group>"; };
+		C1518CFF2CBBE910002A37E7 /* YTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YTextField.h; sourceTree = "<group>"; };
+		C1518D002CBBE910002A37E7 /* YTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YTextField.m; sourceTree = "<group>"; };
 		C151FF442B9CCFFA009EEC02 /* UITextView+WZB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+WZB.m"; sourceTree = "<group>"; };
 		C151FF452B9CCFFA009EEC02 /* UITextView+WZB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+WZB.h"; sourceTree = "<group>"; };
 		C151FF472B9D5060009EEC02 /* PopCommentInputManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopCommentInputManager.h; sourceTree = "<group>"; };
@@ -1276,6 +1291,9 @@
 		C1518CEB2CBA6386002A37E7 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				C1518CDB2CB82787002A37E7 /* BaseRelativeViewController.h */,
+				C1518CDC2CB82787002A37E7 /* BaseRelativeViewController.m */,
+				C1518CFC2CBBE904002A37E7 /* SecurityCode */,
 				C1518CE12CBA1418002A37E7 /* UITextField+Format.h */,
 				C1518CE22CBA1418002A37E7 /* UITextField+Format.m */,
 				C1518CE42CBA5209002A37E7 /* LoginAgreementsLabel.h */,
@@ -1284,6 +1302,30 @@
 				C1518CE92CBA637F002A37E7 /* LoginSocialButtonsView.m */,
 			);
 			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		C1518CF92CBBDFD0002A37E7 /* LoginPanel */ = {
+			isa = PBXGroup;
+			children = (
+				C1518CEC2CBACA7D002A37E7 /* LoginPanel.h */,
+				C1518CED2CBACA7D002A37E7 /* LoginPanel.m */,
+				C1518CF62CBBDFC4002A37E7 /* OtherLoginPanel.h */,
+				C1518CF72CBBDFC4002A37E7 /* OtherLoginPanel.m */,
+				C1518CEF2CBB9128002A37E7 /* LoginAgreementsConfirmationPanel.h */,
+				C1518CF02CBB9128002A37E7 /* LoginAgreementsConfirmationPanel.m */,
+			);
+			path = LoginPanel;
+			sourceTree = "<group>";
+		};
+		C1518CFC2CBBE904002A37E7 /* SecurityCode */ = {
+			isa = PBXGroup;
+			children = (
+				C1518CFD2CBBE910002A37E7 /* SecurityCodeView.h */,
+				C1518CFE2CBBE910002A37E7 /* SecurityCodeView.m */,
+				C1518CFF2CBBE910002A37E7 /* YTextField.h */,
+				C1518D002CBBE910002A37E7 /* YTextField.m */,
+			);
+			path = SecurityCode;
 			sourceTree = "<group>";
 		};
 		C155CFFD2B35D125004A3AFC /* Libraries */ = {
@@ -2204,15 +2246,14 @@
 		C1BDC13C2B31A98D003D67FC /* UserLogin */ = {
 			isa = PBXGroup;
 			children = (
+				C1518CF92CBBDFD0002A37E7 /* LoginPanel */,
 				C1518CEB2CBA6386002A37E7 /* Support Files */,
-				C1518CDB2CB82787002A37E7 /* BaseRelativeViewController.h */,
-				C1518CDC2CB82787002A37E7 /* BaseRelativeViewController.m */,
 				C1518C8A2CB56CB2002A37E7 /* LoginVideoViewController */,
 				C1518CD72CB750A1002A37E7 /* UMengVerifyHelper */,
 				C1518CDE2CB82BD4002A37E7 /* LoginSmsSendViewController.h */,
 				C1518CDF2CB82BD4002A37E7 /* LoginSmsSendViewController.m */,
-				C1518CEC2CBACA7D002A37E7 /* LoginPanel.h */,
-				C1518CED2CBACA7D002A37E7 /* LoginPanel.m */,
+				C1518CF22CBBB53C002A37E7 /* LoginSmsFillViewController.h */,
+				C1518CF32CBBB53C002A37E7 /* LoginSmsFillViewController.m */,
 			);
 			path = UserLogin;
 			sourceTree = "<group>";
@@ -2862,6 +2903,8 @@
 				C18D2EAB2C37A08E003F4073 /* GKPageListContainerView.m in Sources */,
 				C1591A342AFDCF0400351431 /* YYTextInput.m in Sources */,
 				C1E930ED2C68C9A300D8D0A1 /* Attachments.m in Sources */,
+				C1518D012CBBE910002A37E7 /* YTextField.m in Sources */,
+				C1518D022CBBE910002A37E7 /* SecurityCodeView.m in Sources */,
 				C1CEB7DB2B22B77400AA8490 /* ContentSharePanel.m in Sources */,
 				C10BDAEC2B4E2C1400C40BEC /* PlayerDetailsPreviewView.m in Sources */,
 				C1518CDD2CB82787002A37E7 /* BaseRelativeViewController.m in Sources */,
@@ -2940,6 +2983,7 @@
 				C1B0CEEC2B08A09B00A1173E /* AuthorModel.m in Sources */,
 				C1591A4E2AFDCF0400351431 /* UIGestureRecognizer+YYAdd.m in Sources */,
 				C19B2BC32B7E27E900BC6384 /* PlayerZFVolumeBrightnessView.m in Sources */,
+				C1518CF42CBBB53C002A37E7 /* LoginSmsFillViewController.m in Sources */,
 				C1591A3D2AFDCF0400351431 /* NSParagraphStyle+YYText.m in Sources */,
 				C1591ADC2AFE422E00351431 /* AutoRefreshFooter.m in Sources */,
 				C1518C892CB29A81002A37E7 /* ListViewController.m in Sources */,
@@ -2953,6 +2997,7 @@
 				C1E882782B8B80AC0017521C /* CommentModel.m in Sources */,
 				C1591A222AFDCF0400351431 /* YYWebImageManager.m in Sources */,
 				C167826E2B86F98B0092326F /* PlayerDetailsLoadingView.m in Sources */,
+				C1518CF82CBBDFC4002A37E7 /* OtherLoginPanel.m in Sources */,
 				C142C4E12CA84A980029AFF2 /* ItemSubscribeButton.m in Sources */,
 				C10BDA5D2B4D8A3500C40BEC /* PlayerDetailsPreviewLogoBtn.m in Sources */,
 				C16395E52B56510F00B2C71D /* AlivcPlayerVideoDBModel.m in Sources */,
@@ -2979,6 +3024,7 @@
 				C1591A422AFDCF0400351431 /* YYTextArchiver.m in Sources */,
 				C1032E692C2A7826008F3508 /* AuthorUtils.m in Sources */,
 				C12DC15D2B9DE10B0099AFE2 /* LJKAudioCallAssistiveTouchView.m in Sources */,
+				C1518CF12CBB9128002A37E7 /* LoginAgreementsConfirmationPanel.m in Sources */,
 				C1B0CEF32B090A6600A1173E /* AccountManager.m in Sources */,
 				C10BDABF2B4D908900C40BEC /* PlayerDetailsBulletView.m in Sources */,
 				C13C3F272C30E76700FD25E2 /* FullScreenGestureScrollView.m in Sources */,

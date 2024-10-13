@@ -19,7 +19,7 @@
     [UMCommonHandler checkEnvAvailableWithAuthType:UMPNSAuthTypeLoginToken complete:^(NSDictionary * _Nullable resultDic) {
         NSString *resultCode = [resultDic objectForKey:@"resultCode"];
         if (![PNSCodeSuccess isEqualToString:resultCode]) {
-            [[LoginPanel manager] showPanel];
+            [[LoginPanel sharedInstance] showPanel];
         } else {
             [UMengVerifyHelper popPNSAuthTypeLoginToken];
         }
@@ -142,8 +142,13 @@
             NSLog(@"其他按钮点击回调：%@", resultDic);
 
             [UMCommonHandler cancelLoginVCAnimated:YES complete:^{
-                LoginSmsSendViewController *vc = [[LoginSmsSendViewController alloc] init];
-                [[Utils currentViewController] presentViewController:vc animated:YES completion:nil];
+                UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[LoginSmsSendViewController alloc] init]];
+                
+                navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
+                navigationController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                
+                [[Utils currentViewController] presentViewController:navigationController animated:YES completion:nil];
+                
             }];
         } else if ([PNSCodeSuccess isEqualToString:resultCode]) {
             NSLog(@"获取LoginToken成功回调：%@", resultDic);

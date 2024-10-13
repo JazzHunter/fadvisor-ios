@@ -15,16 +15,6 @@
 
 @implementation BaseRelativeViewController
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.modalPresentationStyle = UIModalPresentationFullScreen;
-        [self setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor backgroundColor];

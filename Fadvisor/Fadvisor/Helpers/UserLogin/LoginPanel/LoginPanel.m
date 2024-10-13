@@ -11,10 +11,13 @@
 #import "LoginAgreementsLabel.h"
 #import "LoginSmsSendViewController.h"
 #import "Utils.h"
+#import "LoginAgreementsConfirmationPanel.h"
+#import "OtherLoginPanel.h"
 
 @interface LoginPanel ()
 
 @property (nonatomic) CGFloat viewWidth;
+@property (nonatomic, strong) LoginAgreementsLabel *agreementsLabel;
 
 @end
 
@@ -28,7 +31,7 @@
         self.viewWidth = screenWidth > screenHeight ? screenHeight : screenWidth;
 
         self.backgroundColor = [UIColor backgroundColor];
-        self.mySize = CGSizeMake(self.viewWidth, 380.f);
+        self.mySize = CGSizeMake(self.viewWidth, MyLayoutSize.wrap);
 //        self.insetsPaddingFromSafeArea = UIRectEdgeBottom;
         self.padding = UIEdgeInsetsMake(24, ViewHorizonlMargin, 24, ViewHorizonlMargin);
         self.backgroundImage = [UIImage imageNamed:@"login_alert_bg"];
@@ -84,7 +87,7 @@
     phoneLoginText.text = @"手机号登录";
     [phoneLoginText sizeToFit];
     [phoneLoginLayout addSubview:phoneLoginText];
-    
+
     MyLinearLayout *wechatLoginLayout = [MyLinearLayout linearLayoutWithOrientation:MyOrientation_Horz];
     wechatLoginLayout.myHorzMargin = 0;
     wechatLoginLayout.myHeight = 50;
@@ -95,6 +98,7 @@
     wechatLoginLayout.layer.masksToBounds = YES;
     wechatLoginLayout.layer.cornerRadius = 25;
     wechatLoginLayout.topPos.equalTo(phoneLoginLayout.bottomPos).offset(12);
+    [wechatLoginLayout setTarget:self action:@selector(wechatClicked:)];
     [self addSubview:wechatLoginLayout];
 
     UIImageView *wechatIconImageView = [[UIImageView alloc] initWithImage:[[[UIImage imageNamed:@"ic_wechat_color"] scaleToSize:CGSizeMake(20, 20)] imageWithRenderingMode:(UIImageRenderingModeAutomatic)]];
@@ -106,7 +110,7 @@
     wechatLoginText.text = @"微信登录";
     [wechatLoginText sizeToFit];
     [wechatLoginLayout addSubview:wechatLoginText];
-    
+
     UIButton *otherLoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [otherLoginButton.titleLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightSemibold]];
     [otherLoginButton setTitleColor:[UIColor descriptionTextColor] forState:UIControlStateNormal];
@@ -114,14 +118,14 @@
     [otherLoginButton sizeToFit];
     otherLoginButton.centerXPos.equalTo(self.centerXPos);
     otherLoginButton.topPos.equalTo(wechatLoginLayout.bottomPos).offset(12);
+    [otherLoginButton addTarget:self action:@selector(otherLoginButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:otherLoginButton];
-    
-    LoginAgreementsLabel *agreementsLabel = [LoginAgreementsLabel new];
-    agreementsLabel.myHorzMargin = 0;
-    agreementsLabel.myHeight = MyLayoutSize.wrap;
-    agreementsLabel.topPos.equalTo(otherLoginButton.bottomPos).offset(24);
-    [self addSubview:agreementsLabel];
 
+    _agreementsLabel = [LoginAgreementsLabel new];
+    _agreementsLabel.myHorzMargin = 0;
+    _agreementsLabel.myHeight = MyLayoutSize.wrap;
+    _agreementsLabel.topPos.equalTo(otherLoginButton.bottomPos).offset(24);
+    [self addSubview:_agreementsLabel];
 }
 
 #pragma mark - Acitons
@@ -131,13 +135,36 @@
     [LEEAlert closeWithIdentifier:NSStringFromClass([self class]) completionBlock:nil];
 }
 
-- (void) phoneLoginClicked: (UIView *)sender {
+- (void)phoneLoginClicked:(UIView *)sender {
     [LEEAlert closeWithIdentifier:NSStringFromClass([self class]) completionBlock:^{
         LoginSmsSendViewController *vc = [[LoginSmsSendViewController alloc] init];
         [[Utils currentViewController] presentViewController:vc animated:YES completion:nil];
     }];
 }
 
+- (void)otherLoginButtonClicked:(UIView *)sender {
+    [[OtherLoginPanel sharedInstance] showPanel];
+}
+
+- (void)wechatClicked:(UIView *)sender {
+    if (!_agreementsLabel.isAgreeSelect) {
+        Weak(self);
+        [[LoginAgreementsConfirmationPanel sharedInstance] showPanelWithBlock:^{
+            [LEEAlert clearQueue];
+            [LEEAlert closeWithIdentifier:NSStringFromClass([self class]) completionBlock:nil];
+            [weakself handleWeachatLogin];
+        }];
+    } else {
+        [LEEAlert closeWithIdentifier:NSStringFromClass([self class]) completionBlock:^{
+            [self handleWeachatLogin];
+        }];
+    }
+}
+
+// TODO
+- (void)handleWeachatLogin {
+    NSLog(@"微信登录");
+}
 
 - (void)showPanel {
     [LEEAlert actionsheet].config
@@ -160,6 +187,8 @@
         }
         return 414.0f;
     })
+    .LeeQueue(YES)
+    .LeePriority(1)
     .LeeOpenAnimationConfig(^(void (^animatingBlock)(void), void (^animatedBlock)(void)) {
         [UIView animateWithDuration:0.5f delay:0 usingSpringWithDamping:1 initialSpringVelocity:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
             animatingBlock(); //调用动画中Block
@@ -170,13 +199,13 @@
     .LeeShow();
 }
 
-+ (instancetype)manager {
-    static LoginPanel *manager;
++ (instancetype)sharedInstance {
+    static LoginPanel *sharedInstance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        manager = [[self alloc] init];
+        sharedInstance = [[self alloc] init];
     });
-    return manager;
+    return sharedInstance;
 }
 
 @end

@@ -9,7 +9,7 @@
 #import "UITextField+Format.h"
 #import "LoginAgreementsLabel.h"
 #import "LoginSocialButtonsView.h"
-#import "LoginSmsSendViewController.h"
+#import "LoginSmsFillViewController.h"
 
 @interface LoginSmsSendViewController ()<UITextFieldDelegate>
 
@@ -98,7 +98,7 @@
     _sendSmsButton.centerYPos.equalTo(self.rootLayout.centerYPos);
     [_sendSmsButton addTarget:self action:@selector(sendSmsButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 
-    [_sendSmsButton addTarget:self action:@selector(handleTouchDown:) forControlEvents:UIControlEventTouchDown];
+//    [_sendSmsButton addTarget:self action:@selector(handleTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.rootLayout addSubview:_sendSmsButton];
 
     _passwordLoginButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -112,7 +112,7 @@
     _passwordLoginButton.layer.cornerRadius = 25;
     _passwordLoginButton.topPos.equalTo(_sendSmsButton.bottomPos).offset(16);
     [_passwordLoginButton addTarget:self action:@selector(passwordLoginButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_passwordLoginButton addTarget:self action:@selector(handleTouchDown:) forControlEvents:UIControlEventTouchDown];
+//    [_passwordLoginButton addTarget:self action:@selector(handleTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.rootLayout addSubview:_passwordLoginButton];
 
     LoginAgreementsLabel *agreementsLabel = [LoginAgreementsLabel new];
@@ -141,6 +141,14 @@
 }
 
 - (void)sendSmsButtonClicked:(UIView *)sender {
+    [MBProgressHUD showLoading];
+    
+    [MBProgressHUD hideHUD];
+    
+    LoginSmsFillViewController * vc = [[LoginSmsFillViewController alloc] initWithPhone:_phoneNumTextfield.text];
+    UINavigationController *nc = self.navigationController;
+    [nc pushViewController:vc animated:YES];
+    
 }
 
 - (void)passwordLoginButtonClicked:(UIView *)sender {

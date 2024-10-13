@@ -1,20 +1,20 @@
 //
-//  LoginPanel.h
+//  OtherLoginPanel.h
 //  Fadvisor
 //
-//  Created by 韩建伟 on 2024/10/12.
+//  Created by 韩建伟 on 2024/10/13.
 //
 
 #import <MyLayout/MyLayout.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LoginPanel : MyRelativeLayout
+@interface OtherLoginPanel : MyRelativeLayout
 
 /** 显示 */
 - (void)showPanel;
 
-+ (instancetype)manager;
++ (instancetype)sharedInstance;
 
 @end
 
