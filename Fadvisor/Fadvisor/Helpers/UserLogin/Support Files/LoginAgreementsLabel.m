@@ -8,6 +8,12 @@
 #import "LoginAgreementsLabel.h"
 #import "ImageButton.h"
 
+@interface LoginAgreementsLabel()
+
+@property(nonatomic, strong) ImageButton *checkBoxButton;
+
+@end
+
 @implementation LoginAgreementsLabel
 
 - (instancetype)init {
@@ -24,10 +30,10 @@
 //    self.subviewHSpace = 4;
     self.gravity = MyGravity_Vert_Center;
 
-    ImageButton *checkBoxButton = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24) imageName:@"icon_uncheck" imageSize:CGSizeMake(14, 14)];
-    [checkBoxButton setImage:[UIImage imageNamed:@"icon_check"] forState:UIControlStateSelected];
-    [checkBoxButton addTarget:self action:@selector(checkBoxButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:checkBoxButton];
+    _checkBoxButton = [[ImageButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24) imageName:@"icon_uncheck" imageSize:CGSizeMake(14, 14)];
+    [_checkBoxButton setImage:[UIImage imageNamed:@"icon_check"] forState:UIControlStateSelected];
+    [_checkBoxButton addTarget:self action:@selector(checkBoxButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_checkBoxButton];
 
     YYLabel *textLabel = [YYLabel new];
     textLabel.textVerticalAlignment = YYTextVerticalAlignmentCenter;
@@ -55,6 +61,10 @@
 - (void)checkBoxButtonClicked:(UIButton *)sender {
     self.isAgreeSelect = !self.isAgreeSelect;
     sender.selected = self.isAgreeSelect;
+}
+
+- (void)agree {
+    self.isAgreeSelect = YES;
 }
 
 @end

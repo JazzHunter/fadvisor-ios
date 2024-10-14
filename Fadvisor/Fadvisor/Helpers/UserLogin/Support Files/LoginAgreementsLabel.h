@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (atomic, assign) BOOL isAgreeSelect;
 
+- (void)agree;
+
 @end
 
 NS_ASSUME_NONNULL_END

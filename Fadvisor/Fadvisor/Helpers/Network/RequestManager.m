@@ -18,17 +18,23 @@
 
 @implementation RequestManager
 
-// Post
 - (void)POST:(NSString *)urlString parameters:(id)parameters completion:(void (^)(BaseResponse *))completion {
     [self request:@"POST" URL:urlString parameters:parameters isToken:NO completion:completion];
 }
 
-//Get
 - (void)GET:(NSString *)urlString parameters:(id)parameters completion:(void (^)(BaseResponse *))completion {
     [self request:@"GET" URL:urlString parameters:parameters isToken:NO completion:completion];
 }
 
-#pragma mark - Post & Get
+- (void)PUT:(NSString *)urlString parameters:(id)parameters completion:(void (^)(BaseResponse *response))completion {
+    [self request:@"PUT" URL:urlString parameters:parameters isToken:NO completion:completion];
+}
+
+- (void)DELETE:(NSString *)urlString parameters:(id)parameters completion:(void (^)(BaseResponse *response))completion {
+    [self request:@"DELETE" URL:urlString parameters:parameters isToken:NO completion:completion];
+}
+
+#pragma mark - request
 - (void)request:(NSString *)method URL:(NSString *)urlString parameters:(id)parameters isToken:(BOOL)isToken completion:(void (^)(BaseResponse *response))completion {
     if (self.isLocal) {
         [self requestLocal:urlString completion:completion];
@@ -61,7 +67,6 @@
         [self wrapperTask:task responseObject:nil error:error completion:completion];
     };
 
-    
     if ([method isEqualToString:@"POST"]) {
         [self POST:urlString parameters:parameters progress:nil success:success failure:failure];
     } else if ([method isEqualToString:@"PUT"]) {

@@ -13,7 +13,7 @@
 
 @interface SecurityCodeView ()<YTextFieldDelegate, UITextFieldDelegate>
 
-@property (nonatomic, strong) NSMutableArray *codeArray;
+@property (nonatomic, strong) NSMutableArray *textFieldArray;
 @property (nonatomic, strong) NSMutableArray *linesArray;
 
 //显示样式
@@ -27,16 +27,16 @@
 
 @implementation SecurityCodeView
 
-- (instancetype)initWithFrame:(CGRect)frame count:(NSUInteger)count space:(NSUInteger)space type:(securityCodeType)type {
+- (instancetype)initWithFrame:(CGRect)frame count:(NSUInteger)count space:(NSUInteger)space underlineColor:(UIColor *)underlineColor type:(securityCodeType)type {
     self = [super initWithFrame:frame];
     if (self) {
         _count = count > 0 ? count : 6;
         _space = space;
 //        _size = CGSizeMake(30, 40);
         _type = type;
-        _defaultColor = [UIColor grayColor];
-        _selectedColor = [UIColor yellowColor];
-        _markColor = [UIColor blueColor];
+        _underlineColor = underlineColor;
+        _confirmedColor = [UIColor yellowColor];
+        _cursorColor = [UIColor blueColor];
         [self createUI];
     }
     return self;
@@ -44,79 +44,51 @@
 
 //界面
 - (void)createUI {
-    self.codeArray = [NSMutableArray arrayWithCapacity:self.count];
+    self.textFieldArray = [NSMutableArray arrayWithCapacity:self.count];
     self.linesArray = [NSMutableArray arrayWithCapacity:self.count];
 
-    CGFloat codeWidth = (self.width - self.space * (self.count - 1)) / self.count;
-    CGFloat codeHeight = codeWidth;
+    CGFloat textFieldWidth = (self.width - self.space * (self.count - 1)) / self.count;
+    CGFloat textFieldHeight = textFieldWidth;
 
     CGFloat left = 0;
     NSUInteger num = 1;
     while (num <= self.count) {
-        CGFloat x = left + (num - 1) * (codeWidth + self.space);
-        YTextField *textField = [[YTextField alloc]initWithFrame:CGRectMake(x, 0, codeWidth, codeHeight)];
-        if (self.type == securityCodeTypeDownLine) {
+        CGFloat x = left + (num - 1) * (textFieldWidth + self.space);
+        YTextField *textField = [[YTextField alloc]initWithFrame:CGRectMake(x, 0, textFieldWidth, textFieldHeight)];
+        if (self.type == securityCodeTypeUnderline) {
             textField.borderStyle = UITextBorderStyleNone;
 
-            UILabel *downLine = [[UILabel alloc]initWithFrame:CGRectMake(x, codeHeight + 10, codeWidth, 2)];
-            downLine.backgroundColor = self.defaultColor;
-            [self addSubview:downLine];
-            [self.linesArray addObject:downLine];
+            UIView *underlineView = [[UIView alloc]initWithFrame:CGRectMake(x, textFieldHeight + 10, textFieldWidth, 2)];
+            underlineView.backgroundColor = self.underlineColor;
+            [self addSubview:underlineView];
+            [self.linesArray addObject:underlineView];
         } else if (self.type == securityCodeTypeBox) {
             textField.borderStyle = UITextBorderStyleLine;
         }
         textField.y_delegate = self;
         textField.delegate = self;
-        textField.font = [UIFont systemFontOfSize:((NSUInteger)(codeWidth / 2)) weight:UIFontWeightBold];
+        textField.font = [UIFont systemFontOfSize:((NSUInteger)(textFieldWidth / 2)) weight:UIFontWeightBold];
         textField.textColor = [UIColor titleTextColor];
         textField.textAlignment = NSTextAlignmentCenter;
         textField.keyboardType = UIKeyboardTypeNumberPad;
         textField.tag = num - 1;
-        [textField addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
+//        [textField addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
         [self addSubview:textField];
 
         if (num == 1) {
             [textField becomeFirstResponder];
         }
-        [self.codeArray addObject:textField];
+        [self.textFieldArray addObject:textField];
 
         num += 1;
     }
 }
 
-//输入内容，当内容长度为1，切换下个输入框
-- (void)textFieldValueChanged:(UITextField *)textField {
-    if (textField.text.length >= 1) {
-        if (self.type == securityCodeTypeDownLine) {
-            UILabel *line = [self.linesArray objectAtIndex:textField.tag];
-            line.backgroundColor = self.selectedColor;
-        }
-        if (textField.tag + 1 < self.count) {
-            //最好验证码输入完毕，键盘消失
-            UITextField *nextTextField = [self getNextTextFieldWithIndex:textField.tag + 1];
-            if (nextTextField.text.length == 1) {
-                [textField resignFirstResponder];
-            } else {
-                [nextTextField becomeFirstResponder];
-            }
-        } else {
-            [textField resignFirstResponder];
-        }
-    } else {
-        if (self.type == securityCodeTypeDownLine) {
-            UILabel *line = [self.linesArray objectAtIndex:textField.tag];
-            line.backgroundColor = self.defaultColor;
-        }
-        if (textField.tag - 1 >= 0) {
-            UITextField *lastTextField = [self.codeArray objectAtIndex:textField.tag - 1];
-            [lastTextField becomeFirstResponder];
-        }
-    }
-}
+#pragma mark - Actions
 
 //获取下个输入框
 - (UITextField *)getNextTextFieldWithIndex:(NSInteger)index {
-    UITextField *nextTextField = [self.codeArray objectAtIndex:index];
+    UITextField *nextTextField = [self.textFieldArray objectAtIndex:index];
     if (nextTextField.text.length == 1 && index + 1 < self.count) {
         return [self getNextTextFieldWithIndex:index + 1];
     }
@@ -126,46 +98,96 @@
 //获取上个输入框
 - (UITextField *)getLastNextFieldWithIndex:(NSInteger)index {
     if (index >= 0) {
-        UITextField *nextTextField = [self.codeArray objectAtIndex:index];
+        UITextField *nextTextField = [self.textFieldArray objectAtIndex:index];
         return nextTextField;
     }
     return nil;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (![string isEqualToString:@""]) {
-        //输入内容，如果当前输入框已有内容，切换到下一个
-        if (textField.text.length == 1 && textField.tag + 1 < self.count) {
-            UITextField *nextTextField = [self getNextTextFieldWithIndex:textField.tag + 1];
-            if (nextTextField.text.length == 1) {
-                return NO;
-            } else {
-                [nextTextField becomeFirstResponder];
-            }
-        } else if (textField.text.length == 1 && textField.tag + 1 == self.count) {
-            return NO;
-        }
-    }
-    return YES;
-}
-
-//删除事件
-- (void)yTextFieldDeleteBackward:(YTextField *)textField {
-    if (textField.tag != 0 && textField.text.length == 0) {
-        UITextField *lastTextField = [self getLastNextFieldWithIndex:textField.tag - 1];
-        [lastTextField becomeFirstResponder];
-    }
-}
-
-- (void)setMarkColor:(UIColor *)markColor {
-    _markColor = markColor;
-    for (UITextField *tf in self.codeArray) {
+- (void)setCursorColor:(UIColor *)markColor {
+    _cursorColor = markColor;
+    for (UITextField *tf in self.textFieldArray) {
         tf.tintColor = markColor;
     }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self endEditing:YES];
+}
+
+- (void)handleCallback {
+    if (!self.inputFinishBlock) {
+        return;
+    }
+    NSMutableString *value = [NSMutableString string];
+    for (int i = 0; i < self.textFieldArray.count; i++) {
+        NSString *newChar = ((UITextField *)self.textFieldArray[i]).text;
+        if ([newChar isEqualToString:@""]) {
+            return;
+        }
+        [value appendString:newChar];
+        NSLog(@"%@", ((UITextField *)self.textFieldArray[i]).text);
+    }
+
+    self.inputFinishBlock(value);
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if ([string isEqualToString:@""]) { //输入了退格
+        textField.text = @"";
+        if (self.type == securityCodeTypeUnderline) {
+            UILabel *line = [self.linesArray objectAtIndex:textField.tag];
+            line.backgroundColor = self.underlineColor;
+        }
+        if (textField.tag - 1 >= 0) {
+            UITextField *previousTextField = [self.textFieldArray objectAtIndex:textField.tag - 1];
+            [previousTextField becomeFirstResponder];
+        }
+        
+        return NO;
+    }
+
+    NSInteger textFieldTag = textField.tag;
+    for (NSInteger i = 0; i < string.length; i++) {
+        if (textFieldTag >= self.count) {
+            break;
+        }
+        UITextField *textField = [self.textFieldArray objectAtIndex:textFieldTag];
+        NSString *value = [string substringWithRange:NSMakeRange(i, 1)];
+        textField.text = value;
+
+        if (self.type == securityCodeTypeUnderline) {
+            UILabel *line = [self.linesArray objectAtIndex:textFieldTag];
+            line.backgroundColor = self.confirmedColor;
+        }
+        textFieldTag++;
+    }
+
+    NSInteger lastTag = textField.tag + string.length;
+    if (lastTag < self.count) {
+        UITextField *lastTextField = [self getNextTextFieldWithIndex:lastTag];
+//        if (lastTextField.text.length == 1) {
+//            return NO;
+//        } else {
+        [lastTextField becomeFirstResponder];
+//        }
+    } else {
+        [textField resignFirstResponder];
+        [self handleCallback];
+        return NO;
+    }
+
+    return NO;
+}
+
+#pragma mark - YTextFieldDelegate
+//删除事件
+- (void)yTextFieldDeleteBackward:(YTextField *)textField {
+    if (textField.tag != 0 && textField.text.length == 0) {
+        UITextField *lastTextField = [self getLastNextFieldWithIndex:textField.tag - 1];
+        [lastTextField becomeFirstResponder];
+    }
 }
 
 @end

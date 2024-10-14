@@ -15,8 +15,8 @@
 
 + (void)popLoginAlert:(UIView *)sender {
     //检查当前环境是否支持一键登录或号码认证，resultDic 返回 PNSCodeSuccess 说明当前环境支持
-    
-    [UMCommonHandler checkEnvAvailableWithAuthType:UMPNSAuthTypeLoginToken complete:^(NSDictionary * _Nullable resultDic) {
+
+    [UMCommonHandler checkEnvAvailableWithAuthType:UMPNSAuthTypeLoginToken complete:^(NSDictionary *_Nullable resultDic) {
         NSString *resultCode = [resultDic objectForKey:@"resultCode"];
         if (![PNSCodeSuccess isEqualToString:resultCode]) {
             [[LoginPanel sharedInstance] showPanel];
@@ -47,7 +47,7 @@
             NSFontAttributeName: [UIFont systemFontOfSize:16 weight:UIFontWeightSemibold]
     };
     model.alertTitle = [[NSAttributedString alloc] initWithString:@"注册或登录后继续操作" attributes:alertTitleAttributes];
-    
+
     model.alertCloseImage = [[[UIImage imageNamed:@"ic_close"] scaleToSize:CGSizeMake(24, 24)] imageWithTintColor:[UIColor metaTextColor]];
     model.alertTitleBarFrameBlock = ^CGRect (CGSize screenSize, CGSize superViewSize, CGRect frame) {
         frame.size.height = 64;
@@ -143,12 +143,12 @@
 
             [UMCommonHandler cancelLoginVCAnimated:YES complete:^{
                 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[LoginSmsSendViewController alloc] init]];
-                
+
                 navigationController.modalPresentationStyle = UIModalPresentationFullScreen;
                 navigationController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                
+                navigationController.navigationBar.hidden = YES;
+
                 [[Utils currentViewController] presentViewController:navigationController animated:YES completion:nil];
-                
             }];
         } else if ([PNSCodeSuccess isEqualToString:resultCode]) {
             NSLog(@"获取LoginToken成功回调：%@", resultDic);

@@ -10,6 +10,9 @@
 #import "LoginAgreementsLabel.h"
 #import "LoginSocialButtonsView.h"
 #import "LoginSmsFillViewController.h"
+#import "LoginService.h"
+#import "NotificationView.h"
+#import "LoginAgreementsConfirmationPanel.h"
 
 @interface LoginSmsSendViewController ()<UITextFieldDelegate>
 
@@ -20,6 +23,8 @@
 @property (nonatomic, strong) UIButton *sendSmsButton;
 
 @property (nonatomic, strong) UIButton *passwordLoginButton;
+
+@property (nonatomic, strong) LoginAgreementsLabel *agreementsLabel;
 
 @end
 
@@ -115,11 +120,11 @@
 //    [_passwordLoginButton addTarget:self action:@selector(handleTouchDown:) forControlEvents:UIControlEventTouchDown];
     [self.rootLayout addSubview:_passwordLoginButton];
 
-    LoginAgreementsLabel *agreementsLabel = [LoginAgreementsLabel new];
-    agreementsLabel.myHorzMargin = ViewHorizonlMargin * 2;
-    agreementsLabel.myHeight = MyLayoutSize.wrap;
-    agreementsLabel.topPos.equalTo(_passwordLoginButton.bottomPos).offset(12);
-    [self.rootLayout addSubview:agreementsLabel];
+    _agreementsLabel = [LoginAgreementsLabel new];
+    _agreementsLabel.myHorzMargin = ViewHorizonlMargin * 2;
+    _agreementsLabel.myHeight = MyLayoutSize.wrap;
+    _agreementsLabel.topPos.equalTo(_passwordLoginButton.bottomPos).offset(12);
+    [self.rootLayout addSubview:_agreementsLabel];
 
     LoginSocialButtonsView *socialButtonsView = [LoginSocialButtonsView new];
     socialButtonsView.myHorzMargin = 0;
@@ -141,14 +146,34 @@
 }
 
 - (void)sendSmsButtonClicked:(UIView *)sender {
+    // TODO
+    // 验证手机号格式正确
+    if (!_agreementsLabel.isAgreeSelect) {
+        Weak(self);
+        [[LoginAgreementsConfirmationPanel sharedInstance] showPanelWithBlock:^{
+            [weakself sendSmsAndNaviToNext];
+        }];
+    } else {
+        [self sendSmsAndNaviToNext];
+    }
+}
+
+- (void)sendSmsAndNaviToNext {
     [MBProgressHUD showLoading];
-    
-    [MBProgressHUD hideHUD];
-    
-    LoginSmsFillViewController * vc = [[LoginSmsFillViewController alloc] initWithPhone:_phoneNumTextfield.text];
-    UINavigationController *nc = self.navigationController;
-    [nc pushViewController:vc animated:YES];
-    
+    Weak(self);
+    NSString *phone = _phoneNumTextfield.text.copy;
+    [[LoginService sharedInstance] sendLoginPhoneSms:[phone stringByReplacingOccurrencesOfString:@" " withString:@""] completion:^(NSString *_Nonnull errorMsg) {
+        [MBProgressHUD hideHUD];
+        if (errorMsg) {
+            [NotificationView showNotificaiton:errorMsg type:NotificationDanger];
+            return;
+        }
+        [NotificationView showNotificaiton:@"手机验证码发送成功" type:NotificationSuccess];
+
+        LoginSmsFillViewController *vc = [[LoginSmsFillViewController alloc] initWithPhone:weakself.phoneNumTextfield.text];
+        UINavigationController *nc = self.navigationController;
+        [nc pushViewController:vc animated:YES];
+    }];
 }
 
 - (void)passwordLoginButtonClicked:(UIView *)sender {

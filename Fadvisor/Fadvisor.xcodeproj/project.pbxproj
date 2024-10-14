@@ -78,6 +78,8 @@
 		C1518CF82CBBDFC4002A37E7 /* OtherLoginPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518CF72CBBDFC4002A37E7 /* OtherLoginPanel.m */; };
 		C1518D012CBBE910002A37E7 /* YTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518D002CBBE910002A37E7 /* YTextField.m */; };
 		C1518D022CBBE910002A37E7 /* SecurityCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518CFE2CBBE910002A37E7 /* SecurityCodeView.m */; };
+		C1518D052CBC208F002A37E7 /* LoginPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518D042CBC208F002A37E7 /* LoginPasswordViewController.m */; };
+		C1518D0E2CBD2CB2002A37E7 /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = C1518D0D2CBD2CB2002A37E7 /* LoginService.m */; };
 		C151FF462B9CCFFA009EEC02 /* UITextView+WZB.m in Sources */ = {isa = PBXBuildFile; fileRef = C151FF442B9CCFFA009EEC02 /* UITextView+WZB.m */; };
 		C151FF492B9D5060009EEC02 /* PopCommentInputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C151FF482B9D5060009EEC02 /* PopCommentInputManager.m */; };
 		C155CFFB2B354075004A3AFC /* UIImageView+FitNet.m in Sources */ = {isa = PBXBuildFile; fileRef = C155CFFA2B354075004A3AFC /* UIImageView+FitNet.m */; };
@@ -257,7 +259,6 @@
 		C1BA9C7B2B1B48A100D82BC1 /* VerticalFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BA9C792B1B48A100D82BC1 /* VerticalFlowLayout.m */; };
 		C1BA9C7E2B1B8EEC00D82BC1 /* RichTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BA9C7D2B1B8EEC00D82BC1 /* RichTextView.m */; };
 		C1BDC1362B3127BB003D67FC /* UserProfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BDC1352B3127BB003D67FC /* UserProfileModel.m */; };
-		C1BDC13B2B313B9C003D67FC /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BDC13A2B313B9C003D67FC /* LoginService.m */; };
 		C1BDC13F2B31A9AF003D67FC /* LoginVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BDC13E2B31A9AF003D67FC /* LoginVideoViewController.m */; };
 		C1BDC1422B31AADB003D67FC /* TabAccountHeaderNotLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BDC1412B31AADB003D67FC /* TabAccountHeaderNotLoginView.m */; };
 		C1CEB7C32B1E1C2900AA8490 /* BaseScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1CEB7C22B1E1C2900AA8490 /* BaseScrollViewController.m */; };
@@ -481,6 +482,10 @@
 		C1518CFE2CBBE910002A37E7 /* SecurityCodeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecurityCodeView.m; sourceTree = "<group>"; };
 		C1518CFF2CBBE910002A37E7 /* YTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YTextField.h; sourceTree = "<group>"; };
 		C1518D002CBBE910002A37E7 /* YTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YTextField.m; sourceTree = "<group>"; };
+		C1518D032CBC208F002A37E7 /* LoginPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginPasswordViewController.h; sourceTree = "<group>"; };
+		C1518D042CBC208F002A37E7 /* LoginPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginPasswordViewController.m; sourceTree = "<group>"; };
+		C1518D0C2CBD2CB2002A37E7 /* LoginService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
+		C1518D0D2CBD2CB2002A37E7 /* LoginService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
 		C151FF442B9CCFFA009EEC02 /* UITextView+WZB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+WZB.m"; sourceTree = "<group>"; };
 		C151FF452B9CCFFA009EEC02 /* UITextView+WZB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+WZB.h"; sourceTree = "<group>"; };
 		C151FF472B9D5060009EEC02 /* PopCommentInputManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopCommentInputManager.h; sourceTree = "<group>"; };
@@ -850,8 +855,6 @@
 		C1BDC1342B3127BB003D67FC /* UserProfileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserProfileModel.h; sourceTree = "<group>"; };
 		C1BDC1352B3127BB003D67FC /* UserProfileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserProfileModel.m; sourceTree = "<group>"; };
 		C1BDC1382B312F91003D67FC /* UserEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserEnum.h; sourceTree = "<group>"; };
-		C1BDC1392B313B9C003D67FC /* LoginService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
-		C1BDC13A2B313B9C003D67FC /* LoginService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
 		C1BDC13D2B31A9AF003D67FC /* LoginVideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginVideoViewController.h; sourceTree = "<group>"; };
 		C1BDC13E2B31A9AF003D67FC /* LoginVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginVideoViewController.m; sourceTree = "<group>"; };
 		C1BDC1402B31AADB003D67FC /* TabAccountHeaderNotLoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabAccountHeaderNotLoginView.h; sourceTree = "<group>"; };
@@ -2191,8 +2194,6 @@
 				C1B0CEF22B090A6600A1173E /* AccountManager.m */,
 				C1BDC1342B3127BB003D67FC /* UserProfileModel.h */,
 				C1BDC1352B3127BB003D67FC /* UserProfileModel.m */,
-				C1BDC1392B313B9C003D67FC /* LoginService.h */,
-				C1BDC13A2B313B9C003D67FC /* LoginService.m */,
 			);
 			path = AccountManager;
 			sourceTree = "<group>";
@@ -2254,6 +2255,10 @@
 				C1518CDF2CB82BD4002A37E7 /* LoginSmsSendViewController.m */,
 				C1518CF22CBBB53C002A37E7 /* LoginSmsFillViewController.h */,
 				C1518CF32CBBB53C002A37E7 /* LoginSmsFillViewController.m */,
+				C1518D032CBC208F002A37E7 /* LoginPasswordViewController.h */,
+				C1518D042CBC208F002A37E7 /* LoginPasswordViewController.m */,
+				C1518D0C2CBD2CB2002A37E7 /* LoginService.h */,
+				C1518D0D2CBD2CB2002A37E7 /* LoginService.m */,
 			);
 			path = UserLogin;
 			sourceTree = "<group>";
@@ -2947,6 +2952,7 @@
 				C16395EA2B574CAC00B2C71D /* VideoDetailsPlayerView.m in Sources */,
 				C12DC1642B9E97010099AFE2 /* TabAccountNavigationView.m in Sources */,
 				C159192C2AFDC43F00351431 /* main.m in Sources */,
+				C1518D052CBC208F002A37E7 /* LoginPasswordViewController.m in Sources */,
 				C1591A252AFDCF0400351431 /* YYImageCoder.m in Sources */,
 				C1591A2A2AFDCF0400351431 /* MKAnnotationView+YYWebImage.m in Sources */,
 				C12B09A82B13973600108664 /* MediaModel.m in Sources */,
@@ -3030,7 +3036,6 @@
 				C13C3F272C30E76700FD25E2 /* FullScreenGestureScrollView.m in Sources */,
 				C19B2BBA2B7E197C00BC6384 /* PlayerDetailsGestureView.m in Sources */,
 				C10BDAD72B4D908900C40BEC /* PlayerDetailsGestureSeekPopupView.m in Sources */,
-				C1BDC13B2B313B9C003D67FC /* LoginService.m in Sources */,
 				C1591A4D2AFDCF0400351431 /* UIBarButtonItem+YYAdd.m in Sources */,
 				C1591A6A2AFDCF0400351431 /* YYFileHash.m in Sources */,
 				C12B09982B10853100108664 /* WebContentFileManager.m in Sources */,
@@ -3042,6 +3047,7 @@
 				C1591A2D2AFDCF0400351431 /* YYWebImageOperation.m in Sources */,
 				C1E930FA2C6B568900D8D0A1 /* VoteHButton.m in Sources */,
 				C1591A5E2AFDCF0400351431 /* NSDictionary+YYAdd.m in Sources */,
+				C1518D0E2CBD2CB2002A37E7 /* LoginService.m in Sources */,
 				C1591A4A2AFDCF0400351431 /* UIScrollView+YYAdd.m in Sources */,
 				C1591A3A2AFDCF0400351431 /* YYLabel.m in Sources */,
 				C18D2EB72C37ED2A003F4073 /* GKDBViewController.m in Sources */,

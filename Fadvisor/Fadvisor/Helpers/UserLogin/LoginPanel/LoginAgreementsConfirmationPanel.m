@@ -54,13 +54,13 @@
     YYLabel *textLabel = [YYLabel new];
     textLabel.textVerticalAlignment = YYTextVerticalAlignmentCenter;
     textLabel.textAlignment = NSTextAlignmentCenter;
-    textLabel.myHeight = MyLayoutSize.wrap;
-    textLabel.myHorzMargin = 0;
+//    textLabel.myHeight = MyLayoutSize.wrap;
+//    textLabel.myHorzMargin = 0;
     textLabel.topPos.equalTo(titleLabel.bottomPos).offset(32);
     textLabel.centerXPos.equalTo(self.centerXPos);
 
     //设置整段字符串的颜色
-    NSDictionary *attributes = @{ NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:14], NSForegroundColorAttributeName: [UIColor metaTextColor] };
+    NSDictionary *attributes = @{ NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Regular" size:15], NSForegroundColorAttributeName: [UIColor metaTextColor] };
 
     NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:@"用户协议和隐私保护指引" attributes:attributes];
     //设置高亮色和点击事件
@@ -72,6 +72,7 @@
         NSLog(@"点击了《隐私政策》");
     }];
     textLabel.attributedText = text;
+    [textLabel sizeToFit];
 
     [self addSubview:textLabel];
 

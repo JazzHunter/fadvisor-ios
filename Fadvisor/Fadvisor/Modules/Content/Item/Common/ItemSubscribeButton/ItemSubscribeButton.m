@@ -60,7 +60,7 @@
 
     [self.itemSubscribeService toggleItemSubscribe:!self.isSubscribed authorId:self.itemId completion:^(NSString *errorMsg) {
         if (errorMsg) {
-            //有错误处理一下
+            //TODO 有错误处理一下
             return;
         }
 

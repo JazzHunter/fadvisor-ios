@@ -7,6 +7,7 @@
 
 #import "LoginSmsFillViewController.h"
 #import "SecurityCodeView.h"
+#import "LoginService.h"
 
 @interface LoginSmsFillViewController ()
 
@@ -48,12 +49,18 @@
 
     [self.rootLayout addSubview:descLabel];
     
-    SecurityCodeView *codeView = [[SecurityCodeView alloc]initWithFrame:CGRectMake(0, 0, self.view.width - ViewHorizonlMargin * 4, 100) count:4 space:24 type:securityCodeTypeDownLine];
-    codeView.defaultColor = [UIColor borderColor];
-    codeView.selectedColor = [UIColor descriptionTextColor];
-    codeView.markColor = [UIColor mainColor];
+    SecurityCodeView *codeView = [[SecurityCodeView alloc]initWithFrame:CGRectMake(0, 0, self.view.width - ViewHorizonlMargin * 4, 100) count:4 space:24 underlineColor:[UIColor borderColor] type:securityCodeTypeUnderline];
+    codeView.confirmedColor = [UIColor titleTextColor];
+    codeView.cursorColor = [UIColor mainColor];
     codeView.topPos.equalTo(descLabel.bottomPos).offset(64);
     codeView.leftPos.equalTo(self.rootLayout.leftPos).offset(ViewHorizonlMargin * 2);
+    
+    codeView.inputFinishBlock = ^(NSString * code) {
+        [MBProgressHUD showLoading];
+        [[LoginService sharedInstance] loginBySms:[self.phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""] code:code completion:^(NSString * _Nonnull errorMsg) {
+            [MBProgressHUD hideHUD];
+        }];
+    };
     [self.rootLayout addSubview:codeView];
 }
 @end
